@@ -121,10 +121,13 @@ class ScoreDisplayHandler(Score):
 
 class Skin():
 	def __init__(self):
-		pass
-	def getSkin(self, skinNum):
+		skinDic = {}
 		skin = {"head" : None, "body" : None , "tail" : None}
-		return skin
+		skinList["skin"] = skin
+	def getSkin(self, skinName):
+		return skinDic["skin"]
+	def getSkinDic(self):
+		return skinDic
 
 
 class Observer():
@@ -132,7 +135,7 @@ class Observer():
 		raise NotImplementedError( "Should have implemented update %s" % self )
 
 class Snake():
-	def __init__(self, snakeID, speed, thick, skinNum = None, firstHeadDirection = RIGHT, headPos = DISPLAY_MID, color = green, length = 1,):
+	def __init__(self, snakeID, speed, thick, skinName = None, firstHeadDirection = RIGHT, headPos = DISPLAY_MID, color = green, length = 1,):
 		self.snakeID = snakeID
 		self.color = color
 		self.speed = speed
@@ -141,8 +144,8 @@ class Snake():
 		self.snakeList = [(headPos[posX],headPos[posY],firstHeadDirection)]
 		self.setOfObserver = set()
 		#img
-		if skinNum != None:
-			skin = Skin.getSkin(skinNum)
+		if skinName != None:
+			skin = Skin.getSkin(skinName)
 			self.head_img = skin["head"]
 			self.body_img = skin["body"]
 			self.tail_img = skin["tail"]
@@ -223,20 +226,21 @@ class SnakeDisplayControler(Observer):
 		self.thick = self.snakeState["thick"]
 		self.snakeList = self.snakeState["snakeList"]
 
-	def draw(self):
+	def draw(self, screen):
 		#img rotate
 		head = pygame.transform.rotate(self.head_img, 90 * self.snakeList[SNAKE_HEAD][DIRECTION])
-		Screen.screen.blit(head, (self.snakeList[SNAKE_HEAD][POS_X],self.snakeList[SNAKE_HEAD][POS_Y]))
+		screen.blit(head, (self.snakeList[SNAKE_HEAD][POS_X],self.snakeList[SNAKE_HEAD][POS_Y]))
+		
 		tail = pygame.transform.rotate(self.tail_img, 90 * self.snakeList[SNAKE_TAIL][DIRECTION])
-		Screen.screen.blit(tail, (self.snakeList[SNAKE_TAIL][POS_X],self.snakeList[SNAKE_TAIL][POS_Y]))
+		screen.blit(tail, (self.snakeList[SNAKE_TAIL][POS_X],self.snakeList[SNAKE_TAIL][POS_Y]))
 
 		if self.body_img == None: 
 			for posX, posY, direction in snakeList[1:-1]:
-				pygame.draw.rect(Screen.screen, color, [posX, posY, self.thick, self.thick])
+				pygame.draw.rect(screen, color, [posX, posY, self.thick, self.thick])
 		else:
 			for posX, posY, direction in snakeList[1:-1]:
 				skin = pygame.transform.rotate(self.body_img, 90 * direction)
-				Screen.screen.blit(skin, (posX, posY))
+				screen.blit(skin, (posX, posY))
 
 # pygame.sprite.Sprite
 class Item():
@@ -269,4 +273,3 @@ class GamePlay():
 		pass
 # if __name__ == '__main__':
 	# pass
-print ("hello")

@@ -2,37 +2,38 @@ import pygame, threading
 pygame.init()
 
 #value
-#game
-DISPLAY_HEIGHT = 600
-DISPLAY_WIDTH = 800
-DISPLAY_MID = (DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2)
-FRAMERATE = 20
+"""Screen"""
+SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 800
+SCREEN_MID = (SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
 
-#direction
+FRAMES_PER_SECOND = 30.0
+
+"""Direction"""
 LEFT = 1
 DOWN = 2
 RIGHT = 3
 UP = 4
 
-#color
-green = (0,255,0)
+"""Color"""
+GREEN = (0,255,0)
 
-#snake
+"""Snake"""
 SNAKE_HEAD = -1
 SNAKE_TAIL = 0
 POS_X = 0
 POS_Y = 1
 DIRECTION = 2
 
-#skin
+"""Skin"""
 SKIN_HEAD = 0
 SNAKE_BODY = 1
 SNAKE_TAIL = 2
 
-#img
+"""Img"""
 # icon = pygame.image.load('apple.png')
 
-#sound
+"""Sound"""
 # fire_sound=pygame.mixer.Sound("fire.wav")
 	# pygame.mixer.Sound.play(fire_sound)
 
@@ -40,13 +41,13 @@ SNAKE_TAIL = 2
 clock=pygame.time.Clock()
 
 		# pygame.display.update()
-		# clock.tick(FP)
+		# clock.tick(FRAMES_PER_SECOND)
 #magnification #배울
 
 
 class GameSetting():
 	def __init__(self):
-		self.screen = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))#surface화면
+		self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))#surface화면
 		# screen = pygame.display.set_mode((640,480),SWSURFACE|FULLSCREEN)
 		pygame.display.set_caption('Slither')
 		pygame.display.set_icon(icon)
@@ -135,7 +136,7 @@ class Observer():
 		raise NotImplementedError( "Should have implemented update %s" % self )
 
 class Snake():
-	def __init__(self, snakeID, speed, thick, skinName = None, firstHeadDirection = RIGHT, headPos = DISPLAY_MID, color = green, length = 1,):
+	def __init__(self, snakeID, speed, thick, skinName = None, firstHeadDirection = RIGHT, headPos = SCREEN_MID, color = GREEN, length = 1,):
 		self.snakeID = snakeID
 		self.color = color
 		self.speed = speed

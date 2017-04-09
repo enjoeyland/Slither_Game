@@ -30,6 +30,9 @@ SKIN_HEAD = 0
 SNAKE_BODY = 1
 SNAKE_TAIL = 2
 
+"""Item"""
+CONTINUANCE = -1
+
 """Img"""
 # icon = pygame.image.load('apple.png')
 
@@ -132,7 +135,7 @@ class Skin():
 
 
 class Observer():
-	def update(self):
+	def observeUpdate(self):
 		raise NotImplementedError( "Should have implemented update %s" % self )
 
 class Snake():
@@ -147,9 +150,9 @@ class Snake():
 		#img
 		if skinName != None:
 			skin = Skin.getSkin(skinName)
-			self.head_img = skin["head"]
-			self.body_img = skin["body"]
-			self.tail_img = skin["tail"]
+			self.headImg = skin["head"]
+			self.bodyImg = skin["body"]
+			self.tailImg = skin["tail"]
 
 	# def update(self, newHeadPos):
 	# 	self.snake_list.append(newHeadPos)
@@ -179,9 +182,9 @@ class Snake():
 		self.snakeList = snakeState["snakeList"]
 	def getImg(self):
 		snakeImg = {}
-		snakeImg["head"] = self.head_img
-		snakeImg["body"] = self.body_img
-		snakeImg["tail"] = self.tail_img
+		snakeImg["head"] = self.headImg
+		snakeImg["body"] = self.bodyImg
+		snakeImg["tail"] = self.tailImg
 
 	# def getcolor(self): return self.color
 	# def getLength(self): return self.length
@@ -194,13 +197,13 @@ class Snake():
 		self.setOfObserver.remove(observer)
 	def notify():
 		for observer in setOfObserver:
-			observer.update()
+			observer.observeUpdate()
 
 class SnakeStateHandler(Observer):
 	def __init__(self, snake):
 		snake.attach(self)
 		self.snakeState = snake.getState()
-	def update(self):
+	def observeUpdate(self):
 		self.snakeState = snake.getState()
 	def commit(self):
 		snake.setState(self.snakeState)
@@ -218,46 +221,57 @@ class SnakeDisplayControler(Observer):
 		self.thick = self.snakeState["thick"]
 		self.snakeList = self.snakeState["snakeList"]
 		self.snakeImg = snake.getImg()
-		self.head_img = self.snakeImg["head"]
-		self.body_img = self.snakeImg["body"]
-		self.tail_img = self.snakeImg["tail"]
-	def update(self):
+		self.headImg = self.snakeImg["head"]
+		self.bodyImg = self.snakeImg["body"]
+		self.tailImg = self.snakeImg["tail"]
+
+	def observeUpdate(self):
 		self.snakeState = snake.getState()
 		self.color = self.snakeState["color"]
 		self.thick = self.snakeState["thick"]
 		self.snakeList = self.snakeState["snakeList"]
 
-	def draw(self, screen):
-		#img rotate
-		head = pygame.transform.rotate(self.head_img, 90 * self.snakeList[SNAKE_HEAD][DIRECTION])
-		screen.blit(head, (self.snakeList[SNAKE_HEAD][POS_X],self.snakeList[SNAKE_HEAD][POS_Y]))
-		
-		tail = pygame.transform.rotate(self.tail_img, 90 * self.snakeList[SNAKE_TAIL][DIRECTION])
-		screen.blit(tail, (self.snakeList[SNAKE_TAIL][POS_X],self.snakeList[SNAKE_TAIL][POS_Y]))
+	def update(self):
+		self.headClone = pygame.transform.rotate(self.headImg, 90 * self.snakeList[SNAKE_HEAD][DIRECTION])
+		self.tailClone = pygame.transform.rotate(self.tailImg, 90 * self.snakeList[SNAKE_TAIL][DIRECTION])
+		if self.bodyImg != None:
+			self.bodyClone = pygame.transform.rotate(self.bodyImg, 90 * direction)
 
-		if self.body_img == None: 
+	def draw(self, screen):
+		screen.blit(self.headClone, (self.snakeList[SNAKE_HEAD][POS_X],self.snakeList[SNAKE_HEAD][POS_Y]))
+		screen.blit(self.tailClone, (self.snakeList[SNAKE_TAIL][POS_X],self.snakeList[SNAKE_TAIL][POS_Y]))
+
+		if self.bodyImg == None: 
 			for posX, posY, direction in snakeList[1:-1]:
 				pygame.draw.rect(screen, color, [posX, posY, self.thick, self.thick])
 		else:
 			for posX, posY, direction in snakeList[1:-1]:
-				skin = pygame.transform.rotate(self.body_img, 90 * direction)
-				screen.blit(skin, (posX, posY))
+				screen.blit(self.bodyClone, (posX, posY))
 
 # pygame.sprite.Sprite
-class Item():
-	def __init__(self, form, duration = -1, form_type = "img"):
+class Item(pygame.sprite.Sprite):
+	def __init__(self, form, lifeTimer = CONTINUANCE, form_type = "img"):
+		pygame.sprite.Sprite.__init__(self)
 		self.type = form_type # "img" / "color"
 		self.form = form
-		self.duration = duration
+		self.lifeTimer = lifeTimer
 	def display(self, location):
 		pass
 	def effect(self):
 		raise NotImplementedError( "Should have implemented update %s" % self )
+	def update(self):
+		if not (self.lifeTimer == -1):
+			if not self.lifeTimer:
+				self.kill()
+
+			self.lifeTimer -= 1
+
 
 class Apple(Item):
 	def __init__(self):
 		# appleImg = 
-		Item.__init__(self, appleImg, -1)
+		Item.__init__(self, appleImg, CONTINUANCE)
+
 	def effect(self,score):
 		point = 100
 		score.up(100)

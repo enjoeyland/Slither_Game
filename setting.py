@@ -1,0 +1,31 @@
+#value
+"""Screen"""
+SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 800
+SCREEN_MID = (SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+
+FRAMES_PER_SECOND = 30.0
+
+"""Direction"""
+LEFT = 1
+DOWN = 2
+RIGHT = 3
+UP = 4
+
+"""Color"""
+GREEN = (0,255,0)
+
+"""Snake"""
+SNAKE_HEAD = -1
+SNAKE_TAIL = 0
+POS_X = 0
+POS_Y = 1
+DIRECTION = 2
+
+"""Skin"""
+SKIN_HEAD = 0
+SKIN_BODY = 1
+SKIN_TAIL = 2
+
+"""Item"""
+CONTINUANCE = -1

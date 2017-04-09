@@ -1,5 +1,4 @@
 import pygame, threading
-pygame.init()
 
 #value
 """Screen"""
@@ -27,13 +26,14 @@ DIRECTION = 2
 
 """Skin"""
 SKIN_HEAD = 0
-SNAKE_BODY = 1
-SNAKE_TAIL = 2
+SKIN_BODY = 1
+SKIN_TAIL = 2
 
 """Item"""
 CONTINUANCE = -1
 
 """Img"""
+# pygame.transform.scale(Surface, (width, height), DestSurface = None)
 # icon = pygame.image.load('apple.png')
 
 """Sound"""
@@ -45,8 +45,10 @@ clock=pygame.time.Clock()
 
 		# pygame.display.update()
 		# clock.tick(FRAMES_PER_SECOND)
-#magnification #배울
+#magnification #배율
+#scale
 
+pygame.init()
 
 class GameSetting():
 	def __init__(self):
@@ -68,7 +70,7 @@ class Screen():
 # class Text():
 	# pass
 class GameDisplay():
-	def display_text():
+	def display_text(self):
 		pass
 
 class Event():
@@ -125,13 +127,13 @@ class ScoreDisplayHandler(Score):
 
 class Skin():
 	def __init__(self):
-		skinDic = {}
+		self.skinDic = {}
 		skin = {"head" : None, "body" : None , "tail" : None}
-		skinList["skin"] = skin
+		self.skinDic["skin"] = skin
 	def getSkin(self, skinName):
-		return skinDic["skin"]
+		return self.skinDic["skin"]
 	def getSkinDic(self):
-		return skinDic
+		return self.skinDic
 
 
 class Observer():
@@ -161,10 +163,10 @@ class Snake():
 	def addLength(self, length = 1):
 		self.length += length
 		# self.snakeList.append((snakeList[-1]))
-		notify()
+		self.notify()
 	def addSpeed(self, speed):
 		self.speed += speed
-		notify()
+		self.notify()
 	def getState(self):
 		snakeState = {}
 		snakeState["snakeID"] = self.snakeID
@@ -215,18 +217,19 @@ class SnakeStateHandler(Observer):
 
 class SnakeDisplayControler(Observer):
 	def __init__(self, snake):
-		snake.attach(self)
-		self.snakeState = snake.getState()
+		self.snake = snake
+		self.snake.attach(self)
+		self.snakeState = self.snake.getState()
 		self.color = self.snakeState["color"]
 		self.thick = self.snakeState["thick"]
 		self.snakeList = self.snakeState["snakeList"]
-		self.snakeImg = snake.getImg()
+		self.snakeImg = self.snake.getImg()
 		self.headImg = self.snakeImg["head"]
 		self.bodyImg = self.snakeImg["body"]
 		self.tailImg = self.snakeImg["tail"]
 
 	def observeUpdate(self):
-		self.snakeState = snake.getState()
+		self.snakeState = self.snake.getState()
 		self.color = self.snakeState["color"]
 		self.thick = self.snakeState["thick"]
 		self.snakeList = self.snakeState["snakeList"]
@@ -234,8 +237,6 @@ class SnakeDisplayControler(Observer):
 	def update(self):
 		self.headClone = pygame.transform.rotate(self.headImg, 90 * self.snakeList[SNAKE_HEAD][DIRECTION])
 		self.tailClone = pygame.transform.rotate(self.tailImg, 90 * self.snakeList[SNAKE_TAIL][DIRECTION])
-		if self.bodyImg != None:
-			self.bodyClone = pygame.transform.rotate(self.bodyImg, 90 * direction)
 
 	def draw(self, screen):
 		screen.blit(self.headClone, (self.snakeList[SNAKE_HEAD][POS_X],self.snakeList[SNAKE_HEAD][POS_Y]))
@@ -246,6 +247,7 @@ class SnakeDisplayControler(Observer):
 				pygame.draw.rect(screen, color, [posX, posY, self.thick, self.thick])
 		else:
 			for posX, posY, direction in snakeList[1:-1]:
+				self.bodyClone = pygame.transform.rotate(self.bodyImg, 90 * direction)
 				screen.blit(self.bodyClone, (posX, posY))
 
 # pygame.sprite.Sprite
@@ -276,8 +278,7 @@ class Apple(Item):
 		point = 100
 		score.up(100)
 
-
-class GamePlay():
+class Game():
 	def display_intro():
 		pass
 	def player1_highscore_gameloop():

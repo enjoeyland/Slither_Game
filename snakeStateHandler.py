@@ -1,13 +1,22 @@
+from observer import Observer
+from setting import *
+
 class SnakeStateHandler(Observer):
-	def __init__(self, snake):
-		snake.attach(self)
-		self.snakeState = snake.getState()
+	def __init__(self, Snake):
+		self.snake = Snake
+		self.snake.attach(self)
+		self.snakeList = self.snake.getSnakeList()
+		self.length = self.snake.getLength()
+
 	def observeUpdate(self):
-		self.snakeState = snake.getState()
+		self.snakeList = self.snake.getSnakeList()
+		self.length = self.snake.getLength()
+
 	def commit(self):
-		snake.setState(self.snakeState)
+		self.snake.setSnakeList(self.snakeList)
+
 	def move(self, newHeadPos, direction):
-		self.snakeState["snakeList"].append((newHeadPos[POS_X],newHeadPos[POS_Y],direction))
-		if len(self.snakeState["snakeList"]) > self.snakeState["length"]:
-			del self.snakeState["snakeList"][0]
+		self.snakeList.append((newHeadPos[POS_X],newHeadPos[POS_Y],direction))
+		if len(self.snakeList) > self.length:
+			del self.snakeList[0]
 		self.commit()

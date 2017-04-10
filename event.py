@@ -1,12 +1,20 @@
+import pygame
+import threading
+import time
+
+class Event():
+	pass
+
 class KeyboardEventHandler(Event):
 	def __init__(self):
 		pass
 	def process(self, event, gameState):
-		if event.key==pygame.K_q:
+		if event.key == pygame.K_q:
 			pygame.quit()
 			quit()
-		if event.key==pygame.K_c:
-			intro=False
+		if event.key == pygame.K_c:
+			pass
+			# intro=False
 
 class IOEventHandler(Event, threading.Thread):
 	def __init__(self):
@@ -14,6 +22,9 @@ class IOEventHandler(Event, threading.Thread):
 		self.__suspend = False
 		self.__exit = False
 		self.keh = KeyboardEventHandler()
+
+	def setGameState(self, gameState):
+		self.gameState = gameState
 
 	def threadRun(self):
 		while True:
@@ -30,6 +41,14 @@ class IOEventHandler(Event, threading.Thread):
 			### Exit ###
 			if self.__exit:
 				break
-	def threadSuspend(self): self.__suspend = True
-	def threadResume(self): self.__suspend = False	
-	def threadExit(self): self.__exit = True
+
+
+
+	def threadSuspend(self):
+		self.__suspend = True
+
+	def threadResume(self):
+		self.__suspend = False
+
+	def threadExit(self):
+		self.__exit = True

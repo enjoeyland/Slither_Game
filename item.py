@@ -1,4 +1,6 @@
-# pygame.sprite.Sprite
+import pygame
+from setting import *
+
 class Item(pygame.sprite.Sprite):
 	def __init__(self, form, lifeTimer = CONTINUANCE, form_type = "img"):
 		pygame.sprite.Sprite.__init__(self)
@@ -22,6 +24,6 @@ class Apple(Item):
 		# appleImg = 
 		Item.__init__(self, appleImg, CONTINUANCE)
 
-	def effect(self,score):
+	def effect(self, score):
 		point = 100
 		score.up(100)

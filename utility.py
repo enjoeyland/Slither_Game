@@ -3,7 +3,7 @@ import pygame
 
 """Img"""
 # pygame.transform.scale(Surface, (width, height), DestSurface = None)
-# icon = pygame.image.load('apple.png')
+icon = pygame.image.load('apple.png')
 
 
 """Sound"""
@@ -14,74 +14,42 @@ soundActive = True
 
 
 def getPath():
-	"""This figures out the 'home' path. Useful for
-	storing config/save stuff."""
-
-	pathname = ""
-	try:
-		pathname = os.environ["HOME"] + "/.battlezero"
-	except:
-		try:
-			pathname = os.environ["APPDATA"] + "/battlezero"
-		except:
-			print ("Could not get environment variable for home directory")
-			pathname = "."
-		if not os.path.exists(pathname):
-			os.mkdir(pathname)
+	pathname = os.path.dirname(os.path.abspath(__file__))
 	return pathname
 
 def loadImage(name):
-	filePath = "data/images/" + name + ".bzi"
-	if os.path.isfile(filePath):
-		return pygame.image.load(filePath).convert_alpha()
+	imageTypeList = [".bzi", ".png", ".jpg"]
+	for imageType in imageTypeList:
+		filePath = os.path.join("data/images/", name, imageType)
+		if os.path.isfile(filePath):
+			return pygame.image.load(filePath).convert_alpha()
 
-	filePath = "data/images/" + name + ".png"
-	if os.path.isfile(filePath):
-		return pygame.image.load(filePath).convert_alpha()
-
-	filePath = getResourcePath('data/images/' + name + '.bzi')
-	if os.path.isfile(filePath):
-		return pygame.image.load(filePath).convert_alpha()
-
-	filePath = getResourcePath('data/images/' + name + '.png')
-	if os.path.isfile(filePath):
-		return pygame.image.load(filePath).convert_alpha()
-
-	print ("Failed to load: {0}".format(name))
+	print ("Failed to load image: %s" % name)
 	return None
 
 def loadSound(name):
-	filePath = "data/sounds/" + name + ".bza"
-	if os.path.isfile(filePath):
-		return pygame.mixer.Sound(filePath)
+	soundTypeList = ["bza", ".ogg", ".mp3"]
+	for soundType in soundTypeList:
+		filePath = os.path.join("data/sounds/", name, soundType)
+		if os.path.isfile(filePath):
+			return pygame.mixer.Sound(filePath)
 
-	filePath = "data/sounds/" + name + ".ogg"
-	if os.path.isfile(filePath):
-		return pygame.mixer.Sound(filePath)
-
-	filePath = getResourcePath('data/sounds/' + name + '.ogg')
-	if os.path.isfile(filePath):
-		return pygame.mixer.Sound(filePath)
-
-	filePath = getResourcePath('data/sounds/' + name + '.bza')
-	if os.path.isfile(filePath):
-		return pygame.mixer.Sound(filePath)
-
+	print ("Failed to load sound: %s" % name)
 	return None
 
-def playSound(sound, channelNumber = None):
-	if settingList[SFX] and soundActive:
-		if channelNumber:
-			pygame.mixer.Channel(channelNumber).play(sound)
-		else:
-			sound.play()
+# def playSound(sound, channelNumber = None):
+# 	if settingList[SFX] and soundActive:
+# 		if channelNumber:
+# 			pygame.mixer.Channel(channelNumber).play(sound)
+# 		else:
+# 			sound.play()
 
-def playMusic(music, forceNext = True):
-	if settingList[MUSIC] and soundActive:
-		if forceNext:
-			pygame.mixer.Channel(MUSIC_CHANNEL).queue(music)
-		elif not pygame.mixer.Channel(MUSIC_CHANNEL).get_queue():
-			pygame.mixer.Channel(MUSIC_CHANNEL).queue(music)
+# def playMusic(music, forceNext = True):
+# 	if settingList[MUSIC] and soundActive:
+# 		if forceNext:
+# 			pygame.mixer.Channel(MUSIC_CHANNEL).queue(music)
+# 		elif not pygame.mixer.Channel(MUSIC_CHANNEL).get_queue():
+# 			pygame.mixer.Channel(MUSIC_CHANNEL).queue(music)
 
 def readHighScores():
 	scoreList = []

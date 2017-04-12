@@ -3,8 +3,8 @@ from observer import Observer
 from setting import *
 
 class SnakeDisplayHandler(Observer):
-	def __init__(self, Snake):
-		self.snake = Snake
+	def __init__(self, snake):
+		self.snake = snake
 		self.snake.attach(self)
 		self.snakeState = self.snake.getState()
 		self.color = self.snakeState["color"]

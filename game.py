@@ -10,9 +10,14 @@ class Game():
 		defaultSpeed = 10
 		defaultThick = 20
 
+		gameIsRunning = True
+
 		player = snake.Snake(1, defaultSpeed, defaultThick)
 		snakeStateHandler.SnakeStateHandler(player, event.KeyboardEventHandler)
 		snakeDisplayHandler.SnakeDisplayHandler(player)
+		while gameIsRunning:
+			pass
+
 	def player2_highScore_gameLoop(self):
 		pass
 	def player2_compete_gameLoop(self):

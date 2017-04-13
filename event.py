@@ -39,6 +39,17 @@ class KeyboardEventHandler(Event):
 				for func in self.listenDic[keyType]:
 					func()
 
+class snakeEventHandler(Event):
+	def crashWall(self):
+		pass
+		# if lead_x > display_width- block_size or lead_x < 0 or lead_y > display_height- block_size or lead_y < 0:
+			# gameOver=True
+	def crashItem(self):
+		pass
+	def crashItself(self):
+		pass
+	def crashOtherSnake(self):
+		pass
 
 class IOEventHandler(Event, threading.Thread):
 	def __init__(self):
@@ -46,9 +57,6 @@ class IOEventHandler(Event, threading.Thread):
 		self.__suspend = False
 		self.__exit = False
 		self.keh = KeyboardEventHandler()
-
-	# def setGameState(self, gameState):
-	# 	self.gameState = gameState
 
 	def threadRun(self):
 		while True:

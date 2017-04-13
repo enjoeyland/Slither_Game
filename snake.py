@@ -41,10 +41,11 @@ class Snake():
 	def getSnakeID(self):
 		return self.snakeID
 
-
 	def getSkin(self):
 		return self.snakeSkin
 
+	def getColor(self):
+		return self.color
 
 
 	def getLength(self):
@@ -55,7 +56,6 @@ class Snake():
 		self.notify()
 
 
-
 	def getSpeed(self):
 		return self.speed
 
@@ -64,10 +64,12 @@ class Snake():
 		self.notify()
 
 
+	def getThick(self):
+		return self.thick
 
-	def getColor(self):
-		return self.color
-
+	def setThick(self, thick):
+		self.thick = thick
+		self.notify()
 
 
 	def getSnakeList(self):

@@ -21,6 +21,9 @@ class SnakeDisplayHandler(Observer):
 		self.color = self.snakeState["color"]
 		self.thick = self.snakeState["thick"]
 		self.snakeList = self.snakeState["snakeList"]
+		# if SNAKE_AUTO_DRAW:
+		# 	self.update()
+		# 	# self.draw()
 
 	def update(self):
 		self.headClone = pygame.transform.rotate(self.headImg, 90 * self.snakeList[SNAKE_HEAD][DIRECTION])

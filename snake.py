@@ -60,6 +60,7 @@ class Snake():
 		return self.speed
 
 	def addSpeed(self, speed):
+		"""pixel per second"""
 		self.speed += speed
 		self.notify()
 

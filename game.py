@@ -7,7 +7,7 @@ class Game():
 	def display_intro(self):
 		return 0
 	def player1_highScore_gameLoop(self):
-		defaultSpeed = 10
+		defaultSpeed = 30
 		defaultThick = 20
 
 		gameIsRunning = True

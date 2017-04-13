@@ -25,35 +25,42 @@ class SnakeStateHandler(Observer):
 			del self.snakeList[0]
 		self.commit()
 
+	def tickMove(self):
+		pass
 
+	def smallMove(self):
+		pass # 속도 * (나중 - 처음) / thick
+		#if 처음 == 원래 나중:
+		#
+		#thickMove()
 
 	def eventOnKeyLeft(self):
 		lead_x_change = - self.thick
 		lead_y_change = 0
 		direction = LEFT
-		self.move((self.snakeList[SNAKE_TAIL][POS_X] + lead_x_change,
-			self.snakeList[SNAKE_TAIL][POS_Y] + lead_y_change), direction)
+		self.move((self.snakeList[SNAKE_HEAD][POS_X] + lead_x_change,
+			self.snakeList[SNAKE_HEAD][POS_Y] + lead_y_change), direction)
 
 	def eventOnKeyRight(self):
 		lead_x_change = self.thick
 		lead_y_change = 0
 		direction = RIGHT
-		self.move((self.snakeList[SNAKE_TAIL][POS_X] + lead_x_change,
-			self.snakeList[SNAKE_TAIL][POS_Y] + lead_y_change), direction)
+		self.move((self.snakeList[SNAKE_HEAD][POS_X] + lead_x_change,
+			self.snakeList[SNAKE_HEAD][POS_Y] + lead_y_change), direction)
 
 	def eventOnKeyUp(self):
 		lead_x_change = 0
 		lead_y_change = - self.thick
 		direction = UP
-		self.move((self.snakeList[SNAKE_TAIL][POS_X] + lead_x_change,
-			self.snakeList[SNAKE_TAIL][POS_Y] + lead_y_change), direction)
+		self.move((self.snakeList[SNAKE_HEAD][POS_X] + lead_x_change,
+			self.snakeList[SNAKE_HEAD][POS_Y] + lead_y_change), direction)
 
 	def eventOnKeyDown(self):
 		lead_x_change = 0
 		lead_y_change = self.thick
 		direction = DOWN
-		self.move((self.snakeList[SNAKE_TAIL][POS_X] + lead_x_change,
-			self.snakeList[SNAKE_TAIL][POS_Y] + lead_y_change), direction)
+		self.move((self.snakeList[SNAKE_HEAD][POS_X] + lead_x_change,
+			self.snakeList[SNAKE_HEAD][POS_Y] + lead_y_change), direction)
 
 	def setListener(self, keyboardEventHandler):
 		keyboardEventHandler.onKey(pygame.K_LEFT, self.eventOnKeyLeft)

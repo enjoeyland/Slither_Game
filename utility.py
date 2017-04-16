@@ -3,7 +3,7 @@ import pygame
 
 """Img"""
 # pygame.transform.scale(Surface, (width, height), DestSurface = None)
-icon = pygame.image.load('apple.png')
+# icon = pygame.image.load('apple.png')
 
 
 """Sound"""
@@ -20,7 +20,7 @@ def getPath():
 def loadImage(name):
 	imageTypeList = [".bzi", ".png", ".jpg"]
 	for imageType in imageTypeList:
-		filePath = os.path.join("data/images/", name, imageType)
+		filePath = os.path.join("data/images/", name + imageType)
 		if os.path.isfile(filePath):
 			return pygame.image.load(filePath).convert_alpha()
 

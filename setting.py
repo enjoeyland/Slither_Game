@@ -29,6 +29,11 @@ DIRECTION = 2
 SKIN_HEAD = 0
 SKIN_BODY = 1
 SKIN_TAIL = 2
+SKIN_FIRST = 3
+
+"""Skin Name"""
+SKIN_DEFAULT = 0
+
 
 """Item"""
 CONTINUANCE = -1

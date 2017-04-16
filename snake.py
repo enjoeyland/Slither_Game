@@ -1,7 +1,7 @@
 from setting import *
 
 class Snake():
-	def __init__(self, snakeID, speed, thick, Skin = None, firstHeadDirection = RIGHT, headPos = SCREEN_MID, color = GREEN, length = 1,):
+	def __init__(self, snakeID, speed, thick, skin, skinNum = SKIN_DEFAULT, firstHeadDirection = RIGHT, headPos = SCREEN_MID, color = GREEN, length = 1,):
 		self.snakeID = snakeID
 		self.color = color
 		self.speed = speed
@@ -9,14 +9,13 @@ class Snake():
 		self.length = length
 		self.snakeList = [(headPos[POS_X], headPos[POS_Y], firstHeadDirection)]
 		self.setOfObserver = set()
+
 		#img
-		if Skin != None:
-			self.snakeSkin = Skin.getSkin()
-			self.headImg = self.snakeSkin["head"]
-			self.bodyImg = self.snakeSkin["body"]
-			self.tailImg = self.snakeSkin["tail"]
-
-
+		self.snakeSkin = skin.getSkin(skinNum)
+		self.headImg = self.snakeSkin["head"]
+		self.bodyImg = self.snakeSkin["body"]
+		self.tailImg = self.snakeSkin["tail"]
+		self.firstImg = self.snakeSkin["first"]
 
 
 	def getState(self):

@@ -18,7 +18,7 @@ class KeyboardEventHandler(Event):
 
 	def listen(self):
 		tempDic = {}
-		for key in set(self.listenDic.keys() + self.listenerBuffer.keys()):
+		for key in set(list(self.listenDic.keys()) + list(self.listenerBuffer.keys())):
 			try:
 				tempDic.setdefault(key,[]).append(self.listenDic[key])
 			except KeyError:
@@ -51,7 +51,7 @@ class snakeEventHandler(Event, threading.Thread):
 		thick = snake.getThick()
 		snakeList = snake.getSnakeList()
 		snakeHead = snakeList[SNAKE_HEAD]
-		if  snakeHead[POS_X] > SCREEN_WIDTH - thick or SNAKE_HEAD[POS_X] < 0 \
+		if  snakeHead[POS_X] > SCREEN_WIDTH - thick or snakeHead[POS_X] < 0 \
 				or snakeHead[POS_Y] > SCREEN_HEIGHT - thick or snakeHead[POS_Y] < 0:
 			func()
 
@@ -110,38 +110,55 @@ class snakeEventHandler(Event, threading.Thread):
 		self.crashWallThreadRun(snake, func)
 
 
+def eventHandler():
+	while True:
+		print("a")
+		for event in pygame.event.get():
+			print("b")
+			if event.type == pygame.QUIT:
+				print("c")
+				pygame.quit()
+				quit()
+			elif event.type == pygame.KEYDOWN:
+				KeyboardEventHandler().process(event)
+		time.sleep(0.5)
 
-class IOEventHandler(Event, threading.Thread):
-	def __init__(self):
-		threading.Thread.__init__(self)
-		self.__suspend = False
-		self.__exit = False
-		self.keh = KeyboardEventHandler()
-
-	def run(self):
-		while True:
-			### Suspend ###
-			while self.__suspend:
-				time.sleep(0.5)
-			### Process ###
-			for event in pygame.event.get():
-				if event.type == pygame.QUIT:
-					pygame.quit()
-					quit()
-				elif event.type == pygame.KEYDOWN:
-					self.keh.process(event)
-
-			### Exit ###
-			if self.__exit:
-				break
-
-
-
-	def threadSuspend(self):
-		self.__suspend = True
-
-	def threadResume(self):
-		self.__suspend = False
-
-	def threadExit(self):
-		self.__exit = True
+# class IOEventHandler(Event, threading.Thread):
+# 	def __init__(self):
+# 		threading.Thread.__init__(self)
+# 		self.__suspend = False
+# 		self.__exit = False
+# 		self.keh = KeyboardEventHandler()
+#
+# 	def run(self):
+# 		while True:
+# 			### Suspend ###
+# 			while self.__suspend:
+# 				time.sleep(0.5)
+# 			### Process ###
+# 			print("hi")
+# 			for event in pygame.event.get():
+# 				print("hello")
+# 				if event.type == pygame.QUIT:
+# 					print("Bye~")
+# 					pygame.quit()
+# 					quit()
+# 				elif event.type == pygame.KEYDOWN:
+# 					print("key")
+# 					self.keh.process(event)
+# 			time.sleep(0.5)
+#
+# 			### Exit ###
+# 			if self.__exit:
+# 				break
+#
+#
+#
+# 	def threadSuspend(self):
+# 		self.__suspend = True
+#
+# 	def threadResume(self):
+# 		self.__suspend = False
+#
+# 	def threadExit(self):
+# 		self.__exit = True

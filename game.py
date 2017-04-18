@@ -14,6 +14,8 @@ class Game(object):
 
 	def setGameRunningToFalse(self):
 		self.gameIsRunning = False
+	# def setGameOverTrue(self):
+	# 	self.gameOver = True
 	def display_intro(self):
 		return 0
 	def player1_highScore_gameLoop(self):
@@ -21,17 +23,25 @@ class Game(object):
 		defaultThick = 20
 
 		self.gameIsRunning = True
-		player = snake.Snake(1, defaultSpeed, defaultThick, skin.Skin())
-		mySnakeStateHandler = snakeStateHandler.SnakeStateHandler(player, listener)
-		mySnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(player)
-		while self.gameIsRunning:
-			event.Event().onTick()
-			# if not listener.isArrowKeyPressed():
-			# 	mySnakeStateHandler.tickMove()
+		
+		# setting
+		myOnKeyListenerHandler = listener.OnKeyListenerHandler()
+		myOnTickListenerHandler = listener.OnTickListenerHandler()
 
+		myKeyboardEventHandler = event.KeyboardEventHandler(myOnKeyListenerHandler)
+		myIOEventHandler = event.IOEventHandler(myKeyboardEventHandler, myOnTickListenerHandler)
+		mysnakeEventHandler = event.SnakeEventHandler()
+		myEvent = event.Event(myOnTickListenerHandler)
+
+		player = snake.Snake(1, defaultSpeed, defaultThick, skin.Skin())
+		mySnakeStateHandler = snakeStateHandler.SnakeStateHandler(player, myOnKeyListenerHandler, myOnTickListenerHandler, myIOEventHandler)
+		mySnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(player)
+
+		while self.gameIsRunning:
+			myEvent.onTick()
 
 			self.screen.fill((100,200,255))
-			event.snakeEventHandler().crashWall(player, self.setGameRunningToFalse)
+			mysnakeEventHandler.crashWall(player, self.setGameRunningToFalse)
 			snakeDisplayHandler.SnakeDisplayHandler(player).update()
 			snakeDisplayHandler.SnakeDisplayHandler(player).draw(self.screen)
 

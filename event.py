@@ -10,19 +10,20 @@ except ImportError:
 	import pygame.event as eventModule
 
 class Event(object):
-	def __init__(self):
-		pass
+	def __init__(self, onTickListenerHandler):
+		self.onTickListenerHandler = onTickListenerHandler
 	def onTick(self):
-		for listenerItem in listener.OnTickListenerHandler().listenerList:
+		for listenerItem in self.onTickListenerHandler.listenerList:
 			listenerItem["func"]()
 
 
 class KeyboardEventHandler(object):
-	def __init__(self):
+	def __init__(self, onKeyListenerHandler):
 		self.groupListenedDic = {}
+		self.onKeyListenerHandler = onKeyListenerHandler
 
 	def process(self, keyEvent):
-		for listenerItem in listener.OnKeyListenerHandler().listenerList:
+		for listenerItem in self.onKeyListenerHandler.listenerList:
 			if keyEvent.key == listenerItem["keyType"]:
 				listenerItem["func"]()
 				self.groupListenedDic[listenerItem["group"]] = listenerItem["groupNotifyFunc"]
@@ -41,9 +42,9 @@ class KeyboardEventHandler(object):
 # 			KeyboardEventHandler().process(event)
 
 class IOEventHandler(object):
-	def __init__(self):
-		self.keyboardEventHandler = KeyboardEventHandler()
-		listener.OnTickListenerHandler().listen("eventHandler", self.delegateEventHandler)
+	def __init__(self,keyboardEventHandler , onTickListenerHandler):
+		self.keyboardEventHandler = keyboardEventHandler
+		onTickListenerHandler.listen("eventHandler", self.delegateEventHandler)
 		self.pygameTickEventList = []
 
 	def delegateEventHandler(self):
@@ -61,7 +62,7 @@ class IOEventHandler(object):
 
 
 
-class snakeEventHandler(Event, threading.Thread):
+class SnakeEventHandler(Event, threading.Thread):
 	def __init__(self):
 		threading.Thread.__init__(self)
 		self.wallListenerBuffer = {}

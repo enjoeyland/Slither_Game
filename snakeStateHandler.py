@@ -5,7 +5,7 @@ from observer import Observer
 from setting import *
 
 class SnakeStateHandler(Observer, object):
-	def __init__(self, snake, listener):
+	def __init__(self, snake, onKeyListenerHandler, onTickListenerHandler, IOEventHandler):
 		self.snake = snake
 		self.snake.attach(self)
 		self.snakeList = self.snake.getSnakeList()
@@ -13,8 +13,8 @@ class SnakeStateHandler(Observer, object):
 		self.thick = self.snake.getThick()
 
 		self.arrowKeyPressed = False
-
-		self.setListener(listener)
+		self.IOEventHandler = IOEventHandler
+		self.setListener(onKeyListenerHandler, onTickListenerHandler)
 
 	def observeUpdate(self):
 		self.snakeList = self.snake.getSnakeList()
@@ -75,12 +75,23 @@ class SnakeStateHandler(Observer, object):
 		self.move((self.snakeList[SNAKE_HEAD][POS_X] + lead_x_change,
 			self.snakeList[SNAKE_HEAD][POS_Y] + lead_y_change), direction)
 
-	def onTick(self, listener):
-		if not listener.isArrowKeyPressed():
+	def onTick(self):
+		if not self.isArrowKeyPressed():
 			self.tickMove()
 
 	def onArrowKey(self):
 		pass
+
+	def isArrowKeyPressed(self):
+		arrowKeyPressed = False
+		pygameTickEventList = self.IOEventHandler.getPygameTickEvent()
+		for pygameEvent in pygameTickEventList:
+			if pygameEvent.type == pygame.KEYDOWN:
+				if pygameEvent.key==pygame.K_LEFT or pygameEvent.key==pygame.K_RIGHT \
+					or pygameEvent.key ==pygame.K_UP or pygameEvent.key==pygame.K_DOWN:
+					arrowKeyPressed = True
+		return arrowKeyPressed
+
 
 	def setListener(self, onKeyListenerHandler, onTickListenerHandler):
 		onKeyListenerHandler.listen(pygame.K_LEFT, self.onKeyLeft, group = "arrowKey", groupNotifyFunc = self.onArrowKey)

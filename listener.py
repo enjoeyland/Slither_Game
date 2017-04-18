@@ -1,17 +1,6 @@
 import pygame
 import event
 
-def isArrowKeyPressed():
-	arrowKeyPressed = False
-	pygameTickEventList = event.IOEventHandler().getPygameTickEvent()
-	for pygameEvent in pygameTickEventList:
-		if pygameEvent.type == pygame.KEYDOWN:
-			if pygameEvent.key==pygame.K_LEFT or pygameEvent.key==pygame.K_RIGHT \
-				or pygameEvent.key ==pygame.K_UP or pygameEvent.key==pygame.K_DOWN:
-				arrowKeyPressed = True
-	return arrowKeyPressed
-
-
 class ListenerHandler(object):
 	def __init__(self):
 		self._listenerList = []

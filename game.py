@@ -1,4 +1,6 @@
 import pygame
+
+import listener
 import snake
 import snakeDisplayHandler
 import snakeStateHandler
@@ -6,7 +8,7 @@ import event
 import skin
 from setting import *
 
-class Game():
+class Game(object):
 	def __init__(self, screen):
 		self.screen = screen
 
@@ -20,9 +22,13 @@ class Game():
 
 		self.gameIsRunning = True
 		player = snake.Snake(1, defaultSpeed, defaultThick, skin.Skin())
-		snakeStateHandler.SnakeStateHandler(player, event.KeyboardEventHandler())
-		snakeDisplayHandler.SnakeDisplayHandler(player)
+		mySnakeStateHandler = snakeStateHandler.SnakeStateHandler(player, listener)
+		mySnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(player)
 		while self.gameIsRunning:
+			event.Event().onTick()
+			# if not listener.isArrowKeyPressed():
+			# 	mySnakeStateHandler.tickMove()
+
 
 			self.screen.fill((100,200,255))
 			event.snakeEventHandler().crashWall(player, self.setGameRunningToFalse)
@@ -31,6 +37,7 @@ class Game():
 
 			pygame.display.update()
 			pygame.time.Clock().tick(FRAMES_PER_SECOND)
+
 	def player2_highScore_gameLoop(self):
 		pass
 	def player2_compete_gameLoop(self):

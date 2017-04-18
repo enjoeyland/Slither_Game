@@ -1,43 +1,65 @@
 import pygame
 import threading
-import time
+import listener
+
 from setting import *
 
-class Event():
-	pass
+try:
+	import pygame.fastevent as eventModule
+except ImportError:
+	import pygame.event as eventModule
 
-class KeyboardEventHandler(Event):
+class Event(object):
 	def __init__(self):
-		self.listenerBuffer = {}
-		self.listenDic = {}
+		pass
+	def onTick(self):
+		for listenerItem in listener.OnTickListenerHandler().listenerList:
+			listenerItem["func"]()
 
 
-	def onKey(self, keyType, func):
-		self.listenerBuffer[keyType] = func
-		# self.buffer.append((keyType, func))
-
-	def listen(self):
-		tempDic = {}
-		for key in set(list(self.listenDic.keys()) + list(self.listenerBuffer.keys())):
-			try:
-				tempDic.setdefault(key,[]).append(self.listenDic[key])
-			except KeyError:
-				pass
-			try:
-				tempDic.setdefault(key,[]).append(self.listenerBuffer[key])
-			except KeyError:
-				pass
-		self.listenDic = tempDic
-		self.listenerBuffer = {}
-
-	def endListen(self, keyType):
-		self.listenDic.pop(keyType)
+class KeyboardEventHandler(object):
+	def __init__(self):
+		self.groupListenedDic = {}
 
 	def process(self, keyEvent):
-		for keyType in self.listenDic.keys():
-			if keyEvent.type == keyType:
-				for func in self.listenDic[keyType]:
-					func()
+		for listenerItem in listener.OnKeyListenerHandler().listenerList:
+			if keyEvent.key == listenerItem["keyType"]:
+				listenerItem["func"]()
+				self.groupListenedDic[listenerItem["group"]] = listenerItem["groupNotifyFunc"]
+		self.groupNotify()
+
+	def groupNotify(self):
+		for group in list(self.groupListenedDic.keys()):
+			if self.groupListenedDic[group]:
+				self.groupListenedDic[group]()
+
+# def eventHandler():
+# 	for event in pygame.event.get():
+# 		if event.type == pygame.QUIT:
+# 			pygame.quit()
+# 		elif event.type == pygame.KEYDOWN:
+# 			KeyboardEventHandler().process(event)
+
+class IOEventHandler(object):
+	def __init__(self):
+		self.keyboardEventHandler = KeyboardEventHandler()
+		listener.OnTickListenerHandler().listen("eventHandler", self.delegateEventHandler)
+		self.pygameTickEventList = []
+
+	def delegateEventHandler(self):
+		self.pygameTickEventList = pygame.event.get()
+		for pygameEvent in self.pygameTickEventList:
+			if pygameEvent.type == pygame.QUIT:
+				pygame.quit()
+				quit()
+			elif pygameEvent.type == pygame.KEYDOWN:
+				self.keyboardEventHandler.process(pygameEvent)
+
+	def getPygameTickEvent(self):
+		return self.pygameTickEventList
+
+
+
 
 class snakeEventHandler(Event, threading.Thread):
 	def __init__(self):
@@ -46,6 +68,7 @@ class snakeEventHandler(Event, threading.Thread):
 		self.wallListenDic = {}
 		self.__suspend = False
 		self.__exit = False
+		# pygame.event.Event(pygame.USEREVNT,  )
 
 	def crashWall(self, snake, func):
 		thick = snake.getThick()
@@ -73,92 +96,38 @@ class snakeEventHandler(Event, threading.Thread):
 	def crashOtherSnake(self):
 		pass
 
-	def run(self):
-		while True:
-			### Suspend ###
-			while self.__suspend:
-				time.sleep(0.5)
-			### Process ###
-			# self.crashWall(snake, func)
-			### Exit ###
-			if self.__exit:
-				break
-	def threadSuspend(self):
-		self.__suspend = True
-
-	def threadResume(self):
-		self.__suspend = False
-
-	def threadExit(self):
-		self.__exit = True
-
-	def onCrashWall(self, snake, func):
-		self.wallListenerBuffer[snake] = func
-
-		tempDic = {}
-		for key in set(self.wallListenDic.keys() + self.wallListenerBuffer.keys()):
-			try:
-				tempDic.setdefault(key,[]).append(self.wallListenDic[key])
-			except KeyError:
-				pass
-			try:
-				tempDic.setdefault(key,[]).append(self.wallListenerBuffer[key])
-			except KeyError:
-				pass
-		self.wallListenDic = tempDic
-		self.wallListenerBuffer = {}
-		self.crashWallThreadRun(snake, func)
-
-
-def eventHandler():
-	while True:
-		print("a")
-		for event in pygame.event.get():
-			print("b")
-			if event.type == pygame.QUIT:
-				print("c")
-				pygame.quit()
-				quit()
-			elif event.type == pygame.KEYDOWN:
-				KeyboardEventHandler().process(event)
-		time.sleep(0.5)
-
-# class IOEventHandler(Event, threading.Thread):
-# 	def __init__(self):
-# 		threading.Thread.__init__(self)
-# 		self.__suspend = False
-# 		self.__exit = False
-# 		self.keh = KeyboardEventHandler()
-#
-# 	def run(self):
-# 		while True:
-# 			### Suspend ###
-# 			while self.__suspend:
-# 				time.sleep(0.5)
-# 			### Process ###
-# 			print("hi")
-# 			for event in pygame.event.get():
-# 				print("hello")
-# 				if event.type == pygame.QUIT:
-# 					print("Bye~")
-# 					pygame.quit()
-# 					quit()
-# 				elif event.type == pygame.KEYDOWN:
-# 					print("key")
-# 					self.keh.process(event)
-# 			time.sleep(0.5)
-#
-# 			### Exit ###
-# 			if self.__exit:
-# 				break
-#
-#
-#
-# 	def threadSuspend(self):
-# 		self.__suspend = True
-#
-# 	def threadResume(self):
-# 		self.__suspend = False
-#
-# 	def threadExit(self):
-# 		self.__exit = True
+	# def run(self):
+	# 	while True:
+	# 		### Suspend ###
+	# 		while self.__suspend:
+	# 			time.sleep(0.5)
+	# 		### Process ###
+	# 		# self.crashWall(snake, func)
+	# 		### Exit ###
+	# 		if self.__exit:
+	# 			break
+	# def threadSuspend(self):
+	# 	self.__suspend = True
+    #
+	# def threadResume(self):
+	# 	self.__suspend = False
+    #
+	# def threadExit(self):
+	# 	self.__exit = True
+    #
+	# def onCrashWall(self, snake, func):
+	# 	self.wallListenerBuffer[snake] = func
+    #
+	# 	tempDic = {}
+	# 	for key in set(list(self.wallListenDic.keys()) + list(self.wallListenerBuffer.keys())):
+	# 		try:
+	# 			tempDic.setdefault(key,[]).append(self.wallListenDic[key])
+	# 		except KeyError:
+	# 			pass
+	# 		try:
+	# 			tempDic.setdefault(key,[]).append(self.wallListenerBuffer[key])
+	# 		except KeyError:
+	# 			pass
+	# 	self.wallListenDic = tempDic
+	# 	self.wallListenerBuffer = {}
+	# 	self.crashWallThreadRun(snake, func)

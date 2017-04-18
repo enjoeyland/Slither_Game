@@ -1,8 +1,10 @@
+#-*- coding: utf-8 -*-
+
 import pygame
 from observer import Observer
 from setting import *
 
-class SnakeDisplayHandler(Observer):
+class SnakeDisplayHandler(Observer, object):
 	def __init__(self, snake):
 		self.snake = snake
 		self.snake.attach(self)

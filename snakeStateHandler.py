@@ -1,15 +1,20 @@
+#-*- coding: utf-8 -*-
+
 import pygame
 from observer import Observer
 from setting import *
 
-class SnakeStateHandler(Observer):
-	def __init__(self, snake, keyboardEventHandler):
+class SnakeStateHandler(Observer, object):
+	def __init__(self, snake, listener):
 		self.snake = snake
 		self.snake.attach(self)
 		self.snakeList = self.snake.getSnakeList()
 		self.length = self.snake.getLength()
 		self.thick = self.snake.getThick()
-		self.setListener(keyboardEventHandler)
+
+		self.arrowKeyPressed = False
+
+		self.setListener(listener)
 
 	def observeUpdate(self):
 		self.snakeList = self.snake.getSnakeList()
@@ -26,7 +31,15 @@ class SnakeStateHandler(Observer):
 		self.commit()
 
 	def tickMove(self):
-		pass
+		direction = self.snakeList[SNAKE_HEAD][DIRECTION]
+		if direction == LEFT:
+			self.onKeyLeft()
+		elif direction == RIGHT:
+			self.onKeyRight()
+		elif direction == UP:
+			self.onKeyUp()
+		elif direction == DOWN:
+			self.onKeyDown()
 
 	def smallMove(self):
 		pass # 속도 * (나중 - 처음) / thick
@@ -34,37 +47,44 @@ class SnakeStateHandler(Observer):
 		#
 		#thickMove()
 
-	def eventOnKeyLeft(self):
+	def onKeyLeft(self):
 		lead_x_change = - self.thick
 		lead_y_change = 0
 		direction = LEFT
 		self.move((self.snakeList[SNAKE_HEAD][POS_X] + lead_x_change,
 			self.snakeList[SNAKE_HEAD][POS_Y] + lead_y_change), direction)
 
-	def eventOnKeyRight(self):
+	def onKeyRight(self):
 		lead_x_change = self.thick
 		lead_y_change = 0
 		direction = RIGHT
 		self.move((self.snakeList[SNAKE_HEAD][POS_X] + lead_x_change,
 			self.snakeList[SNAKE_HEAD][POS_Y] + lead_y_change), direction)
 
-	def eventOnKeyUp(self):
+	def onKeyUp(self):
 		lead_x_change = 0
 		lead_y_change = - self.thick
 		direction = UP
 		self.move((self.snakeList[SNAKE_HEAD][POS_X] + lead_x_change,
 			self.snakeList[SNAKE_HEAD][POS_Y] + lead_y_change), direction)
 
-	def eventOnKeyDown(self):
+	def onKeyDown(self):
 		lead_x_change = 0
 		lead_y_change = self.thick
 		direction = DOWN
 		self.move((self.snakeList[SNAKE_HEAD][POS_X] + lead_x_change,
 			self.snakeList[SNAKE_HEAD][POS_Y] + lead_y_change), direction)
 
-	def setListener(self, keyboardEventHandler):
-		keyboardEventHandler.onKey(pygame.K_LEFT, self.eventOnKeyLeft)
-		keyboardEventHandler.onKey(pygame.K_RIGHT, self.eventOnKeyRight)
-		keyboardEventHandler.onKey(pygame.K_UP, self.eventOnKeyUp)
-		keyboardEventHandler.onKey(pygame.K_DOWN, self.eventOnKeyDown)
-		keyboardEventHandler.listen()
+	def onTick(self, listener):
+		if not listener.isArrowKeyPressed():
+			self.tickMove()
+
+	def onArrowKey(self):
+		pass
+
+	def setListener(self, onKeyListenerHandler, onTickListenerHandler):
+		onKeyListenerHandler.listen(pygame.K_LEFT, self.onKeyLeft, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
+		onKeyListenerHandler.listen(pygame.K_RIGHT, self.onKeyRight, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
+		onKeyListenerHandler.listen(pygame.K_UP, self.onKeyUp, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
+		onKeyListenerHandler.listen(pygame.K_DOWN, self.onKeyDown, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
+		onTickListenerHandler.listen("snakeStateHandler", self.onTick)

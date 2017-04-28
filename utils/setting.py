@@ -1,0 +1,57 @@
+"""default values"""
+
+""""Base"""
+POS_X = 0
+POS_Y = 1
+BEGIN = 0
+END = -1
+
+"""Direction"""
+LEFT = 1
+DOWN = 2
+RIGHT = 3
+UP = 4
+
+"""Color"""
+GREEN = (0,255,0)
+
+"""Snake"""
+SNAKE_HEAD = -1
+SNAKE_TAIL = 0
+
+DIRECTION = 2
+# defaultSpeed = 30
+# defaultThick = 20
+# SNAKE_AUTO_DRAW = True
+
+"""Skin"""
+SKIN_HEAD = 0
+SKIN_BODY = 1
+SKIN_TAIL = 2
+SKIN_FIRST = 3
+
+"""Skin Name"""
+SKIN_DEFAULT = 0
+
+
+"""Item"""
+CONTINUANCE = -1
+# DEFAULT_ITEM_SIZE = defaultThick
+DEFAULT_ITEM_SIZE = 20
+ITEM_LIST = ["apple"]
+
+"""Screen"""
+WALL_TICK = 0
+SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 800
+SCREEN_MID = (SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+SPRITE_OFFSET = ((WALL_TICK, SCREEN_WIDTH - WALL_TICK) ,(WALL_TICK, SCREEN_HEIGHT - WALL_TICK))
+ITEM_MARGIN = 0
+
+FRAMES_PER_SECOND = 40.0
+SCREEN_AUTO_UPDATE = True
+
+"""game name"""
+PLAYER1_HIGH_SCORE = 0
+PLAYER2_HIGH_SCORE = 1
+PLAYER2_COMPETE = 2

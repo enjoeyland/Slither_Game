@@ -1,31 +1,10 @@
-import sys
 import pygame
-# import utility
-# import vector
-# from utility import *  
+from utils.setting import DEFAULT_FONT_SIZE, CONTINUANCE, POS_X, POS_Y, BLACK, TOP_LEFT, TOP_MIDDLE, TOP_RIGHT, \
+	CENTER_LEFT, CENTER_MIDDLE, CENTER_RIGHT, BOTTOM_LEFT, BOTTOM_MIDDLE, BOTTOM_RIGHT, ANTI_ALIAS
 
-X = 0
-Y = 1
-
-"""Screen resolution stuff here"""
-ANTI_ALIAS = True
-
-"""Font alignment enumerations""" # alignment : 정렬
-TOP_LEFT = 0
-TOP_MIDDLE = 1
-TOP_RIGHT = 2
-CENTER_LEFT = 3
-CENTER_MIDDLE = 4
-CENTER_RIGHT = 5
-BOTTOM_LEFT = 6
-BOTTOM_MIDDLE = 7
-BOTTOM_RIGHT = 8
-
-"""Color"""
-BLACK = (0, 0, 0)
 
 class Text(pygame.sprite.Sprite):
-	def __init__(self, fontType, fontSize = 12, color = BLACK, text = "", lifeTimer = -1, textIndex = 0):
+	def __init__(self, fontType, fontSize = DEFAULT_FONT_SIZE, color = BLACK, text = "", lifeTimer = CONTINUANCE, textIndex = 0, location = (0,0)):
 		pygame.sprite.Sprite.__init__(self)
 		pygame.font.init()
 
@@ -34,61 +13,55 @@ class Text(pygame.sprite.Sprite):
 		self.color = color
 		self.fontType = fontType
 
-		#if hasattr(sys, '_MEIPASS'):
-		# self.fontType = utility.getResourcePath(fontType)
-
 		self.fontSize = fontSize
 		self.lifeTimer = lifeTimer
 		self.alignment = TOP_LEFT 
 		self.buildImage()
 		# self.position = vector.vector2d(0,0) #<-
-		self.position = []
+		self.position = location
 
 	def draw(self, screen):
 		screen.blit(self.image, self.rect)
 
 	def update(self):
-		if not (self.lifeTimer == -1):
+		if self.lifeTimer != CONTINUANCE:
 			if not self.lifeTimer:
 				self.kill()
 
 			self.lifeTimer -= 1
 
 		if self.alignment == TOP_LEFT:
-			self.rect.topleft = (self.position[X], self.position[y])
+			self.rect.topleft = (self.position[POS_X], self.position[POS_Y])
 
 		elif self.alignment == TOP_MIDDLE:
-			self.rect.midtop = (self.position[X], self.position[y])
+			self.rect.midtop = (self.position[POS_X], self.position[POS_Y])
 
 		elif self.alignment == TOP_RIGHT:
-			self.rect.topright = (self.position[X], self.position[y])
+			self.rect.topright = (self.position[POS_X], self.position[POS_Y])
 
 		elif self.alignment == CENTER_LEFT:
-			self.rect.midleft = (self.position[X], self.position[y])
+			self.rect.midleft = (self.position[POS_X], self.position[POS_Y])
 
 		elif self.alignment == CENTER_MIDDLE:
-			self.rect.center = (self.position[X], self.position[y])
+			self.rect.center = (self.position[POS_X], self.position[POS_Y])
 
 		elif self.alignment == CENTER_RIGHT:
-			self.rect.midright = (self.position[X], self.position[y])
+			self.rect.midright = (self.position[POS_X], self.position[POS_Y])
 
 		elif self.alignment == BOTTOM_LEFT:
-			self.rect.bottomleft = (self.position[X], self.position[y])
+			self.rect.bottomleft = (self.position[POS_X], self.position[POS_Y])
 
 		elif self.alignment == BOTTOM_MIDDLE:
-			self.rect.midbottom = (self.position[X], self.position[y])
+			self.rect.midbottom = (self.position[POS_X], self.position[POS_Y])
 
 		elif self.alignment == BOTTOM_RIGHT:
-			self.rect.bottomright = (self.position[X], self.position[y])
+			self.rect.bottomright = (self.position[POS_X], self.position[POS_Y])
 
 
 
 	def setFont(self, fontSize, color, fontType):
 		self.color = color
 		self.fontType = fontType
-
-		#if hasattr(sys, '_MEIPASS'):
-		# self.fontType = utility.getResourcePath(fontType)
 
 		self.fontSize = fontSize
 		self.buildImage()
@@ -117,14 +90,12 @@ class Text(pygame.sprite.Sprite):
 
 	def getPosition(self):
 		"""This method returns the sprite's position"""
-		return [self.position[X], self.position[y]]
+		return [self.position[POS_X], self.position[POS_Y]]
 
 
 
 	def setPosition(self, position):
 		"""This method sets the sprite's position"""
-		# self.position[X] = position[X]
-		# self.position[y] = position[Y]
 		self.position = position
 
 
@@ -155,16 +126,11 @@ class Text(pygame.sprite.Sprite):
 		return newObject
 
 	def buildImage(self):
-		# self.fontObject = pygame.font.Font(self.fontType, self.fontSize)
 		self.fontObject = pygame.font.SysFont(self.fontType, self.fontSize)
 		self.image = self.fontObject.render(str(self.text), ANTI_ALIAS, self.color)
 		self.rect = self.image.get_rect()
 
 class TextSurface:
 	def __init__(self, fontType, fontSize, color, text):
-		#if hasattr(sys, '_MEIPASS'):
-		# fontType = utility.getResourcePath(fontType)
-
-		# fontObject = pygame.font.Font(fontType, fontSize)
 		fontObject = pygame.font.SysFont(fontType, fontSize)
 		self.image = fontObject.render(str(text), ANTI_ALIAS, color)

@@ -1,7 +1,9 @@
+from utils.observer import Publisher
 from utils.setting import *
 
-class Snake(object):
+class Snake(Publisher):
 	def __init__(self, snakeID, speed, thick, skin, skinNum = SKIN_DEFAULT, firstHeadDirection = RIGHT, headPos = SCREEN_MID, color = GREEN, length = 1,):
+		Publisher.__init__(self)
 		self.snakeID = snakeID
 		self.color = color
 		self.speed = speed
@@ -12,11 +14,17 @@ class Snake(object):
 
 		#img
 		self.snakeSkin = skin.getSkin(skinNum)
-		self.headImg = self.snakeSkin["head"]
-		self.bodyImg = self.snakeSkin["body"]
-		self.tailImg = self.snakeSkin["tail"]
-		self.firstImg = self.snakeSkin["first"]
+		self.headImg = self.resizeImage(self.snakeSkin["head"])
+		self.bodyImg = self.resizeImage(self.snakeSkin["body"])
+		self.tailImg = self.resizeImage(self.snakeSkin["tail"])
+		self.firstImg = self.resizeImage(self.snakeSkin["first"])
 
+	def resizeImage(self, image):
+		try:
+			image = pygame.transform.scale(image,(self.thick, self.thick))
+			return image
+		except Exception as e:
+			return  image
 
 	def getState(self):
 		snakeState = {}
@@ -78,17 +86,3 @@ class Snake(object):
 	def setSnakeList(self, snakeList):
 		self.snakeList = snakeList
 		self.notify()
-
-
-
-
-
-	def attach(self, observer):
-		self.setOfObserver.add(observer)
-
-	def detach(self, observer):
-		self.setOfObserver.remove(observer)
-
-	def notify(self):
-		for observer in self.setOfObserver:
-			observer.observeUpdate()

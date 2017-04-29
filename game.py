@@ -1,8 +1,8 @@
 import pygame
 
-from event import event, keyboardEventHandler, io_eventHandler, snakeEventHandler
+from event import event, keyboardEventHandler, io_eventHandler, snakeEventCreator
 from event import listener
-from gameObject import skin
+from gameObject import skin, score
 from gameObject.items import item, apple
 from player import snake, snakeDisplayHandler, snakeStateHandler
 from utils.setting import *
@@ -25,13 +25,23 @@ class Game(object):
 
 		self.gameIsRunning = True
 
-		# setting
+		# Create Group
+		groupApple = pygame.sprite.Group()
+		groupItem = pygame.sprite.Group()
+		groupWall = pygame.sprite.Group()
+		groupText = pygame.sprite.Group()
+		allSprites = pygame.sprite.Group()
+
+		# Setting
+		mScore = score.Score()
+		mScoreDisplayHandler = score.ScoreDisplayHandler(mScore)
+
 		mOnKeyListenerHandler = listener.ListenerHandler()
 		mOnTickListenerHandler = listener.ListenerHandler()
 
 		mKeyboardEventHandler = keyboardEventHandler.KeyboardEventHandler(mOnKeyListenerHandler)
-		mIOEventHandler = io_eventHandler.IOEventHandler(mKeyboardEventHandler, mOnTickListenerHandler)
-		mSnakeEventHandler = snakeEventHandler.SnakeEventHandler()
+		mIOEventHandler = io_eventHandler.IOEventHandler(mKeyboardEventHandler, mOnTickListenerHandler, mScore)
+		mSnakeEventCreator = snakeEventCreator.SnakeEventCreator()
 		mEvent = event.Event(mOnTickListenerHandler)
 
 		player = snake.Snake(1, defaultSpeed, defaultThick, skin.Skin())
@@ -39,29 +49,32 @@ class Game(object):
 		mSnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(player)
 		itemAppleGenerator = item.ItemGenerator(apple.Apple, 1)
 
-		GroupApple = pygame.sprite.Group()
-		GroupItem = pygame.sprite.Group()
-		GroupWall = pygame.sprite.Group()
-		allSprites = pygame.sprite.Group()
-
+		groupText.add(mScoreDisplayHandler.draw())
 		itemAppleGenerator.setItemMaximumNum(2)
-		while self.gameIsRunning:
-			mEvent.onTick()
 
+		while self.gameIsRunning:
+			# Make Event
+			mEvent.onTick()
+			# mIOEventHandler.handleEvent()
+			mSnakeEventCreator.crashWall(player, self.setGameRunningToFalse)
+			mSnakeEventCreator.crashItem(player, groupItem)
+
+			# Drop Item
 			objectApple = itemAppleGenerator.dropItem()
 			if objectApple:
-				GroupApple.add(objectApple)
-			print(GroupApple.sprites()[0].getLocation())
+				groupApple.add(objectApple)
+
 			# Group Update
 			try:
-				GroupItem.add(GroupApple.sprites())
-				allSprites.add(GroupItem.sprites(), GroupWall.sprites())
+				groupItem.add(groupApple.sprites())
+				allSprites.add(groupItem.sprites(), groupWall.sprites(), groupText.sprites())
 			except:
 				pass
 
 
 			self.screen.fill((100,200,255))
-			mSnakeEventHandler.crashWall(player, self.setGameRunningToFalse)
+
+
 
 			mSnakeDisplayHandler.update()
 			mSnakeDisplayHandler.draw(self.screen)

@@ -6,7 +6,7 @@ from utils.observer import Observer
 from utils.setting import *
 
 
-class SnakeDisplayHandler(Observer, object):
+class SnakeDisplayHandler(Observer):
 	def __init__(self, snake):
 		self.snake = snake
 		self.snake.attach(self)
@@ -29,9 +29,6 @@ class SnakeDisplayHandler(Observer, object):
 		self.snakeList = self.snakeState["snakeList"]
 		self.length = self.snakeState["length"]
 
-		# if SNAKE_AUTO_DRAW:
-		# 	self.update()
-		# 	# self.draw()
 
 	def update(self):
 		self.headClone = pygame.transform.rotate(self.headImg, 90 * self.snakeList[SNAKE_HEAD][DIRECTION])
@@ -44,7 +41,6 @@ class SnakeDisplayHandler(Observer, object):
 			surface.blit(self.firstClone, (self.snakeList[SNAKE_HEAD][POS_X],self.snakeList[SNAKE_HEAD][POS_Y]))
 
 		else:
-			surface.blit(self.headClone, (self.snakeList[SNAKE_HEAD][POS_X],self.snakeList[SNAKE_HEAD][POS_Y]))
 			surface.blit(self.tailClone, (self.snakeList[SNAKE_TAIL][POS_X],self.snakeList[SNAKE_TAIL][POS_Y]))
 
 			if self.bodyImg == None:
@@ -54,3 +50,4 @@ class SnakeDisplayHandler(Observer, object):
 				for posX, posY, direction in self.snakeList[1:-1]:
 					self.bodyClone = pygame.transform.rotate(self.bodyImg, 90 * direction)
 					surface.blit(self.bodyClone, (posX, posY))
+			surface.blit(self.headClone, (self.snakeList[SNAKE_HEAD][POS_X],self.snakeList[SNAKE_HEAD][POS_Y]))

@@ -3,21 +3,27 @@ import pygame
 
 from utils.setting import *
 
-class Item(pygame.sprite.Sprite, object):
+class Item(pygame.sprite.Sprite):
 	"""This class is abstract class"""
 	def __init__(self, itemGenerator, image, location, lifeTimer = CONTINUANCE):
 		pygame.sprite.Sprite.__init__(self)
 		self.itemGenerator = itemGenerator
+		self.type = None
 		self.image = image
 		self.rect = self.image.get_rect()
-		self.setLocation(location)
-		# self.type = form_type # "img" / "color"
-		# self.form = form
+		self.location = location
+		self.setLocation(self.location)
 		self.lifeTimer = lifeTimer
 
 	def setLocation(self, location):
 		self.rect.x = location[POS_X]
 		self.rect.y = location[POS_Y]
+
+	def getLocation(self):
+		return self.location
+
+	def getSize(self):
+		return self.rect.size
 
 	def effect(self, *args):
 		raise NotImplementedError( "Should have implemented update %s" % self )

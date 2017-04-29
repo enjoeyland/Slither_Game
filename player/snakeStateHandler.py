@@ -6,7 +6,7 @@ from utils.observer import Observer
 from utils.setting import *
 
 
-class SnakeStateHandler(Observer, object):
+class SnakeStateHandler(Observer):
 	def __init__(self, snake, onKeyListenerHandler, onTickListenerHandler, IOEventHandler):
 		self.snake = snake
 		self.snake.attach(self)

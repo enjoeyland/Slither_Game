@@ -1,8 +1,6 @@
 #-*- coding: utf-8 -*-
 
-import pygame
-import game
-
+from core import game
 from utils import utility
 from utils.setting import *
 

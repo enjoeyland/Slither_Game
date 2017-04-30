@@ -1,18 +1,19 @@
-import pygame
+import pygame,time
 
 from event import event, keyboardEventHandler, io_eventHandler, snakeEventCreator
 from event import listener
 from gameObject import skin, score
 from gameObject.items import item, apple
 from player import snake, snakeDisplayHandler, snakeStateHandler
+from utils import dataSavor
 from utils.setting import *
 
 class Game(object):
 	def __init__(self, screen):
 		self.screen = screen
 
-	def setGameRunningToFalse(self):
-		self.gameIsRunning = False
+	def setGameSessionToFalse(self):
+		self.gameSession = False
 	# def setGameOverTrue(self):
 	# 	self.gameOver = True
 	def display_intro(self):
@@ -24,6 +25,7 @@ class Game(object):
 		defaultThick = 20
 
 		self.gameIsRunning = True
+		self.gameSession = True
 
 		# Create Group
 		groupApple = pygame.sprite.Group()
@@ -35,6 +37,7 @@ class Game(object):
 		# Setting
 		mScore = score.Score()
 		mScoreDisplayHandler = score.ScoreDisplayHandler(mScore)
+		mScoreSavor = dataSavor.ScoreSavor()
 
 		mOnKeyListenerHandler = listener.ListenerHandler()
 		mOnTickListenerHandler = listener.ListenerHandler()
@@ -47,16 +50,19 @@ class Game(object):
 		player = snake.Snake(1, defaultSpeed, defaultThick, skin.Skin())
 		mSnakeStateHandler = snakeStateHandler.SnakeStateHandler(player, mOnKeyListenerHandler, mOnTickListenerHandler, mIOEventHandler)
 		mSnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(player)
+
 		itemAppleGenerator = item.ItemGenerator(apple.Apple, 1)
 
 		groupText.add(mScoreDisplayHandler.draw())
 		itemAppleGenerator.setItemMaximumNum(2)
 
-		while self.gameIsRunning:
+
+		while self.gameSession:
 			# Make Event
 			mEvent.onTick()
+
 			# mIOEventHandler.handleEvent()
-			mSnakeEventCreator.crashWall(player, self.setGameRunningToFalse)
+			mSnakeEventCreator.crashWall(player, self.setGameSessionToFalse)
 			mSnakeEventCreator.crashItem(player, groupItem)
 
 			# Drop Item
@@ -71,10 +77,8 @@ class Game(object):
 			except:
 				pass
 
-
+			# Build Screen
 			self.screen.fill((100,200,255))
-
-
 
 			mSnakeDisplayHandler.update()
 			mSnakeDisplayHandler.draw(self.screen)
@@ -82,8 +86,12 @@ class Game(object):
 			allSprites.update()
 			allSprites.draw(self.screen)
 
+			# Update Screen
 			pygame.display.update()
 			pygame.time.Clock().tick(FRAMES_PER_SECOND)
+
+		mScoreSavor.saveScore(mScore.getScore())
+		print(mScoreSavor.getTopScore(10))
 
 	def player2_highScore_gameLoop(self):
 		pass

@@ -4,30 +4,36 @@ from ui.text import Text
 from utils.setting import WHITE, SCREEN_MID, POS_X, POS_Y, CENTER_MIDDLE
 
 
-class PopUp(object):
-	def __init__(self, screen, backgroundColor = WHITE, pageSize = (500,300)):
-		self.screen = screen
-		self.backgroundColor = backgroundColor
+class PopUp(pygame.sprite.Sprite):
+	def __init__(self, backgroundColor = WHITE, pageSize = (500,300), transparent = 128,buildImageAutomatic =True, *args, **kwargs):
+		pygame.sprite.Sprite.__init__(self)
+		self.backgroundColor = (backgroundColor[0], backgroundColor[1], backgroundColor[2], transparent)
 		self.pageSize = pageSize
 		self.popUpPageBasePoint = [SCREEN_MID[POS_X] - (self.pageSize[POS_X] / 2),
 								   SCREEN_MID[POS_Y] - (self.pageSize[POS_Y] / 2)]
+		if buildImageAutomatic == True:
+			self.buildImage( *args, **kwargs)
 
-	def draw(self, *args, **kwargs):
-		popUpPage = pygame.Surface(self.pageSize)
-		popUpPage.set_alpha(128)
-		popUpPage.fill(self.backgroundColor)
-		self.screen.blit(popUpPage, self.popUpPageBasePoint)
-		return self.drawContent(*args, **kwargs)
+	def buildImage(self, *args, **kwargs):
+		self.popUpPage = pygame.Surface(self.pageSize, pygame.SRCALPHA)
+		# self.popUpPage.set_alpha(128)
+		self.popUpPage.fill(self.backgroundColor)
+		self.drawAdditionalContent(*args, **kwargs)
+		self.image = self.popUpPage
+		self.rect = self.image.get_rect()
+		self.rect.topleft = self.popUpPageBasePoint
 
-	def drawContent(self, *args, **kwargs):
+	def drawAdditionalContent(self, *args, **kwargs):
 		pass
 
 	# def drawText(self, text):
 	# 	return Text(text = text, fontSize= 50, location= SCREEN_MID, alignment= CENTER_MIDDLE)
 
 class PausePage(PopUp):
-	def __init__(self, screen, pageSize= (500,300)):
-		PopUp.__init__(self, screen, pageSize= pageSize)
+	def __init__(self, pageSize= (500,300)):
+		PopUp.__init__(self, pageSize= pageSize)
 
-	def drawContent(self):
-		return Text(text = "Pause", fontSize= 50, location= SCREEN_MID, alignment= CENTER_MIDDLE)
+	def drawAdditionalContent(self):
+		textSprite = Text(text = "Pause", fontSize= 50, location= (self.pageSize[POS_X]/2, self.pageSize[POS_Y]/2), alignment= CENTER_MIDDLE)
+		textSprite.update()
+		self.popUpPage.blit(textSprite.image, textSprite.rect)

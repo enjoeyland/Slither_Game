@@ -1,5 +1,4 @@
 import pygame
-import time
 
 from event import event, keyboardEventHandler, io_eventHandler, snakeEventCreator
 from event import listener
@@ -32,17 +31,9 @@ class Game(object):
 	# def clickMenuButton(self, buttonSprite):
 	# 	if buttonSprite.isClicked():
 	# 		pass
-	## 다시 button 만들기
-	def setButtonSprite(self, name, buttonSprite):
-		self.buttonSprite = buttonSprite
-		if name == "replay":
-			return self.clickReplayButton
-		elif name == "menu":
-			pass
 
 	def clickReplayButton(self):
-		if self.buttonSprite.isClicked():
-			self.gameReplay = True
+		self.gameReplay = True
 
 	# def setGameOverTrue(self):
 	# 	self.gameOver = True
@@ -64,13 +55,14 @@ class Game(object):
 		groupItem = pygame.sprite.Group()
 		groupWall = pygame.sprite.Group()
 		groupText = pygame.sprite.Group()
+		groupPopUp = pygame.sprite.Group()
 		allSprites = pygame.sprite.Group()
 
 		# Setting
 		mScore = score.Score()
 		mScoreDisplayHandler = score.ScoreDisplayHandler(mScore)
 		mScoreSavor = dataSavor.ScoreSavor()
-		mScoreTable = scoreTable.ScoreTable(self.screen)
+		mScoreTable = scoreTable.ScoreTable()
 
 		mOnKeyListenerHandler = listener.ListenerHandler()
 		mOnTickListenerHandler = listener.ListenerHandler()
@@ -84,7 +76,7 @@ class Game(object):
 		mSnakeStateHandler = snakeStateHandler.SnakeStateHandler(player, mOnKeyListenerHandler, mOnTickListenerHandler, mIOEventHandler)
 		mSnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(player)
 
-		mPausePage = popUp.PausePage(self.screen)
+		mPausePage = popUp.PausePage()
 
 		itemAppleGenerator = item.ItemGenerator(apple.Apple, 1)
 
@@ -92,8 +84,8 @@ class Game(object):
 		itemAppleGenerator.setItemMaximumNum(2)
 		mOnKeyListenerHandler.listen(pygame.K_p, self.pause)
 
-		menuButton = {"name" : "menu", "listener" : mOnTickListenerHandler, "func": self.setButtonSprite}
-		replayButton = {"name" : "replay", "listener" : mOnTickListenerHandler, "func": self.setButtonSprite}
+		# menuButton = {"name" : "menu", "listener" : mOnTickListenerHandler, "func": self.setButtonSprite}
+		replayButton = {"name" : "replay", "listener" : mOnTickListenerHandler, "func": self.clickReplayButton}
 
 		while self.gameSession:
 
@@ -132,44 +124,53 @@ class Game(object):
 
 			if self.isPause:
 				# End Listen
-
 				mSnakeStateHandler.endListen()
 
-				pauseSprite = mPausePage.draw()
-				groupText.add(pauseSprite)
-				allSprites.add(groupText.sprites())
+				groupPopUp.add(mPausePage)
+				allSprites.add(groupPopUp.sprites())
 
-				groupText.update()
-				groupText.draw(self.screen)
+				groupPopUp.update()
+				groupPopUp.draw(self.screen)
 				pygame.display.update()
 
 				while self.isPause:
 					mEvent.onTick()
+
+					pygame.display.update()
 					pygame.time.Clock().tick(3)
 
-				pauseSprite.kill()
+				mPausePage.kill()
 
 				#listen
 				mSnakeStateHandler.setListener()
 
 			else:
 				self.setGameSessionToFalse()
+				# End Listen
+				mSnakeStateHandler.endListen()
+
 				mScoreSavor.saveScore(mScore.getScore())
+				mScoreTable.buildImage(mScoreSavor.getTopScore(10), mScore.getScore(), replayButton)
 
-				scoreTextSprites = mScoreTable.draw(mScoreSavor.getTopScore(10), mScore.getScore(), replayButton)
-				groupText.add(scoreTextSprites)
-				allSprites.add(groupText.sprites())
-
-				groupText.update()
-				groupText.draw(self.screen)
+				groupPopUp.add(mScoreTable)
+				groupPopUp.update()
+				groupPopUp.draw(self.screen)
 				pygame.display.update()
 
 				while not self.gameReplay:
 					mEvent.onTick()
-					pygame.time.Clock().tick(3)
 
-				for scoreTextSprite in scoreTextSprites:
-					scoreTextSprite.kill()
+					self.screen.fill(SCREEN_BACKGROUND)
+					mSnakeDisplayHandler.draw(self.screen)
+					allSprites.draw(self.screen)
+
+					groupPopUp.update()
+					groupPopUp.draw(self.screen)
+
+					pygame.display.update()
+					pygame.time.Clock().tick(10)
+
+				mScoreTable.kill()
 
 		return self.gameReplay
 

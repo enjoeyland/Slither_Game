@@ -5,7 +5,7 @@ from utils.setting import DEFAULT_FONT_SIZE, CONTINUANCE, POS_X, POS_Y, BLACK, T
 
 
 class Text(pygame.sprite.Sprite):
-	def __init__(self, fontType = DEFAULT_FONT_TYPE, fontSize = DEFAULT_FONT_SIZE, color = BLACK, text = "", lifeTimer = CONTINUANCE, textIndex = 0, location = (0,0), alignment = TOP_LEFT):
+	def __init__(self, fontType = DEFAULT_FONT_TYPE, fontSize = DEFAULT_FONT_SIZE, color = BLACK, text = "", lifeTimer = CONTINUANCE, textIndex = 0, location = (0,0), alignment = TOP_LEFT, basePoint = (0,0)):
 		pygame.sprite.Sprite.__init__(self)
 		pygame.font.init()
 
@@ -19,6 +19,7 @@ class Text(pygame.sprite.Sprite):
 		self.alignment = alignment
 		self.buildImage(self.textColor)
 		self.position = location
+		self.basePoint = basePoint
 
 	def draw(self, screen):
 		screen.blit(self.image, self.rect)
@@ -31,31 +32,31 @@ class Text(pygame.sprite.Sprite):
 			self.lifeTimer -= 1
 
 		if self.alignment == TOP_LEFT:
-			self.rect.topleft = (self.position[POS_X], self.position[POS_Y])
+			self.rect.topleft = self.position
 
 		elif self.alignment == TOP_MIDDLE:
-			self.rect.midtop = (self.position[POS_X], self.position[POS_Y])
+			self.rect.midtop = self.position
 
 		elif self.alignment == TOP_RIGHT:
-			self.rect.topright = (self.position[POS_X], self.position[POS_Y])
+			self.rect.topright = self.position
 
 		elif self.alignment == CENTER_LEFT:
-			self.rect.midleft = (self.position[POS_X], self.position[POS_Y])
+			self.rect.midleft = self.position
 
 		elif self.alignment == CENTER_MIDDLE:
-			self.rect.center = (self.position[POS_X], self.position[POS_Y])
+			self.rect.center = self.position
 
 		elif self.alignment == CENTER_RIGHT:
-			self.rect.midright = (self.position[POS_X], self.position[POS_Y])
+			self.rect.midright = self.position
 
 		elif self.alignment == BOTTOM_LEFT:
-			self.rect.bottomleft = (self.position[POS_X], self.position[POS_Y])
+			self.rect.bottomleft = self.position
 
 		elif self.alignment == BOTTOM_MIDDLE:
-			self.rect.midbottom = (self.position[POS_X], self.position[POS_Y])
+			self.rect.midbottom = self.position
 
 		elif self.alignment == BOTTOM_RIGHT:
-			self.rect.bottomright = (self.position[POS_X], self.position[POS_Y])
+			self.rect.bottomright = self.position
 
 
 
@@ -100,14 +101,15 @@ class Text(pygame.sprite.Sprite):
 
 	def isClicked(self):
 		click = pygame.mouse.get_pressed()
-		if self.mouseOver() and click[0] == 1:
+		if self.isMouseOver() and click[0] == 1:
 			return True
 		else:
 			return False
 
-	def mouseOver(self):
+	def isMouseOver(self):
 		mousePosition = list(pygame.mouse.get_pos())
-		if ( mousePosition[POS_X] > self.rect.left ) and ( mousePosition[POS_X] < self.rect.right ) and ( mousePosition[POS_Y] > self.rect.top ) and ( mousePosition[POS_Y] < self.rect.bottom ):
+		if ( mousePosition[POS_X] > self.rect.left + self.basePoint[POS_X] ) and ( mousePosition[POS_X] < self.rect.right + self.basePoint[POS_X] )\
+				and ( mousePosition[POS_Y] > self.rect.top + self.basePoint[POS_Y]) and ( mousePosition[POS_Y] < self.rect.bottom + self.basePoint[POS_Y]):
 			return True
 		else:
 			return False
@@ -139,9 +141,3 @@ class TextSurface:
 	def __init__(self, fontType, fontSize, color, text):
 		fontObject = pygame.font.SysFont(fontType, fontSize)
 		self.image = fontObject.render(str(text), ANTI_ALIAS, color)
-
-class Button(Text):
-	def __init__(self, fontType = DEFAULT_FONT_TYPE, fontSize = DEFAULT_FONT_SIZE, color = BLACK, text = "", lifeTimer = CONTINUANCE, textIndex = 0, location = (0,0), alignment = CENTER_MIDDLE, backgroundColor = WHITE, buttonSize = None):
-		Text.__init__(self, fontType, fontSize, color, text, lifeTimer, textIndex, location, alignment)
-		self.backgroundColor = backgroundColor
-		self.buttonSize = buttonSize

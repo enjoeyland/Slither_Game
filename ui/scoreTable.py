@@ -1,3 +1,4 @@
+from ui.button import Button
 from ui.popUp import PopUp
 from ui.text import Text
 from utils.setting import TOP_MIDDLE, SCREEN_WIDTH, POS_X, POS_Y, RED, BLUE, BOTTOM_LEFT
@@ -21,19 +22,25 @@ class DrawTable():
 
 
 class ScoreTable(PopUp):
-	def __init__(self, screen, pageSize= (500,300)):
+	def __init__(self, pageSize= (500,300)):
 		self.pageSize = pageSize
-		PopUp.__init__(self, screen, pageSize= self.pageSize)
+		PopUp.__init__(self, pageSize= self.pageSize, buildImageAutomatic = False)
 		self.key = "score"
 
-	def drawContent(self, data, thisSessionScore, appendButton = None):
-
-		result = []
-		scoreSprites = DrawTable().draw(data, self.key, self.popUpPageBasePoint, self.pageSize[POS_X], thisSessionScore)
-		result.extend(scoreSprites)
+	def drawAdditionalContent(self, data, thisSessionScore, appendButton = None):
+		self.allSprites = []
+		scoreSprites = DrawTable().draw(data, self.key ,width= self.pageSize[POS_X], highLight= thisSessionScore)
+		self.allSprites.extend(scoreSprites)
 
 		if appendButton is not None:
-			buttonSprite = Text(color= BLUE,text= appendButton["name"], fontSize= 30,location=(self.popUpPageBasePoint[POS_X], self.popUpPageBasePoint[POS_Y] + self.pageSize[POS_Y])  ,alignment= BOTTOM_LEFT)
-			appendButton["listener"].listen(appendButton["name"]+"Button", appendButton["func"](appendButton["name"], buttonSprite))
-			result.append(buttonSprite)
-		return result
+			self.buttonSprite = Button(appendButton["func"], buttonSize=(150,40), text= appendButton["name"], fontSize= 30, location=(0,self.pageSize[POS_Y]), alignment= BOTTOM_LEFT, basePoint = self.popUpPageBasePoint)
+			self.buttonSprite.listen(appendButton["listener"])
+			self.update()
+	def getButtonSprite(self):
+		return self.buttonSprite
+
+	def update(self):
+		for sprite in self.allSprites:
+			sprite.update()
+			self.popUpPage.blit(sprite.image, sprite.rect)
+		self.popUpPage.blit(self.buttonSprite.image, self.buttonSprite.rect)

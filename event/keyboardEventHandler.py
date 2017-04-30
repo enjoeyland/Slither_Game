@@ -5,7 +5,7 @@ class KeyboardEventHandler(object):
 
 	def process(self, keyEvent):
 		for listenerItem in self.onKeyListenerHandler.listenerList:
-			if keyEvent.key == listenerItem["keyType"]:
+			if keyEvent.key == listenerItem["listenerName"]:
 				listenerItem["func"]()
 				self.groupListenedDic[listenerItem["group"]] = listenerItem["groupNotifyFunc"]
 		self.groupNotify()

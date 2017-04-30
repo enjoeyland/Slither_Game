@@ -16,7 +16,10 @@ class SnakeStateHandler(Observer):
 
 		self.arrowKeyPressed = False
 		self.IOEventHandler = IOEventHandler
-		self.setListener(onKeyListenerHandler, onTickListenerHandler)
+
+		self.onKeyListenerHandler = onKeyListenerHandler
+		self.onTickListenerHandler = onTickListenerHandler
+		self.setListener()
 
 	def observeUpdate(self):
 		self.snakeList = self.snake.getSnakeList()
@@ -95,9 +98,13 @@ class SnakeStateHandler(Observer):
 		return arrowKeyPressed
 
 
-	def setListener(self, onKeyListenerHandler, onTickListenerHandler):
-		onKeyListenerHandler.listen(pygame.K_LEFT, self.onKeyLeft, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
-		onKeyListenerHandler.listen(pygame.K_RIGHT, self.onKeyRight, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
-		onKeyListenerHandler.listen(pygame.K_UP, self.onKeyUp, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
-		onKeyListenerHandler.listen(pygame.K_DOWN, self.onKeyDown, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
-		onTickListenerHandler.listen("snakeStateHandler", self.onTick)
+	def setListener(self):
+		self.onKeyListenerHandler.listen(pygame.K_LEFT, self.onKeyLeft, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
+		self.onKeyListenerHandler.listen(pygame.K_RIGHT, self.onKeyRight, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
+		self.onKeyListenerHandler.listen(pygame.K_UP, self.onKeyUp, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
+		self.onKeyListenerHandler.listen(pygame.K_DOWN, self.onKeyDown, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
+		self.onTickListenerHandler.listen("snakeStateHandler", self.onTick)
+
+	def endListen(self):
+		self.onKeyListenerHandler.endListen(group = "arrowKey")
+		self.onTickListenerHandler.endListen(listenerName = "snakeStateHandler")

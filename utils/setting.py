@@ -8,6 +8,7 @@ POS_Y = 1
 BEGIN = 0
 END = -1
 DEFAULT_FONT_SIZE = 20
+DEFAULT_FONT_TYPE = "comicsansms"
 
 """Direction"""
 LEFT = 1
@@ -16,9 +17,12 @@ RIGHT = 3
 UP = 4
 
 """Color"""
-GREEN = (0,255,0)
 BLACK = (0, 0, 0)
-
+WHITE = (255,255,255)
+RED = (255, 0, 0)
+GREEN = (0,255,0)
+BLUE = (0, 0, 255)
+SCREEN_BACKGROUND = (100,200,255)
 
 """Font alignment enumerations""" # alignment : 정렬
 TOP_LEFT = 0
@@ -75,6 +79,7 @@ ANTI_ALIAS = True
 
 FRAMES_PER_SECOND = 20.0
 SCREEN_AUTO_UPDATE = True
+
 
 """game name"""
 PLAYER1_HIGH_SCORE = 0

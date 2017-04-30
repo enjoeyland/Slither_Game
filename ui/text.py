@@ -1,23 +1,23 @@
 import pygame
 from utils.setting import DEFAULT_FONT_SIZE, CONTINUANCE, POS_X, POS_Y, BLACK, TOP_LEFT, TOP_MIDDLE, TOP_RIGHT, \
-	CENTER_LEFT, CENTER_MIDDLE, CENTER_RIGHT, BOTTOM_LEFT, BOTTOM_MIDDLE, BOTTOM_RIGHT, ANTI_ALIAS
+	CENTER_LEFT, CENTER_MIDDLE, CENTER_RIGHT, BOTTOM_LEFT, BOTTOM_MIDDLE, BOTTOM_RIGHT, ANTI_ALIAS, DEFAULT_FONT_TYPE, \
+	WHITE
 
 
 class Text(pygame.sprite.Sprite):
-	def __init__(self, fontType, fontSize = DEFAULT_FONT_SIZE, color = BLACK, text = "", lifeTimer = CONTINUANCE, textIndex = 0, location = (0,0)):
+	def __init__(self, fontType = DEFAULT_FONT_TYPE, fontSize = DEFAULT_FONT_SIZE, color = BLACK, text = "", lifeTimer = CONTINUANCE, textIndex = 0, location = (0,0), alignment = TOP_LEFT):
 		pygame.sprite.Sprite.__init__(self)
 		pygame.font.init()
 
 		self.textIndex = textIndex
 		self.text = text
-		self.color = color
+		self.textColor = color
 		self.fontType = fontType
 
 		self.fontSize = fontSize
 		self.lifeTimer = lifeTimer
-		self.alignment = TOP_LEFT 
-		self.buildImage()
-		# self.position = vector.vector2d(0,0) #<-
+		self.alignment = alignment
+		self.buildImage(self.textColor)
 		self.position = location
 
 	def draw(self, screen):
@@ -60,17 +60,17 @@ class Text(pygame.sprite.Sprite):
 
 
 	def setFont(self, fontSize, color, fontType):
-		self.color = color
+		self.textColor = color
 		self.fontType = fontType
 
 		self.fontSize = fontSize
-		self.buildImage()
+		self.buildImage(self.textColor)
 
 
 
 	def setText(self, text):
 		self.text = text
-		self.buildImage()
+		self.buildImage(self.textColor)
 
 
 	def getText(self):
@@ -79,12 +79,12 @@ class Text(pygame.sprite.Sprite):
 
 
 	def setColor(self, color):
-		self.color = color
+		self.textColor = color
 
 
 
 	def getColor(self):
-		return self.color
+		return self.textColor
 
 
 
@@ -98,11 +98,16 @@ class Text(pygame.sprite.Sprite):
 		"""This method sets the sprite's position"""
 		self.position = position
 
-
+	def isClicked(self):
+		click = pygame.mouse.get_pressed()
+		if self.mouseOver() and click[0] == 1:
+			return True
+		else:
+			return False
 
 	def mouseOver(self):
 		mousePosition = list(pygame.mouse.get_pos())
-		if ( mousePosition[0] > self.rect.left ) and ( mousePosition[0] < self.rect.right ) and ( mousePosition[1] > self.rect.top ) and ( mousePosition[1] < self.rect.bottom ):
+		if ( mousePosition[POS_X] > self.rect.left ) and ( mousePosition[POS_X] < self.rect.right ) and ( mousePosition[POS_Y] > self.rect.top ) and ( mousePosition[POS_Y] < self.rect.bottom ):
 			return True
 		else:
 			return False
@@ -120,17 +125,23 @@ class Text(pygame.sprite.Sprite):
 		self.alignment = alignment
 
 	def copy(self):
-		newObject = Text(self.fontType, self.fontSize, self.color, self.text, self.lifeTimer)
+		newObject = Text(self.fontType, self.fontSize, self.textColor, self.text, self.lifeTimer)
 		newObject.setAlign(self.alignment)
 
 		return newObject
 
-	def buildImage(self):
+	def buildImage(self, color):
 		self.fontObject = pygame.font.SysFont(self.fontType, self.fontSize)
-		self.image = self.fontObject.render(str(self.text), ANTI_ALIAS, self.color)
+		self.image = self.fontObject.render(str(self.text), ANTI_ALIAS, color)
 		self.rect = self.image.get_rect()
 
 class TextSurface:
 	def __init__(self, fontType, fontSize, color, text):
 		fontObject = pygame.font.SysFont(fontType, fontSize)
 		self.image = fontObject.render(str(text), ANTI_ALIAS, color)
+
+class Button(Text):
+	def __init__(self, fontType = DEFAULT_FONT_TYPE, fontSize = DEFAULT_FONT_SIZE, color = BLACK, text = "", lifeTimer = CONTINUANCE, textIndex = 0, location = (0,0), alignment = CENTER_MIDDLE, backgroundColor = WHITE, buttonSize = None):
+		Text.__init__(self, fontType, fontSize, color, text, lifeTimer, textIndex, location, alignment)
+		self.backgroundColor = backgroundColor
+		self.buttonSize = buttonSize

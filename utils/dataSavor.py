@@ -93,4 +93,3 @@ class ScoreSavor(DataSavor):
 			return int(json["score"])
 		except KeyError:
 			return 0
-

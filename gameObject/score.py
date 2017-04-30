@@ -1,5 +1,5 @@
+from ui.text import Text
 from utils.observer import Observer, Publisher
-from utils.text import Text
 
 
 class Score(Publisher):
@@ -29,7 +29,7 @@ class ScoreDisplayHandler(Observer):
 		self.scoreC.attach(self)
 
 	def draw(self):
-		self.scoreSprite = Text("comicsansms", text= self.getText(self.scoreC.score))
+		self.scoreSprite = Text(text= self.getText(self.scoreC.score))
 		return self.scoreSprite
 
 	def getText(self, score):

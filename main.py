@@ -17,5 +17,6 @@ gameObject = game.Game(screen)
 
 whichGame = gameObject.display_intro()
 if whichGame == PLAYER1_HIGH_SCORE:
-	gameObject.player1_highScore_gameLoop()
+	while gameObject.player1_highScore_gameLoop():
+		pass
 

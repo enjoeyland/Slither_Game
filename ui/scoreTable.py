@@ -35,7 +35,7 @@ class ScoreTable(PopUp):
 		if appendButton is not None:
 			self.buttonSprite = Button(appendButton["func"], buttonSize=(150,40), text= appendButton["name"], fontSize= 30, location=(0,self.pageSize[POS_Y]), alignment= BOTTOM_LEFT, basePoint = self.popUpPageBasePoint)
 			self.buttonSprite.listen(appendButton["listener"])
-			self.update()
+
 	def getButtonSprite(self):
 		return self.buttonSprite
 
@@ -43,4 +43,5 @@ class ScoreTable(PopUp):
 		for sprite in self.allSprites:
 			sprite.update()
 			self.popUpPage.blit(sprite.image, sprite.rect)
+		self.buttonSprite.update()
 		self.popUpPage.blit(self.buttonSprite.image, self.buttonSprite.rect)

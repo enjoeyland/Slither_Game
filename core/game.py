@@ -6,7 +6,7 @@ from gameObject import skin, score
 from gameObject.items import item, apple
 from player import snake, snakeDisplayHandler, snakeStateHandler
 from ui import scoreTable, popUp
-from utils import dataSavor
+from utils import dataSavor, utility
 from utils.setting import FRAMES_PER_SECOND, SCREEN_BACKGROUND
 
 
@@ -42,13 +42,16 @@ class Game(object):
 
 
 	def player1_highScore_gameLoop(self):
-		defaultSpeed = 30
+		defaultSpeed = 600
 		defaultThick = 20
 
 		self.isGameRunning = True
 		self.gameSession = True
 		self.gameReplay = False
 		self.isPause = False
+
+		# Load Image
+		appleImg = utility.loadImage("apple")
 
 		# Create Group
 		groupApple = pygame.sprite.Group()
@@ -93,12 +96,12 @@ class Game(object):
 				# Make Event
 				mEvent.onTick()
 
-				# mIOEventHandler.handleEvent()
 				mSnakeEventCreator.crashWall(player, self.setGameRunningToFalse)
+				mSnakeEventCreator.crashItself(player, self.setGameRunningToFalse)
 				mSnakeEventCreator.crashItem(player, groupItem)
 
 				# Drop Item
-				objectApple = itemAppleGenerator.dropItem()
+				objectApple = itemAppleGenerator.dropItem(image= appleImg)
 				if objectApple:
 					groupApple.add(objectApple)
 
@@ -121,6 +124,7 @@ class Game(object):
 				# Update Screen
 				pygame.display.update()
 				pygame.time.Clock().tick(FRAMES_PER_SECOND)
+
 
 			if self.isPause:
 				# End Listen
@@ -153,8 +157,8 @@ class Game(object):
 				mScoreTable.buildImage(mScoreSavor.getTopScore(10), mScore.getScore(), replayButton)
 
 				groupPopUp.add(mScoreTable)
-				groupPopUp.update()
 				groupPopUp.draw(self.screen)
+				groupPopUp.update()
 				pygame.display.update()
 
 				while not self.gameReplay:
@@ -164,8 +168,8 @@ class Game(object):
 					mSnakeDisplayHandler.draw(self.screen)
 					allSprites.draw(self.screen)
 
-					groupPopUp.update()
 					groupPopUp.draw(self.screen)
+					groupPopUp.update()
 
 					pygame.display.update()
 					pygame.time.Clock().tick(10)

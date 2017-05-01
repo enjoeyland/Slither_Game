@@ -18,7 +18,7 @@ class Text(pygame.sprite.Sprite):
 		self.lifeTimer = lifeTimer
 		self.alignment = alignment
 		self.buildImage(self.textColor)
-		self.position = location
+		self.location = location
 		self.basePoint = basePoint
 
 	def draw(self, screen):
@@ -32,31 +32,31 @@ class Text(pygame.sprite.Sprite):
 			self.lifeTimer -= 1
 
 		if self.alignment == TOP_LEFT:
-			self.rect.topleft = self.position
+			self.rect.topleft = self.location
 
 		elif self.alignment == TOP_MIDDLE:
-			self.rect.midtop = self.position
+			self.rect.midtop = self.location
 
 		elif self.alignment == TOP_RIGHT:
-			self.rect.topright = self.position
+			self.rect.topright = self.location
 
 		elif self.alignment == CENTER_LEFT:
-			self.rect.midleft = self.position
+			self.rect.midleft = self.location
 
 		elif self.alignment == CENTER_MIDDLE:
-			self.rect.center = self.position
+			self.rect.center = self.location
 
 		elif self.alignment == CENTER_RIGHT:
-			self.rect.midright = self.position
+			self.rect.midright = self.location
 
 		elif self.alignment == BOTTOM_LEFT:
-			self.rect.bottomleft = self.position
+			self.rect.bottomleft = self.location
 
 		elif self.alignment == BOTTOM_MIDDLE:
-			self.rect.midbottom = self.position
+			self.rect.midbottom = self.location
 
 		elif self.alignment == BOTTOM_RIGHT:
-			self.rect.bottomright = self.position
+			self.rect.bottomright = self.location
 
 
 
@@ -81,7 +81,7 @@ class Text(pygame.sprite.Sprite):
 
 	def setColor(self, color):
 		self.textColor = color
-
+		self.buildImage(self.textColor)
 
 
 	def getColor(self):
@@ -89,15 +89,15 @@ class Text(pygame.sprite.Sprite):
 
 
 
-	def getPosition(self):
-		"""This method returns the sprite's position"""
-		return [self.position[POS_X], self.position[POS_Y]]
+	def getLocation(self):
+		"""This method returns the sprite's location"""
+		return self.location
 
 
 
-	def setPosition(self, position):
-		"""This method sets the sprite's position"""
-		self.position = position
+	def setLocation(self, location):
+		"""This method sets the sprite's location"""
+		self.location = location
 
 	def isClicked(self):
 		click = pygame.mouse.get_pressed()
@@ -116,7 +116,7 @@ class Text(pygame.sprite.Sprite):
 
 	def mouseOverDump(self):
 		print ("Mouse Position: ", list(pygame.mouse.get_pos()))
-		print ("[Rect Dimensions: ", "<LEFT: ", self.rect.left, ">", "<RIGHT: ", self.rect.right, ">", "<TOP: ", self.rect.top, ">", "<BOTTOM: ", self.rect.bottom, ">]")
+		print ("[Rect Dimensions: ", "<LEFT: ", self.rect.left + self.basePoint[POS_X], ">", "<RIGHT: ", self.rect.right + self.basePoint[POS_X], ">", "<TOP: ", self.rect.top + self.basePoint[POS_Y], ">", "<BOTTOM: ", self.rect.bottom + self.basePoint[POS_Y], ">]")
 
 
 

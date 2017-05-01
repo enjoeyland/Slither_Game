@@ -71,7 +71,6 @@ class Snake(Publisher):
 		self.speed += speed
 		self.notify()
 
-
 	def getThick(self):
 		return self.thick
 
@@ -79,9 +78,8 @@ class Snake(Publisher):
 		self.thick = thick
 		self.notify()
 
-
 	def getSnakeList(self):
-		return self.snakeList
+		return  self.snakeList
 
 	def setSnakeList(self, snakeList):
 		self.snakeList = snakeList

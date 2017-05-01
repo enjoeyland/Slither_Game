@@ -6,10 +6,13 @@ from utils.setting import DEFAULT_ITEM_SIZE, APPLE
 
 
 class Apple(item.Item):
-	def __init__(self, itemGenerator, location, size = DEFAULT_ITEM_SIZE):
+	def __init__(self, itemGenerator, location, size = DEFAULT_ITEM_SIZE, image = None):
 		self.location = location
 		self.image_size = size
-		self.image = utility.loadImage("apple")
+		if image is None:
+			self.image = utility.loadImage("apple")
+		else:
+			self.image = image
 		self.resizeImage()
 		item.Item.__init__(self, itemGenerator, self.image, location)
 		self.type = APPLE

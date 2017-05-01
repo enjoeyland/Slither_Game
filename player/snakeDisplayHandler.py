@@ -5,7 +5,6 @@ import pygame
 from utils.observer import Observer
 from utils.setting import *
 
-
 class SnakeDisplayHandler(Observer):
 	def __init__(self, snake):
 		self.snake = snake
@@ -13,7 +12,7 @@ class SnakeDisplayHandler(Observer):
 		self.snakeState = self.snake.getState()
 		self.color = self.snakeState["color"]
 		self.thick = self.snakeState["thick"]
-		self.snakeList = self.snakeState["snakeList"]
+		self.snakeList = self.snake.getSnakeList()
 		self.length = self.snakeState["length"]
 
 		self.snakeImg = self.snake.getSkin()
@@ -26,7 +25,7 @@ class SnakeDisplayHandler(Observer):
 		self.snakeState = self.snake.getState()
 		self.color = self.snakeState["color"]
 		self.thick = self.snakeState["thick"]
-		self.snakeList = self.snakeState["snakeList"]
+		self.snakeList = self.snake.getSnakeList()
 		self.length = self.snakeState["length"]
 
 
@@ -41,8 +40,6 @@ class SnakeDisplayHandler(Observer):
 			surface.blit(self.firstClone, (self.snakeList[SNAKE_HEAD][POS_X],self.snakeList[SNAKE_HEAD][POS_Y]))
 
 		else:
-			surface.blit(self.tailClone, (self.snakeList[SNAKE_TAIL][POS_X],self.snakeList[SNAKE_TAIL][POS_Y]))
-
 			if self.bodyImg == None:
 				for posX, posY, direction in self.snakeList[1:-1]:
 					pygame.draw.rect(surface, self.color, [posX, posY, self.thick, self.thick])
@@ -50,4 +47,5 @@ class SnakeDisplayHandler(Observer):
 				for posX, posY, direction in self.snakeList[1:-1]:
 					self.bodyClone = pygame.transform.rotate(self.bodyImg, 90 * direction)
 					surface.blit(self.bodyClone, (posX, posY))
+			surface.blit(self.tailClone, (self.snakeList[SNAKE_TAIL][POS_X],self.snakeList[SNAKE_TAIL][POS_Y]))
 			surface.blit(self.headClone, (self.snakeList[SNAKE_HEAD][POS_X],self.snakeList[SNAKE_HEAD][POS_Y]))

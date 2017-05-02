@@ -1,7 +1,9 @@
 import random
 import pygame
 
-from utils.setting import *
+from utils.setting import POS_Y, POS_X, CONTINUANCE, FRAMES_PER_SECOND, BEGIN, SPRITE_OFFSET, ITEM_MARGIN, \
+	DEFAULT_ITEM_SIZE, END
+
 
 class Item(pygame.sprite.Sprite):
 	"""This class is abstract class"""

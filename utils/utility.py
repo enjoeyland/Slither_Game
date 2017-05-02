@@ -1,6 +1,8 @@
 import os
 import pygame
 
+from utils.setting import POS_X, POS_Y
+
 """Img"""
 # pygame.transform.scale(Surface, (width, height), DestSurface = None)
 # icon = pygame.image.load('apple.png')
@@ -26,6 +28,20 @@ def loadImage(name):
 
 	print ("Failed to load image: %s" % name)
 	return None
+
+def resizeImage(image, size):
+	try:
+		resizedImg = pygame.transform.smoothscale(image, size)
+	except:
+		resizedImg = image
+		print("fall image resize")
+	return resizedImg
+
+def setImageBackgroundColor(image, backgroundColor):
+	surface = pygame.Surface(image.get_rect().size)
+	surface.fill(backgroundColor)
+	surface.blit(image, (0,0))
+	return surface
 
 def loadSound(name):
 	soundTypeList = ["bza", ".ogg", ".mp3"]

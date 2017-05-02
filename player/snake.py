@@ -1,3 +1,4 @@
+from utils import utility
 from utils.observer import Publisher
 from utils.setting import *
 
@@ -14,17 +15,11 @@ class Snake(Publisher):
 
 		#img
 		self.snakeSkin = skin.getSkin(skinNum)
-		self.headImg = self.resizeImage(self.snakeSkin["head"])
-		self.bodyImg = self.resizeImage(self.snakeSkin["body"])
-		self.tailImg = self.resizeImage(self.snakeSkin["tail"])
-		self.firstImg = self.resizeImage(self.snakeSkin["first"])
+		self.headImg = utility.resizeImage(self.snakeSkin["head"],(self.thick, self.thick))
+		self.bodyImg = utility.resizeImage(self.snakeSkin["body"], (self.thick, self.thick))
+		self.tailImg = utility.resizeImage(self.snakeSkin["tail"], (self.thick, self.thick))
+		self.firstImg = utility.resizeImage(self.snakeSkin["first"], (self.thick, self.thick))
 
-	def resizeImage(self, image):
-		try:
-			image = pygame.transform.scale(image,(self.thick, self.thick))
-			return image
-		except Exception as e:
-			return  image
 
 	def getState(self):
 		snakeState = {}

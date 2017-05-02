@@ -13,12 +13,9 @@ class Apple(item.Item):
 			self.image = utility.loadImage("apple")
 		else:
 			self.image = image
-		self.resizeImage()
+		self.image = utility.resizeImage(image, (self.image_size, self.image_size))
 		item.Item.__init__(self, itemGenerator, self.image, location)
 		self.type = APPLE
-
-	def resizeImage(self):
-		self.image = pygame.transform.scale(self.image,(self.image_size, self.image_size))
 
 	def effect(self, score, snake):
 		point = 100

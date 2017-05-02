@@ -7,7 +7,7 @@ from gameObject.items import item, apple
 from player import snake, snakeDisplayHandler, snakeStateHandler
 from ui import scoreTable, popUp
 from utils import dataSavor, utility
-from utils.setting import FRAMES_PER_SECOND, SCREEN_BACKGROUND
+from utils.setting import FRAMES_PER_SECOND, SCREEN_BACKGROUND, DEFAULT_SPEED, DEFAULT_THICK, FIRST_SKIN, SKIN_DEFAULT
 
 
 class Game(object):
@@ -35,6 +35,10 @@ class Game(object):
 	def clickReplayButton(self):
 		self.gameReplay = True
 
+	def clickQuitButton(self):
+		pygame.quit()
+		quit()
+
 	# def setGameOverTrue(self):
 	# 	self.gameOver = True
 	def display_intro(self):
@@ -42,8 +46,7 @@ class Game(object):
 
 
 	def player1_highScore_gameLoop(self):
-		defaultSpeed = 600
-		defaultThick = 20
+
 
 		self.isGameRunning = True
 		self.gameSession = True
@@ -75,7 +78,7 @@ class Game(object):
 		mSnakeEventCreator = snakeEventCreator.SnakeEventCreator()
 		mEvent = event.Event(mOnTickListenerHandler)
 
-		player = snake.Snake(1, defaultSpeed, defaultThick, skin.Skin())
+		player = snake.Snake(1, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), skinNum= SKIN_DEFAULT)
 		mSnakeStateHandler = snakeStateHandler.SnakeStateHandler(player, mOnKeyListenerHandler, mOnTickListenerHandler, mIOEventHandler)
 		mSnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(player)
 
@@ -89,6 +92,7 @@ class Game(object):
 
 		# menuButton = {"name" : "menu", "listener" : mOnTickListenerHandler, "func": self.setButtonSprite}
 		replayButton = {"name" : "replay", "listener" : mOnTickListenerHandler, "func": self.clickReplayButton}
+		quitButton = {"name" : "quit", "listener" : mOnTickListenerHandler, "func" : self.clickQuitButton}
 
 		while self.gameSession:
 

@@ -61,6 +61,10 @@ class Snake(Publisher):
 	def getSpeed(self):
 		return self.speed
 
+	def setSpeed(self, speed):
+		self.speed = speed
+		self.notify()
+
 	def addSpeed(self, speed):
 		"""pixel per second"""
 		self.speed += speed

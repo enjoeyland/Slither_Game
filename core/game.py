@@ -1,5 +1,6 @@
 import pygame
 
+from core import level
 from event import event, keyboardEventHandler, io_eventHandler, snakeEventCreator
 from event import listener
 from gameObject import skin, score
@@ -7,7 +8,8 @@ from gameObject.items import item, apple
 from player import snake, snakeDisplayHandler, snakeStateHandler
 from ui import scoreTable, popUp
 from utils import dataSavor, utility
-from utils.setting import FRAMES_PER_SECOND, SCREEN_BACKGROUND, DEFAULT_SPEED, DEFAULT_THICK, FIRST_SKIN, SKIN_DEFAULT
+from utils.setting import FRAMES_PER_SECOND, SCREEN_BACKGROUND, DEFAULT_SPEED, DEFAULT_THICK, FIRST_SKIN, SKIN_DEFAULT, \
+	PLAYER1_HIGH_SCORE
 
 
 class Game(object):
@@ -86,6 +88,10 @@ class Game(object):
 
 		itemAppleGenerator = item.ItemGenerator(apple.Apple, 1)
 
+		mGameHandler = level.GameHandler(player, {"apple": itemAppleGenerator}, gameName= PLAYER1_HIGH_SCORE)
+
+
+
 		groupText.add(mScoreDisplayHandler.draw())
 		itemAppleGenerator.setItemMaximumNum(2)
 		mOnKeyListenerHandler.listen(pygame.K_p, self.pause)
@@ -103,6 +109,8 @@ class Game(object):
 				mSnakeEventCreator.crashWall(player, self.setGameRunningToFalse)
 				mSnakeEventCreator.crashItself(player, self.setGameRunningToFalse)
 				mSnakeEventCreator.crashItem(player, groupItem)
+
+				mGameHandler.update(mScore.getScore())
 
 				# Drop Item
 				objectApple = itemAppleGenerator.dropItem(image= appleImg)

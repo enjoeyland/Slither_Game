@@ -38,7 +38,7 @@ class SnakeEventCreator(EventCreator):
 		snakeSpeed = snake.speed
 		snakeHead = snakeList[SNAKE_HEAD]
 		tick = snake.thick
-		for eachSegment in snakeList[ : -1 - int(2 * snakeThick / (snakeSpeed / FRAMES_PER_SECOND))]:
+		for eachSegment in snakeList[ : - int(3 * snakeThick / (snakeSpeed / FRAMES_PER_SECOND))]:
 			if eachSegment[POS_X] <= snakeHead[POS_X] and  eachSegment[POS_X] + tick > snakeHead[POS_X]\
 					and eachSegment[POS_Y] <= snakeHead[POS_Y] and eachSegment[POS_Y] + tick > snakeHead[POS_Y]:
 				print("crash itself")

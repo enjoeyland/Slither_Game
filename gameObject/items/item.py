@@ -36,19 +36,37 @@ class Item(pygame.sprite.Sprite):
 
 	def update(self):
 		if self.lifeTimer != CONTINUANCE:
-			if not self.lifeTimer:
+			if self.lifeTimer <= 0:
 				self.itemKill()
 			self.lifeTimer -= 1
 
 class ItemGenerator(object):
-	def __init__(self, item, dropProbability):
+	def __init__(self, item, dropProbability = FRAMES_PER_SECOND, lifeTimer =  CONTINUANCE):
 		self.item = item
-		self.dropProbability = dropProbability
+		self.dropProbability = dropProbability / FRAMES_PER_SECOND
 		self.itemMaximumNum = 1
 		self.currentItemNum = 0
+		self.itemLifeTimer = lifeTimer
 
-		self.count = 0
-		self.count2 = 0
+	def setItemMaximumNum(self, num):
+		self.itemMaximumNum = num
+
+	def getItemMaximumNum(self):
+		return self.itemMaximumNum
+
+	def setDropProbability(self, probability):
+		self.dropProbability = probability / FRAMES_PER_SECOND
+
+	def getDropProbability(self):
+		return self.dropProbability
+
+	def setItemLifeTimer(self, lifeTimer):
+		self.itemLifeTimer = lifeTimer
+
+	def getItemLifeTime(self):
+		return self.itemLifeTimer
+
+
 
 	def generateLocation(self, method = "random", size = DEFAULT_ITEM_SIZE):
 		"""method = 'random' or 'relative'  """
@@ -57,14 +75,9 @@ class ItemGenerator(object):
 			posY = random.randrange(SPRITE_OFFSET[POS_Y][BEGIN] + ITEM_MARGIN, SPRITE_OFFSET[POS_Y][END] - ITEM_MARGIN - size)
 			return (posX, posY)
 
+
 	def itemDropDecision(self):
 		return random.random() <= self.dropProbability
-
-	def getItemMaximumNum(self):
-		return self.itemMaximumNum
-
-	def setItemMaximumNum(self, num):
-		self.itemMaximumNum = num
 
 	def dropItem(self, method = "random", *args, **kwargs):
 		if "size" in kwargs.keys():
@@ -75,7 +88,7 @@ class ItemGenerator(object):
 			location = self.generateLocation(method, size)
 			if self.itemDropDecision():
 				self.currentItemNum += 1
-				return self.item(self, location, *args, **kwargs)
+				return self.item(self, location, lifeTimer = self.itemLifeTimer,*args, **kwargs)
 
 	def itemKilled(self):
 		self.currentItemNum -= 1

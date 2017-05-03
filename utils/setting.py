@@ -74,13 +74,13 @@ CRASH_OTHER_SNAKE = pygame.USEREVENT + 5
 
 """Screen"""
 WALL_TICK = 0
-FULL_SCREEN = False
+FULL_SCREEN = True
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-SCREEN_MID = (SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+SCREEN_MID = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 SPRITE_OFFSET = ((WALL_TICK, SCREEN_WIDTH - WALL_TICK) ,(WALL_TICK, SCREEN_HEIGHT - WALL_TICK))
 
-ITEM_MARGIN = 0
+ITEM_MARGIN = 20
 ANTI_ALIAS = True
 
 FRAMES_PER_SECOND = 200.0
@@ -89,13 +89,80 @@ SCREEN_AUTO_UPDATE = True
 DEFAULT_FONT_SIZE = 20
 DEFAULT_FONT_TYPE = "comicsansms"
 
+"""Files"""
+READ = "r"
+WRITE = "w"
+APPEND = "a"
 
 """game name"""
 PLAYER1_HIGH_SCORE = 0
 PLAYER2_HIGH_SCORE = 1
 PLAYER2_COMPETE = 2
 
-"""Files"""
-READ = "r"
-WRITE = "w"
-APPEND = "a"
+"""Level"""
+LEVEL_0 = 0
+LEVEL_1 = 1
+LEVEL_2 = 2
+LEVEL_3 = 3
+LEVEL_4 = 4
+LEVEL_5 = 5
+LEVEL_6 = 6
+LEVEL_7 = 7
+MAX_LEVEL = "max level"
+LEVEL = {PLAYER1_HIGH_SCORE :
+			{LEVEL_0 : {"level": 0,
+						"score": 0,
+						"setting": {"snake": {"speed": 300, "thick" : 20},
+									"item": {"apple": {"num" : 2, "probability": FRAMES_PER_SECOND,"lifeTimer": CONTINUANCE}}
+									}
+						},
+			LEVEL_1 : {"level": 1,
+					   "score": 500,
+					   "setting": {"snake": {"speed": 500, "thick" : 20},
+								   "item": {"apple": {"num" : 2, "probability": 80,"lifeTimer": CONTINUANCE}}
+								   }
+					   },
+			LEVEL_2 : {"level": 2,
+					   "score": 1500,
+					   "setting": {"snake": {"speed": 600, "thick" : 20},
+								   "item": {"apple": {"num" : 2, "probability": 30,"lifeTimer": CONTINUANCE}}
+								   }
+					   },
+			LEVEL_3 : {"level": 3,
+					   "score": 3000,
+					   "setting": {"snake": {"speed": 700, "thick" : 20},
+								   "item": {"apple": {"num" : 2, "probability": 10,"lifeTimer": 4 * FRAMES_PER_SECOND}}
+								   }
+					   },
+			LEVEL_4 : {"level": 4,
+					   "score": 4500,
+					   "setting": {"snake": {"speed": 800, "thick" : 20},
+								   "item": {"apple": {"num" : 2, "probability": 8,"lifeTimer": 3 * FRAMES_PER_SECOND}}
+								   }
+					   },
+			LEVEL_5 : {"level": 5,
+					   "score": 6000,
+					   "setting": {"snake": {"speed": 900, "thick" : 20},
+								   "item": {"apple": {"num" : 1, "probability": 3,"lifeTimer": 2 * FRAMES_PER_SECOND}}
+								   }
+					   },
+			LEVEL_6 : {"level": 6,
+					   "score": 7500,
+					   "setting": {"snake": {"speed": 1000, "thick" : 20},
+								   "item": {"apple": {"num" : 2, "probability": 5,"lifeTimer": 1.3 * FRAMES_PER_SECOND}}
+								   }
+					   },
+			LEVEL_7 :  {"level": 7,
+						"score": 10000,
+						"setting": {"snake": {"speed": 1100, "thick" : 20},
+									"item": {"apple": {"num" : 3, "probability": 3,"lifeTimer": 0.5 * FRAMES_PER_SECOND}}
+									}
+						},
+			MAX_LEVEL : {"level": 7,
+						 "score": 10000,
+						 "setting": {"snake": {"speed": 1100, "thick" : 20},
+									 "item": {"apple": {"num" : 3, "probability": 3,"lifeTimer": 0.5 * FRAMES_PER_SECOND}}
+									 }
+						 }},
+		PLAYER2_HIGH_SCORE : {},
+		PLAYER2_COMPETE : {}}

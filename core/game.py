@@ -9,7 +9,7 @@ from player import snake, snakeDisplayHandler, snakeStateHandler
 from ui import scoreTable, popUp
 from utils import dataSavor, utility
 from utils.setting import FRAMES_PER_SECOND, SCREEN_BACKGROUND, DEFAULT_SPEED, DEFAULT_THICK, FIRST_SKIN, SKIN_DEFAULT, \
-	PLAYER1_HIGH_SCORE
+	PLAYER1_HIGH_SCORE, PLAY_INFINITELY
 
 
 class Game(object):
@@ -48,8 +48,6 @@ class Game(object):
 
 
 	def player1_highScore_gameLoop(self):
-
-
 		self.isGameRunning = True
 		self.gameSession = True
 		self.gameReplay = False
@@ -57,6 +55,12 @@ class Game(object):
 
 		# Load Image
 		appleImg = utility.loadImage("apple")
+
+		# Load Sound
+		soundAppleBite = utility.loadSound("Apple_Bite")
+		soundAppleBite.set_volume(1)
+		soundBGM = utility.loadSound("BGM")
+		soundBGM.set_volume(0.3)
 
 		# Create Group
 		groupApple = pygame.sprite.Group()
@@ -76,7 +80,7 @@ class Game(object):
 		mOnTickListenerHandler = listener.ListenerHandler()
 
 		mKeyboardEventHandler = keyboardEventHandler.KeyboardEventHandler(mOnKeyListenerHandler)
-		mIOEventHandler = io_eventHandler.IOEventHandler(mKeyboardEventHandler, mOnTickListenerHandler, mScore)
+		mIOEventHandler = io_eventHandler.IOEventHandler(mKeyboardEventHandler, mOnTickListenerHandler, mScore, self.screen)
 		mSnakeEventCreator = snakeEventCreator.SnakeEventCreator()
 		mEvent = event.Event(mOnTickListenerHandler)
 
@@ -86,14 +90,14 @@ class Game(object):
 
 		mPausePage = popUp.PausePage()
 
-		itemAppleGenerator = item.ItemGenerator(apple.Apple, 1)
+		itemAppleGenerator = item.ItemGenerator(apple.Apple)
 
 		mGameHandler = level.GameHandler(player, {"apple": itemAppleGenerator}, gameName= PLAYER1_HIGH_SCORE)
 
 
-
 		groupText.add(mScoreDisplayHandler.draw())
-		itemAppleGenerator.setItemMaximumNum(2)
+		mGameHandler.update(mScore.getScore())
+
 		mOnKeyListenerHandler.listen(pygame.K_p, self.pause)
 
 		# menuButton = {"name" : "menu", "listener" : mOnTickListenerHandler, "func": self.setButtonSprite}
@@ -101,8 +105,10 @@ class Game(object):
 		quitButton = {"name" : "quit", "listener" : mOnTickListenerHandler, "func" : self.clickQuitButton}
 
 		while self.gameSession:
+			utility.playSound(soundBGM, loops= PLAY_INFINITELY)
 
 			while self.isGameRunning:
+
 				# Make Event
 				mEvent.onTick()
 
@@ -113,7 +119,7 @@ class Game(object):
 				mGameHandler.update(mScore.getScore())
 
 				# Drop Item
-				objectApple = itemAppleGenerator.dropItem(image= appleImg)
+				objectApple = itemAppleGenerator.dropItem(image= appleImg, sound= soundAppleBite)
 				if objectApple:
 					groupApple.add(objectApple)
 
@@ -137,6 +143,8 @@ class Game(object):
 				pygame.display.update()
 				pygame.time.Clock().tick(FRAMES_PER_SECOND)
 
+			### Out of Gam running loop ###
+			soundBGM.fadeout(2)
 
 			if self.isPause:
 				# End Listen

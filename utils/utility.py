@@ -37,28 +37,24 @@ def resizeImage(image, size):
 		print("fall image resize")
 	return resizedImg
 
-def setImageBackgroundColor(image, backgroundColor):
-	surface = pygame.Surface(image.get_rect().size)
-	surface.fill(backgroundColor)
-	surface.blit(image, (0,0))
-	return surface
+# def setImageBackgroundColor(image, backgroundColor):
+# 	surface = pygame.Surface(image.get_rect().size)
+# 	surface.fill(backgroundColor)
+# 	surface.blit(image, (0,0))
+# 	return surface
 
 def loadSound(name):
-	soundTypeList = ["bza", ".ogg", ".mp3"]
+	soundTypeList = [".bza", ".ogg", ".mp3", ".wav"]
 	for soundType in soundTypeList:
-		filePath = os.path.join("data/sounds/", name, soundType)
+		filePath = os.path.join("data/sounds/", name + soundType)
 		if os.path.isfile(filePath):
 			return pygame.mixer.Sound(filePath)
 
 	print ("Failed to load sound: %s" % name)
 	return None
 
-# def playSound(sound, channelNumber = None):
-# 	if settingList[SFX] and soundActive:
-# 		if channelNumber:
-# 			pygame.mixer.Channel(channelNumber).play(sound)
-# 		else:
-# 			sound.play()
+def playSound(sound, channelNumber = None, loops = 0):
+	sound.play(loops = loops)
 
 # def playMusic(music, forceNext = True):
 # 	if settingList[MUSIC] and soundActive:
@@ -67,36 +63,3 @@ def loadSound(name):
 # 		elif not pygame.mixer.Channel(MUSIC_CHANNEL).get_queue():
 # 			pygame.mixer.Channel(MUSIC_CHANNEL).queue(music)
 
-def readHighScores():
-	scoreList = []
-	try:
-		scoreFile = open(getPath() + "/score.bzd",'r')
-		scoreList.append(int(scoreFile.readline()))
-		scoreList.append(int(scoreFile.readline()))
-		scoreList.append(int(scoreFile.readline()))
-		scoreList.append(int(scoreFile.readline()))
-		scoreFile.close()
-
-		return scoreList
-
-	except:
-		scoreFile = open(getPath() + "/score.bzd",'w')
-		scoreFile.write(str(0) + '\n')
-		scoreFile.write(str(0) + '\n')
-		scoreFile.write(str(0) + '\n')
-		scoreFile.write(str(0) + '\n')
-		scoreFile.close()
-
-		return [0,0,0,0]
-
-def writeHighScores(arg):
-	scoreFile = open(getPath() + "/score.bzd",'w')
-	tutorial = arg[0]
-	world1 = arg[1]
-	world2 = arg[2]
-	world3 = arg[3]
-	scoreFile.write(str(tutorial) + '\n')
-	scoreFile.write(str(world1) + '\n')
-	scoreFile.write(str(world2) + '\n')
-	scoreFile.write(str(world3) + '\n')
-	scoreFile.close()

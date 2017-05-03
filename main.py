@@ -5,7 +5,11 @@ from core import game
 from utils import utility
 from utils.setting import SCREEN_WIDTH, SCREEN_HEIGHT, FULL_SCREEN, PLAYER1_HIGH_SCORE
 
+# pygame init
+pygame.mixer.pre_init(44100, -16, 2, 2048)
 pygame.init()
+pygame.mixer.init()
+
 
 if FULL_SCREEN:
 	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)

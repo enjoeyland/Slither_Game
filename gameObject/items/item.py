@@ -7,15 +7,16 @@ from utils.setting import POS_Y, POS_X, CONTINUANCE, FRAMES_PER_SECOND, BEGIN, S
 
 class Item(pygame.sprite.Sprite):
 	"""This class is abstract class"""
-	def __init__(self, itemGenerator, image, location, lifeTimer = CONTINUANCE):
+	def __init__(self, itemGenerator, image, location, type = None, lifeTimer = CONTINUANCE, sound = None):
 		pygame.sprite.Sprite.__init__(self)
 		self.itemGenerator = itemGenerator
-		self.type = None
+		self.type = type
 		self.image = image
 		self.rect = self.image.get_rect()
 		self.location = location
 		self.setLocation(self.location)
 		self.lifeTimer = lifeTimer
+		self.sound = sound
 
 	def setLocation(self, location):
 		self.rect.x = location[POS_X]
@@ -92,19 +93,3 @@ class ItemGenerator(object):
 
 	def itemKilled(self):
 		self.currentItemNum -= 1
-
-# apples = pygame.sprite.Group()
-# items = pygame.sprite.Group()
-# players = pygame.sprite.Group()
-# walls = pygame.sprite.Group()
-# allSprites = pygame.sprite.Group()
-#
-# location = (0,0)
-# apple1 = item.Apple(location)
-# apple2 = item.Apple(location)
-# apple3 = item.Apple(location)
-#
-# apples.add(apple1,apple2,apple3)
-# allSprites.add(apples.sprites())
-# # allSprites.draw(screen)
-# # allSprites.update()

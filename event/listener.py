@@ -5,9 +5,10 @@ class ListenerHandler(object):
 	def __init__(self):
 		self._listenerList = []
 
-	def listen(self, listenerName, func, group = None, groupNotifyFunc = None):
+	def listen(self, listenerName, func, group = None, groupNotifyFunc = None, target = None, description = None):
 		self._listenerList.append({"listenerName" : listenerName, "func" : func,
-									"group" : group, "groupNotifyFunc" : groupNotifyFunc})
+									"group" : group, "groupNotifyFunc" : groupNotifyFunc,
+								   "target" : target, "description" : description})
 
 	def endListen(self, **kwargs):
 		for key, value in kwargs.items():
@@ -21,6 +22,10 @@ class ListenerHandler(object):
 	@property
 	def listenerList(self):
 		return self._listenerList
+
+	def notify(self):
+		for listenerItem in self.listenerList:
+			listenerItem["func"]()
 
 # class OnKeyListenerHandler(ListenerHandler):
 # 	pass

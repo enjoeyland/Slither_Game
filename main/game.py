@@ -1,14 +1,15 @@
+import queue
+
 import pygame
 
-from core import level
 from event import event, keyboardEventHandler, io_eventHandler, snakeEventCreator
 from event import listener
-from gameObject import skin, score
+from gameObject import skin, score, level
 from gameObject.items import item, apple
 from player import snake, snakeDisplayHandler, snakeStateHandler
 from ui import scoreTable, popUp
 from utils import dataSavor, utility
-from utils.setting import FRAMES_PER_SECOND, SCREEN_BACKGROUND, DEFAULT_SPEED, DEFAULT_THICK, FIRST_SKIN, SKIN_DEFAULT, \
+from utils.setting import FRAMES_PER_SECOND, SCREEN_BACKGROUND, DEFAULT_SPEED, DEFAULT_THICK, SKIN_DEFAULT, \
 	PLAYER1_HIGH_SCORE, PLAY_INFINITELY
 
 
@@ -78,6 +79,11 @@ class Game(object):
 
 		mOnKeyListenerHandler = listener.ListenerHandler()
 		mOnTickListenerHandler = listener.ListenerHandler()
+		mPygameEventListenerHandler = listener.ListenerHandler()
+
+		mPygameEventQueue = queue.Queue()
+		mPygameEventDistributor = io_eventHandler.pygameEventDistributor(mPygameEventListenerHandler, mPygameEventQueue)
+
 
 		mKeyboardEventHandler = keyboardEventHandler.KeyboardEventHandler(mOnKeyListenerHandler)
 		mIOEventHandler = io_eventHandler.IOEventHandler(mKeyboardEventHandler, mOnTickListenerHandler, mScore, self.screen)
@@ -94,7 +100,7 @@ class Game(object):
 
 		mGameHandler = level.GameHandler(player, {"apple": itemAppleGenerator}, gameName= PLAYER1_HIGH_SCORE)
 
-
+		mPygameEventDistributor.start()
 		groupText.add(mScoreDisplayHandler.draw())
 		mGameHandler.update(mScore.getScore())
 
@@ -111,6 +117,9 @@ class Game(object):
 
 				# Make Event
 				mEvent.onTick()
+
+				mPygameEventQueue.put(pygame.event.get())
+				mPygameEventQueue.join()
 
 				mSnakeEventCreator.crashWall(player, self.setGameRunningToFalse)
 				mSnakeEventCreator.crashItself(player, self.setGameRunningToFalse)

@@ -63,3 +63,5 @@ def playSound(sound, channelNumber = None, loops = 0):
 # 		elif not pygame.mixer.Channel(MUSIC_CHANNEL).get_queue():
 # 			pygame.mixer.Channel(MUSIC_CHANNEL).queue(music)
 
+def executeFunction(func, *args, **kwargs):
+	func(*args, **kwargs)

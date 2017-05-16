@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 import pygame
 
-from core import game
+from Main import game
 from utils import utility
 from utils.setting import SCREEN_WIDTH, SCREEN_HEIGHT, FULL_SCREEN, PLAYER1_HIGH_SCORE
 

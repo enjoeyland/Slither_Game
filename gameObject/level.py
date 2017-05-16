@@ -2,19 +2,22 @@ from utils.setting import MAX_LEVEL, LEVEL
 
 
 class Level():
-	def __init__(self, levelSetting = LEVEL):
-		self.levelSetting = levelSetting
+	def __init__(self):
+		self.settingPerLevel = LEVEL
+
+	def setSettingPerLevel(self, settingPerLevel):
+		self.settingPerLevel = settingPerLevel
 
 	def getLevel(self, score, gameName = None):
-		for level in range(LEVEL[gameName][MAX_LEVEL]["level"]):
-			if LEVEL[gameName][level]["score"] <= score < LEVEL[gameName][level + 1]["score"]:
-				return LEVEL[gameName][level]["level"]
+		for level in range(self.settingPerLevel[gameName][MAX_LEVEL]["level"]):
+			if self.settingPerLevel[gameName][level]["score"] <= score < self.settingPerLevel[gameName][level + 1]["score"]:
+				return self.settingPerLevel[gameName][level]["level"]
 		else:
-			if LEVEL[gameName][MAX_LEVEL]["score"] <= score:
-				return LEVEL[gameName][MAX_LEVEL]["level"]
+			if self.settingPerLevel[gameName][MAX_LEVEL]["score"] <= score:
+				return self.settingPerLevel[gameName][MAX_LEVEL]["level"]
 
 	def getLevelSetting(self):
-		return self.levelSetting
+		return self.settingPerLevel
 
 class GameHandler():
 	def __init__(self, mSnake, mItemGenerators, levelClass = Level, gameName = None):

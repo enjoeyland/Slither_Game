@@ -36,6 +36,7 @@ class SnakeDisplayHandler(Observer):
 		if self.firstImg != None:
 			self.firstClone = pygame.transform.rotate(self.firstImg, 90 * self.snakeList[SNAKE_HEAD][DIRECTION])
 
+	#여기 있으면 않됨
 	def getCurveImgDirection(self, lastDirection, currentDirection):
 		if lastDirection is UP and currentDirection is LEFT \
 			or lastDirection is RIGHT and currentDirection is DOWN:

@@ -8,6 +8,7 @@ from utils.setting import SNAKE_HEAD, POS_X, SCREEN_WIDTH, SCREEN_HEIGHT, POS_Y,
 class SnakeEventCreator(EventCreator):
 	def __init__(self):
 		pass
+
 	def crashWall(self, snake, func):
 		thick = snake.getThick()
 		snakeList = snake.getSnakeList()

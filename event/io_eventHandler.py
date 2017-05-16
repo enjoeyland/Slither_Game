@@ -1,5 +1,4 @@
-import pygame
-
+from utils import utility
 from utils.setting import *
 
 
@@ -31,6 +30,7 @@ class IOEventHandler(object):
 
 			elif pygameEvent.type == CRASH_ITEM:
 				if pygameEvent.item.type == APPLE:
+					#여기 있으면 않됨
 					pygameEvent.item.effect(self.screen, self.mScore, pygameEvent.snake)
 
 			elif pygameEvent.type == CRASH_ITSELF:
@@ -43,32 +43,95 @@ class IOEventHandler(object):
 	def getPygameTickEvent(self):
 		return self.pygameTickEventList
 
-class pygameEventHandler():
-	def __init__(self, pygameEventListenerHandler):
-		self.listerHandler = pygameEventListenerHandler
+
+class pygameEventDistributor2(object):
+	def __init__(self, listenerHandler):
+		self.listerHandler = listenerHandler
 		self.listenedEventList = []
 
-	def handleEvent(self):
+	def distribute(self):
+		"""This function need to be called once per fame"""
 		self.listenedEventList = []
-		self.pygameWholeEvent = pygame.event.get()
+		pygameWholeEvent = pygame.event.get()
 
-		for pygameEvent in self.pygameWholeEvent:
+		for pygameEvent in pygameWholeEvent:
 			for listener in self.listerHandler.listenerList:
-				if pygameEvent.type == listener["target"]:
-					try:
-						listener["func"](pygameEvent)
-						self.listenedEventList.append(pygameEvent.type)
-					except TypeError:
-						try:
-							listener["func"]()
-							self.listenedEventList.append(pygameEvent.type)
-						except Exception as e:
-							print(listener["description"])
-							raise e
+				if pygameEvent.type == listener.getAddtionalTarget():
+					utility.executeFunction(listener.getCallbackFunc, pygameEvent = pygameEvent)
+					self.listenedEventList.append(pygameEvent.type)
 
 		for listener in self.listerHandler.listenerList:
-			if listener["target"] == "WholeEvent":
-				listener["func"](self.pygameWholeEvent)
+			if listener.getAddtionalTarget() == "wholeEvent":
+				utility.executeFunction(listener.getCallbackFunc, wholeEvent = pygameWholeEvent)
 
-			elif listener["target"] == "ListenedEvent":
-				listener["func"](list(set(self.listenedEventList)))
+			elif listener.getAddtionalTarget() == "listenedEvent":
+				utility.executeFunction(listener.getCallbackFunc, listenedEvent = list(set(self.listenedEventList)))
+
+	def listen(self, request):
+		self.listerHandler.listen()
+	def endListen(self, listenerName):
+		self.listerHandler.endListen(listenerName)
+	def endGroupListen(self, groupName):
+		self.listerHandler.endGroupListen(groupName)
+
+
+# import threading, time
+from queue import Queue
+# thread를 쓰지 말기
+# observer pattern를 쓰는게 좋을 것 같음
+# listener에게 notify해주고 listener는 queue에서 get하게 함
+import threading
+class pygameEventDistributor(threading.Thread):
+	def __init__(self, pygameEventListenerHandler, queue):
+		threading.Thread.__init__(self)
+		self.listerHandler = pygameEventListenerHandler
+		self.queue = queue
+		self.listenedEventList = []
+		self.__suspend = False
+		self.__exit = False
+
+	def run(self):
+		while True:
+			while self.__suspend:
+				time.sleep(0.1)
+
+			# process
+			self.listenedEventList = []
+			self.pygameWholeEvent = self.queue.get()
+
+			for pygameEvent in self.pygameWholeEvent:
+				for listener in self.listerHandler.listenerList:
+					if pygameEvent.type == listener["target"]:
+						try:
+							listener["func"](pygameEvent)
+							self.listenedEventList.append(pygameEvent.type)
+						except TypeError:
+							try:
+								listener["func"]()
+								self.listenedEventList.append(pygameEvent.type)
+							except Exception as e:
+								print(listener["description"])
+								raise e
+
+			for listener in self.listerHandler.listenerList:
+				if listener["target"] == "WholeEvent":
+					listener["func"](self.pygameWholeEvent)
+
+				elif listener["target"] == "ListenedEvent":
+					listener["func"](list(set(self.listenedEventList)))
+
+			self.queue.task_done()
+
+
+			# Exit
+			if self.__exit:
+				break
+
+	def suspend(self):
+		self.__suspend = True
+
+	def resume(self):
+		self.__suspend = False
+
+	def exit(self):
+		self.__exit = True

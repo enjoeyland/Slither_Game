@@ -2,7 +2,7 @@ import queue
 
 import pygame
 
-from event import event, keyboardEventHandler, io_eventHandler, snakeEventCreator
+from event import Event, keyboardEventHandler, io_eventHandler, snakeEventCreator
 from event import listener
 from gameObject import skin, score, level
 from gameObject.items import item, apple
@@ -88,7 +88,7 @@ class Game(object):
 		mKeyboardEventHandler = keyboardEventHandler.KeyboardEventHandler(mOnKeyListenerHandler)
 		mIOEventHandler = io_eventHandler.IOEventHandler(mKeyboardEventHandler, mOnTickListenerHandler, mScore, self.screen)
 		mSnakeEventCreator = snakeEventCreator.SnakeEventCreator()
-		mEvent = event.Event(mOnTickListenerHandler)
+		mEvent = Event.Event(mOnTickListenerHandler)
 
 		player = snake.Snake(1, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), skinNum= SKIN_DEFAULT)
 		mSnakeStateHandler = snakeStateHandler.SnakeStateHandler(player, mOnKeyListenerHandler, mOnTickListenerHandler, mIOEventHandler)

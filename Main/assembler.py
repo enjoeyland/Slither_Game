@@ -1,7 +1,11 @@
-from event import listener, io_eventHandler, keyboardEventHandler
-from gameObject import score
-from ui import scoreTable
+from event import listener, io_eventHandler, keyboardEventHandler, snakeEventCreator
+from gameObject import score, skin, level
+from gameObject.items import item, apple
+from player import snake, snakeStateHandler, snakeDisplayHandler
+from ui import scoreTable, popUp
 from utils import dataSavor
+from utils.setting import DEFAULT_SPEED, DEFAULT_THICK, SKIN_DEFAULT, PLAYER1_HIGH_SCORE
+
 
 class NotAssemblerCreatedError(Exception):
 	def __init__(self, funcName):
@@ -11,17 +15,38 @@ class NotAssemblerCreatedError(Exception):
 
 class Assembler(object):
 	def __init__(self):
-		self._Score = score.Score()
+		self.createScore()
 		self.createEventDistributor()
+		self.createKeyboardEventHandler()
+		self.createTickEventHandler()
+		self.createPlayer()
+
+		#
+		self.createScoreDisplay()
+		self.createScoreTable()
+
+		self.createSnakeEventCreator()
+		self.createTickEventCreator()
+
+		self.createPausePage()
+		self.createAppleItemGenerator()
+		self.createGameHandler(PLAYER1_HIGH_SCORE)
+
+	def createScore(self):
+		""" create score """
+		self._Score = score.Score()
 
 	def getScore(self):
-		return self._Score
+		if self._Score is not None:
+			return self._Score
+		else:
+			raise NotAssemblerCreatedError("createScore")
 
 
 
 	def createScoreDisplay(self):
 		""" create related to score display """
-		self._ScoreDisplayHandler = score.ScoreDisplayHandler(self._Score)
+		self._ScoreDisplayHandler = score.ScoreDisplayHandler(self.getScore())
 		self._ScoreSavor = dataSavor.ScoreSavor()
 
 	def getScoreDisplayHandler(self):
@@ -63,11 +88,6 @@ class Assembler(object):
 
 
 
-		# mOnKeyListenerHandler = listener.ListenerHandler()
-		# mOnTickListenerHandler = listener.ListenerHandler()
-		# mPygameEventListenerHandler = listener.ListenerHandler()
-
-		# mPygameEventQueue = queue.Queue()
 	def createEventDistributor(self):
 		""" create event distributor """
 		self.createListenerHandler()
@@ -86,11 +106,13 @@ class Assembler(object):
 		else:
 			raise NotAssemblerCreatedError("createEventDistributor")
 
+
+
 	def createKeyboardEventHandler(self):
 		""" create keyboard event handler """
 		self.createListenerHandler()
 		self._OnKeyListenerHandler = self.getListenerHandler()
-		self._KeyboardEventHandler = keyboardEventHandler.KeyboardEventHandler(self._OnKeyListenerHandler)
+		self._KeyboardEventHandler = keyboardEventHandler.KeyboardEventHandler(self._OnKeyListenerHandler, self._PygameEventDistributor)
 
 	def getOnKeyListenerHandler(self):
 		if self._OnKeyListenerHandler is not None:
@@ -105,22 +127,108 @@ class Assembler(object):
 			raise NotAssemblerCreatedError("createKeyboardEventHandler")
 
 
-		_IOEventHandler = io_eventHandler.IOEventHandler(_KeyboardEventHandler, _OnTickListenerHandler, _Score, self.screen)
 
-		# event creator
-		_SnakeEventCreator = snakeEventCreator.SnakeEventCreator()
-		_Event = event.Event(_OnTickListenerHandler)
+	def createTickEventHandler(self):
+		""" create tick event handler """
+		self.createListenerHandler()
+		self._OnTickListenerHandler = self.getListenerHandler()
+		self._TickEventHandler = tickEventHandler.TickEventHandler()
 
-		# player
-		player = snake.Snake(1, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), skinNum= SKIN_DEFAULT)
-		_SnakeStateHandler = snakeStateHandler.SnakeStateHandler(player, _OnKeyListenerHandler, _OnTickListenerHandler, _IOEventHandler)
-		_SnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(player)
+	def getOnTickListenerHandler(self):
+		if self._OnTickListenerHandler is not None:
+			return self._OnTickListenerHandler
+		else:
+			raise NotAssemblerCreatedError("createTickEventHandler")
 
-		# puase page
-		_PausePage = popUp.PausePage()
+	def getTickEventHandler(self):
+		if self._TickEventHandler is not None:
+			return self._TickEventHandler
+		else:
+			raise NotAssemblerCreatedError("createTickEventHandler")
 
-		# item
-		itemAppleGenerator = item.ItemGenerator(apple.Apple)
 
-		# level
-		_GameHandler = level.GameHandler(player, {"apple": itemAppleGenerator}, gameName= PLAYER1_HIGH_SCORE)
+
+	def createSnakeEventCreator(self):
+		""" create snake event creator """
+		self._SnakeEventCreator = snakeEventCreator.SnakeEventCreator()
+
+	def getSnakeEventCreator(self):
+		if self._SnakeEventCreator is not None:
+			return self._SnakeEventCreator
+		else:
+			raise NotAssemblerCreatedError("createSnakeEventCreator")
+
+
+
+	def createTickEventCreator(self):
+		""" create tick event creator """
+		self._TickEventCreator = tickEventCreator.TickEventCreator()
+
+	def getTickEventCreator(self):
+		if self._TickEventCreator is not None:
+			return self._TickEventCreator
+		else:
+			raise NotAssemblerCreatedError("createTickEventCreator")
+
+
+
+	def createPlayer(self):
+		""" create player """
+		self._player = snake.Snake(1, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), skinNum= SKIN_DEFAULT)
+		self._SnakeStateHandler = snakeStateHandler.SnakeStateHandler(self._player, self.getOnKeyListenerHandler(), self.getOnTickListenerHandler(), self.getPygameEventDistributor())
+		self._SnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(self._player)
+
+	def getPlayer(self):
+		if self._player is not None:
+			return self._player
+		else:
+			raise NotAssemblerCreatedError("createPlayer")
+
+	def getSnakeStateHandler(self):
+		if self._SnakeStateHandler is not None:
+			return self._SnakeStateHandler
+		else:
+			raise NotAssemblerCreatedError("createPlayer")
+
+	def getSnakeDisplayHandler(self):
+		if self._SnakeDisplayHandler is not None:
+			return self._SnakeDisplayHandler
+		else:
+			raise NotAssemblerCreatedError("createPlayer")
+
+
+
+	def createPausePage(self):
+		""" create pause page """
+		self._PausePage = popUp.PausePage()
+
+	def getPausePage(self):
+		if self._PausePage is not None:
+			return self._PausePage
+		else:
+			raise NotAssemblerCreatedError("createPausePage")
+
+
+
+	def createAppleItemGenerator(self):
+		""" create apple item generator """
+		self._itemAppleGenerator = item.ItemGenerator(apple.Apple)
+
+	def getItemAppleGenerator(self):
+		if self._itemAppleGenerator is not None:
+			return self._itemAppleGenerator
+		else:
+			raise NotAssemblerCreatedError("createAppleItemGenerator")
+
+
+
+	def createGameHandler(self, gameName):
+		""" create game state handler """
+		self._GameHandler = level.GameHandler(self.getPlayer(), {"apple": self.getItemAppleGenerator()}, gameName= gameName)
+
+
+	def getGameHandler(self):
+		if self._GameHandler is not None:
+			return self._GameHandler
+		else:
+			raise NotAssemblerCreatedError("createGameHandler")

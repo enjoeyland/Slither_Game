@@ -7,7 +7,7 @@ from utils.setting import POS_X, SNAKE_HEAD, DIRECTION, LEFT, RIGHT, UP, DOWN, F
 
 
 class SnakeStateHandler(Observer):
-	def __init__(self, snake, onKeyListenerHandler, onTickListenerHandler, IOEventHandler):
+	def __init__(self, snake, KeyboardEventHandler, TickEventHandler, IOEventHandler):
 		self.snake = snake
 		self.snake.attach(self)
 
@@ -21,8 +21,8 @@ class SnakeStateHandler(Observer):
 		self.arrowKeyPressed = False
 		self.IOEventHandler = IOEventHandler
 
-		self.onKeyListenerHandler = onKeyListenerHandler
-		self.onTickListenerHandler = onTickListenerHandler
+		self.KeyboardEventHandler = KeyboardEventHandler
+		self.TickEventHandler = TickEventHandler
 		self.setListener()
 
 	def observeUpdate(self):
@@ -99,12 +99,12 @@ class SnakeStateHandler(Observer):
 
 
 	def setListener(self):
-		self.onKeyListenerHandler.listen(pygame.K_LEFT, self.onKeyLeft, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
-		self.onKeyListenerHandler.listen(pygame.K_RIGHT, self.onKeyRight, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
-		self.onKeyListenerHandler.listen(pygame.K_UP, self.onKeyUp, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
-		self.onKeyListenerHandler.listen(pygame.K_DOWN, self.onKeyDown, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
-		self.onTickListenerHandler.listen("snakeStateHandler", self.onTick)
+		self.KeyboardEventHandler.listen(pygame.K_LEFT, self.onKeyLeft, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
+		self.KeyboardEventHandler.listen(pygame.K_RIGHT, self.onKeyRight, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
+		self.KeyboardEventHandler.listen(pygame.K_UP, self.onKeyUp, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
+		self.KeyboardEventHandler.listen(pygame.K_DOWN, self.onKeyDown, group = "arrowKey", groupNotifyFunc = self.onArrowKey)
+		self.TickEventHandler.listen("snakeStateHandler", self.onTick)
 
 	def endListen(self):
-		self.onKeyListenerHandler.endListen(group = "arrowKey")
-		self.onTickListenerHandler.endListen(listenerName = "snakeStateHandler")
+		self.KeyboardEventHandler.endListen(group = "arrowKey")
+		self.TickEventHandler.endListen(listenerName = "snakeStateHandler")

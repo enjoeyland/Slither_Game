@@ -1,9 +1,11 @@
-from event import listener, io_eventHandler, keyboardEventHandler, snakeEventCreator
+from event import eventDistributor
+from event.eventCreators import snakeEventCreator, tickEventCreator
+from event.eventHandlers import keyboardEventHandler, tickEventHandler
 from gameObject import score, skin, level
 from gameObject.items import item, apple
 from player import snake, snakeStateHandler, snakeDisplayHandler
 from ui import scoreTable, popUp
-from utils import dataSavor
+from utils import dataSavor, listener
 from utils.setting import DEFAULT_SPEED, DEFAULT_THICK, SKIN_DEFAULT, PLAYER1_HIGH_SCORE
 
 
@@ -90,15 +92,7 @@ class Assembler(object):
 
 	def createEventDistributor(self):
 		""" create event distributor """
-		self.createListenerHandler()
-		self._PygameEventListenerHandler = self.getListenerHandler()
-		self._PygameEventDistributor = io_eventHandler.pygameEventDistributor(self._PygameEventListenerHandler)
-
-	def getPygameEventListenerHandler(self):
-		if self._PygameEventListenerHandler is not None:
-			return self._PygameEventListenerHandler
-		else:
-			raise NotAssemblerCreatedError("createEventDistributor")
+		self._PygameEventDistributor = eventDistributor.pygameEventDistributor()
 
 	def getPygameEventDistributor(self):
 		if self._PygameEventDistributor is not None:
@@ -110,15 +104,7 @@ class Assembler(object):
 
 	def createKeyboardEventHandler(self):
 		""" create keyboard event handler """
-		self.createListenerHandler()
-		self._OnKeyListenerHandler = self.getListenerHandler()
-		self._KeyboardEventHandler = keyboardEventHandler.KeyboardEventHandler(self._OnKeyListenerHandler, self._PygameEventDistributor)
-
-	def getOnKeyListenerHandler(self):
-		if self._OnKeyListenerHandler is not None:
-			return self._OnKeyListenerHandler
-		else:
-			raise NotAssemblerCreatedError("createKeyboardEventHandler")
+		self._KeyboardEventHandler = keyboardEventHandler.KeyboardEventHandler(self.getPygameEventDistributor())
 
 	def getKeyboardEventHandler(self):
 		if self._KeyboardEventHandler is not None:
@@ -130,15 +116,7 @@ class Assembler(object):
 
 	def createTickEventHandler(self):
 		""" create tick event handler """
-		self.createListenerHandler()
-		self._OnTickListenerHandler = self.getListenerHandler()
-		self._TickEventHandler = tickEventHandler.TickEventHandler()
-
-	def getOnTickListenerHandler(self):
-		if self._OnTickListenerHandler is not None:
-			return self._OnTickListenerHandler
-		else:
-			raise NotAssemblerCreatedError("createTickEventHandler")
+		self._TickEventHandler = tickEventHandler.TickEventHandler(self.getPygameEventDistributor())
 
 	def getTickEventHandler(self):
 		if self._TickEventHandler is not None:
@@ -175,7 +153,7 @@ class Assembler(object):
 	def createPlayer(self):
 		""" create player """
 		self._player = snake.Snake(1, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), skinNum= SKIN_DEFAULT)
-		self._SnakeStateHandler = snakeStateHandler.SnakeStateHandler(self._player, self.getOnKeyListenerHandler(), self.getOnTickListenerHandler(), self.getPygameEventDistributor())
+		self._SnakeStateHandler = snakeStateHandler.SnakeStateHandler(self._player, self.getKeyboardEventHandler(), self.getTickEventHandler(), self.getPygameEventDistributor())
 		self._SnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(self._player)
 
 	def getPlayer(self):

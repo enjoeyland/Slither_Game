@@ -2,8 +2,9 @@
 import pygame
 
 from Main import game
+from Main.gameStates import player1HighScore
 from utils import utility
-from utils.setting import SCREEN_WIDTH, SCREEN_HEIGHT, FULL_SCREEN, PLAYER1_HIGH_SCORE
+from utils.setting import SCREEN_WIDTH, SCREEN_HEIGHT, FULL_SCREEN, PLAYER1_HIGH_SCORE, EXIT, INTRO
 
 # pygame init
 pygame.mixer.pre_init(44100, -16, 2, 2048)
@@ -21,9 +22,11 @@ pygame.display.set_icon(utility.loadImage("apple"))
 
 gameObject = game.Game(screen)
 
-
-whichGame = gameObject.display_intro()
-if whichGame == PLAYER1_HIGH_SCORE:
-	while gameObject.player1_highScore_gameLoop():
-		pass
-
+state = gameObject.display_intro()
+while True:
+	if state == PLAYER1_HIGH_SCORE:
+		state = player1HighScore.Player1HighScore(screen).gameLoop()
+	elif state == INTRO:
+		state = gameObject.display_intro()
+	elif state == EXIT:
+		break

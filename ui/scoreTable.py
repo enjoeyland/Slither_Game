@@ -7,6 +7,7 @@ from utils.setting import TOP_MIDDLE, SCREEN_WIDTH, POS_X, POS_Y, RED, BLUE, BOT
 class DrawTable():
 	def __init__(self):
 		pass
+
 	def draw(self, data, key, basePoint = (0,0), width = SCREEN_WIDTH, highLight = None):
 		textSpriteList = []
 		fontSize = 20

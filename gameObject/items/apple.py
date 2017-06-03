@@ -27,8 +27,9 @@ class Apple(item.Item):
 		score.up(point)
 		snake.addLength()
 		utility.playSound(self.sound)
+		self.kill()
 		self.eatenEffect(screen)
-		self.itemKill()
+
 
 	def eatenEffect(self, screen):
 		pass

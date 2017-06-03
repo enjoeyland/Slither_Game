@@ -139,9 +139,9 @@ class Button(pygame.sprite.Sprite):
 			self.buildImage(self.backgroundColor)
 
 
-	def listen(self, onTickListenerHandler):
-		onTickListenerHandler.listen("button_%s_click"% self, self.click, group = "button_%s"% self)
-		onTickListenerHandler.listen("button_%s_hover"% self, self.hover, group = "button_%s"% self)
+	def listen(self, TickEventHandler):
+		TickEventHandler.listen("button_%s_click"% self, self.click, group = "button_%s"% self)
+		TickEventHandler.listen("button_%s_hover"% self, self.hover, group = "button_%s"% self)
 
-	def endListen(self, onTickListenerHandler):
-		onTickListenerHandler.endListen(group = "button_%s"% self)
+	def endListen(self, TickEventHandler):
+		TickEventHandler.endListen(group = "button_%s"% self)

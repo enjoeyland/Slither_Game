@@ -1,14 +1,9 @@
-import threading
-
-from event.Event import EventCreator
+from event.eventCreators.eventCreator import EventCreator
 from utils.setting import SNAKE_HEAD, POS_X, SCREEN_WIDTH, SCREEN_HEIGHT, POS_Y, CRASH_WALL, CRASH_ITEM, CRASH_ITSELF, \
 	FRAMES_PER_SECOND
 
 
 class SnakeEventCreator(EventCreator):
-	def __init__(self):
-		pass
-
 	def crashWall(self, snake, func):
 		thick = snake.getThick()
 		snakeList = snake.getSnakeList()

@@ -36,7 +36,7 @@ class Player1HighScore(gameMode.GameMode, object):
         allSprites = pygame.sprite.Group()
 
         # Get All Object
-        mAssembler = assembler.Assembler()
+        mAssembler = assembler.Assembler(self.screen)
 
         groupItem = mAssembler.getGroupItem()
 

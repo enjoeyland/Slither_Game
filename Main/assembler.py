@@ -2,7 +2,7 @@ import pygame
 
 from event import eventDistributor
 from event.eventCreators import snakeEventCreator
-from event.eventHandlers import keyboardEventHandler, tickEventHandler
+from event.eventHandlers import keyboardEventHandler, tickEventHandler, crashItemEventHandler
 from gameObject import score, skin, level
 from gameObject.items import item, apple
 from player import snake, snakeAction, snakeDisplayHandler
@@ -18,12 +18,16 @@ class NotAssemblerCreatedError(Exception):
 		return "function '%s' is not created" % self.funcName
 
 class Assembler(object):
-	def __init__(self):
+	def __init__(self, screen):
+		self.screen = screen
 		self.createGroupItem()
 		self.createScore()
+
 		self.createEventDistributor()
 		self.createKeyboardEventHandler()
 		self.createTickEventHandler()
+		self.createCrashItemEventHandler()
+
 		self.createPlayer()
 
 		self.createScoreDisplay()
@@ -134,6 +138,15 @@ class Assembler(object):
 			return self._TickEventHandler
 		else:
 			raise NotAssemblerCreatedError("createTickEventHandler")
+
+	def createCrashItemEventHandler(self):
+		self._CrashItemEventHandler = crashItemEventHandler.CrashItemEventHandler(self.getPygameEventDistributor(),self.screen,self.getScore())
+
+	def getCrashItemEventHandler(self):
+		if self._CrashItemEventHandler is not None:
+			return self._CrashItemEventHandler
+		else:
+			raise NotAssemblerCreatedError("createCrashItemEventHandler")
 
 
 

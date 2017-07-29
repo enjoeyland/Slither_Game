@@ -2,29 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ab0ef9d-5181-47f5-b526-22e05647b983" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Main/gameStates/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Main/gameStates/gameMode.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Main/gameStates/player1HighScore.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Main/gameStates/player2Compete.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Main/gameStates/player2HighScore.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/event/eventCreators/EventCreator.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/event/eventCreators/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/event/eventCreators/tickEventCreator.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/event/eventHandlers/tickEventHandler.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/event/event.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/event/io_eventHandler.py" afterPath="$PROJECT_DIR$/event/eventDistributor.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/event/keyboardEventHandler.py" afterPath="$PROJECT_DIR$/event/eventHandlers/keyboardEventHandler.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/event/listener.py" afterPath="$PROJECT_DIR$/utils/listener.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/event/snakeEventCreator.py" afterPath="$PROJECT_DIR$/event/eventCreators/snakeEventCreator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/architecture/170422-Slither_Game_UML.EAP" afterPath="$PROJECT_DIR$/architecture/170422-Slither_Game_UML.EAP" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/event/eventCreators/tickEventCreator.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/player/snakeStateHandler.py" afterPath="$PROJECT_DIR$/player/snakeAction.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/170404-Slither_Game.iml" afterPath="$PROJECT_DIR$/.idea/170404-Slither_Game.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/assembler.py" afterPath="$PROJECT_DIR$/Main/assembler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gameObject/items/apple.py" afterPath="$PROJECT_DIR$/gameObject/items/apple.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gameObject/items/item.py" afterPath="$PROJECT_DIR$/gameObject/items/item.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player/snakeStateHandler.py" afterPath="$PROJECT_DIR$/player/snakeStateHandler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/gameStates/gameMode.py" afterPath="$PROJECT_DIR$/Main/gameStates/gameMode.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/gameStates/player1HighScore.py" afterPath="$PROJECT_DIR$/Main/gameStates/player1HighScore.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/textFiles/score.json" afterPath="$PROJECT_DIR$/data/textFiles/score.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/event/eventCreators/snakeEventCreator.py" afterPath="$PROJECT_DIR$/event/eventCreators/snakeEventCreator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/event/eventDistributor.py" afterPath="$PROJECT_DIR$/event/eventDistributor.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/event/eventHandlers/keyboardEventHandler.py" afterPath="$PROJECT_DIR$/event/eventHandlers/keyboardEventHandler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/event/eventHandlers/tickEventHandler.py" afterPath="$PROJECT_DIR$/event/eventHandlers/tickEventHandler.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main/game.py" afterPath="$PROJECT_DIR$/main/game.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player/snake.py" afterPath="$PROJECT_DIR$/player/snake.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player/snakeDisplayHandler.py" afterPath="$PROJECT_DIR$/player/snakeDisplayHandler.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/button.py" afterPath="$PROJECT_DIR$/ui/button.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/scoreTable.py" afterPath="$PROJECT_DIR$/ui/scoreTable.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/setting.py" afterPath="$PROJECT_DIR$/utils/setting.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/listener.py" afterPath="$PROJECT_DIR$/utils/listener.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/observer.py" afterPath="$PROJECT_DIR$/utils/observer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/utility.py" afterPath="$PROJECT_DIR$/utils/utility.py" />
     </list>
     <ignored path="170404-Slither_Game.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,43 +42,51 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="observer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/observer.py">
+      <file leaf-file-name="snakeEventCreator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/event/eventCreators/snakeEventCreator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state vertical-scroll-proportion="-17.5">
+              <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="snakeStateHandler.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/player/snakeStateHandler.py">
+      <file leaf-file-name="snakeAction.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/player/snakeAction.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="101" column="125" selection-start-line="101" selection-start-column="115" selection-end-line="101" selection-end-column="125" />
+            <state vertical-scroll-proportion="-25.071428">
+              <caret line="55" column="57" selection-start-line="55" selection-start-column="57" selection-end-line="55" selection-end-column="57" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="assembler.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Main/assembler.py">
+      <file leaf-file-name="utility.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/utility.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334">
-              <caret line="155" column="142" selection-start-line="155" selection-start-column="142" selection-end-line="155" selection-end-column="142" />
-              <folding>
-                <element signature="e#0#34#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="keyboardEventHandler.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/event/eventHandlers/keyboardEventHandler.py">
+      <file leaf-file-name="snakeDisplayHandler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/player/snakeDisplayHandler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="26" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="26" />
+            <state vertical-scroll-proportion="-7.9411764">
+              <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="player1HighScore.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Main/gameStates/player1HighScore.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.07614213">
+              <caret line="59" column="46" selection-start-line="59" selection-start-column="46" selection-end-line="59" selection-end-column="46" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -89,12 +94,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tickEventHandler.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/event/eventHandlers/tickEventHandler.py">
+      <file leaf-file-name="listener.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/listener.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="22" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="22" />
+              <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="eventDistributor.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/event/eventDistributor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.088235">
+              <caret line="49" column="18" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -115,12 +132,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/event.py" />
-        <option value="$PROJECT_DIR$/gameObject/items/itemGenerater.py" />
         <option value="$PROJECT_DIR$/gameObject/items/itemGenerator.py" />
         <option value="$PROJECT_DIR$/event/snakeEventHandler.py" />
         <option value="$PROJECT_DIR$/game.py" />
-        <option value="$PROJECT_DIR$/utils/observer.py" />
         <option value="$PROJECT_DIR$/text.py" />
         <option value="$PROJECT_DIR$/utils/dataFileSavor.py" />
         <option value="$PROJECT_DIR$/utils/dataSavor.py" />
@@ -128,14 +142,11 @@
         <option value="$PROJECT_DIR$/ui/popUp.py" />
         <option value="$PROJECT_DIR$/ui/text.py" />
         <option value="$PROJECT_DIR$/gameObject/skin.py" />
-        <option value="$PROJECT_DIR$/player/snake.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/event/event.py" />
         <option value="$PROJECT_DIR$/../170404-Slither_Game - 복사본/event/io_eventHandler.py" />
-        <option value="$PROJECT_DIR$/player/snakeDisplayHandler.py" />
         <option value="$PROJECT_DIR$/event/snakeEventCreator.py" />
         <option value="$PROJECT_DIR$/core/level.py" />
-        <option value="$PROJECT_DIR$/utils/utility.py" />
         <option value="$PROJECT_DIR$/event/listener.py" />
         <option value="$PROJECT_DIR$/core/game.py" />
         <option value="$PROJECT_DIR$/main/game.py" />
@@ -145,27 +156,33 @@
         <option value="$PROJECT_DIR$/event/keyboardEventHandler.py" />
         <option value="$PROJECT_DIR$/gameObject/items/item.py" />
         <option value="$PROJECT_DIR$/gameObject/items/apple.py" />
-        <option value="$PROJECT_DIR$/event/eventHandlers/keyboardEventHandler.py" />
-        <option value="$PROJECT_DIR$/event/eventDistributor.py" />
         <option value="$PROJECT_DIR$/event/eventCreators/EventCreator.py" />
-        <option value="$PROJECT_DIR$/event/eventHandlers/tickEventHandler.py" />
-        <option value="$PROJECT_DIR$/event/eventCreators/snakeEventCreator.py" />
         <option value="$PROJECT_DIR$/event/eventCreators/tickEventCreator.py" />
         <option value="$PROJECT_DIR$/Main/gameMode/player2HighScore.py" />
         <option value="$PROJECT_DIR$/Main/gameMode/player2Compete.py" />
         <option value="$PROJECT_DIR$/Main/gameMode/gameMode.py" />
         <option value="$PROJECT_DIR$/Main/gameMode/player1HighScore.py" />
         <option value="$PROJECT_DIR$/ui/scoreTable.py" />
-        <option value="$PROJECT_DIR$/ui/button.py" />
         <option value="$PROJECT_DIR$/Main/gameModes/player1HighScore.py" />
         <option value="$PROJECT_DIR$/utils/setting.py" />
-        <option value="$PROJECT_DIR$/Main/gameStates/gameMode.py" />
-        <option value="$PROJECT_DIR$/Main/gameStates/player1HighScore.py" />
-        <option value="$PROJECT_DIR$/utils/listener.py" />
         <option value="$PROJECT_DIR$/Main/game.py" />
         <option value="$PROJECT_DIR$/Main/main.py" />
+        <option value="$PROJECT_DIR$/utils/observer.py" />
+        <option value="$PROJECT_DIR$/utils/utility.py" />
         <option value="$PROJECT_DIR$/player/snakeStateHandler.py" />
+        <option value="$PROJECT_DIR$/utils/listener.py" />
+        <option value="$PROJECT_DIR$/event/eventHandlers/keyboardEventHandler.py" />
+        <option value="$PROJECT_DIR$/player/snakeAttributeHandler.py" />
+        <option value="$PROJECT_DIR$/event/eventHandlers/tickEventHandler.py" />
+        <option value="$PROJECT_DIR$/player/snakeDisplayHandler.py" />
         <option value="$PROJECT_DIR$/Main/assembler.py" />
+        <option value="$PROJECT_DIR$/event/eventCreators/snakeEventCreator.py" />
+        <option value="$PROJECT_DIR$/event/eventDistributor.py" />
+        <option value="$PROJECT_DIR$/player/snakeAction.py" />
+        <option value="$PROJECT_DIR$/player/snake.py" />
+        <option value="$PROJECT_DIR$/ui/button.py" />
+        <option value="$PROJECT_DIR$/Main/gameStates/player1HighScore.py" />
+        <option value="$PROJECT_DIR$/Main/gameStates/gameMode.py" />
       </list>
     </option>
   </component>
@@ -216,6 +233,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -392,13 +411,11 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="C:/Program Files/Git/cmd/git.exe" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.21173672" />
     <property name="SearchEverywhereHistoryKey" value="play&#9;FILE&#9;file://C:/joey/workplace/2017/Computer/pygame/170404-Slither_Game/Main/gameStates/player1HighScore.py" />
   </component>
@@ -597,16 +614,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18330692" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16904384" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995495" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919955" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30405405" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29650506" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24986793" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919955" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -627,11 +644,11 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31756756" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29650506" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919955" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1320655" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16904384" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995495" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24986793" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -651,13 +668,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/event/eventCreators/snakeEventCreator.py</url>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="14" />
+      <option name="time" value="16" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -725,7 +736,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/player/snakeStateHandler.py">
+    <entry file="file://$PROJECT_DIR$/player/snakeAction.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -821,13 +832,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/player/snakeDisplayHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.10655738">
-          <caret line="38" column="14" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/dataSavor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.052693207">
@@ -849,18 +853,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/player/snake.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5263158">
-          <caret line="65" column="21" selection-start-line="65" selection-start-column="21" selection-end-line="65" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gameObject/items/item.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -868,41 +864,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.6470587">
           <caret line="24" column="43" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/event/eventDistributor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="18" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/utility.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.3157895">
-          <caret line="65" column="33" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/event/eventCreators/eventCreator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05263158">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/event/eventCreators/snakeEventCreator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2631579">
-          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -910,7 +871,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -918,25 +878,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/event/eventCreators/tickEventCreator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21052632">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#44#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui/button.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="141" column="39" selection-start-line="141" selection-start-column="39" selection-end-line="141" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -944,7 +885,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21924482">
           <caret line="37" column="58" selection-start-line="37" selection-start-column="58" selection-end-line="37" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -952,15 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5263158">
           <caret line="25" column="29" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/gameStates/gameMode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="33" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -968,86 +899,149 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="104" column="18" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.2941175">
-          <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/listener.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="50" column="93" selection-start-line="50" selection-start-column="93" selection-end-line="50" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/gameStates/player1HighScore.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6923077">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/observer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.36885247">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main/game.py">
+    <entry file="file://$PROJECT_DIR$/event/eventCreators/eventCreator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.9230769">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.21077283">
+          <caret line="4" column="63" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/event/eventHandlers/tickEventHandler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="22" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/event/eventHandlers/keyboardEventHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="26" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/player/snakeStateHandler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="101" column="125" selection-start-line="101" selection-start-column="115" selection-end-line="101" selection-end-column="125" />
+        <state vertical-scroll-proportion="0.36885247">
+          <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Main/assembler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="155" column="142" selection-start-line="155" selection-start-column="142" selection-end-line="155" selection-end-column="142" />
+        <state vertical-scroll-proportion="0.5625">
+          <caret line="143" column="35" selection-start-line="143" selection-start-column="35" selection-end-line="143" selection-end-column="35" />
           <folding>
-            <element signature="e#0#34#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="126" column="56" selection-start-line="126" selection-start-column="56" selection-end-line="126" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/event/eventDistributor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.088235">
+          <caret line="49" column="18" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/button.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.45516074">
+          <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.63114756">
+          <caret line="25" column="11" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/player/snake.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.77017117">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/player/snakeAction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-25.071428">
+          <caret line="55" column="57" selection-start-line="55" selection-start-column="57" selection-end-line="55" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/event/eventHandlers/keyboardEventHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52693206">
+          <caret line="12" column="56" selection-start-line="12" selection-start-column="56" selection-end-line="12" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/event/eventCreators/snakeEventCreator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.5">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/listener.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/utility.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/gameStates/gameMode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30456853">
+          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/player/snakeDisplayHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.9411764">
+          <caret line="10" column="26" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/gameStates/player1HighScore.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.07614213">
+          <caret line="59" column="46" selection-start-line="59" selection-start-column="46" selection-end-line="59" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>

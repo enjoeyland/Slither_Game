@@ -1,17 +1,17 @@
-from utils import utility
-from utils.observer import Publisher
-from utils.setting import *
+from utils import utility, listener
+from utils.setting import SKIN_DEFAULT, RIGHT, SCREEN_MID, GREEN, POS_X, POS_Y
 
-class Snake(Publisher):
+
+class Snake(listener.ListenerHandler):
 	def __init__(self, snakeID, speed, thick, skin, skinNum = SKIN_DEFAULT, firstHeadDirection = RIGHT, headPos = SCREEN_MID, color = GREEN, length = 1,):
-		Publisher.__init__(self)
+		listener.ListenerHandler.__init__(self)
+
 		self.snakeID = snakeID
 		self.color = color
 		self.speed = speed
 		self.thick = thick
 		self.length = length
-		self.snakeList = [(headPos[POS_X], headPos[POS_Y], firstHeadDirection)]
-		self.setOfObserver = set()
+		self.snakeList = [[headPos[POS_X], headPos[POS_Y], firstHeadDirection]]
 
 		#img
 		self.snakeSkin = skin.getSkin(skinNum)
@@ -37,7 +37,7 @@ class Snake(Publisher):
 		self.thick = snakeState["thick"]
 		self.length = snakeState["length"]
 		self.snakeList = snakeState["snakeList"]
-		self.notify()
+		self._notify()
 
 
 	def getSnakeID(self):
@@ -55,7 +55,7 @@ class Snake(Publisher):
 
 	def addLength(self, length = 1):
 		self.length += length
-		self.notify()
+		self._notify()
 
 
 	def getSpeed(self):
@@ -63,23 +63,23 @@ class Snake(Publisher):
 
 	def setSpeed(self, speed):
 		self.speed = speed
-		self.notify()
+		self._notify()
 
 	def addSpeed(self, speed):
 		"""pixel per second"""
 		self.speed += speed
-		self.notify()
+		self._notify()
 
 	def getThick(self):
 		return self.thick
 
 	def setThick(self, thick):
 		self.thick = thick
-		self.notify()
+		self._notify()
 
 	def getSnakeList(self):
 		return  self.snakeList
 
 	def setSnakeList(self, snakeList):
 		self.snakeList = snakeList
-		self.notify()
+		self._notify()

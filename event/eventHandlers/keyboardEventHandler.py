@@ -12,7 +12,7 @@ class KeyboardEventHandler(listener.ListenerHandler, object):
 		self.request.setAddtionalTarget(pygame.KEYDOWN)
 		self.pygameEventDistributor.listen(self.request)
 
-	def process(self, keyEvent):
-		for listenerItem in self.listenerList:
-			if keyEvent.key == listenerItem.getAddtionalTarget():
-				listenerItem.notify()
+	def process(self, data):
+		for listenerItem in self._listenerList:
+			if data.key == listenerItem.getAddtionalTarget():
+				self._notifyOne(listenerItem)

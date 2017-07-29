@@ -1,9 +1,11 @@
+import pygame
+
 from event import eventDistributor
-from event.eventCreators import snakeEventCreator, tickEventCreator
+from event.eventCreators import snakeEventCreator
 from event.eventHandlers import keyboardEventHandler, tickEventHandler
 from gameObject import score, skin, level
 from gameObject.items import item, apple
-from player import snake, snakeStateHandler, snakeDisplayHandler
+from player import snake, snakeAction, snakeDisplayHandler
 from ui import scoreTable, popUp
 from utils import dataSavor, listener
 from utils.setting import DEFAULT_SPEED, DEFAULT_THICK, SKIN_DEFAULT, PLAYER1_HIGH_SCORE
@@ -17,22 +19,31 @@ class NotAssemblerCreatedError(Exception):
 
 class Assembler(object):
 	def __init__(self):
+		self.createGroupItem()
 		self.createScore()
 		self.createEventDistributor()
 		self.createKeyboardEventHandler()
 		self.createTickEventHandler()
 		self.createPlayer()
 
-		#
 		self.createScoreDisplay()
 		self.createScoreTable()
 
 		self.createSnakeEventCreator()
-		self.createTickEventCreator()
 
 		self.createPausePage()
 		self.createAppleItemGenerator()
 		self.createGameHandler(PLAYER1_HIGH_SCORE)
+
+
+	def createGroupItem(self):
+		self._groupItem = pygame.sprite.Group()
+	def getGroupItem(self):
+		if self._groupItem is not None:
+			return self._groupItem
+		else:
+			raise NotAssemblerCreatedError("createScore")
+
 
 	def createScore(self):
 		""" create score """
@@ -128,7 +139,7 @@ class Assembler(object):
 
 	def createSnakeEventCreator(self):
 		""" create snake event creator """
-		self._SnakeEventCreator = snakeEventCreator.SnakeEventCreator()
+		self._SnakeEventCreator = snakeEventCreator.SnakeEventCreator(self.getPlayer(), self.getGroupItem())
 
 	def getSnakeEventCreator(self):
 		if self._SnakeEventCreator is not None:
@@ -136,24 +147,10 @@ class Assembler(object):
 		else:
 			raise NotAssemblerCreatedError("createSnakeEventCreator")
 
-
-
-	def createTickEventCreator(self):
-		""" create tick event creator """
-		self._TickEventCreator = tickEventCreator.TickEventCreator()
-
-	def getTickEventCreator(self):
-		if self._TickEventCreator is not None:
-			return self._TickEventCreator
-		else:
-			raise NotAssemblerCreatedError("createTickEventCreator")
-
-
-
 	def createPlayer(self):
 		""" create player """
 		self._player = snake.Snake(1, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), skinNum= SKIN_DEFAULT)
-		self._SnakeStateHandler = snakeStateHandler.SnakeStateHandler(self._player, self.getKeyboardEventHandler(), self.getTickEventHandler(), self.getPygameEventDistributor())
+		self._SnakeAction = snakeAction.SnakeAction(self._player, self.getKeyboardEventHandler())
 		self._SnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(self._player)
 
 	def getPlayer(self):
@@ -162,9 +159,9 @@ class Assembler(object):
 		else:
 			raise NotAssemblerCreatedError("createPlayer")
 
-	def getSnakeStateHandler(self):
-		if self._SnakeStateHandler is not None:
-			return self._SnakeStateHandler
+	def getSnakeAction(self):
+		if self._SnakeAction is not None:
+			return self._SnakeAction
 		else:
 			raise NotAssemblerCreatedError("createPlayer")
 

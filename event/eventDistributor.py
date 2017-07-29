@@ -43,29 +43,44 @@ from utils.setting import *
 # 	def getPygameTickEvent(self):
 # 		return self.pygameTickEventList
 
+def appendOnTickEvent(func):
+	def wrapper(self):
+		pygame.event.post(pygame.event.Event(ON_TICK))
+		return func(self)
+	return wrapper
 
 class pygameEventDistributor(listener.ListenerHandler, object):
 	def __init__(self):
 		listener.ListenerHandler.__init__(self)
 		self.listenedEventList = []
 
+	@appendOnTickEvent
+	def _getEvent(self):
+		return pygame.event.get()
+
+	def _setEventCache(self,event):
+		self._tempEvent = event
+
+	def _getEventCache(self):
+		return self._tempEvent
+
 	def distribute(self):
 		"""This function need to be called once per fame"""
-		self.listenedEventList = []
-		pygameWholeEvent = pygame.event.get()
+		# self.listenedEventList = []
+		self._setEventCache(self._getEvent())
 
-		for pygameEvent in pygameWholeEvent:
-			for listenerItem in self.listenerList:
+		for pygameEvent in self._getEventCache():
+			for listenerItem in self._listenerList:
 				if pygameEvent.type == listenerItem.getAddtionalTarget():
-					listenerItem.notify(pygameEvent = pygameEvent)
-					self.listenedEventList.append(pygameEvent.type)
+					self._notifyOne(listenerItem, data = pygameEvent)
+					# self.listenedEventList.append(pygameEvent.type)
 
-		for listenerItem in self.listenerList:
-			if listenerItem.getAddtionalTarget() == "wholeEvent":
-				listenerItem.notify(wholeEvent = pygameWholeEvent)
-
-			elif listenerItem.getAddtionalTarget() == "listenedEvent":
-				listenerItem.notify(listenedEvent = list(set(self.listenedEventList)))
+		# for listenerItem in self._listenerList:
+		# 	if listenerItem.getAddtionalTarget() == "wholeEvent":
+		# 		listenerItem.notify(data = pygameWholeEvent)
+        #
+		# 	elif listenerItem.getAddtionalTarget() == "listenedEvent":
+		# 		listenerItem.notify(data = list(set(self.listenedEventList)))
 
 
 # import threading, time

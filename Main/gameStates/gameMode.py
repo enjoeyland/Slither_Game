@@ -8,7 +8,7 @@ class GameMode(object):
     def setGameSessionToFalse(self):
         self.gameSession = False
 
-    def setGameRunningToFalse(self):
+    def setGameRunningToFalse(self, **kwargs):
         self.isGameRunning = False
 
     def pause(self):
@@ -18,6 +18,10 @@ class GameMode(object):
         else:
             self.isGameRunning = True
             self.isPause = False
+
+    def quit(self, **kwargs):
+        pygame.quit()
+        quit()
 
     def clickReplayButton(self):
         self.gameReplay = True

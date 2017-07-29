@@ -7,7 +7,7 @@ from event.eventCreators import eventCreator, snakeEventCreator
 from event.eventHandlers import keyboardEventHandler
 from gameObject import skin, score, level
 from gameObject.items import item, apple
-from player import snake, snakeDisplayHandler, snakeStateHandler
+from player import snake, snakeDisplayHandler, snakeAction
 from ui import scoreTable, popUp
 from utils import dataSavor, utility, listener
 from utils.setting import FRAMES_PER_SECOND, SCREEN_BACKGROUND, DEFAULT_SPEED, DEFAULT_THICK, SKIN_DEFAULT, \
@@ -92,7 +92,7 @@ class Game(object):
 		mEvent = eventCreator.Event(mOnTickListenerHandler)
 
 		player = snake.Snake(1, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), skinNum= SKIN_DEFAULT)
-		mSnakeStateHandler = snakeStateHandler.SnakeStateHandler(player, mOnKeyListenerHandler, mOnTickListenerHandler, mIOEventHandler)
+		mSnakeStateHandler = snakeAction.SnakeStateHandler(player, mOnKeyListenerHandler, mOnTickListenerHandler, mIOEventHandler)
 		mSnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(player)
 
 		mPausePage = popUp.PausePage()

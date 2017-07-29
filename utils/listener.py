@@ -29,32 +29,34 @@ from utils import utility
 
 class ListenerHandler(object):
 	def __init__(self):
-		self.listenerList = []
+		self._listenerList = []
 
 	def listen(self, request):
-		self.listenerList.append(request)
+		self._listenerList.append(request)
 
 	def endListen(self, listenerName):
-		self.listenerList = [listener for listener in self.listenerList if listenerName != listener.getName()]
+		self._listenerList = [listener for listener in self._listenerList if listenerName != listener.getName()]
 
 	def endGroupListen(self, groupName):
-		self.listenerList = [listener for listener in self.listenerList if groupName != listener.getGroupName()]
+		self._listenerList = [listener for listener in self._listenerList if groupName != listener.getGroupName()]
 
-	def notify(self):
-		for listenerItem in self.listenerList:
-			func = listenerItem.getCallbackFunc()
-			utility.executeFunction(func)
+	def _notify(self,*args, **kwargs):
+		for listenerItem in self._listenerList:
+			listenerItem.notify(*args,**kwargs)
+
+	def _notifyOne(self,listener,*args, **kwargs):
+		listener.notify(*args,**kwargs)
 
 
 
 class Request(object):
-	def __init__(self, listenerName, callbackFunc, description = None, addtionalTarget = None):
+	def __init__(self, listenerName, callbackFunc, description = None, addtionalTarget = None, groupName = None, groupCallbackFunc = lambda *args, **kwargs : None):
 		self.name = listenerName
 		self.callbackFunc = callbackFunc
 		self.description = description
 		self.addtionalTarget =  addtionalTarget
-		self.groupName = None
-		self.groupCallbackFunc = lambda : None
+		self.groupName = groupName
+		self.groupCallbackFunc = groupCallbackFunc
 
 	def getName(self):
 		return self.name
@@ -82,8 +84,25 @@ class Request(object):
 		return self.addtionalTarget
 
 	def notify(self,*args, **kwargs):
-		utility.executeFunction(self.callbackFunc, *args ,**kwargs)
+		utility.executeFunction(self.callbackFunc, name = self.name, *args ,**kwargs)
 		self.groupNotify(*args, **kwargs)
 
 	def groupNotify(self,*args, **kwargs):
-		utility.executeFunction(self.groupCallbackFunc, *args ,**kwargs)
+		utility.executeFunction(self.groupCallbackFunc, name = self.name, *args ,**kwargs)
+
+class ListenerHandler2(object):
+	def __init__(self):
+		self._listenerList = []
+
+	def listen(self, request):
+		self._listenerList.append(request)
+
+	def endListen(self, listenerName):
+		self._listenerList = [listener for listener in self._listenerList if listenerName != listener.getName()]
+
+	def endGroupListen(self, groupName):
+		self._listenerList = [listener for listener in self._listenerList if groupName != listener.getGroupName()]
+
+	def _notify(self,*args):
+		for func in self._listenerList:
+			utility.executeFunction(func,*args)

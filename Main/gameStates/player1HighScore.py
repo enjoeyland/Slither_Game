@@ -3,7 +3,8 @@ import pygame
 from Main import assembler
 from Main.gameStates import gameMode
 from utils import utility
-from utils.setting import PLAY_INFINITELY, SCREEN_BACKGROUND, FRAMES_PER_SECOND, PLAYER1_HIGH_SCORE, EXIT
+from utils.setting import PLAY_INFINITELY, SCREEN_BACKGROUND, FRAMES_PER_SECOND, PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
+    CRASH_ITSELF
 from utils.listener import Request
 
 
@@ -28,7 +29,7 @@ class Player1HighScore(gameMode.GameMode, object):
 
         # Create Group
         groupApple = pygame.sprite.Group()
-        groupItem = pygame.sprite.Group()
+        # groupItem = pygame.sprite.Group()
         groupWall = pygame.sprite.Group()
         groupText = pygame.sprite.Group()
         groupPopUp = pygame.sprite.Group()
@@ -36,28 +37,33 @@ class Player1HighScore(gameMode.GameMode, object):
 
         # Get All Object
         mAssembler = assembler.Assembler()
+
+        groupItem = mAssembler.getGroupItem()
+
         mPygameEventDistributor = mAssembler.getPygameEventDistributor()
         mScoreDisplayHandler = mAssembler.getScoreDisplayHandler()
         mScore = mAssembler.getScore()
         mGameHandler = mAssembler.getGameHandler()
         mKeyboardEventHandler = mAssembler.getKeyboardEventHandler()
-        mTickEventCreator = mAssembler.getTickEventCreator()
+        mTickEventHandler = mAssembler.getTickEventHandler()
         mSnakeEventCreator = mAssembler.getSnakeEventCreator()
         player = mAssembler.getPlayer()
         itemAppleGenerator = mAssembler.getItemAppleGenerator()
         mSnakeDisplayHandler = mAssembler.getSnakeDisplayHandler()
-        mSnakeStateHandler = mAssembler.getSnakeStateHandler()
+        mSnakeAction = mAssembler.getSnakeAction()
         mPausePage = mAssembler.getPausePage()
         mScoreSavor = mAssembler.getScoreSavor()
         mScoreTable = mAssembler.getScoreTable()
-        mTickEventHandler = mAssembler.getTickEventHandler()
 
-
-        mPygameEventDistributor.start()
+        # Base Setting
         groupText.add(mScoreDisplayHandler.draw())
         mGameHandler.update(mScore.getScore())
 
-        mKeyboardEventHandler.listen(Request("Player1HighScore", self.pause, addtionalTarget= pygame.K_p))
+        mKeyboardEventHandler.listen(Request("Player1HighScore", self.pause, addtionalTarget = pygame.K_p))
+        mPygameEventDistributor.listen(Request("Player1HighScore", self.quit, addtionalTarget = pygame.QUIT))
+        mPygameEventDistributor.listen(Request("Player1HighScore", self.setGameRunningToFalse, addtionalTarget = CRASH_WALL))
+        mPygameEventDistributor.listen(Request("Player1HighScore", self.setGameRunningToFalse, addtionalTarget = CRASH_ITSELF))
+
 
         # menuButton = {"name" : "menu", "listener" : mTickEventHandler, "func": self.setButtonSprite}
         replayButton = {"name" : "replay", "listener" : mTickEventHandler, "func": self.clickReplayButton}
@@ -67,13 +73,9 @@ class Player1HighScore(gameMode.GameMode, object):
             utility.playSound(soundBGM, loops= PLAY_INFINITELY)
 
             while self.isGameRunning:
+                mPygameEventDistributor.distribute()
 
-                # Make Event
-                mTickEventCreator.onTick()
-
-                mSnakeEventCreator.crashWall(player, self.setGameRunningToFalse)
-                mSnakeEventCreator.crashItself(player, self.setGameRunningToFalse)
-                mSnakeEventCreator.crashItem(player, groupItem)
+                mSnakeAction.tickMove()
 
                 mGameHandler.update(mScore.getScore())
 
@@ -107,7 +109,7 @@ class Player1HighScore(gameMode.GameMode, object):
 
             if self.isPause:
                 # End Listen
-                mSnakeStateHandler.endListen()
+                mSnakeAction.endListen()
 
                 groupPopUp.add(mPausePage)
                 allSprites.add(groupPopUp.sprites())
@@ -117,7 +119,7 @@ class Player1HighScore(gameMode.GameMode, object):
                 pygame.display.update()
 
                 while self.isPause:
-                    mTickEventCreator.onTick()
+                    mPygameEventDistributor.distribute()
 
                     pygame.display.update()
                     pygame.time.Clock().tick(3)
@@ -125,12 +127,12 @@ class Player1HighScore(gameMode.GameMode, object):
                 mPausePage.kill()
 
                 #listen
-                mSnakeStateHandler.setListener()
+                mSnakeAction.setListener()
 
             else:
                 self.setGameSessionToFalse()
                 # End Listen
-                mSnakeStateHandler.endListen()
+                mSnakeAction.endListen()
 
                 mScoreSavor.saveScore(mScore.getScore())
                 mScoreTable.buildImage(mScoreSavor.getTopScore(10), mScore.getScore(), replayButton)
@@ -141,7 +143,7 @@ class Player1HighScore(gameMode.GameMode, object):
                 pygame.display.update()
 
                 while not self.gameReplay:
-                    mTickEventCreator.onTick()
+                    mPygameEventDistributor.distribute()
 
                     self.screen.fill(SCREEN_BACKGROUND)
                     mSnakeDisplayHandler.draw(self.screen)

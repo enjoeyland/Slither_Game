@@ -29,8 +29,8 @@ class GameHandler():
 		self.lastLevel = 0
 
 	def update(self, score):
-		level = self.setLevel(score)
-		self.checkLevelChange(level)
+		currentLevel = self.getLevel(score)
+		self.checkLevelChange(currentLevel)
 
 	def checkLevelChange(self, level):
 		if self.lastLevel != level:
@@ -39,15 +39,17 @@ class GameHandler():
 		self.lastLevel = level
 
 	def setLevel(self, score):
-		level = self.mLevel.getLevel(score, self.gameName)
+		level = self.getLevel(score)
 		levelSetting = self.mLevel.getLevelSetting()
 		setting = levelSetting[self.gameName][level]["setting"]
 
-		self.mSnake.setSpeed(setting["snake"]["speed"])
-		self.mSnake.setThick(setting["snake"]["thick"])
+		self.mSnake.setAttributes(speed = setting["snake"]["speed"], thick = setting["snake"]["thick"])
 
 		for itemGenerator in self.mItemGenerators.keys():
 			self.mItemGenerators[itemGenerator].setItemMaximumNum(setting["item"][itemGenerator]["num"])
 			self.mItemGenerators[itemGenerator].setDropProbability(setting["item"][itemGenerator]["probability"])
 			self.mItemGenerators[itemGenerator].setItemLifeTimer(setting["item"][itemGenerator]["lifeTimer"])
 		return level
+
+	def getLevel(self, score):
+		return self.mLevel.getLevel(score, self.gameName)

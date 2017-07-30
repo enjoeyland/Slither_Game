@@ -33,6 +33,7 @@ class SnakeEventCreator(EventCreator):
 	def crashWall(self):
 		if  self.snake_snakeHead[POS_X] > SCREEN_WIDTH - self.snake_thick or self.snake_snakeHead[POS_X] < 0 \
 				or self.snake_snakeHead[POS_Y] > SCREEN_HEIGHT - self.snake_thick or self.snake_snakeHead[POS_Y] < 0:
+			print(self.snake_snakeHead)
 			print("crash wall")
 			self.createEvent(CRASH_WALL, snake = self.snake)
 

@@ -92,4 +92,7 @@ class ItemGenerator(object):
 				return self.item(self, location, lifeTimer = self.itemLifeTimer,*args, **kwargs)
 
 	def itemKilled(self):
-		self.currentItemNum -= 1
+		if self.currentItemNum > 0:
+			self.currentItemNum -= 1
+		else:
+			print("the number of item is not positive")

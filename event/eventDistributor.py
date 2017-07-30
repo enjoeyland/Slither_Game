@@ -44,32 +44,28 @@ from utils.setting import *
 # 		return self.pygameTickEventList
 
 def appendOnTickEvent(func):
-	def wrapper(self):
+	def wrapper(*args):
 		pygame.event.post(pygame.event.Event(ON_TICK))
-		return func(self)
+		return func(*args)
 	return wrapper
 
 class pygameEventDistributor(listener.ListenerHandler, object):
-	def __init__(self):
+	def __init__(self, eventListToListen):
 		listener.ListenerHandler.__init__(self)
-		self.listenedEventList = []
+		self.eventListToListen = eventListToListen
+
+		pygame.event.set_allowed(None)
+		pygame.event.set_allowed(self.eventListToListen)
 
 	@appendOnTickEvent
-	def _getEvent(self):
-		return pygame.event.get()
-
-	def _setEventCache(self,event):
-		self._tempEvent = event
-
-	def _getEventCache(self):
-		return self._tempEvent
+	def _getEvent(self,eventList):
+		self.__eventCache = pygame.event.get(eventList)
+		pygame.event.clear()
+		return self.__eventCache
 
 	def distribute(self):
 		"""This function need to be called once per fame"""
-		# self.listenedEventList = []
-		self._setEventCache(self._getEvent())
-
-		for pygameEvent in self._getEventCache():
+		for pygameEvent in self._getEvent(self.eventListToListen):
 			for listenerItem in self._listenerList:
 				if pygameEvent.type == listenerItem.getAddtionalTarget():
 					self._notifyOne(listenerItem, data = pygameEvent)
@@ -81,7 +77,14 @@ class pygameEventDistributor(listener.ListenerHandler, object):
         #
 		# 	elif listenerItem.getAddtionalTarget() == "listenedEvent":
 		# 		listenerItem.notify(data = list(set(self.listenedEventList)))
-
+	# def atPause(self):
+	# 	eventList = [pygame.QUIT,pygame.KEYDOWN,ON_TICK]
+	# 	pygame.event.wait()
+	# 	if pygame.event.peek(eventList):
+	# 		for pygameEvent in self._getEvent(eventList):
+	# 			for listenerItem in self._listenerList:
+	# 				if pygameEvent.type == listenerItem.getAddtionalTarget():
+	# 					self._notifyOne(listenerItem, data = pygameEvent)
 
 # import threading, time
 from queue import Queue

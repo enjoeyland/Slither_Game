@@ -73,10 +73,9 @@ class Player1HighScore(gameMode.GameMode, object):
             utility.playSound(soundBGM, loops= PLAY_INFINITELY)
 
             while self.isGameRunning:
+                #wait for machine input (at machine learning)
                 mPygameEventDistributor.distribute()
-
                 mSnakeAction.tickMove()
-
                 mGameHandler.update(mScore.getScore())
 
                 # Drop Item

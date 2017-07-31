@@ -26,6 +26,7 @@ class SnakeAction:
 		self.snake_thick = self.snake.getThick()
 		self.snake_speed = self.snake.getSpeed()
 
+
 	def commit(self):
 		self.snake.setSnakeList(self.snake_snakeList)
 

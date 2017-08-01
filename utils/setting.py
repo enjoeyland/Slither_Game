@@ -144,25 +144,25 @@ LEVEL = {PLAYER1_HIGH_SCORE :
 			LEVEL_3 : {"level": 3,
 					   "score": 3000,
 					   "setting": {"snake": {"speed": 700, "thick" : 20},
-								   "item": {"apple": {"num" : 2, "probability": 10,"lifeTimer": 4 * FRAMES_PER_SECOND}}
+								   "item": {"apple": {"num" : 3, "probability": 10,"lifeTimer": 4 * FRAMES_PER_SECOND}}
 								   }
 					   },
 			LEVEL_4 : {"level": 4,
 					   "score": 4500,
 					   "setting": {"snake": {"speed": 800, "thick" : 20},
-								   "item": {"apple": {"num" : 2, "probability": 8,"lifeTimer": 3 * FRAMES_PER_SECOND}}
+								   "item": {"apple": {"num" : 5, "probability": 8,"lifeTimer": 3 * FRAMES_PER_SECOND}}
 								   }
 					   },
 			LEVEL_5 : {"level": 5,
 					   "score": 6000,
 					   "setting": {"snake": {"speed": 900, "thick" : 20},
-								   "item": {"apple": {"num" : 1, "probability": 3,"lifeTimer": 2 * FRAMES_PER_SECOND}}
+								   "item": {"apple": {"num" : 7, "probability": 3,"lifeTimer": 2 * FRAMES_PER_SECOND}}
 								   }
 					   },
 			LEVEL_6 : {"level": 6,
 					   "score": 7500,
 					   "setting": {"snake": {"speed": 1000, "thick" : 20},
-								   "item": {"apple": {"num" : 2, "probability": 5,"lifeTimer": 1.3 * FRAMES_PER_SECOND}}
+								   "item": {"apple": {"num" : 8, "probability": 5,"lifeTimer": 1.3 * FRAMES_PER_SECOND}}
 								   }
 					   },
 			LEVEL_7 :  {"level": 7,

@@ -1,6 +1,7 @@
 import pygame
 
 from ui.text import Text
+from utils.listener import Request
 from utils.setting import DEFAULT_FONT_TYPE, DEFAULT_FONT_SIZE, CONTINUANCE, GREEN, WHITE, TOP_LEFT, CENTER_MIDDLE, \
 	POS_X, POS_Y, DARK_GREEN, BOTTOM_RIGHT, BOTTOM_MIDDLE, BOTTOM_LEFT, CENTER_RIGHT, CENTER_LEFT, TOP_MIDDLE, TOP_RIGHT
 
@@ -139,9 +140,9 @@ class Button(pygame.sprite.Sprite):
 			self.buildImage(self.backgroundColor)
 
 
-	def listen(self, onTickListenerHandler):
-		onTickListenerHandler.listen("button_%s_click"% self, self.click, group = "button_%s"% self)
-		onTickListenerHandler.listen("button_%s_hover"% self, self.hover, group = "button_%s"% self)
+	def listen(self, TickEventHandler):
+		TickEventHandler.listen(Request("button_%s_click"% self, self.click, groupName = "button_%s"% self))
+		TickEventHandler.listen(Request("button_%s_hover"% self, self.hover, groupName = "button_%s"% self))
 
-	def endListen(self, onTickListenerHandler):
-		onTickListenerHandler.endListen(group = "button_%s"% self)
+	def endListen(self, TickEventHandler):
+		TickEventHandler.endGroupListen("button_%s"% self)

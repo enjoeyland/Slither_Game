@@ -31,14 +31,14 @@ class Item(pygame.sprite.Sprite):
 	def effect(self, *args):
 		raise NotImplementedError( "Should have implemented update %s" % self )
 
-	def itemKill(self):
-		self.kill()
+	def kill(self):
+		pygame.sprite.Sprite.kill(self)
 		self.itemGenerator.itemKilled()
 
 	def update(self):
 		if self.lifeTimer != CONTINUANCE:
 			if self.lifeTimer <= 0:
-				self.itemKill()
+				self.kill()
 			self.lifeTimer -= 1
 
 class ItemGenerator(object):
@@ -92,4 +92,7 @@ class ItemGenerator(object):
 				return self.item(self, location, lifeTimer = self.itemLifeTimer,*args, **kwargs)
 
 	def itemKilled(self):
-		self.currentItemNum -= 1
+		if self.currentItemNum > 0:
+			self.currentItemNum -= 1
+		else:
+			print("the number of item is not positive")

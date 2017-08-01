@@ -63,3 +63,11 @@ def playSound(sound, channelNumber = None, loops = 0):
 # 		elif not pygame.mixer.Channel(MUSIC_CHANNEL).get_queue():
 # 			pygame.mixer.Channel(MUSIC_CHANNEL).queue(music)
 
+def executeFunction(func, name = "", *args, **kwargs):
+	try:
+		func(*args, **kwargs)
+	except TypeError:
+		print("error occurs : %s" % name)
+		raise
+
+# class ExecuteFunctionError(Exception):

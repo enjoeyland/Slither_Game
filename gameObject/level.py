@@ -1,0 +1,58 @@
+from utils.setting import MAX_LEVEL, LEVEL
+
+
+class Level():
+	def __init__(self):
+		self.settingPerLevel = LEVEL
+
+	def setSettingPerLevel(self, settingPerLevel):
+		self.settingPerLevel = settingPerLevel
+
+	def getLevel(self, score, gameName):
+		for level in range(self.settingPerLevel[gameName][MAX_LEVEL]["level"]):
+			if self.settingPerLevel[gameName][level]["score"] <= score < self.settingPerLevel[gameName][level + 1]["score"]:
+				return self.settingPerLevel[gameName][level]["level"]
+		else:
+			if self.settingPerLevel[gameName][MAX_LEVEL]["score"] <= score:
+				return self.settingPerLevel[gameName][MAX_LEVEL]["level"]
+
+	def getLevelSetting(self,gameName, level):
+		return self.settingPerLevel[gameName][level]
+
+class LevelHandler():
+	def __init__(self, gameName, mSnake, mItemGenerators, levelClass = Level):
+		self.mLevel = levelClass()
+		self.gameName = gameName
+		self.mSnake = mSnake
+		self.mItemGenerators = mItemGenerators
+
+		self.lastLevel = -1
+
+	def update(self, score):
+		currentLevel = self.getLevel(score)
+		if self.isLevelChange(currentLevel):
+			self.setLevel(currentLevel)
+			self.setLevelSetting(currentLevel)
+
+	def isLevelChange(self, level):
+		if self.lastLevel != level:
+			return True
+		return False
+		# self.lastLevel = level
+
+	def setLevel(self, level):
+		self.lastLevel = level
+		print("Level %s" % level)
+
+	def setLevelSetting(self, level):
+		levelSetting = self.mLevel.getLevelSetting(self.gameName,level)["setting"]
+
+		self.mSnake.setAttributes(speed = levelSetting["snake"]["speed"], thick = levelSetting["snake"]["thick"])
+
+		for itemGenerator in self.mItemGenerators.keys():
+			self.mItemGenerators[itemGenerator].setItemMaximumNum(levelSetting["item"][itemGenerator]["num"])
+			self.mItemGenerators[itemGenerator].setDropProbability(levelSetting["item"][itemGenerator]["probability"])
+			self.mItemGenerators[itemGenerator].setItemLifeTimer(levelSetting["item"][itemGenerator]["lifeTimer"])
+
+	def getLevel(self, score):
+		return self.mLevel.getLevel(score, self.gameName)

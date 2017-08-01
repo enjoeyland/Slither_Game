@@ -1,6 +1,6 @@
 class Observer(object):
 	def observeUpdate(self):
-		raise NotImplementedError( "Should have implemented update %s" % self )
+		raise NotImplementedError("Should have implemented update %s" % self)
 
 class Publisher(object):
 	def __init__(self):

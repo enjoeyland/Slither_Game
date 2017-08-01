@@ -44,12 +44,12 @@ class Snake(listener.ListenerHandler):
 		snakeState["snakeList"] = self.snakeList
 		return snakeState
 
-	def setAttributes(self, **kwargs):
-		self.color = kwargs["color"] if kwargs["color"] else self.color
-		self.speed = kwargs["speed"] if kwargs["speed"] else self.speed
-		self.thick = kwargs["thick"] if kwargs["thick"] else self.thick
-		self.length = kwargs["length"] if kwargs["length"] else self.length
-		self.snakeList = kwargs["snakeList"] if kwargs["snakeList"] else self.snakeList
+	def setAttributes(self, color = None, speed = None,thick = None, length = None, snakeList = None):
+		self.color = color if color else self.color
+		self.speed = speed if speed else self.speed
+		self.thick = thick if thick else self.thick
+		self.length = length if length else self.length
+		self.snakeList = snakeList if snakeList else self.snakeList
 		self.attributeChanged = True
 
 

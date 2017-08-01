@@ -37,7 +37,7 @@ class Assembler(object):
 
 		self.createPausePage()
 		self.createAppleItemGenerator()
-		self.createGameHandler(PLAYER1_HIGH_SCORE)
+		self.createLevelHandler(PLAYER1_HIGH_SCORE)
 
 
 	def createGroupItem(self):
@@ -210,12 +210,12 @@ class Assembler(object):
 
 
 
-	def createGameHandler(self, gameName):
+	def createLevelHandler(self, gameName):
 		""" create game state handler """
-		self._GameHandler = level.GameHandler(self.getPlayer(), {"apple": self.getItemAppleGenerator()}, gameName= gameName)
+		self._GameHandler = level.LevelHandler(gameName, self.getPlayer(), {"apple" : self.getItemAppleGenerator()})
 
 
-	def getGameHandler(self):
+	def getLevelHandler(self):
 		if self._GameHandler is not None:
 			return self._GameHandler
 		else:

@@ -8,7 +8,7 @@ class Level():
 	def setSettingPerLevel(self, settingPerLevel):
 		self.settingPerLevel = settingPerLevel
 
-	def getLevel(self, score, gameName = None):
+	def getLevel(self, score, gameName):
 		for level in range(self.settingPerLevel[gameName][MAX_LEVEL]["level"]):
 			if self.settingPerLevel[gameName][level]["score"] <= score < self.settingPerLevel[gameName][level + 1]["score"]:
 				return self.settingPerLevel[gameName][level]["level"]
@@ -16,40 +16,43 @@ class Level():
 			if self.settingPerLevel[gameName][MAX_LEVEL]["score"] <= score:
 				return self.settingPerLevel[gameName][MAX_LEVEL]["level"]
 
-	def getLevelSetting(self):
-		return self.settingPerLevel
+	def getLevelSetting(self,gameName, level):
+		return self.settingPerLevel[gameName][level]
 
-class GameHandler():
-	def __init__(self, mSnake, mItemGenerators, levelClass = Level, gameName = None):
+class LevelHandler():
+	def __init__(self, gameName, mSnake, mItemGenerators, levelClass = Level):
 		self.mLevel = levelClass()
 		self.gameName = gameName
 		self.mSnake = mSnake
 		self.mItemGenerators = mItemGenerators
 
-		self.lastLevel = 0
+		self.lastLevel = -1
 
 	def update(self, score):
 		currentLevel = self.getLevel(score)
-		self.checkLevelChange(currentLevel)
+		if self.isLevelChange(currentLevel):
+			self.setLevel(currentLevel)
+			self.setLevelSetting(currentLevel)
 
-	def checkLevelChange(self, level):
+	def isLevelChange(self, level):
 		if self.lastLevel != level:
-			print("Level %s" % level)
+			return True
+		return False
+		# self.lastLevel = level
 
+	def setLevel(self, level):
 		self.lastLevel = level
+		print("Level %s" % level)
 
-	def setLevel(self, score):
-		level = self.getLevel(score)
-		levelSetting = self.mLevel.getLevelSetting()
-		setting = levelSetting[self.gameName][level]["setting"]
+	def setLevelSetting(self, level):
+		levelSetting = self.mLevel.getLevelSetting(self.gameName,level)["setting"]
 
-		self.mSnake.setAttributes(speed = setting["snake"]["speed"], thick = setting["snake"]["thick"])
+		self.mSnake.setAttributes(speed = levelSetting["snake"]["speed"], thick = levelSetting["snake"]["thick"])
 
 		for itemGenerator in self.mItemGenerators.keys():
-			self.mItemGenerators[itemGenerator].setItemMaximumNum(setting["item"][itemGenerator]["num"])
-			self.mItemGenerators[itemGenerator].setDropProbability(setting["item"][itemGenerator]["probability"])
-			self.mItemGenerators[itemGenerator].setItemLifeTimer(setting["item"][itemGenerator]["lifeTimer"])
-		return level
+			self.mItemGenerators[itemGenerator].setItemMaximumNum(levelSetting["item"][itemGenerator]["num"])
+			self.mItemGenerators[itemGenerator].setDropProbability(levelSetting["item"][itemGenerator]["probability"])
+			self.mItemGenerators[itemGenerator].setItemLifeTimer(levelSetting["item"][itemGenerator]["lifeTimer"])
 
 	def getLevel(self, score):
 		return self.mLevel.getLevel(score, self.gameName)

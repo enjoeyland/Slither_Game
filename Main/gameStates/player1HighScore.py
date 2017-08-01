@@ -43,7 +43,7 @@ class Player1HighScore(gameMode.GameMode, object):
         mPygameEventDistributor = mAssembler.getPygameEventDistributor()
         mScoreDisplayHandler = mAssembler.getScoreDisplayHandler()
         mScore = mAssembler.getScore()
-        mGameHandler = mAssembler.getGameHandler()
+        mLevelHandler = mAssembler.getLevelHandler()
         mKeyboardEventHandler = mAssembler.getKeyboardEventHandler()
         mTickEventHandler = mAssembler.getTickEventHandler()
         mSnakeEventCreator = mAssembler.getSnakeEventCreator()
@@ -57,7 +57,7 @@ class Player1HighScore(gameMode.GameMode, object):
 
         # Base Setting
         groupText.add(mScoreDisplayHandler.draw())
-        mGameHandler.update(mScore.getScore())
+        mLevelHandler.update(mScore.getScore())
 
         mKeyboardEventHandler.listen(Request("Player1HighScore", self.pause, addtionalTarget = pygame.K_p))
         mPygameEventDistributor.listen(Request("Player1HighScore", self.quit, addtionalTarget = pygame.QUIT))
@@ -76,7 +76,7 @@ class Player1HighScore(gameMode.GameMode, object):
                 #wait for machine input (at machine learning)
                 mPygameEventDistributor.distribute()
                 mSnakeAction.tickMove()
-                mGameHandler.update(mScore.getScore())
+                mLevelHandler.update(mScore.getScore())
 
                 # Drop Item
                 objectApple = itemAppleGenerator.dropItem(image= appleImg, sound= soundAppleBite)

@@ -1,11 +1,12 @@
 import pygame
+from player import snake, snakeAction
 
 from event import eventDistributor
 from event.eventCreators import snakeEventCreator
 from event.eventHandlers import keyboardEventHandler, tickEventHandler, crashItemEventHandler
 from gameObject import score, skin, level
 from gameObject.items import item, apple
-from player import snake, snakeAction, snakeDisplayHandler
+from gameObject.player import snakeDisplayHandler
 from ui import scoreTable, popUp
 from utils import dataSavor, listener
 from utils.setting import DEFAULT_SPEED, DEFAULT_THICK, SKIN_DEFAULT, PLAYER1_HIGH_SCORE, P1_HIGH_SCORE_LISTENING_EVENT
@@ -162,7 +163,7 @@ class Assembler(object):
 
 	def createPlayer(self):
 		""" create player """
-		self._player = snake.Snake(self.getPygameEventDistributor(),1, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), skinNum= SKIN_DEFAULT)
+		self._player = snake.Snake(self.getPygameEventDistributor(), 1, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), skinNum= SKIN_DEFAULT)
 		self._SnakeAction = snakeAction.SnakeAction(self._player, self.getKeyboardEventHandler())
 		self._SnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(self._player)
 

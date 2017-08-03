@@ -6,7 +6,7 @@ from utils.setting import WHITE, SCREEN_MID, POS_X, POS_Y, CENTER_MIDDLE
 
 class PopUp(pygame.sprite.Sprite):
 	def __init__(self, backgroundColor = WHITE, pageSize = (500,300), transparent = 128,buildImageAutomatic =True, *args, **kwargs):
-		pygame.sprite.Sprite.__init__(self)
+		super().__init__()
 		self.backgroundColor = (backgroundColor[0], backgroundColor[1], backgroundColor[2], transparent)
 		self.pageSize = pageSize
 		self.popUpPageBasePoint = [SCREEN_MID[POS_X] - (self.pageSize[POS_X] / 2),
@@ -31,7 +31,7 @@ class PopUp(pygame.sprite.Sprite):
 
 class PausePage(PopUp):
 	def __init__(self, pageSize= (500,300)):
-		PopUp.__init__(self, pageSize= pageSize)
+		super().__init__(pageSize= pageSize)
 
 	def drawAdditionalContent(self):
 		textSprite = Text(text = "Pause", fontSize= 50, location= (self.pageSize[POS_X]/2, self.pageSize[POS_Y]/2), alignment= CENTER_MIDDLE)

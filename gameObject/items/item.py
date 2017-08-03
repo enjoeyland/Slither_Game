@@ -8,7 +8,7 @@ from utils.setting import POS_Y, POS_X, CONTINUANCE, FRAMES_PER_SECOND, BEGIN, S
 class Item(pygame.sprite.Sprite):
 	"""This class is abstract class"""
 	def __init__(self, itemGenerator, image, location, type = None, lifeTimer = CONTINUANCE, sound = None):
-		pygame.sprite.Sprite.__init__(self)
+		super().__init__()
 		self.itemGenerator = itemGenerator
 		self.type = type
 		self.image = image

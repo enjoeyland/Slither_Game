@@ -51,7 +51,7 @@ def appendOnTickEvent(func):
 
 class pygameEventDistributor(listener.ListenerHandler, object):
 	def __init__(self, eventListToListen):
-		listener.ListenerHandler.__init__(self)
+		super().__init__()
 		self.eventListToListen = eventListToListen
 
 		pygame.event.set_allowed(None)

@@ -5,7 +5,7 @@ from utils import listener
 
 class KeyboardEventHandler(listener.ListenerHandler, object):
 	def __init__(self, pygameEventDistributor):
-		listener.ListenerHandler.__init__(self)
+		super().__init__()
 		self.pygameEventDistributor = pygameEventDistributor
 
 		self.request = listener.Request("KeyboardEventHandler", self.process, description= "handle keyboard event")

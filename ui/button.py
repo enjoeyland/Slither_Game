@@ -7,7 +7,7 @@ from utils.setting import DEFAULT_FONT_TYPE, DEFAULT_FONT_SIZE, CONTINUANCE, GRE
 
 class Button(pygame.sprite.Sprite):
 	def __init__(self,func, fontType = DEFAULT_FONT_TYPE, fontSize = DEFAULT_FONT_SIZE, textColor = WHITE, text = "", buttonLifeTimer = CONTINUANCE, textIndex = 0, location = (0,0), alignment = TOP_LEFT, backgroundColor = GREEN, buttonSize = None, hoverColor = DARK_GREEN, basePoint = (0,0)):
-		pygame.sprite.Sprite.__init__(self)
+		super().__init__()
 		self.buttonSize = buttonSize
 		self.backgroundColor = backgroundColor
 		self.hoverColor = hoverColor

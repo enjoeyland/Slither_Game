@@ -10,7 +10,7 @@ from utils.listener import Request
 
 class Player1HighScore(gameMode.GameMode, object):
     def __init__(self, screen):
-        gameMode.GameMode.__init__(self, screen)
+        super().__init__(screen)
 
     def gameLoop(self):
         self.isGameRunning = True

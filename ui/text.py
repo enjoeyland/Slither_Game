@@ -6,7 +6,7 @@ from utils.setting import DEFAULT_FONT_SIZE, CONTINUANCE, POS_X, POS_Y, BLACK, T
 
 class Text(pygame.sprite.Sprite):
 	def __init__(self, fontType = DEFAULT_FONT_TYPE, fontSize = DEFAULT_FONT_SIZE, color = BLACK, text = "", lifeTimer = CONTINUANCE, textIndex = 0, location = (0,0), alignment = TOP_LEFT, basePoint = (0,0)):
-		pygame.sprite.Sprite.__init__(self)
+		super().__init__()
 		pygame.font.init()
 
 		self.textIndex = textIndex

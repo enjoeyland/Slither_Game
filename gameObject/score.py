@@ -4,7 +4,7 @@ from utils.observer import Observer, Publisher
 
 class Score(Publisher):
 	def __init__(self, score = 0):
-		Publisher.__init__(self)
+		super().__init__()
 		self.score = score
 
 	def up(self, change):

@@ -70,7 +70,7 @@ class DataSavor(object):
 
 class ScoreSavor(DataSavor):
 	def __init__(self):
-		DataSavor.__init__(self, "score.json")
+		super().__init__("score.json")
 
 	def saveScore(self, score, **kwargs):
 		data = {}

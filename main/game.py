@@ -1,13 +1,13 @@
 import queue
 
 import pygame
-from player import snake, snakeAction
 
 from event import eventDistributor
 from event.eventCreators import eventCreator, snakeEventCreator
 from event.eventHandlers import keyboardEventHandler
 from gameObject import skin, score, level
 from gameObject.items import item, apple
+from gameObject.player import snake, snakeAction
 from gameObject.player import snakeDisplayHandler
 from ui import scoreTable, popUp
 from utils import dataSavor, utility, listener

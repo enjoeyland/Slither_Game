@@ -139,6 +139,7 @@ class Player1HighScore(gameMode.GameMode, object):
                 groupPopUp.add(mScoreTable)
                 groupPopUp.draw(self.screen)
                 groupPopUp.update()
+
                 pygame.display.update()
 
                 while not self.gameReplay:

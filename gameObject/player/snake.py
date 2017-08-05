@@ -19,10 +19,11 @@ class Snake(listener.ListenerHandler):
 
 		#img
 		self.snakeSkin = skin.getSkin(skinNum)
-		self.headImg = utility.resizeImage(self.snakeSkin["head"],(self.thick, self.thick))
-		self.bodyImg = utility.resizeImage(self.snakeSkin["body"], (self.thick, self.thick))
-		self.tailImg = utility.resizeImage(self.snakeSkin["tail"], (self.thick, self.thick))
-		self.firstImg = utility.resizeImage(self.snakeSkin["first"], (self.thick, self.thick))
+		self.snakeSkin["head"] = utility.resizeImage(self.snakeSkin["head"],(self.thick, self.thick))
+		self.snakeSkin["body"] = utility.resizeImage(self.snakeSkin["body"], (self.thick, self.thick))
+		self.snakeSkin["tail"] = utility.resizeImage(self.snakeSkin["tail"], (self.thick, self.thick))
+		self.snakeSkin["first"] = utility.resizeImage(self.snakeSkin["first"], (self.thick, self.thick))
+		self.snakeSkin["curve"] = utility.resizeImage(self.snakeSkin["curve"], (self.thick, self.thick))
 
 		self.attributeChanged = False
 

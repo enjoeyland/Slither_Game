@@ -30,11 +30,16 @@ def loadImage(name):
 	return None
 
 def resizeImage(image, size):
+	if image is None:
+		return None
 	try:
 		resizedImg = pygame.transform.smoothscale(image, size)
 	except:
-		resizedImg = image
-		print("fall image resize")
+		try:
+			resizedImg = pygame.transform.scale(image, size)
+		except:
+			resizedImg = image
+			print("fall image resize : %s" % image)
 	return resizedImg
 
 # def setImageBackgroundColor(image, backgroundColor):

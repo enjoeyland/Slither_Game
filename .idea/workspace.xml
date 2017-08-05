@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6ab0ef9d-5181-47f5-b526-22e05647b983" name="Default" comment="all bug catched!!">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/utils/helpSocket.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/main/game.py" afterPath="" />
+    <list default="true" id="6ab0ef9d-5181-47f5-b526-22e05647b983" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/main.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mainForTraining.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Main/gameStates/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Main/gameStates/gameIntro.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Main/gameStates/gameMode.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Main/gameStates/player1HighScore.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Main/gameStates/player2Compete.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Main/gameStates/player2HighScore.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/main.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/gameObject/skin.py" afterPath="$PROJECT_DIR$/gameObject/player/skin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/gameStates/player1HighScore.py" afterPath="$PROJECT_DIR$/Main/gameStates/player1HighScore.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/assembler.py" afterPath="$PROJECT_DIR$/Main/assembler.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/textFiles/score.json" afterPath="$PROJECT_DIR$/data/textFiles/score.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gameObject/player/snake.py" afterPath="$PROJECT_DIR$/gameObject/player/snake.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/helpSocket.py" afterPath="$PROJECT_DIR$/utils/helpSocket.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/setting.py" afterPath="$PROJECT_DIR$/utils/setting.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/utility.py" afterPath="$PROJECT_DIR$/utils/utility.py" />
     </list>
     <ignored path="170404-Slither_Game.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,21 +39,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="player1HighScore.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Main/gameStates/player1HighScore.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.222222">
-              <caret line="116" column="44" selection-start-line="116" selection-start-column="44" selection-end-line="116" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="helpSocket.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="helpSocket.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/helpSocket.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.41569087">
-              <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -50,11 +51,75 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="48" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
+              <folding>
+                <element signature="e#23#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="skin.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gameObject/player/skin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="30" column="31" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="snake.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gameObject/player/snake.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-15.058824">
+              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utility.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/utils/utility.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.32315978">
+              <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="setting.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/setting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.9117646">
-              <caret line="102" column="14" selection-start-line="102" selection-start-column="14" selection-end-line="102" selection-end-column="14" />
+            <state vertical-scroll-proportion="-11.911765">
+              <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+              <folding>
+                <element signature="e#21#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="assembler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Main/assembler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.5555553">
+              <caret line="165" column="85" selection-start-line="165" selection-start-column="72" selection-end-line="165" selection-end-column="85" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mainForTraining.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mainForTraining.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -76,11 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/gameObject/skin.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/event/event.py" />
-        <option value="$PROJECT_DIR$/../170404-Slither_Game - 복사본/event/io_eventHandler.py" />
-        <option value="$PROJECT_DIR$/event/snakeEventCreator.py" />
         <option value="$PROJECT_DIR$/core/level.py" />
         <option value="$PROJECT_DIR$/event/listener.py" />
         <option value="$PROJECT_DIR$/core/game.py" />
@@ -97,7 +157,6 @@
         <option value="$PROJECT_DIR$/Main/gameMode/player1HighScore.py" />
         <option value="$PROJECT_DIR$/Main/gameModes/player1HighScore.py" />
         <option value="$PROJECT_DIR$/utils/observer.py" />
-        <option value="$PROJECT_DIR$/utils/utility.py" />
         <option value="$PROJECT_DIR$/player/snakeStateHandler.py" />
         <option value="$PROJECT_DIR$/player/snakeAttributeHandler.py" />
         <option value="$PROJECT_DIR$/player/snakeDisplayHandler.py" />
@@ -110,13 +169,11 @@
         <option value="$PROJECT_DIR$/gameObject/level.py" />
         <option value="$PROJECT_DIR$/player/snake.py" />
         <option value="$PROJECT_DIR$/Main/game.py" />
-        <option value="$PROJECT_DIR$/Main/main.py" />
         <option value="$PROJECT_DIR$/event/eventDistributor.py" />
         <option value="$PROJECT_DIR$/event/eventHandlers/keyboardEventHandler.py" />
         <option value="$PROJECT_DIR$/event/eventHandlers/tickEventHandler.py" />
         <option value="$PROJECT_DIR$/gameObject/items/apple.py" />
         <option value="$PROJECT_DIR$/gameObject/items/item.py" />
-        <option value="$PROJECT_DIR$/gameObject/player/snake.py" />
         <option value="$PROJECT_DIR$/gameObject/score.py" />
         <option value="$PROJECT_DIR$/ui/button.py" />
         <option value="$PROJECT_DIR$/ui/popUp.py" />
@@ -125,8 +182,16 @@
         <option value="$PROJECT_DIR$/utils/dataSavor.py" />
         <option value="$PROJECT_DIR$/Main/gameStates/player1HighScore.py" />
         <option value="$PROJECT_DIR$/utils/socket.py" />
-        <option value="$PROJECT_DIR$/utils/setting.py" />
         <option value="$PROJECT_DIR$/utils/helpSocket.py" />
+        <option value="$PROJECT_DIR$/Main/main.py" />
+        <option value="$PROJECT_DIR$/Main/gameStates/gameIntro.py" />
+        <option value="$PROJECT_DIR$/Main/gameStates/mainForTraining.py" />
+        <option value="$PROJECT_DIR$/Main/mainForTraining.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/mainForTraining.py" />
+        <option value="$PROJECT_DIR$/utils/setting.py" />
+        <option value="$PROJECT_DIR$/gameObject/player/snake.py" />
+        <option value="$PROJECT_DIR$/utils/utility.py" />
       </list>
     </option>
   </component>
@@ -219,7 +284,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Main" />
+              <option name="myItemId" value="gameObject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="170404-Slither_Game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="170404-Slither_Game" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gameObject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="player" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -234,10 +317,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gameStates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -271,35 +350,18 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\gameObject\player" />
+      <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game" />
+      <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\Main" />
       <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\gameObject" />
       <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\utils" />
-      <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\event\eventCreators" />
-      <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\event" />
-      <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\eventHandlers" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\event" />
       <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\player" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.helpSocket">
-    <configuration default="false" name="170404-slither" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="170404-Slither_Game" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/170404-slither.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.mainForTraining (1)">
     <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -317,23 +379,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="apple" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gameObject/items" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="170404-Slither_Game" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gameObject/items/apple.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="helpSocket" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -347,6 +392,57 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="170404-Slither_Game" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/helpSocket.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="mainForTraining" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Main" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="170404-Slither_Game" />
+      <option name="SCRIPT_NAME" value="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\mainForTraining.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="170404-Slither_Game" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="mainForTraining (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="170404-Slither_Game" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mainForTraining.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -473,18 +569,20 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="Python.170404-slither" />
-      <item index="1" class="java.lang.String" itemvalue="Python.main" />
-      <item index="2" class="java.lang.String" itemvalue="Python.apple" />
-      <item index="3" class="java.lang.String" itemvalue="Python.helpSocket" />
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Python.main" />
+      <item index="1" class="java.lang.String" itemvalue="Python.helpSocket" />
+      <item index="2" class="java.lang.String" itemvalue="Python.mainForTraining" />
+      <item index="3" class="java.lang.String" itemvalue="Python.main (1)" />
+      <item index="4" class="java.lang.String" itemvalue="Python.mainForTraining (1)" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.helpSocket" />
-        <item index="1" class="java.lang.String" itemvalue="Python.main" />
-        <item index="2" class="java.lang.String" itemvalue="Python.apple" />
-        <item index="3" class="java.lang.String" itemvalue="Python.170404-slither" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.mainForTraining (1)" />
+        <item index="1" class="java.lang.String" itemvalue="Python.main (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Python.main" />
+        <item index="3" class="java.lang.String" itemvalue="Python.mainForTraining" />
+        <item index="4" class="java.lang.String" itemvalue="Python.helpSocket" />
       </list>
     </recent_temporary>
   </component>
@@ -511,25 +609,31 @@
       <option name="project" value="LOCAL" />
       <updated>1501567159849</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="try to make socket class">
+      <created>1501860508269</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1501860508269</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16851558" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3990981" sideWeight="0.50184894" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46561444" sideWeight="0.503962" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919955" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29650506" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29650506" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24986793" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919955" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29763246" sideWeight="0.4981511" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46561444" sideWeight="0.49603805" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -572,7 +676,8 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <MESSAGE value="pycharm commit test!" />
     <MESSAGE value="all bug catched!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="all bug catched!!" />
+    <MESSAGE value="try to make socket class" />
+    <option name="LAST_COMMIT_MESSAGE" value="try to make socket class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -588,7 +693,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Main/main.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
@@ -684,13 +789,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/utility.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files/Python/Python35/Lib/site-packages/pygame/sprite.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -704,16 +802,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/gameStates/gameIntro.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="16" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#36#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -733,7 +821,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main/gameStates/gameMode.py">
+    <entry file="file://$PROJECT_DIR$/gameStates/gameMode.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
@@ -741,7 +829,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main/gameStates/player2Compete.py">
+    <entry file="file://$PROJECT_DIR$/gameStates/player2Compete.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -749,29 +837,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Main/gameStates/player2HighScore.py">
+    <entry file="file://$PROJECT_DIR$/gameStates/player2HighScore.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/assembler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-42.35294">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding>
-            <element signature="e#23#36#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -843,14 +913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gameObject/player/snake.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -943,23 +1005,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gameObject/skin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.7915691">
-          <caret line="6" column="44" selection-start-line="6" selection-start-column="44" selection-end-line="6" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/setting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.9117646">
-          <caret line="102" column="14" selection-start-line="102" selection-start-column="14" selection-end-line="102" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/gameStates/player1HighScore.py">
+    <entry file="file://$PROJECT_DIR$/gameStates/player1HighScore.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.222222">
           <caret line="116" column="44" selection-start-line="116" selection-start-column="44" selection-end-line="116" selection-end-column="44" />
@@ -967,13 +1013,83 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/gameStates/gameIntro.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+          <folding>
+            <marker date="1501915188479" expanded="false" signature="0:76" placeholder="import ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main/assembler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5555553">
+          <caret line="165" column="85" selection-start-line="165" selection-start-column="72" selection-end-line="165" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mainForTraining.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/setting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.911765">
+          <caret line="51" column="21" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+          <folding>
+            <element signature="e#21#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils/helpSocket.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.41569087">
-          <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gameObject/player/skin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="31" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="48" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
+          <folding>
+            <element signature="e#23#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gameObject/player/snake.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.058824">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/utility.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32315978">
+          <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>

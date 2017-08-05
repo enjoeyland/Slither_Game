@@ -1,15 +1,14 @@
 """default values"""
 import pygame
+import sys
 
-
-""""Base"""
+""""Base Values"""
 POS_X = 0
 POS_Y = 1
 BEGIN = 0
 END = -1
 YES = 1
 NO = 0
-
 
 """Direction"""
 LEFT = 1
@@ -41,14 +40,39 @@ BOTTOM_RIGHT = 8
 PLAY_ONE_TIME = 0
 PLAY_INFINITELY = -1
 SOUND_LIST = ["Apple_Bite", "BGM"]
+"""Wall"""
+WALL_SIZE = 0
+
+"""Screen"""
+import os
+if os.path.split(os.path.abspath(sys.argv[0]))[1] == "mainForTraining.py":
+	SCREEN_SCALE = 2
+	FRAMES_PER_SECOND = 50.0
+else:
+	SCREEN_SCALE = 10
+	FRAMES_PER_SECOND = 200.0
+
+FULL_SCREEN = False
+SCREEN_WIDTH = 80 * SCREEN_SCALE
+SCREEN_HEIGHT = 60 * SCREEN_SCALE
+SCREEN_MID = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+SPRITE_OFFSET = ((WALL_SIZE, SCREEN_WIDTH - WALL_SIZE) ,(WALL_SIZE, SCREEN_HEIGHT - WALL_SIZE))
+
+ITEM_MARGIN = 2 * SCREEN_SCALE
+ANTI_ALIAS = True
+
+"""Text"""
+# DEFAULT_FONT_SIZE = int(2 * (SCREEN_SCALE/1.5 + 3))
+DEFAULT_FONT_SIZE = 0
+DEFAULT_FONT_TYPE = "comicsansms"
 
 """Snake"""
 SNAKE_HEAD = -1
 SNAKE_TAIL = 0
 DIRECTION = 2
 
-DEFAULT_SPEED = 600
-DEFAULT_THICK = 20
+DEFAULT_SPEED = 60 * SCREEN_SCALE
+DEFAULT_THICK = 2 * SCREEN_SCALE
 
 """Skin"""
 SKIN_HEAD = 0
@@ -65,7 +89,7 @@ FIRST_SKIN = 1
 """Item"""
 CONTINUANCE = -1
 # DEFAULT_ITEM_SIZE = defaultThick
-DEFAULT_ITEM_SIZE = 30
+DEFAULT_ITEM_SIZE = 3 * SCREEN_SCALE
 ITEM_LIST = ["apple"]
 APPLE = 0
 
@@ -76,31 +100,10 @@ CRASH_ITEM = pygame.USEREVENT + 3
 CRASH_ITSELF = pygame.USEREVENT + 4
 CRASH_OTHER_SNAKE = pygame.USEREVENT + 5
 
-
-"""Screen"""
-WALL_TICK = 0
-FULL_SCREEN = False
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
-SCREEN_MID = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-SPRITE_OFFSET = ((WALL_TICK, SCREEN_WIDTH - WALL_TICK) ,(WALL_TICK, SCREEN_HEIGHT - WALL_TICK))
-
-ITEM_MARGIN = 20
-ANTI_ALIAS = True
-
-FRAMES_PER_SECOND = 200.0
-SCREEN_AUTO_UPDATE = True
-
-DEFAULT_FONT_SIZE = 20
-DEFAULT_FONT_TYPE = "comicsansms"
-
 """Files"""
 READ = "r"
 WRITE = "w"
 APPEND = "a"
-
-"""Socket"""
-MSG_LEN = 1024
 
 """Game State"""
 EXIT = -1
@@ -128,55 +131,55 @@ MAX_LEVEL = "max level"
 LEVEL = {PLAYER1_HIGH_SCORE :
 			{LEVEL_0 : {"level": 0,
 						"score": 0,
-						"setting": {"snake": {"speed": 300, "thick" : 20},
+						"setting": {"snake": {"speed": 30 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
 									"item": {"apple": {"num" : 2, "probability": FRAMES_PER_SECOND,"lifeTimer": CONTINUANCE}}
 									}
 						},
 			LEVEL_1 : {"level": 1,
 					   "score": 500,
-					   "setting": {"snake": {"speed": 500, "thick" : 20},
+					   "setting": {"snake": {"speed": 50 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
 								   "item": {"apple": {"num" : 2, "probability": 80,"lifeTimer": CONTINUANCE}}
 								   }
 					   },
 			LEVEL_2 : {"level": 2,
 					   "score": 1500,
-					   "setting": {"snake": {"speed": 600, "thick" : 20},
+					   "setting": {"snake": {"speed": 60 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
 								   "item": {"apple": {"num" : 2, "probability": 30,"lifeTimer": CONTINUANCE}}
 								   }
 					   },
 			LEVEL_3 : {"level": 3,
 					   "score": 3000,
-					   "setting": {"snake": {"speed": 700, "thick" : 20},
+					   "setting": {"snake": {"speed": 70 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
 								   "item": {"apple": {"num" : 3, "probability": 10,"lifeTimer": 4 * FRAMES_PER_SECOND}}
 								   }
 					   },
 			LEVEL_4 : {"level": 4,
 					   "score": 4500,
-					   "setting": {"snake": {"speed": 800, "thick" : 20},
+					   "setting": {"snake": {"speed": 80 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
 								   "item": {"apple": {"num" : 5, "probability": 8,"lifeTimer": 3 * FRAMES_PER_SECOND}}
 								   }
 					   },
 			LEVEL_5 : {"level": 5,
 					   "score": 6000,
-					   "setting": {"snake": {"speed": 900, "thick" : 20},
+					   "setting": {"snake": {"speed": 90 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
 								   "item": {"apple": {"num" : 7, "probability": 3,"lifeTimer": 2 * FRAMES_PER_SECOND}}
 								   }
 					   },
 			LEVEL_6 : {"level": 6,
 					   "score": 7500,
-					   "setting": {"snake": {"speed": 1000, "thick" : 20},
+					   "setting": {"snake": {"speed": 100 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
 								   "item": {"apple": {"num" : 8, "probability": 5,"lifeTimer": 1.3 * FRAMES_PER_SECOND}}
 								   }
 					   },
 			LEVEL_7 :  {"level": 7,
 						"score": 10000,
-						"setting": {"snake": {"speed": 1100, "thick" : 20},
+						"setting": {"snake": {"speed": 110 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
 									"item": {"apple": {"num" : 3, "probability": 3,"lifeTimer": 0.5 * FRAMES_PER_SECOND}}
 									}
 						},
 			MAX_LEVEL : {"level": 7,
 						 "score": 10000,
-						 "setting": {"snake": {"speed": 1100, "thick" : 20},
+						 "setting": {"snake": {"speed": 110 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
 									 "item": {"apple": {"num" : 3, "probability": 3,"lifeTimer": 0.5 * FRAMES_PER_SECOND}}
 									 }
 						 }},

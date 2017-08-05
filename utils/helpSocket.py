@@ -21,19 +21,30 @@ class SocketClient:
     def send(self, msg):
         if type(msg) == str:
             msg = msg.encode("utf-8")
-        self.sock.send(msg)
+        self.sock.send(self.appendSizeToMSG(msg))
 
-    def receive(self, msg_len=0):
-        # chunks = []
-        # bytes_recd = 0
-        # while bytes_recd < msg_len:
-        #     chunk = self.sock.recv(min(msg_len - bytes_recd, 2048))
-        #     if chunk == b'':
-        #         raise RuntimeError("socket connection broken")
-        #     chunks.append(chunk)
-        #     bytes_recd = bytes_recd + len(chunk)
-        # return b''.join(chunks)
-        return self.sock.recv(2048)
+    def receive(self):
+        msgLen = self.getMessageLen()
+        chunks = []
+        bytesRecd = 0
+        while bytesRecd < msgLen:
+            chunk = self.sock.recv(min(msgLen - bytesRecd, 2048))
+            print(chunk)
+            if chunk == b'':
+                raise RuntimeError("socket connection broken")
+            chunks.append(chunk)
+            bytesRecd = bytesRecd + len(chunk)
+        return b''.join(chunks)
+
+    def appendSizeToMSG(self, msg):
+        if len(bytes([len(msg)])) < 255:
+            return bytes([len(bytes([len(msg)]))]) + bytes([len(msg)]) + msg
+        else:
+            raise RuntimeError("[Socket] : Over max message len")
+
+    def getMessageLen(self):
+        msgDigit = int.from_bytes(self.sock.recv(1), byteorder='big')
+        return int.from_bytes(self.sock.recv(msgDigit), byteorder='big')
 
 class SocketServerForOneClient:
     def __init__(self, server_address, sock = None):
@@ -64,27 +75,42 @@ class SocketServerForOneClient:
     def send(self, msg):
         if type(msg) == str:
             msg = msg.encode("utf-8")
-        self.connect.send(msg)
+        self.connect.send(self.appendSizeToMSG(msg))
 
-    def receive(self, msg_len =0):
-        # chunks = []
-        # bytes_recd = 0
-        # while bytes_recd < msg_len:
-        #     chunk = self.connect.recv(min(msg_len - bytes_recd, 2048))
-        #     if chunk == b'':
-        #         raise RuntimeError("socket connection broken")
-        #     chunks.append(chunk)
-        #     bytes_recd = bytes_recd + len(chunk)
-        # return b''.join(chunks)
-        return self.sock.recv(2048)
+    def receive(self):
+        msgLen = self.getMessageLen()
+        chunks = []
+        bytesRecd = 0
+        while bytesRecd < msgLen:
+            chunk = self.connect.recv(min(msgLen - bytesRecd, 2048))
+            print(chunk)
+            if chunk == b'':
+                raise RuntimeError("socket connection broken")
+            chunks.append(chunk)
+            bytesRecd = bytesRecd + len(chunk)
+        return b''.join(chunks)
+
 
     def close(self):
         self.sock.close()
 
+    def appendSizeToMSG(self, msg):
+        if len(bytes([len(msg)])) < 255:
+            return bytes([len(bytes([len(msg)]))]) + bytes([len(msg)]) + msg
+        else:
+            raise RuntimeError("[Socket] : Over max message len")
+
+    def getMessageLen(self):
+        msgDigit = int.from_bytes(self.connect.recv(1), byteorder='big')
+        a=int.from_bytes(self.connect.recv(msgDigit), byteorder='big')
+        print(a)
+        return a
+
+
+
 if __name__ == "__main__":
     import threading
     import time
-    # pid = os.fork()
     def temp_ss():
         ss = SocketServerForOneClient(('localhost',3490))
         print("[SS] : socket server created")
@@ -100,11 +126,12 @@ if __name__ == "__main__":
         print("[SC] : connecting...")
         sc.connect(('localhost',3490))
         print("[SC] : connected")
-        print("[SC] : sending")
-        sc.send(b"echo")
+        msg = b"echo!echo!echo!echo!echo!"
+        print("[SC] : sending %s" % msg)
+        sc.send(msg)
         print("[SC] : waiting to receive")
         msg = sc.receive()
-        print("[SC] : received %s" % msg)
+        print("[SC] : Received %s" % msg)
     t = threading.Thread(target=temp_sc)
     t.start()
     temp_ss()

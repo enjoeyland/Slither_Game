@@ -3,9 +3,9 @@ import pygame
 from event import eventDistributor
 from event.eventCreators import snakeEventCreator
 from event.eventHandlers import keyboardEventHandler, tickEventHandler, crashItemEventHandler
-from gameObject import score, skin, level
+from gameObject import score, level
 from gameObject.items import item, apple
-from gameObject.player import snake, snakeAction
+from gameObject.player import snake, snakeAction, skin
 from gameObject.player import snakeDisplayHandler
 from ui import scoreTable, popUp
 from utils import dataSavor, listener

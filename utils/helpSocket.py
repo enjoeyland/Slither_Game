@@ -111,6 +111,7 @@ class SocketServerForOneClient:
 if __name__ == "__main__":
     import threading
     import time
+
     def temp_ss():
         ss = SocketServerForOneClient(('localhost',3490))
         print("[SS] : socket server created")
@@ -118,6 +119,7 @@ if __name__ == "__main__":
         msg = ss.receive()
         print("[SS] : Recived %s" % msg)
         ss.send(msg)
+
     def temp_sc():
         sc = SocketClient()
         print("[SC] : socket client created")
@@ -132,6 +134,7 @@ if __name__ == "__main__":
         print("[SC] : waiting to receive")
         msg = sc.receive()
         print("[SC] : Received %s" % msg)
+
     t = threading.Thread(target=temp_sc)
     t.start()
     temp_ss()

@@ -17,19 +17,14 @@ class Apple(item.Item):
 		self.image = utility.resizeImage(image, (self.image_size, self.image_size))
 		super().__init__(itemGenerator, self.image, location, type= APPLE, lifeTimer= self.lifeTimer, sound = sound)
 
-		if sound is None:
-			self.sound = utility.loadSound("Apple_Bite")
-		else:
-			self.sound = sound
-
 	def effect(self, screen, score, snake):
 		point = 100
 		score.up(point)
 		snake.addLength()
 		utility.playSound(self.sound)
 		self.kill()
-		self.eatenEffect(screen)
+		self.killedEffect(screen)
 
 
-	def eatenEffect(self, screen):
+	def killedEffect(self, screen):
 		pass

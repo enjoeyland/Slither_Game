@@ -1,30 +1,23 @@
-import pygame
-
 from gameObject.items import item
 from utils import utility
 from utils.setting import DEFAULT_ITEM_SIZE, APPLE, CONTINUANCE
 
 
 class Apple(item.Item):
-	def __init__(self, itemGenerator, location, size = DEFAULT_ITEM_SIZE, image = None, sound = None,lifeTimer = CONTINUANCE):
-		self.location = location
-		self.image_size = size
-		self.lifeTimer = lifeTimer
-		if image is None:
-			self.image = utility.loadImage("apple")
-		else:
-			self.image = image
-		self.image = utility.resizeImage(image, (self.image_size, self.image_size))
-		super().__init__(itemGenerator, self.image, location, type= APPLE, lifeTimer= self.lifeTimer, sound = sound)
+	def __init__(self, image, sound = None, size = DEFAULT_ITEM_SIZE, location = None, lifeTimer = CONTINUANCE):
+		super().__init__(image, APPLE, sound = sound, size = size, location = location, lifeTimer = lifeTimer, )
 
 	def effect(self, screen, score, snake):
 		point = 100
 		score.up(point)
 		snake.addLength()
-		utility.playSound(self.sound)
+		if self.sound:
+			utility.playSound(self.sound)
 		self.kill()
 		self.killedEffect(screen)
 
-
 	def killedEffect(self, screen):
 		pass
+
+	def clone(self):
+		return Apple(self.image, sound= self.sound, size= self.image_size, location= self.location, lifeTimer= self.lifeTimer)

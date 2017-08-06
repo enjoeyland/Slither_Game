@@ -1,7 +1,7 @@
 from event.eventCreators.eventCreator import EventCreator
 from utils.listener import Request
 from utils.setting import SNAKE_HEAD, POS_X, SCREEN_WIDTH, SCREEN_HEIGHT, POS_Y, CRASH_WALL, CRASH_ITEM, CRASH_ITSELF, \
-	FRAMES_PER_SECOND
+	FRAMES_PER_SECOND, SPRITE_OFFSET, END, BEGIN
 
 
 class SnakeEventCreator(EventCreator):
@@ -31,8 +31,8 @@ class SnakeEventCreator(EventCreator):
 
 
 	def crashWall(self):
-		if  self.snake_snakeHead[POS_X] > SCREEN_WIDTH - self.snake_thick or self.snake_snakeHead[POS_X] < 0 \
-				or self.snake_snakeHead[POS_Y] > SCREEN_HEIGHT - self.snake_thick or self.snake_snakeHead[POS_Y] < 0:
+		if  self.snake_snakeHead[POS_X] > SPRITE_OFFSET[POS_X][END] - self.snake_thick or self.snake_snakeHead[POS_X] < SPRITE_OFFSET[POS_X][BEGIN] \
+				or self.snake_snakeHead[POS_Y] > SPRITE_OFFSET[POS_Y][END] - self.snake_thick or self.snake_snakeHead[POS_Y] < SPRITE_OFFSET[POS_Y][BEGIN]:
 			print(self.snake_snakeHead)
 			print("crash wall")
 			self.createEvent(CRASH_WALL, snake = self.snake)

@@ -20,11 +20,11 @@ class Level():
 		return self.settingPerLevel[gameName][level]
 
 class LevelHandler():
-	def __init__(self, gameName, mSnake, mItemGenerators, levelClass = Level):
+	def __init__(self, gameName, mSnake, ItemSpawners, levelClass = Level):
 		self.mLevel = levelClass()
 		self.gameName = gameName
 		self.mSnake = mSnake
-		self.mItemGenerators = mItemGenerators
+		self.ItemSpawners = ItemSpawners
 
 		self.lastLevel = -1
 
@@ -49,10 +49,10 @@ class LevelHandler():
 
 		self.mSnake.setAttributes(speed = levelSetting["snake"]["speed"], thick = levelSetting["snake"]["thick"])
 
-		for itemGenerator in self.mItemGenerators.keys():
-			self.mItemGenerators[itemGenerator].setItemMaximumNum(levelSetting["item"][itemGenerator]["num"])
-			self.mItemGenerators[itemGenerator].setDropProbability(levelSetting["item"][itemGenerator]["probability"])
-			self.mItemGenerators[itemGenerator].setItemLifeTimer(levelSetting["item"][itemGenerator]["lifeTimer"])
+		for itemSpawner in self.ItemSpawners.keys():
+			self.ItemSpawners[itemSpawner].setItemMaximumNum(levelSetting["item"][itemSpawner]["num"])
+			self.ItemSpawners[itemSpawner].setDropProbability(levelSetting["item"][itemSpawner]["probability"])
+			self.ItemSpawners[itemSpawner].setItemLifeTimer(levelSetting["item"][itemSpawner]["lifeTimer"])
 
 	def getLevel(self, score):
 		return self.mLevel.getLevel(score, self.gameName)

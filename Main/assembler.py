@@ -8,7 +8,7 @@ from gameObject.items import item, apple
 from gameObject.player import snake, snakeAction, skin
 from gameObject.player import snakeDisplayHandler
 from ui import scoreTable, popUp
-from utils import dataSavor, listener
+from utils import dataSavor, listener, utility
 from utils.setting import DEFAULT_SPEED, DEFAULT_THICK, SKIN_DEFAULT, PLAYER1_HIGH_SCORE, P1_HIGH_SCORE_LISTENING_EVENT
 
 
@@ -37,7 +37,7 @@ class Assembler(object):
 		self.createSnakeEventCreator()
 
 		self.createPausePage()
-		self.createAppleItemGenerator()
+		self.createAppleItemSpawner()
 		self.createLevelHandler(PLAYER1_HIGH_SCORE)
 
 
@@ -199,25 +199,29 @@ class Assembler(object):
 
 
 
-	def createAppleItemGenerator(self):
+	def createAppleItemSpawner(self):
 		""" create apple item generator """
-		self._itemAppleGenerator = item.ItemGenerator(apple.Apple)
+		appleImg = utility.loadImage("apple")
+		soundAppleBite = utility.loadSound("Apple_Bite")
+		soundAppleBite.set_volume(1)
+		self._ApplePrototype = apple.Apple(appleImg, sound = soundAppleBite)
+		self._itemAppleSpawner = item.ItemSpawner(self._ApplePrototype)
 
-	def getItemAppleGenerator(self):
-		if self._itemAppleGenerator is not None:
-			return self._itemAppleGenerator
+	def getItemAppleSpawner(self):
+		if self._itemAppleSpawner is not None:
+			return self._itemAppleSpawner
 		else:
-			raise NotAssemblerCreatedError("createAppleItemGenerator")
+			raise NotAssemblerCreatedError("createAppleItemSpawner")
 
 
 
 	def createLevelHandler(self, gameName):
 		""" create game state handler """
-		self._GameHandler = level.LevelHandler(gameName, self.getPlayer(), {"apple" : self.getItemAppleGenerator()})
+		self._LevelHandler = level.LevelHandler(gameName, self.getPlayer(), {"apple" : self.getItemAppleSpawner()})
 
 
 	def getLevelHandler(self):
-		if self._GameHandler is not None:
-			return self._GameHandler
+		if self._LevelHandler is not None:
+			return self._LevelHandler
 		else:
 			raise NotAssemblerCreatedError("createGameHandler")

@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ab0ef9d-5181-47f5-b526-22e05647b983" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembler/P1H_assembler.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembler/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assembler/assemblerFactory.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/main/__init__.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/Main/assembler.py" afterPath="$PROJECT_DIR$/assembler/assembler.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Main/assembler.py" afterPath="$PROJECT_DIR$/Main/assembler.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/textFiles/score.json" afterPath="$PROJECT_DIR$/data/textFiles/score.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/event/eventCreators/snakeEventCreator.py" afterPath="$PROJECT_DIR$/event/eventCreators/snakeEventCreator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gameObject/items/apple.py" afterPath="$PROJECT_DIR$/gameObject/items/apple.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gameObject/items/item.py" afterPath="$PROJECT_DIR$/gameObject/items/item.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gameObject/level.py" afterPath="$PROJECT_DIR$/gameObject/level.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/setting.py" afterPath="$PROJECT_DIR$/utils/setting.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gameStates/train_player1HighScore.py" afterPath="$PROJECT_DIR$/gameStates/train_player1HighScore.py" />
     </list>
     <ignored path="170404-Slither_Game.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,55 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="item.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gameObject/items/item.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-25.147058">
-              <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="apple.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gameObject/items/apple.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="6" column="68" selection-start-line="6" selection-start-column="51" selection-end-line="6" selection-end-column="68" />
-              <folding>
-                <element signature="e#0#33#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="setting.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/utils/setting.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6914634">
-              <caret line="78" column="13" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="13" />
-              <folding>
-                <element signature="e#21#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="level.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gameObject/level.py">
+      <file leaf-file-name="player1HighScore.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gameStates/player1HighScore.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="57" column="57" selection-start-line="57" selection-start-column="57" selection-end-line="57" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="assembler.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Main/assembler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.558824">
-              <caret line="47" column="30" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
+              <caret line="27" column="19" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="19" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -86,11 +41,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="player1HighScore.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gameStates/player1HighScore.py">
+      <file leaf-file-name="assembler.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assembler/assembler.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="19" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="19" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="P1H_assembler.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assembler/P1H_assembler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.22716628">
+              <caret line="92" column="52" selection-start-line="92" selection-start-column="52" selection-end-line="92" selection-end-column="52" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -136,9 +101,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/main/game.py" />
-        <option value="$PROJECT_DIR$/main/main.py" />
-        <option value="$PROJECT_DIR$/Main/Assembler.py" />
         <option value="$PROJECT_DIR$/event/io_eventHandler.py" />
         <option value="$PROJECT_DIR$/event/keyboardEventHandler.py" />
         <option value="$PROJECT_DIR$/event/eventCreators/EventCreator.py" />
@@ -183,10 +145,13 @@
         <option value="$PROJECT_DIR$/gameObject/level.py" />
         <option value="$PROJECT_DIR$/Main/assembler.py" />
         <option value="$PROJECT_DIR$/gameObject/items/apple.py" />
-        <option value="$PROJECT_DIR$/gameStates/player1HighScore.py" />
         <option value="$PROJECT_DIR$/gameObject/items/item.py" />
         <option value="$PROJECT_DIR$/event/eventCreators/snakeEventCreator.py" />
         <option value="$PROJECT_DIR$/utils/setting.py" />
+        <option value="$PROJECT_DIR$/gameStates/player1HighScore.py" />
+        <option value="$PROJECT_DIR$/assembler/assemblerFactory.py" />
+        <option value="$PROJECT_DIR$/assembler/assembler.py" />
+        <option value="$PROJECT_DIR$/assembler/P1H_assembler.py" />
       </list>
     </option>
   </component>
@@ -325,7 +290,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Main" />
+              <option name="myItemId" value="assembler" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -359,11 +324,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\assembler" />
       <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\gameObject\player" />
       <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game" />
       <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\Main" />
       <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\gameObject" />
-      <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\utils" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\joey\workplace\2017\Computer\pygame\170404-Slither_Game\gameStates" />
@@ -637,7 +602,13 @@
       <option name="project" value="LOCAL" />
       <updated>1501937263521</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="apply prototype pattern&#10;improve image and wall size structure">
+      <created>1501992518756</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1501992518756</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -701,7 +672,8 @@
     <MESSAGE value="try to make socket class" />
     <MESSAGE value="socket class finished&#10;file structure changed&#10;snake skin image resizing error fixed&#10;add option to change game scale (for machine learning)" />
     <MESSAGE value="train loop making&#10;img saving tested" />
-    <option name="LAST_COMMIT_MESSAGE" value="train loop making&#10;img saving tested" />
+    <MESSAGE value="apply prototype pattern&#10;improve image and wall size structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="apply prototype pattern&#10;improve image and wall size structure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -723,13 +695,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ui/text.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gameObject/player/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -818,14 +783,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="183" column="21" selection-start-line="183" selection-start-column="21" selection-end-line="183" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1054,36 +1011,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gameStates/train_player1HighScore.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="35" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gameStates/player1HighScore.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="19" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Main/assembler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.558824">
-          <caret line="47" column="30" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gameObject/level.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1108,11 +1035,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gameObject/items/item.py">
+    <entry file="file://$PROJECT_DIR$/utils/setting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.147058">
-          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-          <folding />
+        <state vertical-scroll-proportion="0.8902439">
+          <caret line="80" column="10" selection-start-line="80" selection-start-column="10" selection-end-line="80" selection-end-column="10" />
+          <folding>
+            <element signature="e#21#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1126,12 +1055,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/setting.py">
+    <entry file="file://$PROJECT_DIR$/gameObject/items/item.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6914634">
-          <caret line="78" column="13" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="13" />
+        <state vertical-scroll-proportion="1.0426829">
+          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gameStates/train_player1HighScore.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="35" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
           <folding>
-            <element signature="e#21#34#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assembler/assemblerFactory.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21077283">
+          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gameStates/player1HighScore.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="19" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assembler/assembler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assembler/P1H_assembler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22716628">
+          <caret line="92" column="52" selection-start-line="92" selection-start-column="52" selection-end-line="92" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>

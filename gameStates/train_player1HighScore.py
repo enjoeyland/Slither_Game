@@ -1,12 +1,12 @@
 import pygame
+from PIL import Image
 
-from Main import assembler
+from assembler import assembler
 from gameStates import gameMode
 from utils import utility
 from utils.listener import Request
-from utils.setting import PLAY_INFINITELY, PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
+from utils.setting import PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
     CRASH_ITSELF, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT
-from PIL import Image
 
 
 class TrainPlayer1HighScore(gameMode.GameMode, object):

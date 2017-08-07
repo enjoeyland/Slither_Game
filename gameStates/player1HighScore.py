@@ -1,6 +1,6 @@
 import pygame
 
-from assembler import assembler
+from assembler import assemblerFactory
 from gameStates import gameMode
 from utils import utility
 from utils.listener import Request
@@ -10,9 +10,9 @@ from utils.setting import PLAY_INFINITELY, SCREEN_BACKGROUND, FRAMES_PER_SECOND,
 
 class Player1HighScore(gameMode.GameMode, object):
     def __init__(self, screen):
-        super().__init__(screen)
+        super().__init__(PLAYER1_HIGH_SCORE, screen)
 
-    def gameLoop(self):
+    def process(self):
         self.isGameRunning = True
         self.gameSession = True
         self.gameReplay = False
@@ -32,7 +32,7 @@ class Player1HighScore(gameMode.GameMode, object):
         allSprites = pygame.sprite.Group()
 
         # Get All Object
-        mAssembler = assembler.Assembler(self.screen)
+        mAssembler = assemblerFactory.AssemblerFactory().getAssembler(self.gameState, self.screen)
 
         groupItem = mAssembler.getGroupItem()
 
@@ -55,21 +55,20 @@ class Player1HighScore(gameMode.GameMode, object):
         groupText.add(mScoreDisplayHandler.draw())
         mLevelHandler.update(mScore.getScore())
 
-        mKeyboardEventHandler.listen(Request("Player1HighScore", self.pause, addtionalTarget = pygame.K_p))
-        mPygameEventDistributor.listen(Request("Player1HighScore", self.quit, addtionalTarget = pygame.QUIT))
-        mPygameEventDistributor.listen(Request("Player1HighScore", self.setGameRunningToFalse, addtionalTarget = CRASH_WALL))
-        mPygameEventDistributor.listen(Request("Player1HighScore", self.setGameRunningToFalse, addtionalTarget = CRASH_ITSELF))
+        mKeyboardEventHandler.listen(Request("Player1HighScore", self._pause, addtionalTarget = pygame.K_p))
+        mPygameEventDistributor.listen(Request("Player1HighScore", self._quit, addtionalTarget = pygame.QUIT))
+        mPygameEventDistributor.listen(Request("Player1HighScore", self._setGameRunningToFalse, addtionalTarget = CRASH_WALL))
+        mPygameEventDistributor.listen(Request("Player1HighScore", self._setGameRunningToFalse, addtionalTarget = CRASH_ITSELF))
 
 
         # menuButton = {"name" : "menu", "listener" : mTickEventHandler, "func": self.setButtonSprite}
-        replayButton = {"name" : "replay", "listener" : mTickEventHandler, "func": self.clickReplayButton}
-        quitButton = {"name" : "quit", "listener" : mTickEventHandler, "func" : self.clickQuitButton}
+        replayButton = {"name" : "replay", "listener" : mTickEventHandler, "func": self._clickReplayButton}
+        quitButton = {"name" : "quit", "listener" : mTickEventHandler, "func" : self._clickQuitButton}
 
         while self.gameSession:
             utility.playSound(soundBGM, loops= PLAY_INFINITELY)
 
             while self.isGameRunning:
-                #wait for machine input (at machine learning)
                 mPygameEventDistributor.distribute()
                 mSnakeAction.tickMove()
                 mLevelHandler.update(mScore.getScore())
@@ -123,7 +122,7 @@ class Player1HighScore(gameMode.GameMode, object):
                 mSnakeAction.setListener()
 
             else:
-                self.setGameSessionToFalse()
+                self._setGameSessionToFalse()
                 # End Listen
                 mSnakeAction.endListen()
 

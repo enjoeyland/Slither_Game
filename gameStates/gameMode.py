@@ -2,16 +2,17 @@ import pygame
 
 
 class GameMode(object):
-    def __init__(self, screen):
+    def __init__(self, gameState, screen):
+        self.gameState = gameState
         self.screen = screen
 
-    def setGameSessionToFalse(self):
+    def _setGameSessionToFalse(self):
         self.gameSession = False
 
-    def setGameRunningToFalse(self, **kwargs):
+    def _setGameRunningToFalse(self, **kwargs):
         self.isGameRunning = False
 
-    def pause(self):
+    def _pause(self):
         if not self.isPause:
             self.isGameRunning = False
             self.isPause = True
@@ -19,16 +20,16 @@ class GameMode(object):
             self.isGameRunning = True
             self.isPause = False
 
-    def quit(self, **kwargs):
+    def _quit(self, **kwargs):
         pygame.quit()
         quit()
 
-    def clickReplayButton(self):
+    def _clickReplayButton(self):
         self.gameReplay = True
 
-    def clickQuitButton(self):
+    def _clickQuitButton(self):
         pygame.quit()
         quit()
 
-    def gameLoop(self):
+    def process(self):
         raise NotImplementedError( "Should have implemented update %s" % self )

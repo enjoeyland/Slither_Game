@@ -22,8 +22,8 @@ if __name__ == "__main__":
 	state = INTRO
 	while True:
 		if state == PLAYER1_HIGH_SCORE:
-			state = player1HighScore.Player1HighScore(screen).gameLoop()
+			state = player1HighScore.Player1HighScore(screen).process()
 		elif state == INTRO:
-			state = gameIntro.GameIntro(screen).gameLoop()
+			state = gameIntro.GameIntro(screen).process()
 		elif state == EXIT:
 			break

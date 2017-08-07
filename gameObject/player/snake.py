@@ -4,7 +4,7 @@ from utils.setting import SKIN_DEFAULT, RIGHT, SCREEN_MID, GREEN, POS_X, POS_Y, 
 
 
 class Snake(listener.ListenerHandler):
-	def __init__(self, pygameEventDistributor, snakeID, speed, thick, skin, skinNum = SKIN_DEFAULT, firstHeadDirection = RIGHT, headPos = SCREEN_MID, color = GREEN, length = 1,):
+	def __init__(self, pygameEventDistributor, snakeID, speed, thick, skin, skinNum = SKIN_DEFAULT, firstHeadDirection = RIGHT, headPos = SCREEN_MID, color = GREEN, length = 1):
 		super().__init__()
 
 		self.pygameEventDistributor = pygameEventDistributor

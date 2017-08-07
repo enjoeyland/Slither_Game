@@ -1,7 +1,7 @@
 import pygame
 
 
-class GameMode(object):
+class TrainGameMode(object):
     def __init__(self, screen):
         self.screen = screen
 
@@ -18,5 +18,5 @@ class GameMode(object):
     def clickReplayButton(self):
         self.gameReplay = True
 
-    def gameLoop(self):
+    def process(self):
         raise NotImplementedError( "Should have implemented update %s" % self )

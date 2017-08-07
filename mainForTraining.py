@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 import pygame
 
-from gameStates import player1HighScore,gameIntro
+from gameStates import train_player1HighScore,gameIntro
 from utils import utility
 from utils.setting import SCREEN_WIDTH, SCREEN_HEIGHT, FULL_SCREEN, PLAYER1_HIGH_SCORE, EXIT, INTRO
 
@@ -22,8 +22,8 @@ if __name__ == "__main__":
 	state = INTRO
 	while True:
 		if state == PLAYER1_HIGH_SCORE:
-			state = player1HighScore.Player1HighScore(screen).gameLoop()
+			state = train_player1HighScore.TrainPlayer1HighScore(screen).process()
 		elif state == INTRO:
-			state = gameIntro.GameIntro(screen).gameLoop()
+			state = gameIntro.GameIntro(screen).process()
 		elif state == EXIT:
 			break

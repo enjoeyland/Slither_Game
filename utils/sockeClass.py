@@ -2,50 +2,6 @@ import os
 import platform
 import socket
 
-# from utils.setting import MSG_LEN
-
-
-class SocketClient:
-    def __init__(self, sock = None):
-        if sock is None:
-            if platform.system() == "Windows":
-                self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            elif platform.system() == "Linux":
-                self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-        else:
-            self.sock = sock
-
-    def connect(self, server_address): # Windows : (host, port), Linux : (server_address)
-        self.sock.connect(server_address)
-
-    def send(self, msg):
-        if type(msg) == str:
-            msg = msg.encode("utf-8")
-        self.sock.send(self.appendSizeToMSG(msg))
-
-    def receive(self):
-        msgLen = self.getMessageLen()
-        chunks = []
-        bytesRecd = 0
-        while bytesRecd < msgLen:
-            chunk = self.sock.recv(min(msgLen - bytesRecd, 2048))
-            print(chunk)
-            if chunk == b'':
-                raise RuntimeError("socket connection broken")
-            chunks.append(chunk)
-            bytesRecd = bytesRecd + len(chunk)
-        return b''.join(chunks)
-
-    def appendSizeToMSG(self, msg):
-        if len(bytes([len(msg)])) < 255:
-            return bytes([len(bytes([len(msg)]))]) + bytes([len(msg)]) + msg
-        else:
-            raise RuntimeError("[Socket] : Over max message len")
-
-    def getMessageLen(self):
-        msgDigit = int.from_bytes(self.sock.recv(1), byteorder='big')
-        return int.from_bytes(self.sock.recv(msgDigit), byteorder='big')
-
 class SocketServerForOneClient:
     def __init__(self, server_address, sock = None):
         if sock is None:
@@ -75,10 +31,10 @@ class SocketServerForOneClient:
     def send(self, msg):
         if type(msg) == str:
             msg = msg.encode("utf-8")
-        self.connect.send(self.appendSizeToMSG(msg))
+        self.connect.send(self._appendSizeToMSG(msg))
 
     def receive(self):
-        msgLen = self.getMessageLen()
+        msgLen = self._getMessageLen()
         chunks = []
         bytesRecd = 0
         while bytesRecd < msgLen:
@@ -94,18 +50,61 @@ class SocketServerForOneClient:
     def close(self):
         self.sock.close()
 
-    def appendSizeToMSG(self, msg):
+    def _appendSizeToMSG(self, msg):
         if len(bytes([len(msg)])) < 255:
             return bytes([len(bytes([len(msg)]))]) + bytes([len(msg)]) + msg
         else:
             raise RuntimeError("[Socket] : Over max message len")
 
-    def getMessageLen(self):
+    def _getMessageLen(self):
         msgDigit = int.from_bytes(self.connect.recv(1), byteorder='big')
         a=int.from_bytes(self.connect.recv(msgDigit), byteorder='big')
         print(a)
         return a
 
+
+
+
+class SocketClient:
+    def __init__(self, sock = None):
+        if sock is None:
+            if platform.system() == "Windows":
+                self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            elif platform.system() == "Linux":
+                self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        else:
+            self.sock = sock
+
+    def connect(self, server_address): # Windows : (host, port), Linux : (server_address)
+        self.sock.connect(server_address)
+
+    def send(self, msg):
+        if type(msg) == str:
+            msg = msg.encode("utf-8")
+        self.sock.send(self._appendSizeToMSG(msg))
+
+    def receive(self):
+        msgLen = self._getMessageLen()
+        chunks = []
+        bytesRecd = 0
+        while bytesRecd < msgLen:
+            chunk = self.sock.recv(min(msgLen - bytesRecd, 2048))
+            print(chunk)
+            if chunk == b'':
+                raise RuntimeError("socket connection broken")
+            chunks.append(chunk)
+            bytesRecd = bytesRecd + len(chunk)
+        return b''.join(chunks)
+
+    def _appendSizeToMSG(self, msg):
+        if len(bytes([len(msg)])) < 255:
+            return bytes([len(bytes([len(msg)]))]) + bytes([len(msg)]) + msg
+        else:
+            raise RuntimeError("[Socket] : Over max message len")
+
+    def _getMessageLen(self):
+        msgDigit = int.from_bytes(self.sock.recv(1), byteorder='big')
+        return int.from_bytes(self.sock.recv(msgDigit), byteorder='big')
 
 
 if __name__ == "__main__":

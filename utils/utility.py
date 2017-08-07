@@ -1,7 +1,8 @@
 import os
 import pygame
 
-from utils.setting import POS_X, POS_Y
+from event.eventCreators.arrowKeyEventCreator import ArrowKeyEventCreator
+from utils.setting import POS_X, POS_Y, LEFT, RIGHT, DOWN, UP
 
 """Img"""
 # pygame.transform.scale(Surface, (width, height), DestSurface = None)
@@ -16,31 +17,31 @@ soundActive = True
 
 
 def getPath():
-	pathname = os.path.dirname(os.path.abspath(__file__))
-	return pathname
+    pathname = os.path.dirname(os.path.abspath(__file__))
+    return pathname
 
 def loadImage(name):
-	imageTypeList = [".bzi", ".png", ".jpg"]
-	for imageType in imageTypeList:
-		filePath = os.path.join("data/images/", name + imageType)
-		if os.path.isfile(filePath):
-			return pygame.image.load(filePath).convert_alpha()
+    imageTypeList = [".bzi", ".png", ".jpg"]
+    for imageType in imageTypeList:
+        filePath = os.path.join("data/images/", name + imageType)
+        if os.path.isfile(filePath):
+            return pygame.image.load(filePath).convert_alpha()
 
-	print ("Failed to load image: %s" % name)
-	return None
+    print ("Failed to load image: %s" % name)
+    return None
 
 def resizeImage(image, size):
-	if image is None:
-		return None
-	try:
-		resizedImg = pygame.transform.smoothscale(image, size)
-	except:
-		try:
-			resizedImg = pygame.transform.scale(image, size)
-		except:
-			resizedImg = image
-			print("fall image resize : %s" % image)
-	return resizedImg
+    if image is None:
+        return None
+    try:
+        resizedImg = pygame.transform.smoothscale(image, size)
+    except:
+        try:
+            resizedImg = pygame.transform.scale(image, size)
+        except:
+            resizedImg = image
+            print("fall image resize : %s" % image)
+    return resizedImg
 
 # def setImageBackgroundColor(image, backgroundColor):
 # 	surface = pygame.Surface(image.get_rect().size)
@@ -49,17 +50,17 @@ def resizeImage(image, size):
 # 	return surface
 
 def loadSound(name):
-	soundTypeList = [".bza", ".ogg", ".mp3", ".wav"]
-	for soundType in soundTypeList:
-		filePath = os.path.join("data/sounds/", name + soundType)
-		if os.path.isfile(filePath):
-			return pygame.mixer.Sound(filePath)
+    soundTypeList = [".bza", ".ogg", ".mp3", ".wav"]
+    for soundType in soundTypeList:
+        filePath = os.path.join("data/sounds/", name + soundType)
+        if os.path.isfile(filePath):
+            return pygame.mixer.Sound(filePath)
 
-	print ("Failed to load sound: %s" % name)
-	return None
+    print ("Failed to load sound: %s" % name)
+    return None
 
 def playSound(sound, channelNumber = None, loops = 0):
-	sound.play(loops = loops)
+    sound.play(loops = loops)
 
 # def playMusic(music, forceNext = True):
 # 	if settingList[MUSIC] and soundActive:
@@ -69,10 +70,24 @@ def playSound(sound, channelNumber = None, loops = 0):
 # 			pygame.mixer.Channel(MUSIC_CHANNEL).queue(music)
 
 def executeFunction(func, name = "", *args, **kwargs):
-	try:
-		func(*args, **kwargs)
-	except TypeError:
-		print("error occurs : %s" % name)
-		raise
+    try:
+        func(*args, **kwargs)
+    except TypeError:
+        print("error occurs : %s" % name)
+        raise
 
 # class ExecuteFunctionError(Exception):
+
+
+
+def trainActionExecute(action):
+    if action == LEFT:
+        ArrowKeyEventCreator().onKeyLeft()
+    if action == RIGHT:
+        ArrowKeyEventCreator().onKeyRight()
+    if action == DOWN:
+        ArrowKeyEventCreator().onKeyDown()
+    if action == UP:
+        ArrowKeyEventCreator().onKeyUp()
+
+

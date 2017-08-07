@@ -80,14 +80,5 @@ def executeFunction(func, name = "", *args, **kwargs):
 
 
 
-def trainActionExecute(action):
-    if action == LEFT:
-        ArrowKeyEventCreator().onKeyLeft()
-    if action == RIGHT:
-        ArrowKeyEventCreator().onKeyRight()
-    if action == DOWN:
-        ArrowKeyEventCreator().onKeyDown()
-    if action == UP:
-        ArrowKeyEventCreator().onKeyUp()
 
 

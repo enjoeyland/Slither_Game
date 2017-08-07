@@ -5,7 +5,7 @@ from gameStates import player1HighScore, gameIntro
 from utils import utility
 from utils.setting import SCREEN_WIDTH, SCREEN_HEIGHT, FULL_SCREEN, PLAYER1_HIGH_SCORE, EXIT, INTRO
 
-if __name__ == "__main__":
+def main():
 	# pygame init
 	pygame.mixer.pre_init(44100, -16, 2, 2048)
 	pygame.init()
@@ -27,3 +27,6 @@ if __name__ == "__main__":
 			state = gameIntro.GameIntro(screen).process()
 		elif state == EXIT:
 			break
+
+if __name__ == "__main__":
+	main()

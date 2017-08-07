@@ -66,8 +66,11 @@ ITEM_MARGIN = 2 * SCREEN_SCALE
 ANTI_ALIAS = True
 
 """Text"""
-DEFAULT_FONT_SIZE = int(2 * (SCREEN_SCALE/1.5 + 3))
-# DEFAULT_FONT_SIZE = 0
+if os.path.split(os.path.abspath(sys.argv[0]))[1] == "mainForTraining.py":
+	DEFAULT_FONT_SIZE = 0
+else:
+	DEFAULT_FONT_SIZE = 2 * SCREEN_SCALE
+
 DEFAULT_FONT_TYPE = "comicsansms"
 
 """Snake"""

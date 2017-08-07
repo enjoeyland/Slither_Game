@@ -1,26 +1,28 @@
+import numpy
 import pygame
+import json
 
 from PIL import Image
 from assembler import assemblerFactory
-from gameStates import gameMode
-from utils import utility
+from gameStates.train_gameMode import TrainGameMode
+from train import train_utility
 from utils.listener import Request
 from utils.setting import PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
     CRASH_ITSELF, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT
 from utils.sockeClass import SocketServerForOneClient
 
 
-class TrainPlayer1HighScore(gameMode.GameMode, object):
-    def __init__(self, screen):
-        super().__init__(PLAYER1_HIGH_SCORE, screen)
-        self.sock = SocketServerForOneClient(('localhost',3490))
-
+class TrainPlayer1HighScore(TrainGameMode, object):
+    def __init__(self, screen, sock):
+        super().__init__(PLAYER1_HIGH_SCORE, screen, sock)
 
     def process(self):
         self.isGameRunning = True
         self.gameSession = True
         self.gameReplay = False
         self.isPause = False
+
+        lastScore = 0
 
         ###Game Setting Start###
         # Create Group
@@ -55,22 +57,28 @@ class TrainPlayer1HighScore(gameMode.GameMode, object):
         mPygameEventDistributor.listen(Request("Player1HighScore", self._setGameRunningToFalse, addtionalTarget = CRASH_ITSELF))
 
         ###Game Setting Over###
-
-        self.sock.accept()
-        self.sock.send("how to play game/ex) available action")
-        # available_action=["left","right","up","down"]
-        available_action=[0,1,2,3]
+        self.screen.fill(WHITE)
+        img_str = pygame.image.tostring(self.screen, "RGBA")
+        img = Image.frombytes('RGBA', (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
+        img = img.convert("L")
+        img = numpy.array(img) / 255.0
+        self.sock.send(json.dump({"img":img}))
 
         while self.gameSession:
             while self.isGameRunning:
                 # machine action
-                action = self.sock.receive()
-                utility.trainActionExecute(action)
+                action = train_utility.renderEnv2TrainerMsg(self.sock.receive())
+                train_utility.actionExecute(action + 1)
+
 
 
                 mPygameEventDistributor.distribute()
                 mSnakeAction.tickMove()
                 mLevelHandler.update(mScore.getScore())
+                if (mScore.getScore() - lastScore)/100 > 0:
+                    reward = 1
+                else:
+                    reward = 0
 
                 # Drop Item
                 itemAppleSpawner.dropItem()
@@ -97,17 +105,19 @@ class TrainPlayer1HighScore(gameMode.GameMode, object):
 
                 img_str = pygame.image.tostring(self.screen, "RGBA")
                 img = Image.frombytes('RGBA', (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
-                img = img.convert('1')
-                img.save("data/images/screen_shot.png")
-                print("img saved")
+                img = img.convert("L")
+                img = numpy.array(img) / 255.0
 
-                self.sock.send("return img, reward")
+                # img.save("data/images/screen_shot.png")
+                # print("img saved")
+
+                self.sock.send(json.dump({"img" : img, "reward" : reward, "done": not self.isGameRunning, "info" : mLevelHandler.getLevel(mScore.getScore())}))
 
             ### Out of Game Running Loop ###
-            self.sock.send("game over")
-            self.sock.receive()
-            self._clickReplayButton()
-            break
+            if b'restart' == self.sock.receive():
+                self._clickReplayButton()
+                break
+            raise RuntimeError("error")
 
         if self.gameReplay:
             return PLAYER1_HIGH_SCORE

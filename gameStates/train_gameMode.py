@@ -2,20 +2,22 @@ import pygame
 
 
 class TrainGameMode(object):
-    def __init__(self, screen):
+    def __init__(self, gameState, screen, sock):
+        self.gameState = gameState
         self.screen = screen
+        self.sock = sock
 
-    def setGameSessionToFalse(self):
+    def _setGameSessionToFalse(self):
         self.gameSession = False
 
-    def setGameRunningToFalse(self, **kwargs):
+    def _setGameRunningToFalse(self, **kwargs):
         self.isGameRunning = False
 
-    def quit(self, **kwargs):
+    def _quit(self, **kwargs):
         pygame.quit()
         quit()
 
-    def clickReplayButton(self):
+    def _clickReplayButton(self):
         self.gameReplay = True
 
     def process(self):

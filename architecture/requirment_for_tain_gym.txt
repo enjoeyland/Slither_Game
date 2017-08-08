@@ -1,4 +1,4 @@
-gym.make(): env 리턴
+gym.make(*args): env 리턴
 env.env.get_action_meanings(): 액션뜻(left, right, 등)
 env.step(action): action실행하고, 이미지 픽셀값, 보상, done 리턴
 env.reset(): 게임 처음으로 리셋하고, 이미지 픽셀값들 리턴

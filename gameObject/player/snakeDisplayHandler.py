@@ -36,7 +36,6 @@ class SnakeDisplayHandler:
 		if self.snake_firstImg != None:
 			self.firstClone = pygame.transform.rotate(self.snake_firstImg, 90 * self.snake_snakeList[SNAKE_HEAD][DIRECTION])
 
-	#여기 있으면 않됨
 	def getCurveImgDirection(self, lastDirection, currentDirection):
 		if lastDirection is UP and currentDirection is LEFT \
 			or lastDirection is RIGHT and currentDirection is DOWN:
@@ -75,7 +74,7 @@ class SnakeDisplayHandler:
 					if lastSegment[DIRECTION] == direction:
 						pygame.draw.rect(surface, self.snake_color, [posX, posY, self.snake_thick, self.snake_thick])
 					else:
-						curveList.append((direction, lastSegment))
+						curveList.append((lastSegment[DIRECTION], (posX, posY, direction)))
 					lastSegment = (posX, posY, direction)
 
 			elif self.snake_bodyImg is not None and self.snake_curveImg is None:
@@ -91,11 +90,11 @@ class SnakeDisplayHandler:
 						self.bodyClone = pygame.transform.rotate(self.snake_bodyImg, 90 * direction)
 						surface.blit(self.bodyClone, (posX, posY))
 					else:
-						curveList.append((direction, lastSegment))
+						curveList.append((lastSegment[DIRECTION], (posX, posY, direction)))
 					lastSegment = (posX, posY, direction)
 
 			surface.blit(self.tailClone, (self.snake_snakeList[SNAKE_TAIL][POS_X],self.snake_snakeList[SNAKE_TAIL][POS_Y]))
-			for direction, lastSegment in curveList:
-				self.curveClone = pygame.transform.rotate(self.snake_curveImg, 90 * self.getCurveImgDirection(lastSegment[DIRECTION], direction))
-				surface.blit(self.curveClone, (lastSegment[POS_X], lastSegment[POS_Y]))
+			for lastDirection, currentSegment in curveList:
+				self.curveClone = pygame.transform.rotate(self.snake_curveImg, 90 * self.getCurveImgDirection(lastDirection, currentSegment[DIRECTION]))
+				surface.blit(self.curveClone, (currentSegment[POS_X], currentSegment[POS_Y]))
 			surface.blit(self.headClone, (self.snake_snakeList[SNAKE_HEAD][POS_X],self.snake_snakeList[SNAKE_HEAD][POS_Y]))

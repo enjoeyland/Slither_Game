@@ -1,6 +1,12 @@
-gym.make(*args): env ¸®ÅÏ
-env.env.get_action_meanings(): ¾×¼Ç¶æ(left, right, µî)
-env.step(action): action½ÇÇàÇÏ°í, ÀÌ¹ÌÁö ÇÈ¼¿°ª, º¸»ó, done ¸®ÅÏ
-env.reset(): °ÔÀÓ Ã³À½À¸·Î ¸®¼ÂÇÏ°í, ÀÌ¹ÌÁö ÇÈ¼¿°ªµé ¸®ÅÏ
-env.action_space.n: ¾×¼Ç ¼ö
-env.render(): È­¸éÀ¸·Î ¶ç¿ì±â
+gym.make(*args): env ï¿½ï¿½ï¿½ï¿½
+env.env.get_action_meanings(): ï¿½×¼Ç¶ï¿½(left, right, ï¿½ï¿½)
+env.step(action): actionï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½È¼ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½, done ï¿½ï¿½ï¿½ï¿½
+env.reset(): ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+env.action_space.n: ï¿½×¼ï¿½ ï¿½ï¿½
+env.render(): È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
+add this to import
+import sys, os
+# sys.path.append(os.path.abspath("C:/joey/workplace/2017/Computer/pygame/Slither_Game"))
+sys.path.append(os.path.abspath("/home/enjoey/Slither_Game"))
+from train.gym import Gym as gym

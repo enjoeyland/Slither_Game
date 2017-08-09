@@ -1,15 +1,6 @@
-import pygame
-
-from assembler.assembler import Assembler, Assembler_NotCreatedError, checkNotNone
-from event import eventDistributor
-from event.eventCreators import snakeEventCreator
-from event.eventHandlers import keyboardEventHandler, tickEventHandler, crashItemEventHandler
-from gameObject import score, level
-from gameObject.items import item, apple
-from gameObject.player import snake, snakeAction, skin
-from gameObject.player import snakeDisplayHandler
-from ui import scoreTable, popUp
-from utils import dataSavor, listener, utility
+from assembler.assembler import Assembler
+from gameObject.player import  skin
+from utils import  utility
 from utils.setting import DEFAULT_SPEED, DEFAULT_THICK, SKIN_DEFAULT, PLAYER1_HIGH_SCORE, P1_HIGH_SCORE_LISTENING_EVENT
 
 

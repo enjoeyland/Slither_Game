@@ -12,7 +12,7 @@ def main(server_address):
 	pygame.init()
 	pygame.mixer.init()
 
-	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+	screen = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 	sock = SocketServerForOneClient(server_address)
 	sock.accept()

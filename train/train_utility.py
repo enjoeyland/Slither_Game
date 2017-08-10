@@ -27,4 +27,3 @@ def renderTrainer2EnvMsgReset(msg):
     msgStr = msg.decode("utf-8")
     result = json.loads(msgStr)
     return result["image"]
-#hello

@@ -61,6 +61,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         img = Image.frombytes('RGBA', (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
         img = img.convert("L")
         img = numpy.array(img) / 255.0
+        img = img.tolist()
         self.sock.send(json.dumps({"img":img}))
 
         while self.gameSession:
@@ -106,10 +107,9 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 img = Image.frombytes('RGBA', (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
                 img = img.convert("L")
                 img = numpy.array(img) / 255.0
-
+                img = img.tolist()
                 # img.save("data/images/screen_shot.png")
                 # print("img saved")
-
                 self.sock.send(json.dumps({"img" : img, "reward" : reward, "done": not self.isGameRunning, "info" : mLevelHandler.getLevel(mScore.getScore())}))
 
             ### Out of Game Running Loop ###

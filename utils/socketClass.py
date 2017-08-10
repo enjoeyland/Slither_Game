@@ -58,7 +58,7 @@ class SocketServerForOneClient:
             raise RuntimeError("[Socket] : Over max message len")
 
     def _getMessageLen(self):
-        msgDigit = int.from_bytes(self.connect.recv(2), byteorder='big')
+        msgDigit = int.from_bytes(self.connect.recv(1), byteorder='big')
         a=int.from_bytes(self.connect.recv(msgDigit), byteorder='big')
         print(a)
         return a
@@ -105,7 +105,7 @@ class SocketClient:
             raise RuntimeError("[Socket] : Over max message len")
 
     def _getMessageLen(self):
-        msgDigit = int.from_bytes(self.sock.recv(2), byteorder='big')
+        msgDigit = int.from_bytes(self.sock.recv(1), byteorder='big')
         return int.from_bytes(self.sock.recv(msgDigit), byteorder='big')
 
 

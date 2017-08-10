@@ -23,7 +23,8 @@ def getPath():
 def loadImage(name):
     imageTypeList = [".bzi", ".png", ".jpg"]
     for imageType in imageTypeList:
-        filePath = os.path.join("data/images/", name + imageType)
+        filePath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', "data/images/", name + imageType))
+
         if os.path.isfile(filePath):
             return pygame.image.load(filePath).convert_alpha()
 
@@ -52,7 +53,8 @@ def resizeImage(image, size):
 def loadSound(name):
     soundTypeList = [".bza", ".ogg", ".mp3", ".wav"]
     for soundType in soundTypeList:
-        filePath = os.path.join("data/sounds/", name + soundType)
+        filePath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', "data/sounds/", name + soundType))
+
         if os.path.isfile(filePath):
             return pygame.mixer.Sound(filePath)
 

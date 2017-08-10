@@ -46,7 +46,7 @@ SIDE_WALL_SIZE = (0, 0)
 
 """Screen"""
 import os
-if os.path.split(os.path.abspath(sys.argv[0]))[1] == "mainForTraining.py":
+if os.path.split(os.path.abspath(sys.argv[0]))[1] == "training.py":
 	SCREEN_SCALE = 1
 	FRAMES_PER_SECOND = 40.0
 else:
@@ -66,7 +66,7 @@ ITEM_MARGIN = 2 * SCREEN_SCALE
 ANTI_ALIAS = True
 
 """Text"""
-if os.path.split(os.path.abspath(sys.argv[0]))[1] == "mainForTraining.py":
+if os.path.split(os.path.abspath(sys.argv[0]))[1] == "training.py":
 	DEFAULT_FONT_SIZE = 0
 else:
 	DEFAULT_FONT_SIZE = 2 * SCREEN_SCALE

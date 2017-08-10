@@ -52,7 +52,7 @@ class SocketServerForOneClient:
         self.sock.close()
 
     def _appendSizeToMSG(self, msg):
-        if (len(msg).bit_length() + 7) // 8 < 3:
+        if (len(msg).bit_length() + 7) // 8 < 257:
             return bytes([(len(msg).bit_length() + 7) // 8]) + len(msg).to_bytes((len(msg).bit_length() + 7) // 8, 'big') + msg
         else:
             raise RuntimeError("[Socket] : Over max message len")
@@ -99,7 +99,7 @@ class SocketClient:
     def _appendSizeToMSG(self, msg):
         # if len(bytes([len(msg)])) < 255:
         #     return bytes([len(bytes([len(msg)]))]) + bytes([len(msg)]) + msg
-        if (len(msg).bit_length() + 7) // 8 < 3:
+        if (len(msg).bit_length() + 7) // 8 < 257:
             return bytes([(len(msg).bit_length() + 7) // 8]) + len(msg).to_bytes((len(msg).bit_length() + 7) // 8, 'big') + msg
         else:
             raise RuntimeError("[Socket] : Over max message len")

@@ -90,7 +90,6 @@ class SocketClient:
         bytesRecd = 0
         while bytesRecd < msgLen:
             chunk = self.sock.recv(min(msgLen - bytesRecd, 2048))
-            print(chunk)
             if chunk == b'':
                 raise RuntimeError("socket connection broken")
             chunks.append(chunk)

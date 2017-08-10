@@ -38,7 +38,6 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         groupItem = mAssembler.getGroupItem()
 
         mPygameEventDistributor = mAssembler.getPygameEventDistributor()
-        mScoreDisplayHandler = mAssembler.getScoreDisplayHandler()
         mScore = mAssembler.getScore()
         mLevelHandler = mAssembler.getLevelHandler()
         # mKeyboardEventHandler = mAssembler.getKeyboardEventHandler()
@@ -50,7 +49,6 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         mSnakeAction = mAssembler.getSnakeAction()
 
         # Base Setting
-        groupText.add(mScoreDisplayHandler.draw())
         mLevelHandler.update(mScore.getScore())
 
         mPygameEventDistributor.listen(Request("Player1HighScore", self._quit, addtionalTarget = pygame.QUIT))
@@ -63,7 +61,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         img = Image.frombytes('RGBA', (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
         img = img.convert("L")
         img = numpy.array(img) / 255.0
-        self.sock.send(json.dump({"img":img}))
+        self.sock.send(json.dumps({"img":img}))
 
         while self.gameSession:
             while self.isGameRunning:
@@ -112,7 +110,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 # img.save("data/images/screen_shot.png")
                 # print("img saved")
 
-                self.sock.send(json.dump({"img" : img, "reward" : reward, "done": not self.isGameRunning, "info" : mLevelHandler.getLevel(mScore.getScore())}))
+                self.sock.send(json.dumps({"img" : img, "reward" : reward, "done": not self.isGameRunning, "info" : mLevelHandler.getLevel(mScore.getScore())}))
 
             ### Out of Game Running Loop ###
             if b'restart' == self.sock.receive():

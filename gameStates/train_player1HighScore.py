@@ -10,7 +10,7 @@ from train import train_utility
 from utils.listener import Request
 from utils.setting import PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
     CRASH_ITSELF, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT
-from utils.sockeClass import SocketServerForOneClient
+from utils.socketClass import SocketServerForOneClient
 
 
 class TrainPlayer1HighScore(TrainGameMode, object):

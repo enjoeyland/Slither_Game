@@ -1,7 +1,7 @@
 import pygame
 
 from train import train_utility
-from utils.sockeClass import SocketClient
+from utils.socketClass import SocketClient
 
 
 class Environment(object):

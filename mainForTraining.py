@@ -3,7 +3,7 @@ import pygame
 
 from gameStates import train_player1HighScore
 from utils.setting import SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER1_HIGH_SCORE, EXIT
-from utils.sockeClass import SocketServerForOneClient
+from utils.socketClass import SocketServerForOneClient
 
 
 def main(server_address):

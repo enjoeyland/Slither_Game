@@ -21,6 +21,7 @@ class SocketServerForOneClient:
         try:
             self.sock.bind(server_address)
             self.sock.listen(1)
+            print("[Socket] : Binding success")
         except:
             print("[Socket] : Binding failed")
 

@@ -2,7 +2,7 @@
 import pygame
 import sys
 
-""""Base Values"""
+"""Base Values"""
 POS_X = 0
 POS_Y = 1
 BEGIN = 0

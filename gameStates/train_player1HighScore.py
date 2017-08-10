@@ -4,6 +4,7 @@ import json
 
 from PIL import Image
 from assembler import assemblerFactory
+from assembler.train_assemblerFactory import TrainAssemblerFactory
 from gameStates.train_gameMode import TrainGameMode
 from train import train_utility
 from utils.listener import Request
@@ -32,7 +33,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         allSprites = pygame.sprite.Group()
 
         # Get All Object
-        mAssembler = assemblerFactory.AssemblerFactory().getAssembler(self.gameState, self.screen)
+        mAssembler = TrainAssemblerFactory().getAssembler(self.gameState, self.screen)
 
         groupItem = mAssembler.getGroupItem()
 

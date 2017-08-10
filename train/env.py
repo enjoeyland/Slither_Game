@@ -1,8 +1,10 @@
+import pygame
+
 from train import train_utility
 from utils.sockeClass import SocketClient
 
 
-class Environment:
+class Environment(object):
     def __init__(self, server_address):
         self.action_space = ActionSpace()
         self.env = Env()
@@ -18,7 +20,7 @@ class Environment:
         return train_utility.renderTrainer2EnvMsgReset(self._sock.receive())
 
     def render(self):
-        pass
+        pygame.display.update()
 
 class ActionSpace:
     def __init__(self):

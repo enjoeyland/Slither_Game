@@ -4,7 +4,7 @@ import mainForTraining
 from train.env import Environment
 
 
-class Gym:
+class Gym(object):
     def make(self, gameName, *args, **kwargs):
         server_address = ''
         if platform.system() == "Windows":

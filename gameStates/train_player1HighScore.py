@@ -15,7 +15,7 @@ from utils.setting import PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
 
 
 class TrainPlayer1HighScore(TrainGameMode, object):
-    def __init__(self, screen, sock, appleImg, screenToDisplay):
+    def __init__(self, screen, sock, appleImg):
         super().__init__(PLAYER1_HIGH_SCORE, screen, sock)
         self.appleImg = appleImg
 

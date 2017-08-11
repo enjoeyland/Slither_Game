@@ -12,7 +12,7 @@ class Environment(object):
         self._sock.connect(server_address)
 
     def step(self, action):
-        print("action : " + str(action))
+        # print("action : " + str(action))
         self._sock.send(str(action))
         return train_utility.renderTrainer2EnvMsg(self._sock.receive())
 

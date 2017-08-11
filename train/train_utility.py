@@ -23,8 +23,8 @@ def renderTrainer2EnvMsg(msg):
     return image, result["reward"], result["done"], result["info"]
 
 def renderEnv2TrainerMsg(msg):
-    action = int.from_bytes(msg, byteorder='big')
-    print("tranformed action : " + str(action))
+    action = int(msg.decode("utf-8"))
+    # print("tranformed action : " + str(action))
     return action
 
 def renderTrainer2EnvMsgReset(msg):

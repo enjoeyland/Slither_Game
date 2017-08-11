@@ -52,7 +52,7 @@ if _executor == "training.py":
 	SCREEN_SCALE = 1
 	FRAMES_PER_SECOND = 40.0
 elif _executor == "eval.py":
-	SCREEN_SCALE = 3
+	SCREEN_SCALE = 1
 	FRAMES_PER_SECOND = 40.0
 else:
 	SCREEN_SCALE = 10

@@ -87,8 +87,10 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 mLevelHandler.update(mScore.getScore())
                 if (mScore.getScore() - lastScore)/100 > 0:
                     reward = 1
+                    lastScore = mScore.getScore()
                 else:
                     reward = 0
+
 
                 # Drop Item
                 itemAppleSpawner.dropItem()

@@ -14,7 +14,7 @@ class Gym(object):
         if platform.system() == "Windows":
             server_address = ('localhost', random.randrange(2000,4000))
         elif platform.system() == "Linux":
-            server_address = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'data/socket_address/socket_%s'% random.randrange(0,2000)))
+            server_address = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'data/socket_address/socket_%s'% random.randrange(0,4000)))
         gameThread = threading.Thread(target = mainForTraining.main, args = (server_address, ))
         gameThread.daemon = True
         gameThread.start()

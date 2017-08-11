@@ -39,10 +39,8 @@ def loadImageByPil(name):
 
         if os.path.isfile(filePath):
             img = Image.open(filePath)
-            mode = img.mode
-            size = img.size
-            data = img.tobytes()
-            return pygame.image.fromstring(data, size, mode)
+            img = img.convert("RGBA")
+            return pygame.image.fromstring(img.tobytes(), img.size, img.mode)
     print ("Failed to load image: %s" % name)
     return None
 

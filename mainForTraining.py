@@ -14,7 +14,6 @@ def main(server_address):
 	pygame.mixer.init()
 
 	screen = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
-	fakeScreen = pygame.display.set_mode((50, 50))
 
 	# Load Image
 	appleImg = utility.loadImageByPil("apple")

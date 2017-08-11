@@ -40,7 +40,7 @@ class SocketServerForOneClient:
         bytesRecd = 0
         while bytesRecd < msgLen:
             chunk = self.connect.recv(min(msgLen - bytesRecd, 2048))
-            # print(chunk)
+            print(b"chunk" + chunk)
             if chunk == b'':
                 raise RuntimeError("socket connection broken")
             chunks.append(chunk)
@@ -104,15 +104,15 @@ class SocketClient:
         if (len(msg).bit_length() + 7) // 8 < 257:
             a = bytes([(len(msg).bit_length() + 7) // 8]) + len(msg).to_bytes((len(msg).bit_length() + 7) // 8, 'big') + msg
             print(b"sending msg : " + a)
-            return
+            return a
         else:
             raise RuntimeError("[Socket] : Over max message len")
 
     def _getMessageLen(self):
         msgDigit = int.from_bytes(self.sock.recv(1), byteorder='big')
-        print(msgDigit)
+        # print(msgDigit)
         result = int.from_bytes(self.sock.recv(msgDigit), byteorder='big')
-        print(result)
+        # print(result)
         return result
 
 

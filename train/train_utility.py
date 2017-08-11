@@ -24,6 +24,7 @@ def renderTrainer2EnvMsg(msg):
 
 def renderEnv2TrainerMsg(msg):
     action = int.from_bytes(msg, byteorder='big')
+    print("tranformed action : " + str(action))
     return action
 
 def renderTrainer2EnvMsgReset(msg):

@@ -1,5 +1,8 @@
 #-*- coding: utf-8 -*-
+import os
+
 import pygame
+import sys
 
 from gameStates import train_player1HighScore
 from utils import utility
@@ -13,7 +16,10 @@ def main(server_address):
 	pygame.init()
 	pygame.mixer.init()
 
-	screen = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+	if os.path.split(os.path.abspath(sys.argv[0]))[1] == "eval.py":
+		screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+	else:
+		screen = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 	# Load Image
 	appleImg = utility.loadImageByPil("apple")

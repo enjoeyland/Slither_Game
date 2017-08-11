@@ -22,6 +22,12 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         self.isPause = False
 
         lastScore = 0
+        if os.path.split(os.path.abspath(sys.argv[0]))[1] == "eval.py":
+            framesPerSecond = FRAMES_PER_SECOND
+        else:
+            framesPerSecond = 0
+
+
 
         ###Game Setting Start###
         # Create Group
@@ -109,6 +115,8 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 # img.save("data/images/screen_shot.png")
                 # print("img saved")
                 self.sock.send(json.dumps({"image" : img, "reward" : reward, "done": not self.isGameRunning, "info" : mLevelHandler.getLevel(mScore.getScore())}))
+
+                pygame.time.Clock().tick(framesPerSecond)
 
             ### Out of Game Running Loop ###
             if b'restart' == self.sock.receive():

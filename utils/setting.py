@@ -1,6 +1,8 @@
 """default values"""
 import pygame
 import sys
+import os
+
 
 """Base Values"""
 POS_X = 0
@@ -45,7 +47,6 @@ SOUND_LIST = ["Apple_Bite", "BGM"]
 SIDE_WALL_SIZE = (0, 0)
 
 """Screen"""
-import os
 if os.path.split(os.path.abspath(sys.argv[0]))[1] == "training.py":
 	SCREEN_SCALE = 1
 	FRAMES_PER_SECOND = 40.0

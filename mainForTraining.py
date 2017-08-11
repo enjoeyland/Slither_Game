@@ -2,6 +2,7 @@
 import pygame
 
 from gameStates import train_player1HighScore
+from utils import utility
 from utils.setting import SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER1_HIGH_SCORE, EXIT
 from utils.socketClass import SocketServerForOneClient
 
@@ -12,8 +13,11 @@ def main(server_address):
 	pygame.init()
 	pygame.mixer.init()
 
-	# screen = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
-	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+	screen = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+	fakeScreen = pygame.display.set_mode((50, 50))
+
+	# Load Image
+	appleImg = utility.loadImage("apple")
 
 	sock = SocketServerForOneClient(server_address)
 	sock.accept()
@@ -21,7 +25,7 @@ def main(server_address):
 		state = PLAYER1_HIGH_SCORE
 		while True:
 			if state == PLAYER1_HIGH_SCORE:
-				state = train_player1HighScore.TrainPlayer1HighScore(screen, sock).process()
+				state = train_player1HighScore.TrainPlayer1HighScore(screen, sock, appleImg).process()
 			elif state == EXIT:
 				break
 

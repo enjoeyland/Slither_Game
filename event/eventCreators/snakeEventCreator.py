@@ -1,3 +1,7 @@
+import os
+
+import sys
+
 from event.eventCreators.eventCreator import EventCreator
 from utils.listener import Request
 from utils.setting import SNAKE_HEAD, POS_X, SCREEN_WIDTH, SCREEN_HEIGHT, POS_Y, CRASH_WALL, CRASH_ITEM, CRASH_ITSELF, \
@@ -33,8 +37,9 @@ class SnakeEventCreator(EventCreator):
 	def crashWall(self):
 		if  self.snake_snakeHead[POS_X] > SPRITE_OFFSET[POS_X][END] - self.snake_thick or self.snake_snakeHead[POS_X] < SPRITE_OFFSET[POS_X][BEGIN] \
 				or self.snake_snakeHead[POS_Y] > SPRITE_OFFSET[POS_Y][END] - self.snake_thick or self.snake_snakeHead[POS_Y] < SPRITE_OFFSET[POS_Y][BEGIN]:
-			print(self.snake_snakeHead)
-			print("crash wall")
+			# print(self.snake_snakeHead)
+			if os.path.split(os.path.abspath(sys.argv[0]))[1] != "training.py":
+				print("crash wall")
 			self.createEvent(CRASH_WALL, snake = self.snake)
 
 	def crashItem(self):
@@ -52,7 +57,8 @@ class SnakeEventCreator(EventCreator):
 		for eachSegment in self.snake_snakeList[ : - int(3 * self.snake_thick / (self.snake_speed / FRAMES_PER_SECOND))]:
 			if eachSegment[POS_X] <= self.snake_snakeHead[POS_X] and  eachSegment[POS_X] + self.snake_thick > self.snake_snakeHead[POS_X]\
 					and eachSegment[POS_Y] <= self.snake_snakeHead[POS_Y] and eachSegment[POS_Y] + self.snake_thick > self.snake_snakeHead[POS_Y]:
-				print("crash itself")
+				if os.path.split(os.path.abspath(sys.argv[0]))[1] != "training.py":
+					print("crash itself")
 				self.createEvent(CRASH_ITSELF, snake = self.snake)
 
 

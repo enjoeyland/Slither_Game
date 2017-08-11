@@ -3,20 +3,18 @@ import pygame
 import json
 
 from PIL import Image
-from assembler import assemblerFactory
 from assembler.train_assemblerFactory import TrainAssemblerFactory
 from gameStates.train_gameMode import TrainGameMode
 from train import train_utility
 from utils.listener import Request
 from utils.setting import PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
     CRASH_ITSELF, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT
-from utils.socketClass import SocketServerForOneClient
 
 
 class TrainPlayer1HighScore(TrainGameMode, object):
-    def __init__(self, screen, sock):
+    def __init__(self, screen, sock, appleImg):
         super().__init__(PLAYER1_HIGH_SCORE, screen, sock)
-
+        self.appleImg = appleImg
     def process(self):
         self.isGameRunning = True
         self.gameSession = True
@@ -33,7 +31,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         allSprites = pygame.sprite.Group()
 
         # Get All Object
-        mAssembler = TrainAssemblerFactory().getAssembler(self.gameState, self.screen)
+        mAssembler = TrainAssemblerFactory().getAssembler(self.gameState, self.screen, self.appleImg)
 
         groupItem = mAssembler.getGroupItem()
 

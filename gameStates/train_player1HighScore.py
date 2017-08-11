@@ -11,13 +11,14 @@ from gameStates.train_gameMode import TrainGameMode
 from train import train_utility
 from utils.listener import Request
 from utils.setting import PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
-    CRASH_ITSELF, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT, FRAMES_PER_SECOND
+    CRASH_ITSELF, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT, FRAMES_PER_SECOND, SCREEN_BACKGROUND
 
 
 class TrainPlayer1HighScore(TrainGameMode, object):
-    def __init__(self, screen, sock, appleImg):
+    def __init__(self, screen, sock, appleImg, screenToDisplay):
         super().__init__(PLAYER1_HIGH_SCORE, screen, sock)
         self.appleImg = appleImg
+
     def process(self):
         self.isGameRunning = True
         self.gameSession = True
@@ -26,7 +27,9 @@ class TrainPlayer1HighScore(TrainGameMode, object):
 
         lastScore = 0
         if os.path.split(os.path.abspath(sys.argv[0]))[1] == "eval.py":
-            framesPerSecond = FRAMES_PER_SECOND
+            # framesPerSecond = FRAMES_PER_SECOND
+            framesPerSecond = 0
+
         else:
             framesPerSecond = 0
 
@@ -117,6 +120,13 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 img = img.tolist()
                 # img.save("data/images/screen_shot.png")
                 # print("img saved")
+
+                self.screen.fill(SCREEN_BACKGROUND)
+                mSnakeDisplayHandler.draw(self.screen)
+                allSprites.draw(self.screen)
+
+
+
                 self.sock.send(json.dumps({"image" : img, "reward" : reward, "done": not self.isGameRunning, "info" : mLevelHandler.getLevel(mScore.getScore())}))
 
                 pygame.time.Clock().tick(framesPerSecond)

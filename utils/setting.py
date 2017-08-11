@@ -47,8 +47,12 @@ SOUND_LIST = ["Apple_Bite", "BGM"]
 SIDE_WALL_SIZE = (0, 0)
 
 """Screen"""
-if os.path.split(os.path.abspath(sys.argv[0]))[1] == "training.py":
+executor = os.path.split(os.path.abspath(sys.argv[0]))[1]
+if executor == "training.py":
 	SCREEN_SCALE = 1
+	FRAMES_PER_SECOND = 40.0
+if executor == "eval.py":
+	SCREEN_SCALE = 3
 	FRAMES_PER_SECOND = 40.0
 else:
 	SCREEN_SCALE = 10
@@ -67,7 +71,7 @@ ITEM_MARGIN = 2 * SCREEN_SCALE
 ANTI_ALIAS = True
 
 """Text"""
-if os.path.split(os.path.abspath(sys.argv[0]))[1] == "training.py":
+if executor == "training.py":
 	DEFAULT_FONT_SIZE = 0
 else:
 	DEFAULT_FONT_SIZE = 2 * SCREEN_SCALE

@@ -26,7 +26,7 @@ class P1H_assembler(Assembler):
 
         self.createPausePage()
 
-        appleImg = utility.loadImage("apple")
+        appleImg = utility.loadImageByPil("apple")
         soundAppleBite = utility.loadSound("Apple_Bite")
         self.createAppleItemSpawner(appleImg, appleSound = soundAppleBite)
         self.createLevelHandler(PLAYER1_HIGH_SCORE, {"apple" : self.getItemAppleSpawner()})

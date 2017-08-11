@@ -17,7 +17,7 @@ def main(server_address):
 	fakeScreen = pygame.display.set_mode((50, 50))
 
 	# Load Image
-	appleImg = utility.loadImage("apple")
+	appleImg = utility.loadImageByPil("apple")
 
 	sock = SocketServerForOneClient(server_address)
 	sock.accept()

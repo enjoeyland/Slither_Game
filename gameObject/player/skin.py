@@ -13,22 +13,22 @@ class Skin(object):
 
 	def loadSkin(self, skinNum):
 		self.skinDic = {}
-		self.skinDic["head"] = utility.loadImage(self.skinList[skinNum][SKIN_HEAD])
+		self.skinDic["head"] = utility.loadImageByPil(self.skinList[skinNum][SKIN_HEAD])
 
 		if self.skinList[skinNum][SKIN_BODY] is not None:
-			self.skinDic["body"] = utility.loadImage(self.skinList[skinNum][SKIN_BODY])
+			self.skinDic["body"] = utility.loadImageByPil(self.skinList[skinNum][SKIN_BODY])
 		else:
 			self.skinDic["body"] = None
 
-		self.skinDic["tail"] = utility.loadImage(self.skinList[skinNum][SKIN_TAIL])
+		self.skinDic["tail"] = utility.loadImageByPil(self.skinList[skinNum][SKIN_TAIL])
 
 		if self.skinList[skinNum][SKIN_FIRST] is not None:
-			self.skinDic["first"] = utility.loadImage(self.skinList[skinNum][SKIN_FIRST])
+			self.skinDic["first"] = utility.loadImageByPil(self.skinList[skinNum][SKIN_FIRST])
 		else:
 			self.skinDic["first"] = None
 
 		if self.skinList[skinNum][SKIN_CURVE] is not None:
-			self.skinDic["curve"] = utility.loadImage(self.skinList[skinNum][SKIN_CURVE])
+			self.skinDic["curve"] = utility.loadImageByPil(self.skinList[skinNum][SKIN_CURVE])
 		else:
 			self.skinDic["curve"] = None
 

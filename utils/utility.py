@@ -1,5 +1,6 @@
 import os
 import pygame
+from PIL import Image
 
 from event.eventCreators.arrowKeyEventCreator import ArrowKeyEventCreator
 from utils.setting import POS_X, POS_Y, LEFT, RIGHT, DOWN, UP
@@ -28,6 +29,20 @@ def loadImage(name):
         if os.path.isfile(filePath):
             return pygame.image.load(filePath).convert_alpha()
 
+    print ("Failed to load image: %s" % name)
+    return None
+
+def loadImageByPil(name):
+    imageTypeList = [".bzi", ".png", ".jpg"]
+    for imageType in imageTypeList:
+        filePath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', "data/images/", name + imageType))
+
+        if os.path.isfile(filePath):
+            img = Image.open(filePath)
+            mode = img.mode
+            size = img.size
+            data = img.tobytes()
+            return pygame.image.fromstring(data, size, mode)
     print ("Failed to load image: %s" % name)
     return None
 

@@ -40,7 +40,7 @@ class SocketServerForOneClient:
         bytesRecd = 0
         while bytesRecd < msgLen:
             chunk = self.connect.recv(min(msgLen - bytesRecd, 2048))
-            print(chunk)
+            # print(chunk)
             if chunk == b'':
                 raise RuntimeError("socket connection broken")
             chunks.append(chunk)
@@ -60,7 +60,6 @@ class SocketServerForOneClient:
     def _getMessageLen(self):
         msgDigit = int.from_bytes(self.connect.recv(1), byteorder='big')
         a=int.from_bytes(self.connect.recv(msgDigit), byteorder='big')
-        print(a)
         return a
 
 
@@ -90,6 +89,7 @@ class SocketClient:
         bytesRecd = 0
         while bytesRecd < msgLen:
             chunk = self.sock.recv(min(msgLen - bytesRecd, 2048))
+            # print(chunk)
             if chunk == b'':
                 raise RuntimeError("socket connection broken")
             chunks.append(chunk)

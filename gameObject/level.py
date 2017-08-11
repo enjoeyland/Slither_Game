@@ -1,3 +1,7 @@
+import os
+
+import sys
+
 from utils.setting import MAX_LEVEL, LEVEL
 
 
@@ -42,7 +46,8 @@ class LevelHandler():
 
 	def setLevel(self, level):
 		self.lastLevel = level
-		print("Level %s" % level)
+		if os.path.split(os.path.abspath(sys.argv[0]))[1] != "training.py":
+			print("Level %s" % level)
 
 	def setLevelSetting(self, level):
 		levelSetting = self.mLevel.getLevelSetting(self.gameName,level)["setting"]

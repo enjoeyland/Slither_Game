@@ -50,10 +50,10 @@ SIDE_WALL_SIZE = (0, 0)
 _executor = os.path.split(os.path.abspath(sys.argv[0]))[1]
 if _executor == "training.py":
 	SCREEN_SCALE = 1
-	FRAMES_PER_SECOND = 40.0
+	FRAMES_PER_SECOND = 30.0
 elif _executor == "eval.py":
 	SCREEN_SCALE = 1
-	FRAMES_PER_SECOND = 40.0
+	FRAMES_PER_SECOND = 30.0
 else:
 	SCREEN_SCALE = 10
 	FRAMES_PER_SECOND = 200.0

@@ -1,14 +1,17 @@
+import os
+
 import numpy
 import pygame
 import json
 
+import sys
 from PIL import Image
 from assembler.train_assemblerFactory import TrainAssemblerFactory
 from gameStates.train_gameMode import TrainGameMode
 from train import train_utility
 from utils.listener import Request
 from utils.setting import PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
-    CRASH_ITSELF, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT
+    CRASH_ITSELF, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT, FRAMES_PER_SECOND
 
 
 class TrainPlayer1HighScore(TrainGameMode, object):

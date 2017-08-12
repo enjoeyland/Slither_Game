@@ -80,19 +80,19 @@ class SnakeAction:
 	# event notify func
 	def onKeyLeft(self):
 		self.snake_snakeList[SNAKE_HEAD][DIRECTION] = LEFT
-		print("[SnakeAction] : Left")
+		# print("[SnakeAction] : Left")
 		self.commit()
 	def onKeyRight(self):
 		self.snake_snakeList[SNAKE_HEAD][DIRECTION] = RIGHT
-		print("[SnakeAction] : Right")
+		# print("[SnakeAction] : Right")
 		self.commit()
 	def onKeyUp(self):
 		self.snake_snakeList[SNAKE_HEAD][DIRECTION] = UP
-		print("[SnakeAction] : Up")
+		# print("[SnakeAction] : Up")
 		self.commit()
 	def onKeyDown(self):
 		self.snake_snakeList[SNAKE_HEAD][DIRECTION] = DOWN
-		print("[SnakeAction] : Down")
+		# print("[SnakeAction] : Down")
 		self.commit()
 
 	# listen to publisher

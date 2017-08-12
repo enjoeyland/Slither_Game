@@ -60,7 +60,7 @@ class pygameEventDistributor(listener.ListenerHandler, object):
 	@appendOnTickEvent
 	def _getEvent(self,eventList):
 		self.__eventCache = pygame.event.get(eventList)
-		print("[EventDistributor] : " + str(self.__eventCache))
+		# print("[EventDistributor] : " + str(self.__eventCache))
 		pygame.event.clear()
 		return self.__eventCache
 

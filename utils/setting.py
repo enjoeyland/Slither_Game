@@ -55,7 +55,7 @@ elif _executor == "eval.py":
 	SCREEN_SCALE = 1
 	FRAMES_PER_SECOND = 30.0
 else:
-	SCREEN_SCALE = 10
+	SCREEN_SCALE = 1
 	FRAMES_PER_SECOND = 200.0
 
 FULL_SCREEN = False

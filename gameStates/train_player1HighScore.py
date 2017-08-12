@@ -118,7 +118,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 img_str = pygame.image.tostring(self.screen, "RGBA")
                 img = Image.frombytes('RGBA', (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
                 img = img.convert("L")
-                img = numpy.array(img) / 255.0
+                img = numpy.array(img)
                 img = img.tolist()
                 # img.save("data/images/screen_shot.png")
                 # print("img saved")

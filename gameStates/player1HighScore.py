@@ -1,11 +1,13 @@
+import numpy
 import pygame
+from PIL import Image
 
 from assembler import assemblerFactory
 from gameStates import gameMode
 from utils import utility
 from utils.listener import Request
 from utils.setting import PLAY_INFINITELY, SCREEN_BACKGROUND, FRAMES_PER_SECOND, PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
-    CRASH_ITSELF
+    CRASH_ITSELF, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE
 
 
 class Player1HighScore(gameMode.GameMode, object):
@@ -85,13 +87,31 @@ class Player1HighScore(gameMode.GameMode, object):
                     pass
 
                 # Build Screen
-                self.screen.fill(SCREEN_BACKGROUND)
+                # self.screen.fill(SCREEN_BACKGROUND)
+                self.screen.fill(WHITE)
 
                 mSnakeDisplayHandler.update()
                 mSnakeDisplayHandler.draw(self.screen)
 
                 allSprites.update()
                 allSprites.draw(self.screen)
+
+
+
+                # if count == 100:
+                #     img_str = pygame.image.tostring(self.screen, "RGBA")
+                #     img = Image.frombytes('RGBA', (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
+                #     img = img.convert("L")
+                #     img.save("data/images/screen_shot.png")
+                #     print(len(list(img.getdata())))
+                #     img = numpy.array(img)
+                #     img = Image.fromarray(img.squeeze(), "L")
+                #     img.save("data/images/screen_shot2.png")
+                #     print("img saved")
+                #     # print(list(img.getdata()))
+                #     print(len(list(img.getdata())))
+
+                # count +=1
 
                 pygame.display.update()
                 pygame.time.Clock().tick(FRAMES_PER_SECOND)

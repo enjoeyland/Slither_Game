@@ -25,6 +25,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         self.gameReplay = False
         self.isPause = False
 
+        count = 0
         lastScore = 0
         if os.path.split(os.path.abspath(sys.argv[0]))[1] == "eval.py":
             # framesPerSecond = FRAMES_PER_SECOND
@@ -70,7 +71,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         img_str = pygame.image.tostring(self.screen, "RGBA")
         img = Image.frombytes('RGBA', (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
         img = img.convert("L")
-        img = numpy.array(img) / 255.0
+        img = numpy.array(img) #/ 255.0
         img = img.tolist()
         self.sock.send(json.dumps({"image":img}))
 
@@ -116,18 +117,21 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 # image_file = image_file.convert('1') # convert image to black and white
 
                 img_str = pygame.image.tostring(self.screen, "RGBA")
-                img = Image.frombytes('RGBA', (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
+                img = Image.frombytes("RGBA", (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
                 img = img.convert("L")
-                img = numpy.array(img)
+
+                # if count % 200 == 0:
+                #     img.save(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', "data/images/screen_shot.png")))
+                #     print("img saved")
+                # count += 1
+
+                img = numpy.array(img) #/ 255.0
                 img = img.tolist()
-                # img.save("data/images/screen_shot.png")
-                # print("img saved")
+
 
                 self.screen.fill(SCREEN_BACKGROUND)
                 mSnakeDisplayHandler.draw(self.screen)
                 allSprites.draw(self.screen)
-
-
 
                 self.sock.send(json.dumps({"image" : img, "reward" : reward, "done": not self.isGameRunning, "info" : mLevelHandler.getLevel(mScore.getScore())}))
 

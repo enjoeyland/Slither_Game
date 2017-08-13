@@ -135,6 +135,8 @@ class TrainPlayer1HighScore(TrainGameMode, object):
 
                 self.sock.send(json.dumps({"image" : img, "reward" : reward, "done": not self.isGameRunning, "info" : mLevelHandler.getLevel(mScore.getScore())}))
 
+                pygame.display.update()
+
                 pygame.time.Clock().tick(framesPerSecond)
 
             ### Out of Game Running Loop ###

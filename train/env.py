@@ -29,6 +29,7 @@ class ActionSpace:
 
 class Env:
     def __init__(self):
-        self.action_meaning = ["left","right","up","down"]
+        self.action_meaning = ["LEFT","DOWN","RIGHT","UP"]
+
     def get_action_meanings(self):
         return self.action_meaning

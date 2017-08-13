@@ -96,4 +96,5 @@ class Snake(listener.ListenerHandler):
 
 	def setSnakeList(self, snakeList):
 		self.snakeList = snakeList
+		print("[Snake] : " + str(snakeList))
 		self.attributeChanged = True

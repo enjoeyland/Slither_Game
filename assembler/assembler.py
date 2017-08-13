@@ -32,6 +32,13 @@ def checkNotNone(func):
 
 
 class Assembler(object):
+    def __init__(self):
+        self._players = []
+        self._SnakeActions = []
+        self._SnakeDisplayHandlers = []
+        self._SnakeEventCreators = []
+        self._LevelHandlers = []
+
     def createGroupItem(self):
         self._groupItem = pygame.sprite.Group()
     @checkNotNone
@@ -118,26 +125,32 @@ class Assembler(object):
 
     def createSnakeEventCreator(self):
         """ create snake event creator """
-        self._SnakeEventCreator = snakeEventCreator.SnakeEventCreator(self.getPlayer(), self.getGroupItem())
+        for player in self.getPlayers():
+            __SnakeEventCreator = snakeEventCreator.SnakeEventCreator(player, self.getGroupItem())
+            self._SnakeEventCreators.append(__SnakeEventCreator)
     @checkNotNone
-    def getSnakeEventCreator(self):
-        return self._SnakeEventCreator
+    def getSnakeEventCreators(self):
+        return self._SnakeEventCreators
 
 
-    def createPlayer(self,snakeID, speed, thick, skin, skinNum = SKIN_DEFAULT, firstHeadDirection = RIGHT, headPos = SCREEN_MID, color = GREEN, length = 1):
+    def createPlayer(self,snakeID, speed, thick, skin, control, skinNum = SKIN_DEFAULT, firstHeadDirection = RIGHT, headPos = SCREEN_MID, color = GREEN, length = 1):
         """ create player """
-        self._player = snake.Snake(self.getPygameEventDistributor(), snakeID, speed, thick, skin, skinNum=skinNum, firstHeadDirection=firstHeadDirection, headPos=headPos, color=color, length=length)
-        self._SnakeAction = snakeAction.SnakeAction(self._player, self.getKeyboardEventHandler())
-        self._SnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(self._player)
+        __player = snake.Snake(self.getPygameEventDistributor(), snakeID, speed, thick, skin, skinNum=skinNum, firstHeadDirection=firstHeadDirection, headPos=headPos, color=color, length=length)
+        __SnakeAction = snakeAction.SnakeAction(__player, self.getKeyboardEventHandler(), control)
+        __SnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(__player)
+
+        self._players.append(__player)
+        self._SnakeActions.append(__SnakeAction)
+        self._SnakeDisplayHandlers.append(__SnakeDisplayHandler)
     @checkNotNone
-    def getPlayer(self):
-        return self._player
+    def getPlayers(self):
+        return self._players
     @checkNotNone
-    def getSnakeAction(self):
-        return self._SnakeAction
+    def getSnakeActions(self):
+        return self._SnakeActions
     @checkNotNone
-    def getSnakeDisplayHandler(self):
-        return self._SnakeDisplayHandler
+    def getSnakeDisplayHandlers(self):
+        return self._SnakeDisplayHandlers
 
 
 
@@ -164,7 +177,9 @@ class Assembler(object):
 
     def createLevelHandler(self, gameName, ItemSpawners):
         """ create game state handler """
-        self._LevelHandler = level.LevelHandler(gameName, self.getPlayer(),ItemSpawners)
+        for player in self.getPlayers():
+            __LevelHandler = level.LevelHandler(gameName, player,ItemSpawners)
+            self._LevelHandlers.append(__LevelHandler)
     @checkNotNone
-    def getLevelHandler(self):
-        return self._LevelHandler
+    def getLevelHandlers(self):
+        return self._LevelHandlers

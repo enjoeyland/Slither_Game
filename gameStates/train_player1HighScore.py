@@ -49,14 +49,14 @@ class TrainPlayer1HighScore(TrainGameMode, object):
 
         mPygameEventDistributor = mAssembler.getPygameEventDistributor()
         mScore = mAssembler.getScore()
-        mLevelHandler = mAssembler.getLevelHandler()
+        mLevelHandler = mAssembler.getLevelHandlers()[0]
         # mKeyboardEventHandler = mAssembler.getKeyboardEventHandler()
         # mTickEventHandler = mAssembler.getTickEventHandler()
-        # mSnakeEventCreator = mAssembler.getSnakeEventCreator()
-        # player = mAssembler.getPlayer()
+        # mSnakeEventCreator = mAssembler.getSnakeEventCreators()[0]
+        # player = mAssembler.getPlayers()[0]
         itemAppleSpawner = mAssembler.getItemAppleSpawner()
-        mSnakeDisplayHandler = mAssembler.getSnakeDisplayHandler()
-        mSnakeAction = mAssembler.getSnakeAction()
+        mSnakeDisplayHandler = mAssembler.getSnakeDisplayHandlers()[0]
+        mSnakeAction = mAssembler.getSnakeActions()[0]
 
         # Base Setting
         mLevelHandler.update(mScore.getScore())

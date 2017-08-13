@@ -36,7 +36,7 @@ class Item(pygame.sprite.Sprite):
 		return self.rect.size
 
 	def effect(self, *args):
-		raise NotImplementedError("Should have implemented update %s" % self)
+		raise NotImplementedError("You should implement Item(%s)" % self)
 
 	def update(self):
 		if self.lifeTimer != CONTINUANCE:
@@ -46,7 +46,7 @@ class Item(pygame.sprite.Sprite):
 
 	def clone(self):
 		# return Item(self.image, self.type, self.sound, self.image_size, self.location, self.lifeTimer)
-		return NotImplementedError("Should have implemented update %s" % self)
+		return NotImplementedError("You should implement Item(%s)" % self)
 
 
 class ItemSpawner(object):

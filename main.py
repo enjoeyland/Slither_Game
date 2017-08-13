@@ -2,8 +2,10 @@
 import pygame
 
 from gameStates import player1HighScore, gameIntro
+from gameStates.player2Compete import Player2Compete
 from utils import utility
-from utils.setting import SCREEN_WIDTH, SCREEN_HEIGHT, FULL_SCREEN, PLAYER1_HIGH_SCORE, EXIT, INTRO
+from utils.setting import SCREEN_WIDTH, SCREEN_HEIGHT, FULL_SCREEN, PLAYER1_HIGH_SCORE, EXIT, INTRO, PLAYER2_COMPETE
+
 
 def main():
 	# pygame init
@@ -23,6 +25,8 @@ def main():
 	while True:
 		if state == PLAYER1_HIGH_SCORE:
 			state = player1HighScore.Player1HighScore(screen).process()
+		elif state == PLAYER2_COMPETE:
+			state = Player2Compete(screen).process()
 		elif state == INTRO:
 			state = gameIntro.GameIntro(screen).process()
 		elif state == EXIT:

@@ -1,25 +1,27 @@
 import pygame
 
 from assembler.assembler import Assembler
-from gameObject.control import SnakeArrowControl
+from gameObject.control import SnakeArrowControl, SnakeWASDControl
 from gameObject.player import  skin
 from utils import  utility
-from utils.setting import DEFAULT_SPEED, DEFAULT_THICK, SKIN_DEFAULT, PLAYER1_HIGH_SCORE, P1_HIGH_SCORE_LISTENING_EVENT
+from utils.setting import DEFAULT_SPEED, DEFAULT_THICK, SKIN_DEFAULT, PLAYER1_HIGH_SCORE, \
+    GREEN, PINK, UP, P2_COMPETE_LISTENING_EVENT, SCREEN_MID, POS_X, SCREEN_WIDTH, POS_Y
 
 
-class P1H_assembler(Assembler):
+class P2C_assembler(Assembler):
     def __init__(self, screen):
         super().__init__()
         self.screen = screen
         self.createGroupItem()
         self.createScore()
 
-        self.createEventDistributor(P1_HIGH_SCORE_LISTENING_EVENT)
+        self.createEventDistributor(P2_COMPETE_LISTENING_EVENT)
         self.createKeyboardEventHandler()
         self.createTickEventHandler()
         self.createCrashItemEventHandler(self.screen)
 
-        self.createPlayer(1, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), SnakeArrowControl(), skinNum= SKIN_DEFAULT)
+        self.createPlayer(1, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), SnakeArrowControl(), firstHeadDirection = UP, headPos = (SCREEN_MID[POS_X] - (SCREEN_WIDTH / 4), SCREEN_MID[POS_Y]), skinNum = SKIN_DEFAULT, color = GREEN)
+        self.createPlayer(2, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), SnakeWASDControl(), firstHeadDirection = UP, headPos = (SCREEN_MID[POS_X] + (SCREEN_WIDTH / 4), SCREEN_MID[POS_Y]), skinNum = SKIN_DEFAULT, color = PINK)
 
         self.createScoreDisplay()
         self.createScoreTable()

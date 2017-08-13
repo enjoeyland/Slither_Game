@@ -7,10 +7,11 @@ from utils.observer import Observer
 from utils.setting import POS_X, SNAKE_HEAD, DIRECTION, LEFT, RIGHT, UP, DOWN, FRAMES_PER_SECOND, POS_Y
 
 
-class SnakeAction:
-	def __init__(self, snake, KeyboardEventHandler):
+class SnakeAction(object):
+	def __init__(self, snake, KeyboardEventHandler, control):
 		self.snake = snake
 		self.KeyboardEventHandler = KeyboardEventHandler
+		self.control = control
 		self.setListener()
 
 		self.snake_snakeList = self.snake.getSnakeList()
@@ -99,10 +100,10 @@ class SnakeAction:
 	def setListener(self):
 		self.snake.listen(Request("SnakeAction", self.updateSnakeAttribute))
 
-		self.KeyboardEventHandler.listen(Request("snakeStateHandler-K_LEFT", self.onKeyLeft, addtionalTarget= pygame.K_LEFT, groupName = "arrowKey"))
-		self.KeyboardEventHandler.listen(Request("snakeStateHandler-K_RIGHT", self.onKeyRight, addtionalTarget= pygame.K_RIGHT, groupName = "arrowKey"))
-		self.KeyboardEventHandler.listen(Request("snakeStateHandler-K_UP", self.onKeyUp, addtionalTarget= pygame.K_UP, groupName = "arrowKey"))
-		self.KeyboardEventHandler.listen(Request("snakeStateHandler-K_DOWN", self.onKeyDown, addtionalTarget= pygame.K_DOWN, groupName = "arrowKey"))
+		self.KeyboardEventHandler.listen(Request("snakeStateHandler-K_LEFT", self.onKeyLeft, addtionalTarget= self.control.left(), groupName = "arrowKey"))
+		self.KeyboardEventHandler.listen(Request("snakeStateHandler-K_RIGHT", self.onKeyRight, addtionalTarget= self.control.right(), groupName = "arrowKey"))
+		self.KeyboardEventHandler.listen(Request("snakeStateHandler-K_UP", self.onKeyUp, addtionalTarget= self.control.up(), groupName = "arrowKey"))
+		self.KeyboardEventHandler.listen(Request("snakeStateHandler-K_DOWN", self.onKeyDown, addtionalTarget= self.control.down(), groupName = "arrowKey"))
 
 	def endListen(self):
 		self.KeyboardEventHandler.endGroupListen("arrowKey")

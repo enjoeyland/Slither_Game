@@ -41,14 +41,14 @@ class Player1HighScore(gameMode.GameMode, object):
         mPygameEventDistributor = mAssembler.getPygameEventDistributor()
         mScoreDisplayHandler = mAssembler.getScoreDisplayHandler()
         mScore = mAssembler.getScore()
-        mLevelHandler = mAssembler.getLevelHandler()
+        mLevelHandler = mAssembler.getLevelHandlers()[0]
         mKeyboardEventHandler = mAssembler.getKeyboardEventHandler()
         mTickEventHandler = mAssembler.getTickEventHandler()
-        mSnakeEventCreator = mAssembler.getSnakeEventCreator()
-        player = mAssembler.getPlayer()
+        mSnakeEventCreator = mAssembler.getSnakeEventCreators()[0]
+        player = mAssembler.getPlayers()[0]
         itemAppleSpawner = mAssembler.getItemAppleSpawner()
-        mSnakeDisplayHandler = mAssembler.getSnakeDisplayHandler()
-        mSnakeAction = mAssembler.getSnakeAction()
+        mSnakeDisplayHandler = mAssembler.getSnakeDisplayHandlers()[0]
+        mSnakeAction = mAssembler.getSnakeActions()[0]
         mPausePage = mAssembler.getPausePage()
         mScoreSavor = mAssembler.getScoreSavor()
         mScoreTable = mAssembler.getScoreTable()
@@ -87,8 +87,8 @@ class Player1HighScore(gameMode.GameMode, object):
                     pass
 
                 # Build Screen
-                # self.screen.fill(SCREEN_BACKGROUND)
-                self.screen.fill(WHITE)
+                self.screen.fill(SCREEN_BACKGROUND)
+                # self.screen.fill(WHITE)
 
                 mSnakeDisplayHandler.update()
                 mSnakeDisplayHandler.draw(self.screen)

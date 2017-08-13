@@ -25,6 +25,7 @@ RED = (255, 0, 0)
 GREEN = (0,255,0)
 DARK_GREEN = (0,100,0)
 BLUE = (0, 0, 255)
+PINK = (255, 102, 204)
 SCREEN_BACKGROUND = (100,200,255)
 
 """Font alignment enumerations""" # alignment : 정렬

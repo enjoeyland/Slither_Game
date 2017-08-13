@@ -1,5 +1,5 @@
 from gameStates import gameMode
-from utils.setting import PLAYER1_HIGH_SCORE, INTRO
+from utils.setting import PLAYER1_HIGH_SCORE, INTRO, PLAYER2_COMPETE
 
 
 class GameIntro(gameMode.GameMode, object):
@@ -9,3 +9,4 @@ class GameIntro(gameMode.GameMode, object):
     def process(self):
         # need to change
         return PLAYER1_HIGH_SCORE
+        # return PLAYER2_COMPETE

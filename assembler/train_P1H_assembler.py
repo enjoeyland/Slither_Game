@@ -15,7 +15,7 @@ class TrainP1H_assembler(Assembler):
         self.createKeyboardEventHandler()
         self.createTickEventHandler()
         self.createCrashItemEventHandler(self.screen)
-        self.createPlayer(1, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(),SnakeArrowControl(), skinNum= SKIN_DEFAULT)
+        self.createPlayer(1, DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(),SnakeArrowControl(), skinNum= SKIN_DEFAULT, length = 2)
         self.createSnakeEventCreator()
 
         self.createAppleItemSpawner(appleImg)

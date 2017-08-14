@@ -19,8 +19,8 @@ def main(server_address):
 	if os.path.split(os.path.abspath(sys.argv[0]))[1] == "eval.py":
 		screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 	else:
-		screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-		# screen = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+		# screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+		screen = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 	# Load Image
 	appleImg = utility.loadImageByPil("apple")

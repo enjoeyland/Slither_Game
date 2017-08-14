@@ -27,6 +27,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
 
         count = 0
         lastScore = 0
+        sendingImgSize = (80, 60)
         if os.path.split(os.path.abspath(sys.argv[0]))[1] == "eval.py":
             # framesPerSecond = FRAMES_PER_SECOND
             framesPerSecond = 0
@@ -117,7 +118,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 # image_file = image_file.convert('1') # convert image to black and white
 
                 img_str = pygame.image.tostring(self.screen, "RGBA")
-                img = Image.frombytes("RGBA", (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
+                img = Image.frombytes("RGBA", sendingImgSize, img_str)
                 img = img.convert("L")
 
                 # if count % 200 == 0:
@@ -135,7 +136,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
 
                 self.sock.send(json.dumps({"image" : img, "reward" : reward, "done": not self.isGameRunning, "info" : mLevelHandler.getLevel(mScore.getScore())}))
 
-                pygame.display.update()
+                # pygame.display.update()
 
                 pygame.time.Clock().tick(framesPerSecond)
 

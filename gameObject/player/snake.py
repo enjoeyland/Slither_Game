@@ -7,9 +7,11 @@ class Snake(listener.ListenerHandler):
 	def __init__(self, pygameEventDistributor, snakeID, speed, thick, skin, skinNum = SKIN_DEFAULT, firstHeadDirection = RIGHT, headPos = SCREEN_MID, color = GREEN, length = 1):
 		super().__init__()
 
+		# to listen
 		self.pygameEventDistributor = pygameEventDistributor
 		self.pygameEventDistributor.listen(Request("Snake", self.tickNotify, addtionalTarget = ON_TICK))
 
+		# Snake Attributes
 		self.snakeID = snakeID
 		self.color = color
 		self.speed = speed
@@ -17,13 +19,10 @@ class Snake(listener.ListenerHandler):
 		self.length = length
 		self.snakeList = [[headPos[POS_X], headPos[POS_Y], firstHeadDirection]]
 
-		#img
+		# Snake Skin
 		self.snakeSkin = skin.getSkin(skinNum)
-		self.snakeSkin["head"] = utility.resizeImage(self.snakeSkin["head"],(self.thick, self.thick))
-		self.snakeSkin["body"] = utility.resizeImage(self.snakeSkin["body"], (self.thick, self.thick))
-		self.snakeSkin["tail"] = utility.resizeImage(self.snakeSkin["tail"], (self.thick, self.thick))
-		self.snakeSkin["first"] = utility.resizeImage(self.snakeSkin["first"], (self.thick, self.thick))
-		self.snakeSkin["curve"] = utility.resizeImage(self.snakeSkin["curve"], (self.thick, self.thick))
+		for key in self.snakeSkin:
+			self.snakeSkin[key] = utility.resizeImage(self.snakeSkin[key],(self.thick, self.thick))
 
 		self.attributeChanged = False
 

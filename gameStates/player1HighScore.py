@@ -1,6 +1,6 @@
-import numpy
 import pygame
-from PIL import Image
+# import numpy
+# from PIL import Image
 
 from assembler import assemblerFactory
 from gameStates import gameMode
@@ -19,7 +19,6 @@ class Player1HighScore(gameMode.GameMode, object):
         self.gameSession = True
         self.gameReplay = False
         self.isPause = False
-
         # Load Image
 
         # Load Sound
@@ -101,7 +100,7 @@ class Player1HighScore(gameMode.GameMode, object):
                 # if count == 100:
                 #     img_str = pygame.image.tostring(self.screen, "RGBA")
                 #     img = Image.frombytes('RGBA', (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
-                #     img = img.convert("L")
+                #     img = img.convert("1")
                 #     img.save("data/images/screen_shot.png")
                 #     print(len(list(img.getdata())))
                 #     img = numpy.array(img)
@@ -110,7 +109,7 @@ class Player1HighScore(gameMode.GameMode, object):
                 #     print("img saved")
                 #     # print(list(img.getdata()))
                 #     print(len(list(img.getdata())))
-
+                #
                 # count +=1
 
                 pygame.display.update()

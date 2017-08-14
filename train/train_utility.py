@@ -9,12 +9,13 @@ from utils.setting import LEFT, RIGHT, DOWN, UP
 def actionExecute(action):
     if action == LEFT:
         ArrowKeyEventCreator().onKeyLeft()
-    if action == RIGHT:
+    elif action == RIGHT:
         ArrowKeyEventCreator().onKeyRight()
-    if action == DOWN:
+    elif action == DOWN:
         ArrowKeyEventCreator().onKeyDown()
-    if action == UP:
+    elif action == UP:
         ArrowKeyEventCreator().onKeyUp()
+    else: pass
 
 def renderTrainer2EnvMsg(msg):
     msgStr = msg.decode("utf-8")

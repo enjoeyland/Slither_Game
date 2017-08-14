@@ -74,13 +74,17 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         img = img.convert("L")
         img = numpy.array(img) #/ 255.0
         img = img.tolist()
+
+        self.screen.fill(SCREEN_BACKGROUND)
+
         self.sock.send(json.dumps({"image":img}))
 
         while self.gameSession:
             while self.isGameRunning:
                 # machine action
                 action = train_utility.renderEnv2TrainerMsg(self.sock.receive())
-                train_utility.actionExecute(action + 1)
+                # train_utility.actionExecute(action + 1)
+                train_utility.actionExecute(action)
 
 
 
@@ -114,7 +118,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 allSprites.update()
                 allSprites.draw(self.screen)
 
-                # self.screen = pygame.image.fromstring(pygame.image.tostring(self.screen, "RGBA"),(800,600),"RGBX")
+                # self.screen = pygame.image.fromstring(pygame.image.tostring(self.screen, "RGBA"),(800,600),"RGBA")
                 # image_file = image_file.convert('1') # convert image to black and white
 
                 img_str = pygame.image.tostring(self.screen, "RGBA")

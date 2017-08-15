@@ -4,7 +4,7 @@ from utils.setting import SKIN_DEFAULT, RIGHT, SCREEN_MID, GREEN, POS_X, POS_Y, 
 
 
 class Snake(listener.ListenerHandler):
-	def __init__(self, pygameEventDistributor, snakeID, speed, thick, skin, skinNum = SKIN_DEFAULT, firstHeadDirection = RIGHT, headPos = SCREEN_MID, color = GREEN, length = 1):
+	def __init__(self, pygameEventDistributor, speed, thick, skin, skinNum = SKIN_DEFAULT, firstHeadDirection = RIGHT, headPos = SCREEN_MID, color = GREEN, length = 1):
 		super().__init__()
 
 		# to listen
@@ -12,7 +12,6 @@ class Snake(listener.ListenerHandler):
 		self.pygameEventDistributor.listen(Request("Snake", self.tickNotify, addtionalTarget = ON_TICK))
 
 		# Snake Attributes
-		self.snakeID = snakeID
 		self.color = color
 		self.speed = speed
 		self.thick = thick
@@ -36,7 +35,6 @@ class Snake(listener.ListenerHandler):
 
 	def getAttributes(self):
 		snakeState = {}
-		snakeState["snakeID"] = self.snakeID
 		snakeState["color"] = self.color
 		snakeState["speed"] = self.speed
 		snakeState["thick"] = self.thick
@@ -53,8 +51,6 @@ class Snake(listener.ListenerHandler):
 		self.attributeChanged = True
 
 
-	def getSnakeID(self):
-		return self.snakeID
 
 	def getSkin(self):
 		return self.snakeSkin

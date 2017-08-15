@@ -25,13 +25,13 @@ class Environment(object):
 
 class ActionSpace:
     def __init__(self):
-        # self.n = 4
-        self.n = 5
+        self.n = 4
+        # self.n = 5
 
 class Env:
     def __init__(self):
-        # self.action_meaning = ["LEFT","DOWN","RIGHT","UP"]
-        self.action_meaning = ["NO_OPERATION","LEFT","DOWN","RIGHT","UP"]
+        self.action_meaning = ["LEFT","DOWN","RIGHT","UP"]
+        # self.action_meaning = ["NO_OPERATION","LEFT","DOWN","RIGHT","UP"]
 
     def get_action_meanings(self):
         return self.action_meaning

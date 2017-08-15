@@ -39,15 +39,20 @@ class Player1HighScore(gameMode.GameMode, object):
 
         mPygameEventDistributor = mAssembler.getPygameEventDistributor()
         mScoreDisplayHandler = mAssembler.getScoreDisplayHandler()
-        mScore = mAssembler.getScore()
-        mLevelHandler = mAssembler.getLevelHandlers()[0]
         mKeyboardEventHandler = mAssembler.getKeyboardEventHandler()
         mTickEventHandler = mAssembler.getTickEventHandler()
-        mSnakeEventCreator = mAssembler.getSnakeEventCreators()[0]
-        player = mAssembler.getPlayers()[0]
         itemAppleSpawner = mAssembler.getItemAppleSpawner()
-        mSnakeDisplayHandler = mAssembler.getSnakeDisplayHandlers()[0]
-        mSnakeAction = mAssembler.getSnakeActions()[0]
+
+
+        mPlayer = mAssembler.getPlayers()[0]
+        snake = mPlayer.getSnake()
+        mSnakeAction = mPlayer.getSnakeAction()
+        mSnakeDisplayHandler = mPlayer.getSnakeDisplayHandler()
+        mSnakeEventCreator = mPlayer.getSnakeEventCreator()
+        mLevelHandler = mPlayer.getLevelHandler()
+        mScore = mPlayer.getScore()
+
+
         mPausePage = mAssembler.getPausePage()
         mScoreSavor = mAssembler.getScoreSavor()
         mScoreTable = mAssembler.getScoreTable()

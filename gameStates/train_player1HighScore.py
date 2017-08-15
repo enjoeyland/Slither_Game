@@ -29,8 +29,8 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         lastScore = 0
         sendingImgSize = (80, 60)
         if os.path.split(os.path.abspath(sys.argv[0]))[1] == "eval.py":
-            # framesPerSecond = FRAMES_PER_SECOND
-            framesPerSecond = 0
+            framesPerSecond = FRAMES_PER_SECOND * 3
+            # framesPerSecond = 0
 
         else:
             framesPerSecond = 0
@@ -50,15 +50,18 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         groupItem = mAssembler.getGroupItem()
 
         mPygameEventDistributor = mAssembler.getPygameEventDistributor()
-        mScore = mAssembler.getScore()
-        mLevelHandler = mAssembler.getLevelHandlers()[0]
         # mKeyboardEventHandler = mAssembler.getKeyboardEventHandler()
         # mTickEventHandler = mAssembler.getTickEventHandler()
-        # mSnakeEventCreator = mAssembler.getSnakeEventCreators()[0]
-        # player = mAssembler.getPlayers()[0]
         itemAppleSpawner = mAssembler.getItemAppleSpawner()
-        mSnakeDisplayHandler = mAssembler.getSnakeDisplayHandlers()[0]
-        mSnakeAction = mAssembler.getSnakeActions()[0]
+
+        mPlayer = mAssembler.getPlayers()[0]
+        snake = mPlayer.getSnake()
+        mSnakeAction = mPlayer.getSnakeAction()
+        mSnakeDisplayHandler = mPlayer.getSnakeDisplayHandler()
+        mSnakeEventCreator = mPlayer.getSnakeEventCreator()
+        mLevelHandler = mPlayer.getLevelHandler()
+        mScore = mPlayer.getScore()
+
 
         # Base Setting
         mLevelHandler.update(mScore.getScore())

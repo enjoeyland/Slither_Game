@@ -37,18 +37,17 @@ class Player2Compete(gameMode.GameMode, object):
         mAssembler = assemblerFactory.AssemblerFactory().getAssembler(self.gameState, self.screen)
 
         groupItem = mAssembler.getGroupItem()
+        itemAppleSpawner = mAssembler.getItemAppleSpawner()
 
         mPygameEventDistributor = mAssembler.getPygameEventDistributor()
-        mScoreDisplayHandler = mAssembler.getScoreDisplayHandler()
-        mScore = mAssembler.getScore()
-        mLevelHandlers = mAssembler.getLevelHandlers()
         mKeyboardEventHandler = mAssembler.getKeyboardEventHandler()
         mTickEventHandler = mAssembler.getTickEventHandler()
-        # mSnakeEventCreators = mAssembler.getSnakeEventCreators()
-        # players = mAssembler.getPlayers()
-        itemAppleSpawner = mAssembler.getItemAppleSpawner()
-        mSnakeDisplayHandlers = mAssembler.getSnakeDisplayHandlers()
-        mSnakeActions = mAssembler.getSnakeActions()
+
+        mPlayer = mAssembler.getPlayers()
+
+        mScoreDisplayHandler = mAssembler.getScoreDisplayHandler()
+        mScore = mAssembler.getScore()
+
         mPausePage = mAssembler.getPausePage()
         mScoreSavor = mAssembler.getScoreSavor()
         mScoreTable = mAssembler.getScoreTable()

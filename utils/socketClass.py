@@ -145,7 +145,7 @@ if __name__ == "__main__":
         msg = sc.receive()
         print("[SC] : Received %s" % msg)
 
-    t = threading.Thread(target=temp_sc)
+    t = threading.Thread(name="SC", target=temp_sc)
     t.start()
     temp_ss()
 

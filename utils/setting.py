@@ -145,62 +145,69 @@ LEVEL = {PLAYER1_HIGH_SCORE :
 			{LEVEL_0 : {"level": 0,
 						"score": 0,
 						"setting": {"snake": {"speed": 20 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
-									"item": {"apple": {"num" : 2, "probability": FRAMES_PER_SECOND,"lifeTimer": CONTINUANCE}}
+									"item": {"apple": {"num" : 8, "probability": FRAMES_PER_SECOND,"lifeTimer": CONTINUANCE}}
 									}
 						},
-			LEVEL_1 : {"level": 1,
-					   "score": 500,
-					   "setting": {"snake": {"speed": 40 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
-								   "item": {"apple": {"num" : 2, "probability": 80,"lifeTimer": CONTINUANCE}}
-								   }
-					   },
-			LEVEL_2 : {"level": 2,
-					   "score": 1500,
-					   "setting": {"snake": {"speed": 60 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
-								   "item": {"apple": {"num" : 2, "probability": 30,"lifeTimer": CONTINUANCE}}
-								   }
-					   },
-			LEVEL_3 : {"level": 3,
-					   "score": 3000,
-					   "setting": {"snake": {"speed": 70 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
-								   "item": {"apple": {"num" : 3, "probability": 10,"lifeTimer": 4 * FRAMES_PER_SECOND}}
-								   }
-					   },
-			LEVEL_4 : {"level": 4,
-					   "score": 4500,
-					   "setting": {"snake": {"speed": 80 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
-								   "item": {"apple": {"num" : 4, "probability": 5,"lifeTimer": 2 * FRAMES_PER_SECOND}}
-								   }
-					   },
-			LEVEL_5 : {"level": 5,
-					   "score": 6000,
-					   "setting": {"snake": {"speed": 90 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
-								   "item": {"apple": {"num" : 3, "probability": 3,"lifeTimer": 1 * FRAMES_PER_SECOND}}
-								   }
-					   },
-			LEVEL_6 : {"level": 6,
-					   "score": 7500,
-					   "setting": {"snake": {"speed": 100 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
-								   "item": {"apple": {"num" : 6, "probability": 10,"lifeTimer": 0.1 * FRAMES_PER_SECOND}}
-								   }
-					   },
-			LEVEL_7 :  {"level": 7,
-						"score": 10000,
-						"setting": {"snake": {"speed": 110 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
-									"item": {"apple": {"num" : 4, "probability": 0.5,"lifeTimer": 0.5 * FRAMES_PER_SECOND}}
-									}
-						},
-			LEVEL_8 :  {"level": 8,
-						"score": 12000,
-						"setting": {"snake": {"speed": 115 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
-									"item": {"apple": {"num" : 3, "probability": 0.6,"lifeTimer": 0.5 * FRAMES_PER_SECOND}}
-									}
-						},
-			MAX_LEVEL : {"level": 8,
-						 "score": 12000,
-						 "setting": {"snake": {"speed": 115 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
-									 "item": {"apple": {"num" : 3, "probability": 0.6,"lifeTimer": 0.5 * FRAMES_PER_SECOND}}
+			# LEVEL_1 : {"level": 1,
+			# 		   "score": 500,
+			# 		   "setting": {"snake": {"speed": 40 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
+			# 					   "item": {"apple": {"num" : 2, "probability": 80,"lifeTimer": CONTINUANCE}}
+			# 					   }
+			# 		   },
+			# LEVEL_2 : {"level": 2,
+			# 		   "score": 1500,
+			# 		   "setting": {"snake": {"speed": 60 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
+			# 					   "item": {"apple": {"num" : 2, "probability": 30,"lifeTimer": CONTINUANCE}}
+			# 					   }
+			# 		   },
+			# LEVEL_3 : {"level": 3,
+			# 		   "score": 3000,
+			# 		   "setting": {"snake": {"speed": 70 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
+			# 					   "item": {"apple": {"num" : 3, "probability": 10,"lifeTimer": 4 * FRAMES_PER_SECOND}}
+			# 					   }
+			# 		   },
+			# LEVEL_4 : {"level": 4,
+			# 		   "score": 4500,
+			# 		   "setting": {"snake": {"speed": 80 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
+			# 					   "item": {"apple": {"num" : 4, "probability": 5,"lifeTimer": 2 * FRAMES_PER_SECOND}}
+			# 					   }
+			# 		   },
+			# LEVEL_5 : {"level": 5,
+			# 		   "score": 6000,
+			# 		   "setting": {"snake": {"speed": 90 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
+			# 					   "item": {"apple": {"num" : 3, "probability": 3,"lifeTimer": 1 * FRAMES_PER_SECOND}}
+			# 					   }
+			# 		   },
+			# LEVEL_6 : {"level": 6,
+			# 		   "score": 7500,
+			# 		   "setting": {"snake": {"speed": 100 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
+			# 					   "item": {"apple": {"num" : 6, "probability": 10,"lifeTimer": 0.1 * FRAMES_PER_SECOND}}
+			# 					   }
+			# 		   },
+			# LEVEL_7 :  {"level": 7,
+			# 			"score": 10000,
+			# 			"setting": {"snake": {"speed": 110 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
+			# 						"item": {"apple": {"num" : 4, "probability": 0.5,"lifeTimer": 0.5 * FRAMES_PER_SECOND}}
+			# 						}
+			# 			},
+			# LEVEL_8 :  {"level": 8,
+			# 			"score": 12000,
+			# 			"setting": {"snake": {"speed": 115 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
+			# 						"item": {"apple": {"num" : 3, "probability": 0.6,"lifeTimer": 0.5 * FRAMES_PER_SECOND}}
+			# 						}
+			# 			},
+			# MAX_LEVEL : {"level": 8,
+			# 			 "score": 12000,
+			# 			 "setting": {"snake": {"speed": 115 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
+			# 						 "item": {"apple": {"num" : 3, "probability": 0.6,"lifeTimer": 0.5 * FRAMES_PER_SECOND}}
+			# 						 }
+			# 			 }
+			MAX_LEVEL : {"level": 0,
+						 "score": 0,
+						 "setting": {"snake": {"speed": 20 * SCREEN_SCALE, "thick" : 2 * SCREEN_SCALE},
+									 "item": {"apple": {"num" : 8, "probability": FRAMES_PER_SECOND,"lifeTimer": CONTINUANCE }}
 									 }
-						 }},
+						 }
+			},
 		PLAYER2_HIGH_SCORE : {},
 		PLAYER2_COMPETE : {}}

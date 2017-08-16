@@ -21,7 +21,7 @@ class Snake(listener.ListenerHandler):
 		# Snake Skin
 		self.snakeSkin = skin.getSkin(skinNum)
 		for key in self.snakeSkin:
-			self.snakeSkin[key] = utility.resizeImage(self.snakeSkin[key],(self.thick, self.thick))
+			self.snakeSkin[key] = utility.resizeImage(self.snakeSkin[key], self.thick)
 
 		self.attributeChanged = False
 

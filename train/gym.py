@@ -5,8 +5,6 @@ import threading
 import time
 from itertools import count
 
-import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..')))
 import mainForTraining
 from train.env import Environment
 
@@ -27,6 +25,8 @@ class Gym(object):
         return Environment(server_address)
 
 if __name__ == "__main__":
+    # import sys
+    # sys.path.append(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..')))
 
     gym = Gym()
     env_num = 2

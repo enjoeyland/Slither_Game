@@ -32,22 +32,23 @@ class P1H_assembler(Assembler):
         self.player.setSnakeAction(self._getSnakeAction())
         self.player.setSnakeDisplayHandler(self._getSnakeDisplayHandler())
 
-        self.createSnakeEventCreator()
+        self.createSnakeEventCreator(PLAYER1_HIGH_SCORE)
         self.player.setSnakeEventCreator(self._getSnakeEventCreator())
 
-        self.createLevelHandler(PLAYER1_HIGH_SCORE, {"apple" : self.getItemAppleSpawner()})
+        self.createLevelHandler(PLAYER1_HIGH_SCORE, snake = self.player.snake, ItemSpawners = {"apple" : self.getItemAppleSpawner()})
         self.player.setLevelHandler(self.getLevelHandler())
 
         self.createScore()
         self.player.setScore(self.getScore())
 
+        self.createCrashItemEventHandler(screen, self.player.snake, self.player.score)
+
         # set snakeEventCreator
         for player in self.players:
             player.snakeEventCreator.setOtherSnake([p.snake for p in self.players])
 
-        # Display
-        self.createCrashItemEventHandler(screen)
 
+        # Display
         self.createScoreDisplay()
         self.createScoreTable()
 

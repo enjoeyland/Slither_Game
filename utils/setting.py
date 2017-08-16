@@ -129,7 +129,7 @@ PLAYER2_COMPETE = 3
 """Eevnt to listen list for each game state"""
 P1_HIGH_SCORE_LISTENING_EVENT = [pygame.QUIT, pygame.KEYDOWN, ON_TICK, CRASH_WALL, CRASH_ITEM, CRASH_ITSELF]
 # P1_HIGH_SCORE_LISTENING_EVENT = [pygame.QUIT, pygame.KEYDOWN, ON_TICK, CRASH_WALL, CRASH_ITEM]
-P2_HIGH_SCORE_LISTENING_EVENT = [pygame.QUIT, pygame.KEYDOWN, ON_TICK, CRASH_WALL, CRASH_ITEM, CRASH_OTHER_SNAKE]
+P2_HIGH_SCORE_LISTENING_EVENT = [pygame.QUIT, pygame.KEYDOWN, ON_TICK, CRASH_WALL, CRASH_ITEM, CRASH_ITSELF, CRASH_OTHER_SNAKE]
 P2_COMPETE_LISTENING_EVENT = [pygame.QUIT, pygame.KEYDOWN, ON_TICK, CRASH_WALL, CRASH_ITEM, CRASH_OTHER_SNAKE]
 
 
@@ -217,15 +217,11 @@ LEVEL = {PLAYER1_HIGH_SCORE :
 		PLAYER2_COMPETE :
 			{LEVEL_0 : {"level": 0,
 						"score": 0,
-						"setting": {"snake": {"speed": 20 * SCREEN_SCALE, "thick" : DEFAULT_THICK},
-									"item": {"apple": {"num" : 2, "probability": FRAMES_PER_SECOND,"lifeTimer": CONTINUANCE}}
-									}
+						"setting": {"item": {"apple": {"num" : 2, "probability": FRAMES_PER_SECOND,"lifeTimer": CONTINUANCE}}}
 						},
 			MAX_LEVEL : {"level": 0,
 						 "score": 0,
-						 "setting": {"snake": {"speed": 20 * SCREEN_SCALE, "thick" : DEFAULT_THICK},
-									 "item": {"apple": {"num" : 2, "probability": FRAMES_PER_SECOND,"lifeTimer": CONTINUANCE}}
-									 }
+						 "setting": {"item": {"apple": {"num" : 2, "probability": FRAMES_PER_SECOND,"lifeTimer": CONTINUANCE}}}
 						 }
 			 }
 		}

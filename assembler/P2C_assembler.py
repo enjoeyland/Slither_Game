@@ -27,7 +27,7 @@ class P2C_assembler(Assembler):
         self.player1 = Player()
         self.players.append(self.player1)
         self.createRelatedToSnake(DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(),
-                                  SnakeArrowControl(),
+                                  SnakeWASDControl(),
                                   firstHeadDirection = UP,
                                   headPos = (SCREEN_MID[POS_X] - (SCREEN_WIDTH / 4), SCREEN_MID[POS_Y]),
                                   skinNum= SKIN_DEFAULT, color = GREEN)
@@ -35,20 +35,23 @@ class P2C_assembler(Assembler):
         self.player1.setSnakeAction(self._getSnakeAction())
         self.player1.setSnakeDisplayHandler(self._getSnakeDisplayHandler())
 
-        self.createSnakeEventCreator()
+        self.createSnakeEventCreator(PLAYER2_COMPETE)
         self.player1.setSnakeEventCreator(self._getSnakeEventCreator())
 
-        self.createLevelHandler(PLAYER2_COMPETE, {"apple" : self.getItemAppleSpawner()})
+        self.createLevelHandler(PLAYER1_HIGH_SCORE, self.player1.snake)
         self.player1.setLevelHandler(self.getLevelHandler())
 
         self.createScore()
         self.player1.setScore(self.getScore())
 
+        self.createCrashItemEventHandler(screen, self.player1.snake, self.player1.score)
+
+
         # Player2
         self.player2 = Player()
         self.players.append(self.player2)
         self.createRelatedToSnake(DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(),
-                                  SnakeWASDControl(),
+                                  SnakeArrowControl(),
                                   firstHeadDirection = UP,
                                   headPos = (SCREEN_MID[POS_X] + (SCREEN_WIDTH / 4), SCREEN_MID[POS_Y]),
                                   skinNum= SKIN_DEFAULT, color = PINK)
@@ -56,14 +59,17 @@ class P2C_assembler(Assembler):
         self.player2.setSnakeAction(self._getSnakeAction())
         self.player2.setSnakeDisplayHandler(self._getSnakeDisplayHandler())
 
-        self.createSnakeEventCreator()
+        self.createSnakeEventCreator(PLAYER2_COMPETE)
         self.player2.setSnakeEventCreator(self._getSnakeEventCreator())
 
-        self.createLevelHandler(PLAYER2_COMPETE, {"apple" : self.getItemAppleSpawner()})
+        self.createLevelHandler(PLAYER1_HIGH_SCORE, self.player2.snake)
         self.player2.setLevelHandler(self.getLevelHandler())
 
         self.createScore()
         self.player2.setScore(self.getScore())
+
+        self.createCrashItemEventHandler(screen, self.player2.snake, self.player2.score)
+
 
         # set snakeEventCreator
         for player in self.players:
@@ -72,9 +78,7 @@ class P2C_assembler(Assembler):
 
         # score for display
         self.createScore()
-        self.createLevelHandler(PLAYER2_COMPETE, {"apple" : self.getItemAppleSpawner()})
-
-        self.createCrashItemEventHandler(screen)
+        self.createLevelHandler(PLAYER2_COMPETE, ItemSpawners = {"apple" : self.getItemAppleSpawner()})
 
         self.createScoreDisplay()
         self.createScoreTable()

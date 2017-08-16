@@ -7,7 +7,7 @@ from gameStates import gameMode
 from utils import utility
 from utils.listener import Request
 from utils.setting import PLAY_INFINITELY, SCREEN_BACKGROUND, FRAMES_PER_SECOND, EXIT, CRASH_WALL, \
-    CRASH_ITSELF, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE, PLAYER2_COMPETE
+    CRASH_ITSELF, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE, PLAYER2_COMPETE, CRASH_OTHER_SNAKE
 
 
 class Player2Compete(gameMode.GameMode, object):
@@ -57,10 +57,10 @@ class Player2Compete(gameMode.GameMode, object):
         groupText.add(mScoreDisplayHandler.draw())
         mLevelHandler.update(mScore.getScore())
 
-        mKeyboardEventHandler.listen(Request("Player1HighScore", self._pause, addtionalTarget = pygame.K_p))
-        mPygameEventDistributor.listen(Request("Player1HighScore", self._quit, addtionalTarget = pygame.QUIT))
-        mPygameEventDistributor.listen(Request("Player1HighScore", self._setGameRunningToFalse, addtionalTarget = CRASH_WALL))
-        mPygameEventDistributor.listen(Request("Player1HighScore", self._setGameRunningToFalse, addtionalTarget = CRASH_ITSELF))
+        mKeyboardEventHandler.listen(Request("Player1HighScore_pause", self._pause, addtionalTarget = pygame.K_p))
+        mPygameEventDistributor.listen(Request("Player1HighScore_quit", self._quit, addtionalTarget = pygame.QUIT))
+        mPygameEventDistributor.listen(Request("Player1HighScore_crashWall", self._setGameRunningToFalse, addtionalTarget = CRASH_WALL))
+        mPygameEventDistributor.listen(Request("Player1HighScore_crashOtherSnake", self._setGameRunningToFalse, addtionalTarget = CRASH_OTHER_SNAKE))
 
 
         # menuButton = {"name" : "menu", "listener" : mTickEventHandler, "func": self.setButtonSprite}
@@ -74,6 +74,7 @@ class Player2Compete(gameMode.GameMode, object):
                 mPygameEventDistributor.distribute()
                 for player in mPlayer:
                     player.snakeAction.tickMove()
+                    player.levelHandler.update(player.score.getScore())
                 mLevelHandler.update(mScore.getScore())
 
                 # Drop Item

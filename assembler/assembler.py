@@ -3,12 +3,12 @@ import pygame
 from event import eventDistributor
 from event.eventCreators import snakeEventCreator
 from event.eventHandlers import keyboardEventHandler, tickEventHandler, crashItemEventHandler
-from gameObject import score, level
+from gameObject import level
 from gameObject.items import item, apple
 from gameObject.player import snake, snakeAction
 from gameObject.player import snakeDisplayHandler
 from ui import scoreTable, popUp
-from utils import dataSavor, listener
+from utils import dataSavor, listener, score
 from utils.setting import SKIN_DEFAULT, RIGHT, SCREEN_MID, GREEN
 
 
@@ -110,17 +110,17 @@ class Assembler(object):
     def getTickEventHandler(self):
         return self._TickEventHandler
 
-    def createCrashItemEventHandler(self, screen):
-        self._CrashItemEventHandler = crashItemEventHandler.CrashItemEventHandler(self.getPygameEventDistributor(), screen, self.getScore())
+    def createCrashItemEventHandler(self, screen, snake, score):
+        self._CrashItemEventHandler = crashItemEventHandler.CrashItemEventHandler(self.getPygameEventDistributor(), screen, snake, score)
     @checkNotNone
     def getCrashItemEventHandler(self):
         return self._CrashItemEventHandler
 
 
 
-    def createSnakeEventCreator(self):
+    def createSnakeEventCreator(self, gameState):
         """ create snake event creator """
-        self._SnakeEventCreator = snakeEventCreator.SnakeEventCreator(self._getSnake(), self.getGroupItem(), )
+        self._SnakeEventCreator = snakeEventCreator.SnakeEventCreator(self._getSnake(), self.getGroupItem(), gameState)
     @checkNotNone
     def _getSnakeEventCreator(self):
         return self._SnakeEventCreator
@@ -165,9 +165,9 @@ class Assembler(object):
 
 
 
-    def createLevelHandler(self, gameName, ItemSpawners):
+    def createLevelHandler(self, gameName, snake = None,ItemSpawners = None):
         """ create game state handler """
-        self._LevelHandler = level.LevelHandler(gameName, self._getSnake(), ItemSpawners)
+        self._LevelHandler = level.LevelHandler(gameName, mSnake = snake, ItemSpawners = ItemSpawners)
     @checkNotNone
     def getLevelHandler(self):
         return self._LevelHandler

@@ -24,7 +24,7 @@ class Level():
 		return self.settingPerLevel[gameName][level]
 
 class LevelHandler():
-	def __init__(self, gameName, mSnake, ItemSpawners, levelClass = Level):
+	def __init__(self, gameName, mSnake = None, ItemSpawners = None, levelClass = Level):
 		self.mLevel = levelClass()
 		self.gameName = gameName
 		self.mSnake = mSnake
@@ -46,18 +46,20 @@ class LevelHandler():
 
 	def setLevel(self, level):
 		self.lastLevel = level
-		if os.path.split(os.path.abspath(sys.argv[0]))[1] != "training.py":
+		if os.path.split(os.path.abspath(sys.argv[0]))[1] != "training.py" and self.ItemSpawners:
 			print("Level %s" % level)
 
 	def setLevelSetting(self, level):
 		levelSetting = self.mLevel.getLevelSetting(self.gameName,level)["setting"]
 
-		self.mSnake.setAttributes(speed = levelSetting["snake"]["speed"], thick = levelSetting["snake"]["thick"])
+		if self.mSnake:
+			self.mSnake.setAttributes(speed = levelSetting["snake"]["speed"], thick = levelSetting["snake"]["thick"])
 
-		for itemSpawner in self.ItemSpawners.keys():
-			self.ItemSpawners[itemSpawner].setItemMaximumNum(levelSetting["item"][itemSpawner]["num"])
-			self.ItemSpawners[itemSpawner].setDropProbability(levelSetting["item"][itemSpawner]["probability"])
-			self.ItemSpawners[itemSpawner].setItemLifeTimer(levelSetting["item"][itemSpawner]["lifeTimer"])
+		if self.ItemSpawners:
+			for itemSpawner in self.ItemSpawners.keys():
+				self.ItemSpawners[itemSpawner].setItemMaximumNum(levelSetting["item"][itemSpawner]["num"])
+				self.ItemSpawners[itemSpawner].setDropProbability(levelSetting["item"][itemSpawner]["probability"])
+				self.ItemSpawners[itemSpawner].setItemLifeTimer(levelSetting["item"][itemSpawner]["lifeTimer"])
 
 	def getLevel(self, score):
 		return self.mLevel.getLevel(score, self.gameName)

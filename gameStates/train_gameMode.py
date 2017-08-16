@@ -6,12 +6,14 @@ class TrainGameMode(object):
         self.gameState = gameState
         self.screen = screen
         self.sock = sock
+        self.player = None
 
     def _setGameSessionToFalse(self):
         self.gameSession = False
 
-    def _setGameRunningToFalse(self, **kwargs):
-        self.isGameRunning = False
+    def _setGameRunningToFalse(self, data):
+        if self.player.snake == data.snake:
+            self.isGameRunning = False
 
     def _quit(self, **kwargs):
         pygame.quit()

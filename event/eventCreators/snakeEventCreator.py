@@ -44,7 +44,6 @@ class SnakeEventCreator(EventCreator):
 	def crashWall(self):
 		if  self.snake_snakeHead[POS_X] > SPRITE_OFFSET[POS_X][END] - self.snake_thick[POS_X] or self.snake_snakeHead[POS_X] < SPRITE_OFFSET[POS_X][BEGIN] \
 				or self.snake_snakeHead[POS_Y] > SPRITE_OFFSET[POS_Y][END] - self.snake_thick[POS_Y] or self.snake_snakeHead[POS_Y] < SPRITE_OFFSET[POS_Y][BEGIN]:
-			# print(self.snake_snakeHead)
 			if os.path.split(os.path.abspath(sys.argv[0]))[1] != "training.py":
 				print("crash wall")
 			self.createEvent(CRASH_WALL, snake = self.snake)

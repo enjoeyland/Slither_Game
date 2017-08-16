@@ -45,6 +45,7 @@ class Player1HighScore(gameMode.GameMode, object):
 
 
         mPlayer = mAssembler.getPlayers()[0]
+        self.player = mPlayer
         snake = mPlayer.getSnake()
         mSnakeAction = mPlayer.getSnakeAction()
         mSnakeDisplayHandler = mPlayer.getSnakeDisplayHandler()

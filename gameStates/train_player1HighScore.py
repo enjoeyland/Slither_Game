@@ -55,6 +55,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         itemAppleSpawner = mAssembler.getItemAppleSpawner()
 
         mPlayer = mAssembler.getPlayers()[0]
+        self.player = mPlayer
         snake = mPlayer.getSnake()
         mSnakeAction = mPlayer.getSnakeAction()
         mSnakeDisplayHandler = mPlayer.getSnakeDisplayHandler()
@@ -148,6 +149,9 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 pygame.time.Clock().tick(framesPerSecond)
 
             ### Out of Game Running Loop ###
+            #endListen
+            mSnakeAction.endListen()
+
             if b'restart' == self.sock.receive():
                 self._clickReplayButton()
                 break

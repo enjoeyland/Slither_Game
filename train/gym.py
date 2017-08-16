@@ -4,6 +4,8 @@ import random
 import threading
 import time
 from itertools import count
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..')))
 
 import mainForTraining
 from train.env import Environment
@@ -31,13 +33,13 @@ if __name__ == "__main__":
     gym = Gym()
     env_num = 2
     envs = [gym.make() for _ in range(env_num)]
-    actions = [3,3]
-    dones = [False, False]
+    actions = [1] * env_num
+    dones = [False] * env_num
     for i, env in enumerate(envs):
         env.reset()
     while True:
         # actions = [random.randint(0,envs[0].action_space.n) for _ in range(env_num)]
-        actions  =[1,1]
+        actions  =[1] * env_num
         for i, env in enumerate(envs):
             if not dones[i]:
                 ob, reward, done, info = env.step(actions[i])

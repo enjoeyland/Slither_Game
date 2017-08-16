@@ -11,17 +11,21 @@ from utils.setting import DEFAULT_SPEED, DEFAULT_THICK, SKIN_DEFAULT, PLAYER1_HI
 
 class P2C_assembler(Assembler):
     def __init__(self, screen):
+        super().__init__()
+        # Item
         self.createGroupItem()
         appleImg = utility.loadImageByPil("apple")
         soundAppleBite = utility.loadSound("Apple_Bite")
         self.createAppleItemSpawner(appleImg, appleSound = soundAppleBite)
 
+        # Event
         self.createEventDistributor(P2_COMPETE_LISTENING_EVENT)
         self.createKeyboardEventHandler()
         self.createTickEventHandler()
 
         # Player1
         self.player1 = Player()
+        self.players.append(self.player1)
         self.createRelatedToSnake(DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(),
                                   SnakeArrowControl(),
                                   firstHeadDirection = UP,
@@ -42,6 +46,7 @@ class P2C_assembler(Assembler):
 
         # Player2
         self.player2 = Player()
+        self.players.append(self.player2)
         self.createRelatedToSnake(DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(),
                                   SnakeWASDControl(),
                                   firstHeadDirection = UP,
@@ -60,6 +65,11 @@ class P2C_assembler(Assembler):
         self.createScore()
         self.player2.setScore(self.getScore())
 
+        # set snakeEventCreator
+        for player in self.players:
+            player.snakeEventCreator.setOtherSnake([p.snake for p in self.players])
+
+
         # score for display
         self.createScore()
         self.createLevelHandler(PLAYER2_COMPETE, {"apple" : self.getItemAppleSpawner()})
@@ -70,5 +80,3 @@ class P2C_assembler(Assembler):
         self.createScoreTable()
 
         self.createPausePage()
-    def getPlayers(self):
-        return [self.player1, self.player2]

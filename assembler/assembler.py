@@ -32,6 +32,8 @@ def checkNotNone(func):
 
 
 class Assembler(object):
+    def __init__(self):
+        self.players = []
     def createGroupItem(self):
         self._groupItem = pygame.sprite.Group()
     @checkNotNone
@@ -118,7 +120,7 @@ class Assembler(object):
 
     def createSnakeEventCreator(self):
         """ create snake event creator """
-        self._SnakeEventCreator = snakeEventCreator.SnakeEventCreator(self._getSnake(), self.getGroupItem())
+        self._SnakeEventCreator = snakeEventCreator.SnakeEventCreator(self._getSnake(), self.getGroupItem(), )
     @checkNotNone
     def _getSnakeEventCreator(self):
         return self._SnakeEventCreator
@@ -171,4 +173,4 @@ class Assembler(object):
         return self._LevelHandler
 
     def getPlayers(self):
-        NotImplementedError("You should implement getPlayers(%s)" % self)
+        return self.players

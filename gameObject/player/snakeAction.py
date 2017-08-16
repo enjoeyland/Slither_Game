@@ -45,7 +45,7 @@ class SnakeAction(object):
 
 	def _move(self, newHeadPos, direction):
 		self.snake_snakeList.append([newHeadPos[POS_X],newHeadPos[POS_Y],direction])
-		if len(self.snake_snakeList) > self.snake_length * self.snake_thick / (self.snake_speed / FRAMES_PER_SECOND):
+		if len(self.snake_snakeList) > self.snake_length * self.snake_thick[POS_X] / (self.snake_speed / FRAMES_PER_SECOND):
 			del self.snake_snakeList[0]
 		self.commit()
 

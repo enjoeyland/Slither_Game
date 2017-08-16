@@ -47,6 +47,7 @@ class Player2Compete(gameMode.GameMode, object):
 
         mScoreDisplayHandler = mAssembler.getScoreDisplayHandler()
         mScore = mAssembler.getScore()
+        mLevelHandler = mAssembler.getLevelHandler()
 
         mPausePage = mAssembler.getPausePage()
         mScoreSavor = mAssembler.getScoreSavor()
@@ -71,7 +72,8 @@ class Player2Compete(gameMode.GameMode, object):
 
             while self.isGameRunning:
                 mPygameEventDistributor.distribute()
-                mSnakeAction.tickMove()
+                for player in mPlayer:
+                    player.snakeAction.tickMove()
                 mLevelHandler.update(mScore.getScore())
 
                 # Drop Item
@@ -89,8 +91,9 @@ class Player2Compete(gameMode.GameMode, object):
                 self.screen.fill(SCREEN_BACKGROUND)
                 # self.screen.fill(WHITE)
 
-                mSnakeDisplayHandler.update()
-                mSnakeDisplayHandler.draw(self.screen)
+                for player in mPlayer:
+                    player.snakeDisplayHandler.update()
+                    player.snakeDisplayHandler.draw(self.screen)
 
                 allSprites.update()
                 allSprites.draw(self.screen)
@@ -120,7 +123,8 @@ class Player2Compete(gameMode.GameMode, object):
 
             if self.isPause:
                 # End Listen
-                mSnakeAction.endListen()
+                for player in mPlayer:
+                    player.snakeAction.endListen()
 
                 groupPopUp.add(mPausePage)
                 allSprites.add(groupPopUp.sprites())
@@ -138,12 +142,16 @@ class Player2Compete(gameMode.GameMode, object):
                 mPausePage.kill()
 
                 #listen
-                mSnakeAction.setListener()
+                for player in mPlayer:
+                    player.snakeAction.setListener()
 
             else:
                 self._setGameSessionToFalse()
                 # End Listen
-                mSnakeAction.endListen()
+                for player in mPlayer:
+                    player.snakeAction.endListen()
+
+                mKeyboardEventHandler.listen(Request("Player1HighScore_replay", self._clickReplayButton, addtionalTarget = pygame.K_RETURN))
 
                 mScoreSavor.saveScore(mScore.getScore())
                 mScoreTable.buildImage(mScoreSavor.getTopScore(10), mScore.getScore(), replayButton)
@@ -158,7 +166,8 @@ class Player2Compete(gameMode.GameMode, object):
                     mPygameEventDistributor.distribute()
 
                     self.screen.fill(SCREEN_BACKGROUND)
-                    mSnakeDisplayHandler.draw(self.screen)
+                    for player in mPlayer:
+                        player.snakeDisplayHandler.draw(self.screen)
                     allSprites.draw(self.screen)
 
                     groupPopUp.draw(self.screen)
@@ -167,6 +176,7 @@ class Player2Compete(gameMode.GameMode, object):
                     pygame.display.update()
                     pygame.time.Clock().tick(10)
 
+                mKeyboardEventHandler.endListen("Player1HighScore_replay")
                 mScoreTable.kill()
         if self.gameReplay:
             return PLAYER2_COMPETE

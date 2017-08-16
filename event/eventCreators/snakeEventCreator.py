@@ -20,6 +20,11 @@ class SnakeEventCreator(EventCreator):
 
 		self.itemGroup = itemGroup
 
+	def setOtherSnake(self, allSnakes):
+		self.otherSnakes = allSnakes
+		self.otherSnakes.remove(self.snake)
+
+
 	def checkingProcess(self):
 		self.updateSnakeAttribute()
 		self.crashWall()
@@ -35,8 +40,8 @@ class SnakeEventCreator(EventCreator):
 
 
 	def crashWall(self):
-		if  self.snake_snakeHead[POS_X] > SPRITE_OFFSET[POS_X][END] - self.snake_thick or self.snake_snakeHead[POS_X] < SPRITE_OFFSET[POS_X][BEGIN] \
-				or self.snake_snakeHead[POS_Y] > SPRITE_OFFSET[POS_Y][END] - self.snake_thick or self.snake_snakeHead[POS_Y] < SPRITE_OFFSET[POS_Y][BEGIN]:
+		if  self.snake_snakeHead[POS_X] > SPRITE_OFFSET[POS_X][END] - self.snake_thick[POS_X] or self.snake_snakeHead[POS_X] < SPRITE_OFFSET[POS_X][BEGIN] \
+				or self.snake_snakeHead[POS_Y] > SPRITE_OFFSET[POS_Y][END] - self.snake_thick[POS_Y] or self.snake_snakeHead[POS_Y] < SPRITE_OFFSET[POS_Y][BEGIN]:
 			# print(self.snake_snakeHead)
 			if os.path.split(os.path.abspath(sys.argv[0]))[1] != "training.py":
 				print("crash wall")
@@ -47,20 +52,27 @@ class SnakeEventCreator(EventCreator):
 			itemSize = item.getSize()
 			itemLocation = item.getLocation()
 			if self.snake_snakeHead[POS_X] >= itemLocation[POS_X] and self.snake_snakeHead[POS_X] <= itemLocation[POS_X] + itemSize[POS_X] \
-					or self.snake_snakeHead[POS_X] + self.snake_thick >= itemLocation[POS_X] and self.snake_snakeHead[POS_X] + self.snake_thick <= itemLocation[POS_X] + itemSize[POS_X]:
+					or self.snake_snakeHead[POS_X] + self.snake_thick[POS_X] >= itemLocation[POS_X] and self.snake_snakeHead[POS_X] + self.snake_thick[POS_X] <= itemLocation[POS_X] + itemSize[POS_X]:
 				if self.snake_snakeHead[POS_Y] >= itemLocation[POS_Y] and self.snake_snakeHead[POS_Y] <= itemLocation[POS_Y] + itemSize[POS_Y] \
-						or self.snake_snakeHead[POS_Y] + self.snake_thick >= itemLocation[POS_Y] and self.snake_snakeHead[POS_Y] + self.snake_thick <= itemLocation[POS_Y] + itemSize[POS_Y]:
+						or self.snake_snakeHead[POS_Y] + self.snake_thick[POS_Y] >= itemLocation[POS_Y] and self.snake_snakeHead[POS_Y] + self.snake_thick[POS_Y] <= itemLocation[POS_Y] + itemSize[POS_Y]:
 					self.createEvent(CRASH_ITEM, snake = self.snake, item = item)
 
 
 	def crashItself(self):
-		for eachSegment in self.snake_snakeList[ : - int(3 * self.snake_thick / (self.snake_speed / FRAMES_PER_SECOND))]:
-			if eachSegment[POS_X] <= self.snake_snakeHead[POS_X] and  eachSegment[POS_X] + self.snake_thick > self.snake_snakeHead[POS_X]\
-					and eachSegment[POS_Y] <= self.snake_snakeHead[POS_Y] and eachSegment[POS_Y] + self.snake_thick > self.snake_snakeHead[POS_Y]:
+		for eachSegment in self.snake_snakeList[ : - int(3 * self.snake_thick[POS_X] / (self.snake_speed / FRAMES_PER_SECOND))]:
+			if eachSegment[POS_X] <= self.snake_snakeHead[POS_X] and  eachSegment[POS_X] + self.snake_thick[POS_X] > self.snake_snakeHead[POS_X]\
+					and eachSegment[POS_Y] <= self.snake_snakeHead[POS_Y] and eachSegment[POS_Y] + self.snake_thick[POS_Y] > self.snake_snakeHead[POS_Y]:
 				if os.path.split(os.path.abspath(sys.argv[0]))[1] != "training.py":
 					print("crash itself")
 				self.createEvent(CRASH_ITSELF, snake = self.snake)
 
 
 	def crashOtherSnake(self):
-		pass
+		for otherSnake in self.otherSnakes:
+			for eachSegment in otherSnake.snakeList:
+				if self.snake_snakeHead[POS_X] >= eachSegment[POS_X] and self.snake_snakeHead[POS_X] <= eachSegment[POS_X] + otherSnake.thick[POS_X] \
+					or self.snake_snakeHead[POS_X] + self.snake_thick[POS_X] >= eachSegment[POS_X] and self.snake_snakeHead[POS_X] + self.snake_thick[POS_X] <= eachSegment[POS_X] + otherSnake.thick[POS_X]:
+					if self.snake_snakeHead[POS_Y] >= eachSegment[POS_Y] and self.snake_snakeHead[POS_Y] <= eachSegment[POS_Y] + otherSnake.thick[POS_Y] \
+							or self.snake_snakeHead[POS_Y] + self.snake_thick[POS_Y] >= eachSegment[POS_Y] and self.snake_snakeHead[POS_Y] + self.snake_thick[POS_Y] <= eachSegment[POS_Y] + otherSnake.thick[POS_Y]:
+						self.createEvent(CRASH_ITSELF, snake = self.snake)
+						print("crash other snake")

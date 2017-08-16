@@ -72,7 +72,7 @@ class SnakeDisplayHandler:
 				lastSegment = self.snake_snakeList[SNAKE_TAIL]
 				for posX, posY, direction in self.snake_snakeList[1:-1]:
 					if lastSegment[DIRECTION] == direction:
-						pygame.draw.rect(surface, self.snake_color, [posX, posY, self.snake_thick, self.snake_thick])
+						pygame.draw.rect(surface, self.snake_color, [posX, posY, *self.snake_thick])
 					else:
 						curveList.append((lastSegment[DIRECTION], (posX, posY, direction)))
 					lastSegment = (posX, posY, direction)

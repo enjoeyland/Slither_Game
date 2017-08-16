@@ -8,15 +8,18 @@ from utils.setting import DEFAULT_SPEED, DEFAULT_THICK, SKIN_DEFAULT, PLAYER1_HI
 class TrainP1H_assembler(Assembler):
     def __init__(self, screen, appleImg):
         super().__init__()
-
+        # Item
         self.createGroupItem()
         self.createAppleItemSpawner(appleImg)
 
+        # Event
         self.createEventDistributor(P1_HIGH_SCORE_LISTENING_EVENT)
         self.createKeyboardEventHandler()
         self.createTickEventHandler()
 
+        # Player
         self.player = Player()
+        self.players.append(self.player)
         self.createRelatedToSnake(DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), SnakeArrowControl(), skinNum= SKIN_DEFAULT, length = 2)
         self.player.setSnake(self._getSnake())
         self.player.setSnakeAction(self._getSnakeAction())
@@ -31,6 +34,9 @@ class TrainP1H_assembler(Assembler):
         self.createScore()
         self.player.setScore(self.getScore())
 
+        # set snakeEventCreator
+        for player in self.players:
+            player.snakeEventCreator.setOtherSnake([p.snake for p in self.players])
+
+
         self.createCrashItemEventHandler(screen)
-    def getPlayers(self):
-        return [self.player]

@@ -61,10 +61,10 @@ class Player1HighScore(gameMode.GameMode, object):
         groupText.add(mScoreDisplayHandler.draw())
         mLevelHandler.update(mScore.getScore())
 
-        mKeyboardEventHandler.listen(Request("Player1HighScore", self._pause, addtionalTarget = pygame.K_p))
-        mPygameEventDistributor.listen(Request("Player1HighScore", self._quit, addtionalTarget = pygame.QUIT))
-        mPygameEventDistributor.listen(Request("Player1HighScore", self._setGameRunningToFalse, addtionalTarget = CRASH_WALL))
-        mPygameEventDistributor.listen(Request("Player1HighScore", self._setGameRunningToFalse, addtionalTarget = CRASH_ITSELF))
+        mKeyboardEventHandler.listen(Request("Player1HighScore_pause", self._pause, addtionalTarget = pygame.K_p))
+        mPygameEventDistributor.listen(Request("Player1HighScore_quit", self._quit, addtionalTarget = pygame.QUIT))
+        mPygameEventDistributor.listen(Request("Player1HighScore_crashWall", self._setGameRunningToFalse, addtionalTarget = CRASH_WALL))
+        mPygameEventDistributor.listen(Request("Player1HighScore_crashItself", self._setGameRunningToFalse, addtionalTarget = CRASH_ITSELF))
 
 
         # menuButton = {"name" : "menu", "listener" : mTickEventHandler, "func": self.setButtonSprite}
@@ -150,6 +150,8 @@ class Player1HighScore(gameMode.GameMode, object):
                 # End Listen
                 mSnakeAction.endListen()
 
+                mKeyboardEventHandler.listen(Request("Player1HighScore_replay", self._clickReplayButton, addtionalTarget = pygame.K_RETURN))
+
                 mScoreSavor.saveScore(mScore.getScore())
                 mScoreTable.buildImage(mScoreSavor.getTopScore(10), mScore.getScore(), replayButton)
 
@@ -172,7 +174,9 @@ class Player1HighScore(gameMode.GameMode, object):
                     pygame.display.update()
                     pygame.time.Clock().tick(10)
 
+                mKeyboardEventHandler.endListen("Player1HighScore_replay")
                 mScoreTable.kill()
+
         if self.gameReplay:
             return PLAYER1_HIGH_SCORE
         else:

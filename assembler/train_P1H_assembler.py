@@ -13,7 +13,9 @@ class TrainP1H_assembler(Assembler):
         self.createAppleItemSpawner(appleImg)
 
         # Event
-        self.createEventDistributor(P1_HIGH_SCORE_LISTENING_EVENT)
+        self.createEventQueue()
+        self.createArrowKeyEventCreator()
+        self.createEventQueueDistributor(P1_HIGH_SCORE_LISTENING_EVENT)
         self.createKeyboardEventHandler()
         self.createTickEventHandler()
 

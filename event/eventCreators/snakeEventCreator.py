@@ -9,7 +9,9 @@ from utils.setting import SNAKE_HEAD, POS_X, SCREEN_WIDTH, SCREEN_HEIGHT, POS_Y,
 
 
 class SnakeEventCreator(EventCreator):
-	def __init__(self, snake, itemGroup, gameState):
+	def __init__(self, queue, snake, itemGroup, gameState):
+		super().__init__(queue)
+
 		self.snake = snake
 		self.snake.listen(Request("SnakeEventCreator",self.checkingProcess))
 

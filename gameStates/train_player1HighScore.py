@@ -1,8 +1,9 @@
 import os
 
-import numpy
+# import numpy
 import pygame
 import json
+from itertools import count
 
 import sys
 from PIL import Image
@@ -15,8 +16,10 @@ from utils.setting import PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
 
 
 class TrainPlayer1HighScore(TrainGameMode, object):
+    _ids = count(0)
     def __init__(self, screen, sock, appleImg):
         super().__init__(PLAYER1_HIGH_SCORE, screen, sock)
+        self._id = next(self._ids)
         self.appleImg = appleImg
 
     def process(self):
@@ -49,7 +52,10 @@ class TrainPlayer1HighScore(TrainGameMode, object):
 
         groupItem = mAssembler.getGroupItem()
 
-        mPygameEventDistributor = mAssembler.getPygameEventDistributor()
+        eventQueue = mAssembler.getEventQueue()
+        mArrowKeyEventCreator = mAssembler.getArrowKeyEventCreator()
+        # mPygameEventDistributor = mAssembler.getPygameEventDistributor()
+        mEventDistributor = mAssembler.getEventDistributor()
         # mKeyboardEventHandler = mAssembler.getKeyboardEventHandler()
         # mTickEventHandler = mAssembler.getTickEventHandler()
         itemAppleSpawner = mAssembler.getItemAppleSpawner()
@@ -67,17 +73,19 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         # Base Setting
         mLevelHandler.update(mScore.getScore())
 
-        mPygameEventDistributor.listen(Request("Player1HighScore", self._quit, addtionalTarget = pygame.QUIT))
-        mPygameEventDistributor.listen(Request("Player1HighScore", self._setGameRunningToFalse, addtionalTarget = CRASH_WALL))
-        mPygameEventDistributor.listen(Request("Player1HighScore", self._setGameRunningToFalse, addtionalTarget = CRASH_ITSELF))
+        mEventDistributor.listen(Request("Player1HighScore", self._quit, addtionalTarget = pygame.QUIT))
+        mEventDistributor.listen(Request("Player1HighScore", self._setGameRunningToFalse, addtionalTarget = CRASH_WALL))
+        mEventDistributor.listen(Request("Player1HighScore", self._setGameRunningToFalse, addtionalTarget = CRASH_ITSELF))
 
         ###Game Setting Over###
         self.screen.fill(WHITE)
         img_str = pygame.image.tostring(self.screen, "RGBA")
         img = Image.frombytes('RGBA', (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
         img = img.convert("L")
-        img = numpy.array(img) #/ 255.0
-        img = img.tolist()
+        # img = numpy.array(img) #/ 255.0
+        # img = img.tolist()
+        img = list(img.getdata())
+
 
         self.screen.fill(SCREEN_BACKGROUND)
 
@@ -87,12 +95,13 @@ class TrainPlayer1HighScore(TrainGameMode, object):
             while self.isGameRunning:
                 # machine action
                 action = train_utility.renderEnv2TrainerMsg(self.sock.receive())
-                # train_utility.actionExecute(action + 1)
-                train_utility.actionExecute(action)
+                # print("[TP1H]Execute action :", action, self._id)
+                train_utility.actionExecute(mArrowKeyEventCreator, action + 1)
+                # train_utility.actionExecute(action)
 
 
 
-                mPygameEventDistributor.distribute()
+                mEventDistributor.distribute()
                 mSnakeAction.tickMove()
                 mLevelHandler.update(mScore.getScore())
                 if (mScore.getScore() - lastScore)/100 > 0:
@@ -134,8 +143,9 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 #     print("img saved")
                 # count += 1
 
-                img = numpy.array(img) #/ 255.0
-                img = img.tolist()
+                # img = numpy.array(img) #/ 255.0
+                # img = img.tolist()
+                img = list(img.getdata())
 
 
                 self.screen.fill(SCREEN_BACKGROUND)

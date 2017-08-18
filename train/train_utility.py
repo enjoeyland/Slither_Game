@@ -1,20 +1,19 @@
 import json
-
 import numpy
 
 from event.eventCreators.arrowKeyEventCreator import ArrowKeyEventCreator
 from utils.setting import LEFT, RIGHT, DOWN, UP
 
 
-def actionExecute(action):
+def actionExecute(ArrowKeyEventCreator, action):
     if action == LEFT:
-        ArrowKeyEventCreator().onKeyLeft()
+        ArrowKeyEventCreator.onKeyLeft()
     elif action == RIGHT:
-        ArrowKeyEventCreator().onKeyRight()
+        ArrowKeyEventCreator.onKeyRight()
     elif action == DOWN:
-        ArrowKeyEventCreator().onKeyDown()
+        ArrowKeyEventCreator.onKeyDown()
     elif action == UP:
-        ArrowKeyEventCreator().onKeyUp()
+        ArrowKeyEventCreator.onKeyUp()
     else: pass
 
 def renderTrainer2EnvMsg(msg):

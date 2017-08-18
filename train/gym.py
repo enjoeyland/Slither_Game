@@ -4,15 +4,13 @@ import random
 import threading
 import time
 from itertools import count
-import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..')))
 
 import mainForTraining
 from train.env import Environment
 
 
 class Gym(object):
-    _ids = count(1)
+    _ids = count(0)
     def make(self, gameName = "slither_game_v0", *args, **kwargs):
         self._id = next(self._ids)
         server_address = ''
@@ -46,7 +44,4 @@ if __name__ == "__main__":
             else:
                 ob, reward, done, info = env.reset(), 0, False, None
             dones[i] = done
-
-
         # print(threading.enumerate())
-

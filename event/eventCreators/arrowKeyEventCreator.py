@@ -4,6 +4,9 @@ from event.eventCreators.eventCreator import EventCreator
 
 
 class ArrowKeyEventCreator(EventCreator):
+    def __init__(self, queue):
+        super().__init__(queue)
+
     def onKeyLeft(self):
         self.createEvent(pygame.KEYDOWN, unicode = '', mod= 0, key = pygame.K_LEFT, scancode = 75)
 

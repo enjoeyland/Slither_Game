@@ -2,7 +2,9 @@ import pygame
 
 from event import eventDistributor
 from event.eventCreators import snakeEventCreator
+from event.eventCreators.arrowKeyEventCreator import ArrowKeyEventCreator
 from event.eventHandlers import keyboardEventHandler, tickEventHandler, crashItemEventHandler
+from event.eventQueue import EventQueue
 from gameObject import level
 from gameObject.items import item, apple
 from gameObject.player import snake, snakeAction
@@ -24,9 +26,9 @@ class Assembler_NotCreatedError(Exception):
 def checkNotNone(func):
     def wrapper(*args):
         result = func(*args)
-        if result is not None:
+        try:
             return result
-        else:
+        except AttributeError:
             raise Assembler_NotCreatedError()
     return wrapper
 
@@ -34,6 +36,20 @@ def checkNotNone(func):
 class Assembler(object):
     def __init__(self):
         self.players = []
+
+    def createEventQueue(self):
+        self._EventQueue = EventQueue()
+    @checkNotNone
+    def getEventQueue(self):
+        return self._EventQueue
+
+    def createArrowKeyEventCreator(self):
+        self._ArrowKeyEventCreator = ArrowKeyEventCreator(self.getEventQueue())
+    @checkNotNone
+    def getArrowKeyEventCreator(self):
+        return self._ArrowKeyEventCreator
+
+
     def createGroupItem(self):
         self._groupItem = pygame.sprite.Group()
     @checkNotNone
@@ -85,18 +101,26 @@ class Assembler(object):
 
 
 
-    def createEventDistributor(self, eventListToListen):
+    def createPygameEventDistributor(self, eventListToListen):
         """ create event distributor """
         self._PygameEventDistributor = eventDistributor.pygameEventDistributor(eventListToListen)
-    @checkNotNone
-    def getPygameEventDistributor(self):
-        return self._PygameEventDistributor
+    def createEventQueueDistributor(self, eventListToListen):
+        """ create event distributor """
+        self._EventQueueDistributor = eventDistributor.EventQueueDistributor(self.getEventQueue(), eventListToListen)
+    def getEventDistributor(self):
+        try:
+            return self._PygameEventDistributor
+        except AttributeError:
+            try:
+                return self._EventQueueDistributor
+            except AttributeError:
+                raise Assembler_NotCreatedError()
 
 
 
     def createKeyboardEventHandler(self):
         """ create keyboard event handler """
-        self._KeyboardEventHandler = keyboardEventHandler.KeyboardEventHandler(self.getPygameEventDistributor())
+        self._KeyboardEventHandler = keyboardEventHandler.KeyboardEventHandler(self.getEventDistributor())
     @checkNotNone
     def getKeyboardEventHandler(self):
         return self._KeyboardEventHandler
@@ -105,13 +129,13 @@ class Assembler(object):
 
     def createTickEventHandler(self):
         """ create tick event handler """
-        self._TickEventHandler = tickEventHandler.TickEventHandler(self.getPygameEventDistributor())
+        self._TickEventHandler = tickEventHandler.TickEventHandler(self.getEventDistributor())
     @checkNotNone
     def getTickEventHandler(self):
         return self._TickEventHandler
 
     def createCrashItemEventHandler(self, screen, snake, score):
-        self._CrashItemEventHandler = crashItemEventHandler.CrashItemEventHandler(self.getPygameEventDistributor(), screen, snake, score)
+        self._CrashItemEventHandler = crashItemEventHandler.CrashItemEventHandler(self.getEventDistributor(), screen, snake, score)
     @checkNotNone
     def getCrashItemEventHandler(self):
         return self._CrashItemEventHandler
@@ -120,7 +144,7 @@ class Assembler(object):
 
     def createSnakeEventCreator(self, gameState):
         """ create snake event creator """
-        self._SnakeEventCreator = snakeEventCreator.SnakeEventCreator(self._getSnake(), self.getGroupItem(), gameState)
+        self._SnakeEventCreator = snakeEventCreator.SnakeEventCreator(self.getEventQueue(), self._getSnake(), self.getGroupItem(), gameState)
     @checkNotNone
     def _getSnakeEventCreator(self):
         return self._SnakeEventCreator
@@ -128,7 +152,7 @@ class Assembler(object):
 
     def createRelatedToSnake(self,speed, thick, skin, control, skinNum = SKIN_DEFAULT, firstHeadDirection = RIGHT, headPos = SCREEN_MID, color = GREEN, length = 1):
         """ create player """
-        self._snake = snake.Snake(self.getPygameEventDistributor(), speed, thick, skin, skinNum=skinNum, firstHeadDirection=firstHeadDirection, headPos=headPos, color=color, length=length)
+        self._snake = snake.Snake(self.getEventDistributor(), speed, thick, skin, skinNum=skinNum, firstHeadDirection=firstHeadDirection, headPos=headPos, color=color, length=length)
         self._SnakeAction = snakeAction.SnakeAction(self._snake, self.getKeyboardEventHandler(), control)
         self._SnakeDisplayHandler = snakeDisplayHandler.SnakeDisplayHandler(self._snake)
 

@@ -1,6 +1,6 @@
 import os
 
-# import numpy
+import numpy
 import pygame
 import json
 from itertools import count
@@ -82,9 +82,8 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         img_str = pygame.image.tostring(self.screen, "RGBA")
         img = Image.frombytes('RGBA', (SCREEN_WIDTH,SCREEN_HEIGHT), img_str)
         img = img.convert("L")
-        # img = numpy.array(img) #/ 255.0
-        # img = img.tolist()
-        img = list(img.getdata())
+        img = numpy.array(img) #/ 255.0
+        img = img.tolist()
 
 
         self.screen.fill(SCREEN_BACKGROUND)
@@ -143,9 +142,8 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 #     print("img saved")
                 # count += 1
 
-                # img = numpy.array(img) #/ 255.0
-                # img = img.tolist()
-                img = list(img.getdata())
+                img = numpy.array(img) #/ 255.0
+                img = img.tolist()
 
 
                 self.screen.fill(SCREEN_BACKGROUND)

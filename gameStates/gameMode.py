@@ -11,8 +11,8 @@ class GameMode(object):
         self.gameSession = False
 
     def _setGameRunningToFalse(self, data):
-        if self.player.snake == data.snake:
-            self.isGameRunning = False
+        # if self.player.snake == data.snake:
+        self.isGameRunning = False
 
     def _pause(self):
         if not self.isPause:

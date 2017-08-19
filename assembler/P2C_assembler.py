@@ -19,7 +19,7 @@ class P2C_assembler(Assembler):
         self.createAppleItemSpawner(appleImg, appleSound = soundAppleBite)
 
         # Event
-        self.createEventDistributor(P2_COMPETE_LISTENING_EVENT)
+        self.createPygameEventDistributor(P2_COMPETE_LISTENING_EVENT)
         self.createKeyboardEventHandler()
         self.createTickEventHandler()
 

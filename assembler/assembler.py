@@ -41,7 +41,10 @@ class Assembler(object):
         self._EventQueue = EventQueue()
     @checkNotNone
     def getEventQueue(self):
-        return self._EventQueue
+        try:
+            return self._EventQueue
+        except AttributeError:
+            return pygame.event
 
     def createArrowKeyEventCreator(self):
         self._ArrowKeyEventCreator = ArrowKeyEventCreator(self.getEventQueue())

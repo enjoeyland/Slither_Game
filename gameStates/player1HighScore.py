@@ -37,7 +37,7 @@ class Player1HighScore(gameMode.GameMode, object):
 
         groupItem = mAssembler.getGroupItem()
 
-        mPygameEventDistributor = mAssembler.getPygameEventDistributor()
+        mEventDistributor = mAssembler.getEventDistributor()
         mScoreDisplayHandler = mAssembler.getScoreDisplayHandler()
         mKeyboardEventHandler = mAssembler.getKeyboardEventHandler()
         mTickEventHandler = mAssembler.getTickEventHandler()
@@ -63,9 +63,9 @@ class Player1HighScore(gameMode.GameMode, object):
         mLevelHandler.update(mScore.getScore())
 
         mKeyboardEventHandler.listen(Request("Player1HighScore_pause", self._pause, addtionalTarget = pygame.K_p))
-        mPygameEventDistributor.listen(Request("Player1HighScore_quit", self._quit, addtionalTarget = pygame.QUIT))
-        mPygameEventDistributor.listen(Request("Player1HighScore_crashWall", self._setGameRunningToFalse, addtionalTarget = CRASH_WALL))
-        mPygameEventDistributor.listen(Request("Player1HighScore_crashItself", self._setGameRunningToFalse, addtionalTarget = CRASH_ITSELF))
+        mEventDistributor.listen(Request("Player1HighScore_quit", self._quit, addtionalTarget = pygame.QUIT))
+        mEventDistributor.listen(Request("Player1HighScore_crashWall", self._setGameRunningToFalse, addtionalTarget = CRASH_WALL))
+        mEventDistributor.listen(Request("Player1HighScore_crashItself", self._setGameRunningToFalse, addtionalTarget = CRASH_ITSELF))
 
 
         # menuButton = {"name" : "menu", "listener" : mTickEventHandler, "func": self.setButtonSprite}
@@ -76,7 +76,7 @@ class Player1HighScore(gameMode.GameMode, object):
             utility.playSound(soundBGM, loops= PLAY_INFINITELY)
 
             while self.isGameRunning:
-                mPygameEventDistributor.distribute()
+                mEventDistributor.distribute()
                 mSnakeAction.tickMove()
                 mLevelHandler.update(mScore.getScore())
 
@@ -136,7 +136,7 @@ class Player1HighScore(gameMode.GameMode, object):
                 pygame.display.update()
 
                 while self.isPause:
-                    mPygameEventDistributor.distribute()
+                    mEventDistributor.distribute()
 
                     pygame.display.update()
                     pygame.time.Clock().tick(3)
@@ -163,7 +163,7 @@ class Player1HighScore(gameMode.GameMode, object):
                 pygame.display.update()
 
                 while not self.gameReplay:
-                    mPygameEventDistributor.distribute()
+                    mEventDistributor.distribute()
 
                     self.screen.fill(SCREEN_BACKGROUND)
                     mSnakeDisplayHandler.draw(self.screen)

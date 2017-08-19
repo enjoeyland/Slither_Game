@@ -14,7 +14,7 @@ import queue
 
 
 class EventQueue(queue.Queue):
-    def __init__(self, maxSize = 1024):
+    def __init__(self, maxSize = 5):
         super().__init__(maxSize)
 
     def get_all(self):

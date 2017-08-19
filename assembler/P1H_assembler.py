@@ -18,7 +18,9 @@ class P1H_assembler(Assembler):
         self.createAppleItemSpawner(appleImg, appleSound = soundAppleBite)
 
         # Event
-        self.createEventDistributor(P1_HIGH_SCORE_LISTENING_EVENT)
+        self.createPygameEventDistributor(P1_HIGH_SCORE_LISTENING_EVENT)
+        # self.createEventQueue()
+        # self.createEventQueueDistributor(P1_HIGH_SCORE_LISTENING_EVENT)
         self.createKeyboardEventHandler()
         self.createTickEventHandler()
 

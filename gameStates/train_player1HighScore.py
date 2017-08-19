@@ -84,6 +84,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
         img = img.convert("L")
         img = numpy.array(img) #/ 255.0
         img = img.tolist()
+        # img = list(img.getdata()) # for running gym test case
 
 
         self.screen.fill(SCREEN_BACKGROUND)
@@ -144,6 +145,7 @@ class TrainPlayer1HighScore(TrainGameMode, object):
 
                 img = numpy.array(img) #/ 255.0
                 img = img.tolist()
+                # img = list(img.getdata()) # for running gym test case
 
 
                 self.screen.fill(SCREEN_BACKGROUND)
@@ -164,6 +166,8 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 self._clickReplayButton()
                 break
             raise RuntimeError("error")
+
+        # del mAssembler
 
         if self.gameReplay:
             return PLAYER1_HIGH_SCORE

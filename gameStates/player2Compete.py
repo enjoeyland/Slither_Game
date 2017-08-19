@@ -39,7 +39,7 @@ class Player2Compete(gameMode.GameMode, object):
         groupItem = mAssembler.getGroupItem()
         itemAppleSpawner = mAssembler.getItemAppleSpawner()
 
-        mPygameEventDistributor = mAssembler.getPygameEventDistributor()
+        mEventDistributor = mAssembler.getEventDistributor()
         mKeyboardEventHandler = mAssembler.getKeyboardEventHandler()
         mTickEventHandler = mAssembler.getTickEventHandler()
 
@@ -58,9 +58,9 @@ class Player2Compete(gameMode.GameMode, object):
         mLevelHandler.update(mScore.getScore())
 
         mKeyboardEventHandler.listen(Request("Player1HighScore_pause", self._pause, addtionalTarget = pygame.K_p))
-        mPygameEventDistributor.listen(Request("Player1HighScore_quit", self._quit, addtionalTarget = pygame.QUIT))
-        mPygameEventDistributor.listen(Request("Player1HighScore_crashWall", self._setGameRunningToFalse, addtionalTarget = CRASH_WALL))
-        mPygameEventDistributor.listen(Request("Player1HighScore_crashOtherSnake", self._setGameRunningToFalse, addtionalTarget = CRASH_OTHER_SNAKE))
+        mEventDistributor.listen(Request("Player1HighScore_quit", self._quit, addtionalTarget = pygame.QUIT))
+        mEventDistributor.listen(Request("Player1HighScore_crashWall", self._setGameRunningToFalse, addtionalTarget = CRASH_WALL))
+        mEventDistributor.listen(Request("Player1HighScore_crashOtherSnake", self._setGameRunningToFalse, addtionalTarget = CRASH_OTHER_SNAKE))
 
 
         # menuButton = {"name" : "menu", "listener" : mTickEventHandler, "func": self.setButtonSprite}
@@ -71,7 +71,7 @@ class Player2Compete(gameMode.GameMode, object):
             utility.playSound(soundBGM, loops= PLAY_INFINITELY)
 
             while self.isGameRunning:
-                mPygameEventDistributor.distribute()
+                mEventDistributor.distribute()
                 for player in mPlayer:
                     player.snakeAction.tickMove()
                     player.levelHandler.update(player.score.getScore())
@@ -135,7 +135,7 @@ class Player2Compete(gameMode.GameMode, object):
                 pygame.display.update()
 
                 while self.isPause:
-                    mPygameEventDistributor.distribute()
+                    mEventDistributor.distribute()
 
                     pygame.display.update()
                     pygame.time.Clock().tick(3)
@@ -164,7 +164,7 @@ class Player2Compete(gameMode.GameMode, object):
                 pygame.display.update()
 
                 while not self.gameReplay:
-                    mPygameEventDistributor.distribute()
+                    mEventDistributor.distribute()
 
                     self.screen.fill(SCREEN_BACKGROUND)
                     for player in mPlayer:

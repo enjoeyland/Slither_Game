@@ -168,7 +168,9 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 break
             raise RuntimeError("error")
 
-        del mAssembler
+        del mAssembler, self.appleImg, self.screen, self.sock, self.player,\
+            mPlayer, snake, mSnakeAction, mSnakeDisplayHandler, mLevelHandler,\
+            mScore, groupItem, img, img_str
 
         if self.gameReplay:
             return PLAYER1_HIGH_SCORE

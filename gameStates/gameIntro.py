@@ -8,5 +8,5 @@ class GameIntro(gameMode.GameMode, object):
 
     def process(self):
         # need to change
-        # return PLAYER1_HIGH_SCORE
-        return PLAYER2_COMPETE
+        return PLAYER1_HIGH_SCORE
+        # return PLAYER2_COMPETE

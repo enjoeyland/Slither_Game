@@ -5,12 +5,19 @@ import threading
 import time
 from itertools import count
 
+import sys
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..')))
+# from memory_profiler import profile
+
+# sys.path.append(r"C:\joey\workplace\2017\Computer\pygame\Slither_Game")
+
 import mainForTraining
 from train.env import Environment
 
 
 class Gym(object):
     _ids = count(0)
+
     def make(self, gameName = "slither_game_v0", *args, **kwargs):
         self._id = next(self._ids)
         server_address = ''
@@ -25,8 +32,8 @@ class Gym(object):
         return Environment(server_address)
 
 if __name__ == "__main__":
-    # import sys
-    # sys.path.append(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..')))
+# import sys
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..')))
 
     gym = Gym()
     env_num = 2
@@ -35,7 +42,10 @@ if __name__ == "__main__":
     dones = [False] * env_num
     for i, env in enumerate(envs):
         env.reset()
-    while True:
+    # from pympler.tracker import SummaryTracker
+    # tracker = SummaryTracker()
+    c = 0
+    while c < 1000:
         # actions = [random.randint(0,envs[0].action_space.n) for _ in range(env_num)]
         actions  =[1] * env_num
         for i, env in enumerate(envs):
@@ -44,4 +54,6 @@ if __name__ == "__main__":
             else:
                 ob, reward, done, info = env.reset(), 0, False, None
             dones[i] = done
+        c += 1
         # print(threading.enumerate())
+    # tracker.print_diff()

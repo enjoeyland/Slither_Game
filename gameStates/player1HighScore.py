@@ -182,4 +182,3 @@ class Player1HighScore(gameMode.GameMode, object):
             return PLAYER1_HIGH_SCORE
         else:
             return EXIT
-

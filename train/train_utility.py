@@ -1,7 +1,6 @@
 import json
 import numpy
 
-from event.eventCreators.arrowKeyEventCreator import ArrowKeyEventCreator
 from utils.setting import LEFT, RIGHT, DOWN, UP
 
 
@@ -20,6 +19,7 @@ def renderTrainer2EnvMsg(msg):
     msgStr = msg.decode("utf-8")
     result = json.loads(msgStr)
     image = numpy.asarray(result["image"])
+    # image = result["image"]
     return image, result["reward"], result["done"], result["info"]
 
 def renderEnv2TrainerMsg(msg):
@@ -31,4 +31,5 @@ def renderTrainer2EnvMsgReset(msg):
     msgStr = msg.decode("utf-8")
     result = json.loads(msgStr)
     image = numpy.asarray(result["image"])
+    # image = result["image"]
     return image

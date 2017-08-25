@@ -7,6 +7,7 @@ from itertools import count
 
 import sys
 from PIL import Image
+
 from assembler.train_assemblerFactory import TrainAssemblerFactory
 from gameStates.train_gameMode import TrainGameMode
 from train import train_utility
@@ -167,10 +168,9 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 break
             raise RuntimeError("error")
 
-        # del mAssembler
+        del mAssembler
 
         if self.gameReplay:
             return PLAYER1_HIGH_SCORE
         else:
             return EXIT
-

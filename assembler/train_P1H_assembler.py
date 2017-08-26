@@ -22,7 +22,7 @@ class TrainP1H_assembler(Assembler):
         # Player
         self.player = Player()
         self.players.append(self.player)
-        self.createRelatedToSnake(DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), SnakeArrowControl(), skinNum= SKIN_DEFAULT, length = 2)
+        self.createRelatedToSnake(DEFAULT_SPEED, DEFAULT_THICK, skin.Skin(), SnakeArrowControl(), skinNum= SKIN_DEFAULT, length = 4)
         self.player.setSnake(self._getSnake())
         self.player.setSnakeAction(self._getSnakeAction())
         self.player.setSnakeDisplayHandler(self._getSnakeDisplayHandler())

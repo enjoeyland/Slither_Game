@@ -11,6 +11,7 @@ from PIL import Image
 from assembler.train_assemblerFactory import TrainAssemblerFactory
 from gameStates.train_gameMode import TrainGameMode
 from train import train_utility
+from train.train_utility import getDirectionTowardItemReward, getGoOppositeDirectionReward
 from utils.listener import Request
 from utils.setting import PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
     CRASH_ITSELF, WHITE, SCREEN_WIDTH, SCREEN_HEIGHT, FRAMES_PER_SECOND, SCREEN_BACKGROUND
@@ -105,11 +106,15 @@ class TrainPlayer1HighScore(TrainGameMode, object):
                 mEventDistributor.distribute()
                 mSnakeAction.tickMove()
                 mLevelHandler.update(mScore.getScore())
+
+                reward = getDirectionTowardItemReward(snake, groupItem)
+                reward += getGoOppositeDirectionReward(snake)
+
                 if (mScore.getScore() - lastScore)/100 > 0:
                     reward = 1
                     lastScore = mScore.getScore()
                 else:
-                    reward = 0
+                    reward += 0
 
 
                 # Drop Item

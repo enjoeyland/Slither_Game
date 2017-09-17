@@ -4,6 +4,7 @@ import pygame
 
 from assembler import assemblerFactory
 from gameStates import gameMode
+from train.train_utility import getDirectionTowardItemReward, getGoOppositeDirectionReward
 from utils import utility
 from utils.listener import Request
 from utils.setting import PLAY_INFINITELY, SCREEN_BACKGROUND, FRAMES_PER_SECOND, PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
@@ -72,6 +73,7 @@ class Player1HighScore(gameMode.GameMode, object):
         replayButton = {"name" : "replay", "listener" : mTickEventHandler, "func": self._clickReplayButton}
         quitButton = {"name" : "quit", "listener" : mTickEventHandler, "func" : self._clickQuitButton}
 
+        lastScore = 0
         while self.gameSession:
             utility.playSound(soundBGM, loops= PLAY_INFINITELY)
 

@@ -83,6 +83,7 @@ DEFAULT_FONT_TYPE = "comicsansms"
 
 """Snake"""
 SNAKE_HEAD = -1
+SNAKE_RIGHT_AFTER_HEAD = -2
 SNAKE_TAIL = 0
 DIRECTION = 2
 

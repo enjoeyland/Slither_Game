@@ -4,15 +4,25 @@ import pygame
 
 from assembler import assemblerFactory
 from gameStates import gameMode
+from ui.whoWinPopUp import WhoWinPopUp
 from utils import utility
 from utils.listener import Request
+from utils.score import ScoreDisplayHandler2
 from utils.setting import PLAY_INFINITELY, SCREEN_BACKGROUND, FRAMES_PER_SECOND, EXIT, CRASH_WALL, \
-    CRASH_ITSELF, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE, PLAYER2_COMPETE, CRASH_OTHER_SNAKE
+    CRASH_ITSELF, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE, PLAYER2_COMPETE, CRASH_OTHER_SNAKE, BOTTOM_LEFT, INTRO, \
+    BOTTOM_RIGHT, PARENT_SIZE_WIDTH, PARENT_SIZE_HEIGHT, PLAYER1, PLAYER2
 
 
 class Player2Compete(gameMode.GameMode, object):
     def __init__(self, screen):
         super().__init__(PLAYER2_COMPETE, screen)
+        self.whoWin = None
+
+    def _playerDead(self, data):
+        if data.snake == self.player[PLAYER1].snake:
+            self.whoWin = PLAYER2
+        elif data.snake == self.player[PLAYER2].snake:
+            self.whoWin = PLAYER1
 
     def process(self):
         self.isGameRunning = True
@@ -23,8 +33,8 @@ class Player2Compete(gameMode.GameMode, object):
         # Load Image
 
         # Load Sound
-        soundBGM = utility.loadSound("BGM")
-        soundBGM.set_volume(0.3)
+        soundBGM = utility.loadSound("Original_green_greens")
+        soundBGM.set_volume(0.6)
 
         # Create Group
         # groupItem = pygame.sprite.Group()
@@ -44,27 +54,40 @@ class Player2Compete(gameMode.GameMode, object):
         mTickEventHandler = mAssembler.getTickEventHandler()
 
         mPlayer = mAssembler.getPlayers()
+        self.player = mPlayer
 
-        mScoreDisplayHandler = mAssembler.getScoreDisplayHandler()
-        mScore = mAssembler.getScore()
-        mLevelHandler = mAssembler.getLevelHandler()
+        # mScoreDisplayHandler = mAssembler.getScoreDisplayHandler()
+        mScoreDisplayHandler = ScoreDisplayHandler2([mPlayer[PLAYER1].score, mPlayer[PLAYER2].score])
+        # mScore = mAssembler.getScore()
+        # mLevelHandler = mAssembler.getLevelHandler()
 
         mPausePage = mAssembler.getPausePage()
-        mScoreSavor = mAssembler.getScoreSavor()
-        mScoreTable = mAssembler.getScoreTable()
+        # mScoreSavor = mAssembler.getScoreSavor()
+        # mScoreTable = mAssembler.getScoreTable()
+        mWhoWinPopUp = WhoWinPopUp()
 
         # Base Setting
         groupText.add(mScoreDisplayHandler.draw())
-        mLevelHandler.update(mScore.getScore())
+        # mLevelHandler.update(mScore.getScore())
 
         mKeyboardEventHandler.listen(Request("Player1HighScore_pause", self._pause, addtionalTarget = pygame.K_p))
         mEventDistributor.listen(Request("Player1HighScore_quit", self._quit, addtionalTarget = pygame.QUIT))
+        mEventDistributor.listen(Request("Player1HighScore_crashWall_playerDead", self._playerDead, addtionalTarget = CRASH_WALL))
         mEventDistributor.listen(Request("Player1HighScore_crashWall", self._setGameRunningToFalse, addtionalTarget = CRASH_WALL))
+        mEventDistributor.listen(Request("Player1HighScore_crashOtherSnake_playerDead", self._playerDead, addtionalTarget = CRASH_OTHER_SNAKE))
         mEventDistributor.listen(Request("Player1HighScore_crashOtherSnake", self._setGameRunningToFalse, addtionalTarget = CRASH_OTHER_SNAKE))
 
 
-        # menuButton = {"name" : "menu", "listener" : mTickEventHandler, "func": self.setButtonSprite}
-        replayButton = {"name" : "replay", "listener" : mTickEventHandler, "func": self._clickReplayButton}
+        menuButton = {"name" : "menu",
+                      "listener" : mTickEventHandler,
+                      "func": self._clickMenuButton,
+                      "alignment" : BOTTOM_RIGHT,
+                      "location" : (PARENT_SIZE_WIDTH, PARENT_SIZE_HEIGHT)}
+        replayButton = {"name" : "replay",
+                        "listener" : mTickEventHandler,
+                        "func": self._clickReplayButton,
+                        "alignment": BOTTOM_LEFT,
+                        "location" : (0, PARENT_SIZE_HEIGHT)}
         quitButton = {"name" : "quit", "listener" : mTickEventHandler, "func" : self._clickQuitButton}
 
         while self.gameSession:
@@ -75,7 +98,8 @@ class Player2Compete(gameMode.GameMode, object):
                 for player in mPlayer:
                     player.snakeAction.tickMove()
                     player.levelHandler.update(player.score.getScore())
-                mLevelHandler.update(mScore.getScore())
+                # mLevelHandler.update(mScore.getScore())
+                mPlayer[PLAYER1].score.getScore(), mPlayer[PLAYER2].score.getScore()
 
                 # Drop Item
                 itemAppleSpawner.dropItem()
@@ -153,17 +177,18 @@ class Player2Compete(gameMode.GameMode, object):
                     player.snakeAction.endListen()
 
                 mKeyboardEventHandler.listen(Request("Player1HighScore_replay", self._clickReplayButton, addtionalTarget = pygame.K_RETURN))
+                # mScoreSavor.saveScore()
+                # mScoreTable.buildImage(mScoreSavor.getTopScore(10), mScore.getScore(), appendButtons = [replayButton, menuButton])
+                mWhoWinPopUp.buildImage(self.whoWin, appendButtons = [replayButton, menuButton])
 
-                mScoreSavor.saveScore(mScore.getScore())
-                mScoreTable.buildImage(mScoreSavor.getTopScore(10), mScore.getScore(), replayButton)
-
-                groupPopUp.add(mScoreTable)
+                # groupPopUp.add(mScoreTable)
+                groupPopUp.add(mWhoWinPopUp)
                 groupPopUp.draw(self.screen)
                 groupPopUp.update()
 
                 pygame.display.update()
 
-                while not self.gameReplay:
+                while not self.gameReplay and not self.goMenu:
                     mEventDistributor.distribute()
 
                     self.screen.fill(SCREEN_BACKGROUND)
@@ -178,9 +203,11 @@ class Player2Compete(gameMode.GameMode, object):
                     pygame.time.Clock().tick(10)
 
                 mKeyboardEventHandler.endListen("Player1HighScore_replay")
-                mScoreTable.kill()
+                # mScoreTable.kill()
         if self.gameReplay:
             return PLAYER2_COMPETE
+        if self.goMenu:
+            return INTRO
         else:
             return EXIT
 

@@ -8,7 +8,8 @@ from train.train_utility import getDirectionTowardItemReward, getGoOppositeDirec
 from utils import utility
 from utils.listener import Request
 from utils.setting import PLAY_INFINITELY, SCREEN_BACKGROUND, FRAMES_PER_SECOND, PLAYER1_HIGH_SCORE, EXIT, CRASH_WALL, \
-    CRASH_ITSELF, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE
+    CRASH_ITSELF, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE, BOTTOM_LEFT, PARENT_SIZE_HEIGHT, INTRO, BOTTOM_RIGHT, \
+    PARENT_SIZE_WIDTH
 
 
 class Player1HighScore(gameMode.GameMode, object):
@@ -23,8 +24,8 @@ class Player1HighScore(gameMode.GameMode, object):
         # Load Image
 
         # Load Sound
-        soundBGM = utility.loadSound("BGM")
-        soundBGM.set_volume(0.3)
+        soundBGM = utility.loadSound("Original_green_greens")
+        soundBGM.set_volume(0.6)
 
         # Create Group
         # groupItem = pygame.sprite.Group()
@@ -69,8 +70,16 @@ class Player1HighScore(gameMode.GameMode, object):
         mEventDistributor.listen(Request("Player1HighScore_crashItself", self._setGameRunningToFalse, addtionalTarget = CRASH_ITSELF))
 
 
-        # menuButton = {"name" : "menu", "listener" : mTickEventHandler, "func": self.setButtonSprite}
-        replayButton = {"name" : "replay", "listener" : mTickEventHandler, "func": self._clickReplayButton}
+        menuButton = {"name" : "menu",
+                      "listener" : mTickEventHandler,
+                      "func": self._clickMenuButton,
+                      "alignment" : BOTTOM_RIGHT,
+                      "location" : (PARENT_SIZE_WIDTH, PARENT_SIZE_HEIGHT)}
+        replayButton = {"name" : "replay",
+                        "listener" : mTickEventHandler,
+                        "func" : self._clickReplayButton,
+                        "alignment" : BOTTOM_LEFT,
+                        "location" : (0,PARENT_SIZE_HEIGHT)}
         quitButton = {"name" : "quit", "listener" : mTickEventHandler, "func" : self._clickQuitButton}
 
         lastScore = 0
@@ -156,7 +165,7 @@ class Player1HighScore(gameMode.GameMode, object):
                 mKeyboardEventHandler.listen(Request("Player1HighScore_replay", self._clickReplayButton, addtionalTarget = pygame.K_RETURN))
 
                 mScoreSavor.saveScore(mScore.getScore())
-                mScoreTable.buildImage(mScoreSavor.getTopScore(10), mScore.getScore(), replayButton)
+                mScoreTable.buildImage(mScoreSavor.getTopScore(10), mScore.getScore(),  appendButtons = [replayButton, menuButton])
 
                 groupPopUp.add(mScoreTable)
                 groupPopUp.draw(self.screen)
@@ -164,7 +173,7 @@ class Player1HighScore(gameMode.GameMode, object):
 
                 pygame.display.update()
 
-                while not self.gameReplay:
+                while not self.gameReplay and not self.goMenu:
                     mEventDistributor.distribute()
 
                     self.screen.fill(SCREEN_BACKGROUND)
@@ -182,5 +191,7 @@ class Player1HighScore(gameMode.GameMode, object):
 
         if self.gameReplay:
             return PLAYER1_HIGH_SCORE
+        elif self.goMenu:
+            return INTRO
         else:
             return EXIT

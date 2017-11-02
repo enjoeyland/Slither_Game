@@ -6,6 +6,7 @@ class GameMode(object):
         self.gameState = gameState
         self.screen = screen
         self.player = None
+        self.goMenu = False
 
     def _setGameSessionToFalse(self):
         self.gameSession = False
@@ -25,6 +26,9 @@ class GameMode(object):
     def _quit(self, **kwargs):
         pygame.quit()
         quit()
+
+    def _clickMenuButton(self):
+        self.goMenu = True
 
     def _clickReplayButton(self):
         self.gameReplay = True

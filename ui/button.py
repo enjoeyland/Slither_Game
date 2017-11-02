@@ -6,7 +6,20 @@ from utils.setting import DEFAULT_FONT_TYPE, DEFAULT_FONT_SIZE, CONTINUANCE, GRE
 	POS_X, POS_Y, DARK_GREEN, BOTTOM_RIGHT, BOTTOM_MIDDLE, BOTTOM_LEFT, CENTER_RIGHT, CENTER_LEFT, TOP_MIDDLE, TOP_RIGHT
 
 class Button(pygame.sprite.Sprite):
-	def __init__(self,func, fontType = DEFAULT_FONT_TYPE, fontSize = DEFAULT_FONT_SIZE, textColor = WHITE, text = "", buttonLifeTimer = CONTINUANCE, textIndex = 0, location = (0,0), alignment = TOP_LEFT, backgroundColor = GREEN, buttonSize = None, hoverColor = DARK_GREEN, basePoint = (0,0)):
+	def __init__(self,
+				 func,
+				 fontType = DEFAULT_FONT_TYPE,
+				 fontSize = DEFAULT_FONT_SIZE,
+				 textColor = WHITE,
+				 text = "",
+				 buttonLifeTimer = CONTINUANCE,
+				 textIndex = 0,
+				 location = (0,0),
+				 alignment = TOP_LEFT,
+				 backgroundColor = GREEN,
+				 buttonSize = (150,40),
+				 hoverColor = DARK_GREEN,
+				 basePoint = (0,0)):
 		super().__init__()
 		self.buttonSize = buttonSize
 		self.backgroundColor = backgroundColor

@@ -5,7 +5,12 @@ from utils.setting import WHITE, SCREEN_MID, POS_X, POS_Y, CENTER_MIDDLE
 
 
 class PopUp(pygame.sprite.Sprite):
-	def __init__(self, backgroundColor = WHITE, pageSize = (500,300), transparent = 128,buildImageAutomatic =True, *args, **kwargs):
+	def __init__(self,
+				 backgroundColor = WHITE,
+				 pageSize = (500,300),
+				 transparent = 128,
+				 buildImageAutomatic =True,
+				 *args, **kwargs):
 		super().__init__()
 		self.backgroundColor = (backgroundColor[0], backgroundColor[1], backgroundColor[2], transparent)
 		self.pageSize = pageSize
@@ -24,6 +29,9 @@ class PopUp(pygame.sprite.Sprite):
 		self.rect.topleft = self.popUpPageBasePoint
 
 	def drawAdditionalContent(self, *args, **kwargs):
+		pass
+
+	def addAdditionalContent(self, *args, **kwargs):
 		pass
 
 	# def drawText(self, text):

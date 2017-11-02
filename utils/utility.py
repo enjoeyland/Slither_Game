@@ -64,7 +64,7 @@ def resizeImage(image, size):
 # 	return surface
 
 def loadSound(name):
-    soundTypeList = [".bza", ".ogg", ".mp3", ".wav"]
+    soundTypeList = [".bza", ".ogg", ".mp3", ".wav", ".ogx"]
     for soundType in soundTypeList:
         filePath = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', "data/sounds/", name + soundType))
 

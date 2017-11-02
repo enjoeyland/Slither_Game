@@ -8,7 +8,8 @@ from ui.text import Text
 from utils import utility
 from utils.listener import Request
 from utils.setting import PLAYER1_HIGH_SCORE, INTRO, PLAYER2_COMPETE, SCREEN_BACKGROUND, BOTTOM_RIGHT, BOTTOM_LEFT, \
-    BLACK, TOP_MIDDLE, SCREEN_HEIGHT, SCREEN_WIDTH, GAME_INTRO_LISTENING_EVENT, SCREEN_MID, BLUE, WHITE, PLAY_INFINITELY
+    BLACK, TOP_MIDDLE, SCREEN_HEIGHT, SCREEN_WIDTH, GAME_INTRO_LISTENING_EVENT, SCREEN_MID, BLUE, WHITE, PLAY_INFINITELY, \
+    BOTTOM_MIDDLE, RED
 
 
 class GameIntro(gameMode.GameMode, object):
@@ -43,6 +44,9 @@ class GameIntro(gameMode.GameMode, object):
         player1Btn.listen(mTickEventHandler)
         player2Btn = Button(self.returnP2C, text = "2 players", alignment = BOTTOM_RIGHT, location=(SCREEN_WIDTH - padding_x, SCREEN_HEIGHT - padding_y), buttonSize=buttonSize, fontSize=fontSize)
         player2Btn.listen(mTickEventHandler)
+        quitBtn = Button(self._quit, text = "quit", alignment = BOTTOM_MIDDLE, location=(SCREEN_WIDTH/2,SCREEN_HEIGHT), buttonSize=buttonSize, fontSize=fontSize, backgroundColor=RED)
+        quitBtn.listen(mTickEventHandler)
+
 
         # make text
         title = Text(color= BLUE, text= "Slither Game by Enjoeyland",fontSize= 40,location= (SCREEN_WIDTH/2, SCREEN_HEIGHT/4),alignment= TOP_MIDDLE)
@@ -51,6 +55,7 @@ class GameIntro(gameMode.GameMode, object):
         groupIntro = pygame.sprite.Group()
         groupIntro.add(player1Btn)
         groupIntro.add(player2Btn)
+        groupIntro.add(quitBtn)
         groupIntro.add(title)
 
 

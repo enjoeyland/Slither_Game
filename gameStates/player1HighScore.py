@@ -25,7 +25,7 @@ class Player1HighScore(gameMode.GameMode, object):
 
         # Load Sound
         soundBGM = utility.loadSound("Original_green_greens")
-        soundBGM.set_volume(0.6)
+        soundBGM.set_volume(0.5)
 
         # Create Group
         # groupItem = pygame.sprite.Group()

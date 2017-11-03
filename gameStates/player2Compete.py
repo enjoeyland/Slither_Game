@@ -59,7 +59,7 @@ class Player2Compete(gameMode.GameMode, object):
         # mScoreDisplayHandler = mAssembler.getScoreDisplayHandler()
         mScoreDisplayHandler = ScoreDisplayHandler2([mPlayer[PLAYER1].score, mPlayer[PLAYER2].score])
         # mScore = mAssembler.getScore()
-        # mLevelHandler = mAssembler.getLevelHandler()
+        mLevelHandler = mAssembler.getLevelHandler()
 
         mPausePage = mAssembler.getPausePage()
         # mScoreSavor = mAssembler.getScoreSavor()
@@ -68,7 +68,7 @@ class Player2Compete(gameMode.GameMode, object):
 
         # Base Setting
         groupText.add(mScoreDisplayHandler.draw())
-        # mLevelHandler.update(mScore.getScore())
+        mLevelHandler.update(mPlayer[PLAYER1].score.getScore() + mPlayer[PLAYER2].score.getScore())
 
         mKeyboardEventHandler.listen(Request("Player1HighScore_pause", self._pause, addtionalTarget = pygame.K_p))
         mEventDistributor.listen(Request("Player1HighScore_quit", self._quit, addtionalTarget = pygame.QUIT))
@@ -98,7 +98,7 @@ class Player2Compete(gameMode.GameMode, object):
                 for player in mPlayer:
                     player.snakeAction.tickMove()
                     player.levelHandler.update(player.score.getScore())
-                # mLevelHandler.update(mScore.getScore())
+                mLevelHandler.update(mPlayer[PLAYER1].score.getScore() +  mPlayer[PLAYER2].score.getScore())
                 mPlayer[PLAYER1].score.getScore(), mPlayer[PLAYER2].score.getScore()
 
                 # Drop Item

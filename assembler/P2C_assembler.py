@@ -77,8 +77,8 @@ class P2C_assembler(Assembler):
 
 
         # score for display
-        # self.createScore()
-        # self.createLevelHandler(PLAYER2_COMPETE, ItemSpawners = {"apple" : self.getItemAppleSpawner()})
+        self.createScore()
+        self.createLevelHandler(PLAYER2_COMPETE, ItemSpawners = {"apple" : self.getItemAppleSpawner()})
 
         # self.createScoreDisplay()
         # self.createScoreTable()
